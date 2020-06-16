@@ -24,7 +24,6 @@
         <module>sparrow-tx</module>
         <module>sparrow-web</module>
         <module>sparrow-rocketmq-tx</module>
-
     </modules>
 
 
@@ -111,11 +110,7 @@
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>${mybatis-plus.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
+
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>

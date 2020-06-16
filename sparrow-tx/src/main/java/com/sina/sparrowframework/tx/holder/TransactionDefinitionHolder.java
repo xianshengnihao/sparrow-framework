@@ -1,6 +1,7 @@
 package com.sina.sparrowframework.tx.holder;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.NamedThreadLocal;
 import org.springframework.lang.Nullable;
 import org.springframework.transaction.TransactionDefinition;
@@ -17,10 +18,9 @@ import java.util.Map;
 /**
  * 事务定义 manager
  */
-@Slf4j
 public abstract class TransactionDefinitionHolder {
 
-
+    private static final Logger log = LoggerFactory.getLogger(TransactionDefinitionHolder.class);
     private static final ThreadLocal<TransactionDefinition> HOLDER = new NamedThreadLocal<>("事务定义");
 
     private static final ThreadLocal<String> TRANSACTION_NAME_HOLDER = new NamedThreadLocal<>("事务名holder");
