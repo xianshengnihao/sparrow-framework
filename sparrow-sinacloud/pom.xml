@@ -2,15 +2,40 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.sina.sparrowframework</groupId>
-    <artifactId>sparrow-sinacloud</artifactId>
-    <version>1.0-SNAPSHOT</version>
     <parent>
         <groupId>com.sina.sparrowframework</groupId>
         <artifactId>sparrow-framework</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>sparrow-sinacloud</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.sina.sparrowframework</groupId>
+            <artifactId>sparrow-tools</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sina.cloudstorage</groupId>
+            <artifactId>scs-java-sdk-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sina.cloudstorage</groupId>
+            <artifactId>scs-java-sdk</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>
