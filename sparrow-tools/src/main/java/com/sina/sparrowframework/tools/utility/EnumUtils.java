@@ -14,9 +14,9 @@
 // * See the License for the specific language governing permissions and
 // * limitations under the License.
 // */
-//package utility;
+//package com.sina.sparrowframework.tools.utility;
 //
-//import org.apache.commons.lang3.ArrayUtils;
+//import org.apache.commons.lang3.ObjectToolkit;
 //import org.apache.commons.lang3.Validate;
 //
 //import java.util.*;
@@ -175,7 +175,7 @@
 //        for (final E value : condensed) {
 //            result[value.ordinal() / Long.SIZE] |= 1 << (value.ordinal() % Long.SIZE);
 //        }
-//        ArrayUtils.reverse(result);
+//        ObjectToolkit.reverse(result);
 //        return result;
 //    }
 //
@@ -226,7 +226,7 @@
 //        for (final E value : condensed) {
 //            result[value.ordinal() / Long.SIZE] |= 1 << (value.ordinal() % Long.SIZE);
 //        }
-//        ArrayUtils.reverse(result);
+//        ObjectToolkit.reverse(result);
 //        return result;
 //    }
 //
@@ -263,8 +263,8 @@
 //     */
 //    public static <E extends Enum<E>> EnumSet<E> processBitVectors(final Class<E> enumClass, final long... values) {
 //        final EnumSet<E> results = EnumSet.noneOf(asEnum(enumClass));
-//        final long[] lvalues = ArrayUtils.clone(Validate.notNull(values));
-//        ArrayUtils.reverse(lvalues);
+//        final long[] lvalues = ObjectToolkit.clone(Validate.notNull(values));
+//        ObjectToolkit.reverse(lvalues);
 //        for (final E constant : enumClass.getEnumConstants()) {
 //            final int block = constant.ordinal() / Long.SIZE;
 //            if (block < lvalues.length && (lvalues[block] & 1 << (constant.ordinal() % Long.SIZE)) != 0) {
@@ -284,9 +284,9 @@
 //     * @since 3.0.1
 //     */
 //    private static <E extends Enum<E>> Class<E> checkBitVectorable(final Class<E> enumClass) {
-//        final E[] constants = asEnum(enumClass).getEnumConstants();
-//        Validate.isTrue(constants.length <= Long.SIZE, CANNOT_STORE_S_S_VALUES_IN_S_BITS,
-//            Integer.valueOf(constants.length), enumClass.getSimpleName(), Integer.valueOf(Long.SIZE));
+//        final E[] com.sina.sparrowframework.tools.constants = asEnum(enumClass).getEnumConstants();
+//        Validate.isTrue(com.sina.sparrowframework.tools.constants.length <= Long.SIZE, CANNOT_STORE_S_S_VALUES_IN_S_BITS,
+//            Integer.valueOf(com.sina.sparrowframework.tools.constants.length), enumClass.getSimpleName(), Integer.valueOf(Long.SIZE));
 //
 //        return enumClass;
 //    }

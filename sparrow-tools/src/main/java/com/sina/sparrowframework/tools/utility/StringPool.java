@@ -1,9 +1,9 @@
-package constants;
+package com.sina.sparrowframework.tools.utility;
 
 /**
  * Copy to jodd.util
  * <p>
- * Pool of <code>String</code> constants to prevent repeating of
+ * Pool of <code>String</code> com.sina.sparrowframework.tools.constants to prevent repeating of
  * hard-coded <code>String</code> literals in the code.
  * Due to fact that these are <code>public static final</code>
  * they will be inlined by java compiler and
