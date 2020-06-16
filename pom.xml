@@ -19,7 +19,6 @@
         <module>sparrow-auth</module>
         <module>sparrow-orm-hibernate</module>
         <module>sparrow-orm-mybatis</module>
-        <module>sparrow-simple-tx</module>
         <module>sparrow-sinacloud</module>
         <module>sparrow-tools</module>
         <module>sparrow-tx</module>

@@ -24,8 +24,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import java.util.TimeZone;
 
-import static com.sina.sparrowframework.tools.utility.DateUtil.TIME_ZONE8;
-
 
 /**
  * @author tianye6
@@ -159,6 +157,6 @@ public class JacksonUtil {
     }
 
     public static TimeZone getDefaultTimeZone() {
-        return TIME_ZONE8;
+        return DateUtil.TIME_ZONE8;
     }
 }
