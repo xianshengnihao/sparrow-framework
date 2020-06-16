@@ -12,6 +12,7 @@
     <groupId>com.sina.sparrowframework</groupId>
     <artifactId>sparrow-framework</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+
     <name>sparrow-framework</name>
     <packaging>pom</packaging>
 
@@ -33,7 +34,7 @@
     </modules>
 
     <properties>
-        <sparrow.version>${project.version}</sparrow.version>
+<!--        <sparrow.version>${project.version}</sparrow.version>-->
         <mybatis-plus.version>3.1.0</mybatis-plus.version>
         <openfeign.version>9.5.1</openfeign.version>
         <bouncycastle.version>1.55</bouncycastle.version>
@@ -115,11 +116,6 @@
             <version>${mybatis-plus.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
         </dependency>
@@ -136,22 +132,13 @@
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.sina.cloudstorage</groupId>
-            <artifactId>scs-java-sdk-core</artifactId>
-            <version>${sina.cloud.storage.version}</version>
-        </dependency>
+
         <dependency>
             <groupId>com.sina.cloudstorage</groupId>
             <artifactId>scs-java-sdk</artifactId>
             <version>${sina.cloud.storage.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>io.github.openfeign</groupId>
-            <artifactId>feign-core</artifactId>
-            <version>${openfeign.version}</version>
-        </dependency>
         <dependency>
             <groupId>org.bouncycastle</groupId>
             <artifactId>bcprov-jdk15on</artifactId>
@@ -161,10 +148,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-autoconfigure</artifactId>
         </dependency>
 
         <dependency>

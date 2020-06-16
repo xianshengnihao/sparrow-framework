@@ -151,7 +151,7 @@ public abstract class Assert  {
             legal = ((Byte) number).compareTo((byte) 0) > 0;
             Assert.assertTrue(legal, format, args);
         } else {
-            throw new IllegalArgumentException(String.format("type[%s] not support", number.getClass().getName()));
+            throw new IllegalArgumentException(String.format("type[%s] not com.sina.sparrowframework.rockemq.support", number.getClass().getName()));
         }
     }
 
@@ -201,7 +201,7 @@ public abstract class Assert  {
             legal = ((Byte) number).compareTo((byte) 0) >= 0;
             Assert.assertTrue(legal, format, args);
         } else {
-            throw new IllegalArgumentException(String.format("type[%s] not support", number.getClass().getName()));
+            throw new IllegalArgumentException(String.format("type[%s] not com.sina.sparrowframework.rockemq.support", number.getClass().getName()));
         }
     }
 

@@ -8,5 +8,10 @@
     <artifactId>sparrow-orm-mybatis</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <parent>
+        <groupId>com.sina.sparrowframework</groupId>
+        <artifactId>sparrow-framework</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
 
+    </parent>
 </project>
