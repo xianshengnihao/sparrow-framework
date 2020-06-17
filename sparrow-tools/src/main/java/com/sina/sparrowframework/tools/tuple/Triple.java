@@ -17,27 +17,16 @@
 package com.sina.sparrowframework.tools.tuple;
 
 
+import com.sina.sparrowframework.tools.utility.CompareBuilder;
 import com.sina.sparrowframework.tools.utility.ObjectToolkit;
-import org.apache.commons.lang3.builder.CompareToBuilder;
 
 import java.io.Serializable;
 
 /**
- * <p>A triple consisting of three elements.</p>
- *
- * <p>This class is an abstract implementation defining the basic API.
- * It refers to the elements as 'left', 'middle' and 'right'.</p>
- *
- * <p>Subclass implementations may be mutable or immutable.
- * However, there is no restriction on the type of the stored objects that may be stored.
- * If mutable objects are stored in the triple, then the triple itself effectively becomes mutable.</p>
- *
- * @param <L> the left element type
- * @param <M> the middle element type
- * @param <R> the right element type
- *
- * @version $Id: Triple.java 1557584 2014-01-12 18:26:49Z britter $
- * @since 3.2
+ * 普通泛型（3属性）
+ * @param <L>
+ * @param <M>
+ * @param <R>
  */
 public abstract class Triple<L, M, R> implements Comparable<Triple<L, M, R>>, Serializable {
 
@@ -95,10 +84,12 @@ public abstract class Triple<L, M, R> implements Comparable<Triple<L, M, R>>, Se
      */
     @Override
     public int compareTo(final Triple<L, M, R> other) {
-      return new CompareToBuilder().append(getLeft(), other.getLeft())
+      return new CompareBuilder().append(getLeft(), other.getLeft())
           .append(getMiddle(), other.getMiddle())
           .append(getRight(), other.getRight()).toComparison();
     }
+
+
 
     /**
      * <p>Compares this triple to another based on the three elements.</p>

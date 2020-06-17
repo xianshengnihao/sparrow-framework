@@ -4277,7 +4277,7 @@ public abstract class StringToolkit  {
 
     /**
      * <p>Splits a String by Character type as returned by
-     * {@code java.lang.Character.getType(char)}. Groups of contiguous
+     * {@code java.com.sina.sparrowframework.tools.lang.Character.getType(char)}. Groups of contiguous
      * characters of the same type are returned as complete tokens.
      * <pre>
      * StringToolkit.splitByCharacterType(null)         = null
@@ -4300,7 +4300,7 @@ public abstract class StringToolkit  {
 
     /**
      * <p>Splits a String by Character type as returned by
-     * {@code java.lang.Character.getType(char)}. Groups of contiguous
+     * {@code java.com.sina.sparrowframework.tools.lang.Character.getType(char)}. Groups of contiguous
      * characters of the same type are returned as complete tokens, with the
      * following exception: the character of type
      * {@code Character.UPPERCASE_LETTER}, if any, immediately
@@ -4328,7 +4328,7 @@ public abstract class StringToolkit  {
 
     /**
      * <p>Splits a String by Character type as returned by
-     * {@code java.lang.Character.getType(char)}. Groups of contiguous
+     * {@code java.com.sina.sparrowframework.tools.lang.Character.getType(char)}. Groups of contiguous
      * characters of the same type are returned as complete tokens, with the
      * following exception: if {@code camelCase} is {@code true},
      * the character of type {@code Character.UPPERCASE_LETTER}, if any,

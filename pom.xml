@@ -23,7 +23,7 @@
         <module>sparrow-tools</module>
         <module>sparrow-tx</module>
         <module>sparrow-web</module>
-        <module>sparrow-rocketmq-tx</module>
+        <module>sparrow-rocketmq</module>
     </modules>
 
 

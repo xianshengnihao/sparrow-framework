@@ -17,21 +17,9 @@
 package com.sina.sparrowframework.tools.tuple;
 
 /**
- * <p>An immutable triple consisting of three {@code Object} elements.</p>
- *
- * <p>Although the implementation is immutable, there is no restriction on the objects
- * that may be stored. If mutable objects are stored in the triple, then the triple
- * itself effectively becomes mutable. The class is also {@code final}, so a subclass
- * can not add undesirable behaviour.</p>
- *
- * <p>#ThreadSafe# if all three objects are thread-safe</p>
- *
- * @param <L> the left element type
- * @param <M> the middle element type
- * @param <R> the right element type
- *
- * @version $Id: ImmutableTriple.java 1592817 2014-05-06 17:57:38Z britter $
- * @since 3.2
+ * 不可变量
+ * @author songbo1
+ * @date
  */
 public final class ImmutableTriple<L, M, R> extends Triple<L, M, R> {
 

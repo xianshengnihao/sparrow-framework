@@ -17,16 +17,10 @@
 package com.sina.sparrowframework.tools.tuple;
 
 /**
- * <p>A mutable triple consisting of three {@code Object} elements.</p>
- *
- * <p>Not #ThreadSafe#</p>
- *
- * @param <L> the left element type
- * @param <M> the middle element type
- * @param <R> the right element type
- *
- * @version $Id: MutableTriple.java 1552635 2013-12-20 13:02:03Z britter $
- * @since 3.2
+ * 可变
+ * @param <L>
+ * @param <M>
+ * @param <R>
  */
 public class MutableTriple<L, M, R> extends Triple<L, M, R> {
 

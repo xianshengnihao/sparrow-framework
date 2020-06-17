@@ -306,7 +306,7 @@ public abstract class DateUtil {
      * @Description 获得当天剩余秒
      * @Date 22:36 2018/6/5
      * @Param []
-     * @return java.lang.Long
+     * @return java.com.sina.sparrowframework.tools.lang.Long
      **/
     public static Long getTodayLeftSeconds() {
         LocalDateTime midnight = LocalDateTime.now().plusDays(1).withHour(0).withMinute(0).withSecond(0).withNano(0);

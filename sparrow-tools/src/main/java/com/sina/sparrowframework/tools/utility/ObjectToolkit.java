@@ -1135,8 +1135,8 @@ public abstract class ObjectToolkit  {
      *
      * <pre>
      * ObjectToolkit.identityToString(null)         = null
-     * ObjectToolkit.identityToString("")           = "java.lang.String@1e23"
-     * ObjectToolkit.identityToString(Boolean.TRUE) = "java.lang.Boolean@7fa"
+     * ObjectToolkit.identityToString("")           = "java.com.sina.sparrowframework.tools.lang.String@1e23"
+     * ObjectToolkit.identityToString(Boolean.TRUE) = "java.com.sina.sparrowframework.tools.lang.Boolean@7fa"
      * </pre>
      *
      * @param object  the object to create a toString for, may be
@@ -1159,9 +1159,9 @@ public abstract class ObjectToolkit  {
      * will throw a NullPointerException for either of the two parameters. </p>
      *
      * <pre>
-     * ObjectToolkit.identityToString(appendable, "")            = appendable.append("java.lang.String@1e23"
-     * ObjectToolkit.identityToString(appendable, Boolean.TRUE)  = appendable.append("java.lang.Boolean@7fa"
-     * ObjectToolkit.identityToString(appendable, Boolean.TRUE)  = appendable.append("java.lang.Boolean@7fa")
+     * ObjectToolkit.identityToString(appendable, "")            = appendable.append("java.com.sina.sparrowframework.tools.lang.String@1e23"
+     * ObjectToolkit.identityToString(appendable, Boolean.TRUE)  = appendable.append("java.com.sina.sparrowframework.tools.lang.Boolean@7fa"
+     * ObjectToolkit.identityToString(appendable, Boolean.TRUE)  = appendable.append("java.com.sina.sparrowframework.tools.lang.Boolean@7fa")
      * </pre>
      *
      * @param appendable  the appendable to append to
@@ -1185,9 +1185,9 @@ public abstract class ObjectToolkit  {
      * will throw a NullPointerException for either of the two parameters. </p>
      *
      * <pre>
-     * ObjectToolkit.identityToString(buf, "")            = buf.append("java.lang.String@1e23"
-     * ObjectToolkit.identityToString(buf, Boolean.TRUE)  = buf.append("java.lang.Boolean@7fa"
-     * ObjectToolkit.identityToString(buf, Boolean.TRUE)  = buf.append("java.lang.Boolean@7fa")
+     * ObjectToolkit.identityToString(buf, "")            = buf.append("java.com.sina.sparrowframework.tools.lang.String@1e23"
+     * ObjectToolkit.identityToString(buf, Boolean.TRUE)  = buf.append("java.com.sina.sparrowframework.tools.lang.Boolean@7fa"
+     * ObjectToolkit.identityToString(buf, Boolean.TRUE)  = buf.append("java.com.sina.sparrowframework.tools.lang.Boolean@7fa")
      * </pre>
      *
      * @param buffer  the buffer to append to
@@ -1209,9 +1209,9 @@ public abstract class ObjectToolkit  {
      * will throw a NullPointerException for either of the two parameters. </p>
      *
      * <pre>
-     * ObjectToolkit.identityToString(builder, "")            = builder.append("java.lang.String@1e23"
-     * ObjectToolkit.identityToString(builder, Boolean.TRUE)  = builder.append("java.lang.Boolean@7fa"
-     * ObjectToolkit.identityToString(builder, Boolean.TRUE)  = builder.append("java.lang.Boolean@7fa")
+     * ObjectToolkit.identityToString(builder, "")            = builder.append("java.com.sina.sparrowframework.tools.lang.String@1e23"
+     * ObjectToolkit.identityToString(builder, Boolean.TRUE)  = builder.append("java.com.sina.sparrowframework.tools.lang.Boolean@7fa"
+     * ObjectToolkit.identityToString(builder, Boolean.TRUE)  = builder.append("java.com.sina.sparrowframework.tools.lang.Boolean@7fa")
      * </pre>
      *
      * @param builder  the builder to append to
