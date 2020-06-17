@@ -1,9 +1,4 @@
-# Getting Started
-
-### Reference Documentation
-For further reference, please consider the following sections:
-
-* [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
-* [Spring Boot Maven Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/2.3.1.RELEASE/maven-plugin/reference/html/)
-* [Create an OCI image](https://docs.spring.io/spring-boot/docs/2.3.1.RELEASE/maven-plugin/reference/html/#build-image)
+### LST财富中心基础框架包
+1. 每个模块以不依赖或少依赖第三方jar为荣，以随意添加第三方jar为耻；
+2. 以有效封装为荣，以过度封装为耻；
 
