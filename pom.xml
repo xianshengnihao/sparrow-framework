@@ -14,9 +14,8 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>sparrow-all</module>
+        <module>sparrowframework-all</module>
         <module>sparrow-exception</module>
-        <module>sparrow-auth</module>
         <module>sparrow-orm-hibernate</module>
         <module>sparrow-orm-mybatis</module>
         <module>sparrow-sinacloud</module>
@@ -24,6 +23,8 @@
         <module>sparrow-tx</module>
         <module>sparrow-web</module>
         <module>sparrow-rocketmq</module>
+        <module>sparrow-constants</module>
+        <module>sparrow-metadata</module>
     </modules>
 
 
