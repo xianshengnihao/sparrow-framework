@@ -8,7 +8,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.Comparator;
 
-public class CompareBuilder implements Builder<Integer> {
+ class CompareBuilder implements Builder<Integer> {
 
 
     private int comparison;

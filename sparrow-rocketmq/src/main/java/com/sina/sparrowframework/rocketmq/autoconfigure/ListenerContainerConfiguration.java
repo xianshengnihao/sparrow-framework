@@ -6,7 +6,7 @@ import com.sina.sparrowframework.rocketmq.annotation.MessageModel;
 import com.sina.sparrowframework.rocketmq.annotation.RocketMQMessageListener;
 import com.sina.sparrowframework.rocketmq.core.RocketMQListener;
 import com.sina.sparrowframework.rocketmq.support.DefaultRocketMQListenerContainer;
-import com.sina.sparrowframework.tools.utility.StringPool;
+import com.sina.sparrowframework.tools.utility.StrPool;
 import com.sina.sparrowframework.tools.utility.StringToolkit;
 import org.apache.rocketmq.client.AccessChannel;
 import org.slf4j.Logger;
@@ -138,19 +138,19 @@ public class ListenerContainerConfiguration implements ApplicationContextAware, 
         if (StringToolkit.isNotBlank(selectorExpression) && !"*".equals(selectorExpression.trim())) {
             String[] tags = selectorExpression.split("\\|\\|");
             target = new StringBuilder();
-            target.append(StringPool.UNDERSCORE);
+            target.append(StrPool.UNDERSCORE);
             int length = tags.length;
             for (int i =0 ; i< length ; i++) {
                 String tag = tags[i].trim();
                 if (i == length - 1 ) {
                     target.append(tag);
                 }else {
-                    target.append(tag).append(StringPool.UNDERSCORE);
+                    target.append(tag).append(StrPool.UNDERSCORE);
                 }
             }
         }
         String groupName = consumerGroup
-                .concat(StringPool.UNDERSCORE)
+                .concat(StrPool.UNDERSCORE)
                 .concat(topic)
                 .concat(target == null ? "" : target.toString());
 

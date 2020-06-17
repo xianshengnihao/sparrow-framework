@@ -82,88 +82,27 @@ public abstract class StringToolkit  {
     }
 
 
-    //---------------------------------------------------------------------
-    // General convenience methods for working with Strings
-    //---------------------------------------------------------------------
 
-    /**
-     * Check whether the given {@code String} is empty.
-     * <p>This method accepts any Object as an argument, comparing it to
-     * {@code null} and the empty String. As a consequence, this method
-     * will never return {@code true} for a non-null non-String object.
-     * <p>The Object signature is useful for general attribute handling code
-     * that commonly deals with Strings but generally has to iterate over
-     * Objects since attributes may e.g. be primitive value objects as well.
-     * @param str the candidate String
-     * @since 3.2.1
-     */
     public static boolean isEmpty( Object str) {
         return (str == null || "".equals(str));
     }
 
-    /**
-     * Check that the given {@code CharSequence} is neither {@code null} nor
-     * of length 0.
-     * <p>Note: this method returns {@code true} for a {@code CharSequence}
-     * that purely consists of whitespace.
-     * <p><pre class="code">
-     * StringUtils.hasLength(null) = false
-     * StringUtils.hasLength("") = false
-     * StringUtils.hasLength(" ") = true
-     * StringUtils.hasLength("Hello") = true
-     * </pre>
-     * @param str the {@code CharSequence} to check (may be {@code null})
-     * @return {@code true} if the {@code CharSequence} is not {@code null} and has length
-     * @see #hasText(String)
-     */
+    
     public static boolean hasLength( CharSequence str) {
         return (str != null && str.length() > 0);
     }
 
-    /**
-     * Check that the given {@code String} is neither {@code null} nor of length 0.
-     * <p>Note: this method returns {@code true} for a {@code String} that
-     * purely consists of whitespace.
-     * @param str the {@code String} to check (may be {@code null})
-     * @return {@code true} if the {@code String} is not {@code null} and has length
-     * @see #hasLength(CharSequence)
-     * @see #hasText(String)
-     */
+
     public static boolean hasLength( String str) {
         return (str != null && !str.isEmpty());
     }
 
-    /**
-     * Check whether the given {@code CharSequence} contains actual <em>text</em>.
-     * <p>More specifically, this method returns {@code true} if the
-     * {@code CharSequence} is not {@code null}, its length is greater than
-     * 0, and it contains at least one non-whitespace character.
-     * <p><pre class="code">
-     * StringUtils.hasText(null) = false
-     * StringUtils.hasText("") = false
-     * StringUtils.hasText(" ") = false
-     * StringUtils.hasText("12345") = true
-     * StringUtils.hasText(" 12345 ") = true
-     * </pre>
-     * @param str the {@code CharSequence} to check (may be {@code null})
-     * @return {@code true} if the {@code CharSequence} is not {@code null},
-     * its length is greater than 0, and it does not contain whitespace only
-     * @see Character#isWhitespace
-     */
+
     public static boolean hasText( CharSequence str) {
         return (str != null && str.length() > 0 && containsText(str));
     }
 
-    /**
-     * Check whether the given {@code String} contains actual <em>text</em>.
-     * <p>More specifically, this method returns {@code true} if the
-     * {@code String} is not {@code null}, its length is greater than 0,
-     * and it contains at least one non-whitespace character.
-     * @param str the {@code String} to check (may be {@code null})
-     * @return {@code true} if the {@code String} is not {@code null}, its
-     * length is greater than 0, and it does not contain whitespace only
-     * @see #hasText(CharSequence)
-     */
+
     public static boolean hasText( String str) {
         return (str != null && !str.isEmpty() && containsText(str));
     }
@@ -180,23 +119,12 @@ public abstract class StringToolkit  {
 
 
 
-    /**
-     * Check whether the given {@code String} contains any whitespace characters.
-     * @param str the {@code String} to check (may be {@code null})
-     * @return {@code true} if the {@code String} is not empty and
-     * contains at least 1 whitespace character
-     * @see #containsWhitespace(CharSequence)
-     */
+
     public static boolean containsWhitespace( String str) {
         return containsWhitespace((CharSequence) str);
     }
 
-    /**
-     * Trim leading and trailing whitespace from the given {@code String}.
-     * @param str the {@code String} to check
-     * @return the trimmed {@code String}
-     * @see java.lang.Character#isWhitespace
-     */
+
     public static String trimWhitespace(String str) {
         if (!hasLength(str)) {
             return str;
@@ -216,13 +144,7 @@ public abstract class StringToolkit  {
         return str.substring(beginIndex, endIndex + 1);
     }
 
-    /**
-     * Trim <i>all</i> whitespace from the given {@code String}:
-     * leading, trailing, and in between characters.
-     * @param str the {@code String} to check
-     * @return the trimmed {@code String}
-     * @see java.lang.Character#isWhitespace
-     */
+
     public static String trimAllWhitespace(String str) {
         if (!hasLength(str)) {
             return str;
@@ -239,12 +161,7 @@ public abstract class StringToolkit  {
         return sb.toString();
     }
 
-    /**
-     * Trim leading whitespace from the given {@code String}.
-     * @param str the {@code String} to check
-     * @return the trimmed {@code String}
-     * @see java.lang.Character#isWhitespace
-     */
+
     public static String trimLeadingWhitespace(String str) {
         if (!hasLength(str)) {
             return str;
@@ -257,12 +174,7 @@ public abstract class StringToolkit  {
         return sb.toString();
     }
 
-    /**
-     * Trim trailing whitespace from the given {@code String}.
-     * @param str the {@code String} to check
-     * @return the trimmed {@code String}
-     * @see java.lang.Character#isWhitespace
-     */
+
     public static String trimTrailingWhitespace(String str) {
         if (!hasLength(str)) {
             return str;
@@ -275,12 +187,7 @@ public abstract class StringToolkit  {
         return sb.toString();
     }
 
-    /**
-     * Trim all occurrences of the supplied leading character from the given {@code String}.
-     * @param str the {@code String} to check
-     * @param leadingCharacter the leading character to be trimmed
-     * @return the trimmed {@code String}
-     */
+
     public static String trimLeadingCharacter(String str, char leadingCharacter) {
         if (!hasLength(str)) {
             return str;
@@ -293,12 +200,7 @@ public abstract class StringToolkit  {
         return sb.toString();
     }
 
-    /**
-     * Trim all occurrences of the supplied trailing character from the given {@code String}.
-     * @param str the {@code String} to check
-     * @param trailingCharacter the trailing character to be trimmed
-     * @return the trimmed {@code String}
-     */
+
     public static String trimTrailingCharacter(String str, char trailingCharacter) {
         if (!hasLength(str)) {
             return str;
@@ -638,21 +540,7 @@ public abstract class StringToolkit  {
         return cleanPath(path1).equals(cleanPath(path2));
     }
 
-    /**
-     * Decode the given encoded URI component value. Based on the following rules:
-     * <ul>
-     * <li>Alphanumeric characters {@code "a"} through {@code "z"}, {@code "A"} through {@code "Z"},
-     * and {@code "0"} through {@code "9"} stay the same.</li>
-     * <li>Special characters {@code "-"}, {@code "_"}, {@code "."}, and {@code "*"} stay the same.</li>
-     * <li>A sequence "{@code %<i>xy</i>}" is interpreted as a hexadecimal representation of the character.</li>
-     * </ul>
-     * @param source the encoded String
-     * @param charset the character set
-     * @return the decoded value
-     * @throws IllegalArgumentException when the given source contains invalid encoded sequences
-     * @since 5.0
-     * @see java.net.URLDecoder#decode(String, String)
-     */
+
     public static String uriDecode(String source, Charset charset) {
         int length = source.length();
         if (length == 0) {
@@ -688,19 +576,7 @@ public abstract class StringToolkit  {
         return (changed ? new String(bos.toByteArray(), charset) : source);
     }
 
-    /**
-     * Parse the given {@code String} value into a {@link Locale}, accepting
-     * the {@link Locale#toString} format as well as BCP 47 language tags.
-     * @param localeValue the locale value: following either {@code Locale's}
-     * {@code toString()} format ("en", "en_UK", etc), also accepting spaces as
-     * separators (as an alternative to underscores), or BCP 47 (e.g. "en-UK")
-     * as specified by {@link Locale#forLanguageTag} on Java 7+
-     * @return a corresponding {@code Locale} instance, or {@code null} if none
-     * @throws IllegalArgumentException in case of an invalid locale specification
-     * @since 5.0.4
-     * @see #parseLocaleString
-     * @see Locale#forLanguageTag
-     */
+
 
     public static Locale parseLocale(String localeValue) {
         String[] tokens = tokenizeLocaleSource(localeValue);
@@ -836,20 +712,7 @@ public abstract class StringToolkit  {
         return newArr;
     }
 
-    /**
-     * Merge the given {@code String} arrays into one, with overlapping
-     * array elements only included once.
-     * <p>The order of elements in the original arrays is preserved
-     * (with the exception of overlapping elements, which are only
-     * included on their first occurrence).
-     * @param array1 the first array (can be {@code null})
-     * @param array2 the second array (can be {@code null})
-     * @return the new array ({@code null} if both given arrays were {@code null})
-     * @deprecated as of 4.3.15, in favor of manual merging via {@link LinkedHashSet}
-     * (with every entry included at most once, even entries within the first array)
-     */
     @Deprecated
-
     public static String[] mergeStringArrays( String[] array1,  String[] array2) {
         if (ObjectToolkit.isEmpty(array1)) {
             return array2;
@@ -870,8 +733,6 @@ public abstract class StringToolkit  {
 
     /**
      * Turn given source {@code String} array into sorted array.
-     * @param array the source array
-     * @return the sorted array (never {@code null})
      */
     public static String[] sortStringArray(String[] array) {
         if (ObjectToolkit.isEmpty(array)) {
@@ -884,9 +745,6 @@ public abstract class StringToolkit  {
 
     /**
      * Copy the given {@code Collection} into a {@code String} array.
-     * <p>The {@code Collection} must contain {@code String} elements only.
-     * @param collection the {@code Collection} to copy
-     * @return the {@code String} array
      */
     public static String[] toStringArray(Collection<String> collection) {
         return collection.toArray(new String[0]);
@@ -894,9 +752,6 @@ public abstract class StringToolkit  {
 
     /**
      * Copy the given Enumeration into a {@code String} array.
-     * The Enumeration must contain {@code String} elements only.
-     * @param enumeration the Enumeration to copy
-     * @return the {@code String} array
      */
     public static String[] toStringArray(Enumeration<String> enumeration) {
         return toStringArray(Collections.list(enumeration));
@@ -904,9 +759,6 @@ public abstract class StringToolkit  {
 
     /**
      * Trim the elements of the given {@code String} array,
-     * calling {@code String.trim()} on each of them.
-     * @param array the original {@code String} array
-     * @return the resulting array (of the same size) with trimmed elements
      */
     public static String[] trimArrayElements( String[] array) {
         if (ObjectToolkit.isEmpty(array)) {
@@ -923,9 +775,6 @@ public abstract class StringToolkit  {
 
     /**
      * Remove duplicate strings from the given array.
-     * <p>As of 4.2, it preserves the original order, as it uses a {@link LinkedHashSet}.
-     * @param array the {@code String} array
-     * @return an array without duplicates, in natural sort order
      */
     public static String[] removeDuplicateStrings(String[] array) {
         if (ObjectToolkit.isEmpty(array)) {
@@ -943,13 +792,6 @@ public abstract class StringToolkit  {
 
     /**
      * Take an array of strings and split each element based on the given delimiter.
-     * A {@code Properties} instance is then generated, with the left of the delimiter
-     * providing the key, and the right of the delimiter providing the value.
-     * <p>Will trim both the key and value before adding them to the {@code Properties}.
-     * @param array the array to process
-     * @param delimiter to split each element using (typically the equals symbol)
-     * @return a {@code Properties} instance representing the array contents,
-     * or {@code null} if the array to process was {@code null} or empty
      */
 
     public static Properties splitArrayElementsIntoProperties(String[] array, String delimiter) {
@@ -958,17 +800,6 @@ public abstract class StringToolkit  {
 
     /**
      * Take an array of strings and split each element based on the given delimiter.
-     * A {@code Properties} instance is then generated, with the left of the
-     * delimiter providing the key, and the right of the delimiter providing the value.
-     * <p>Will trim both the key and value before adding them to the
-     * {@code Properties} instance.
-     * @param array the array to process
-     * @param delimiter to split each element using (typically the equals symbol)
-     * @param charsToDelete one or more characters to remove from each element
-     * prior to attempting the split operation (typically the quotation mark
-     * symbol), or {@code null} if no removal should occur
-     * @return a {@code Properties} instance representing the array contents,
-     * or {@code null} if the array to process was {@code null} or empty
      */
 
     public static Properties splitArrayElementsIntoProperties(
@@ -992,45 +823,12 @@ public abstract class StringToolkit  {
         return result;
     }
 
-    /**
-     * Tokenize the given {@code String} into a {@code String} array via a
-     * {@link StringTokenizer}.
-     * <p>Trims tokens and omits empty tokens.
-     * <p>The given {@code delimiters} string can consist of any number of
-     * delimiter characters. Each of those characters can be used to separate
-     * tokens. A delimiter is always a single character; for multi-character
-     * delimiters, consider using {@link #delimitedListToStringArray}.
-     * @param str the {@code String} to tokenize
-     * @param delimiters the delimiter characters, assembled as a {@code String}
-     * (each of the characters is individually considered as a delimiter)
-     * @return an array of the tokens
-     * @see java.util.StringTokenizer
-     * @see String#trim()
-     * @see #delimitedListToStringArray
-     */
+
     public static String[] tokenizeToStringArray( String str, String delimiters) {
         return tokenizeToStringArray(str, delimiters, true, true);
     }
 
-    /**
-     * Tokenize the given {@code String} into a {@code String} array via a
-     * {@link StringTokenizer}.
-     * <p>The given {@code delimiters} string can consist of any number of
-     * delimiter characters. Each of those characters can be used to separate
-     * tokens. A delimiter is always a single character; for multi-character
-     * delimiters, consider using {@link #delimitedListToStringArray}.
-     * @param str the {@code String} to tokenize
-     * @param delimiters the delimiter characters, assembled as a {@code String}
-     * (each of the characters is individually considered as a delimiter)
-     * @param trimTokens trim the tokens via {@link String#trim()}
-     * @param ignoreEmptyTokens omit empty tokens from the result array
-     * (only applies to tokens that are empty after trimming; StringTokenizer
-     * will not consider subsequent delimiters as token in the first place).
-     * @return an array of the tokens
-     * @see java.util.StringTokenizer
-     * @see String#trim()
-     * @see #delimitedListToStringArray
-     */
+
     public static String[] tokenizeToStringArray(
              String str, String delimiters, boolean trimTokens, boolean ignoreEmptyTokens) {
 
@@ -1055,15 +853,6 @@ public abstract class StringToolkit  {
     /**
      * Take a {@code String} that is a delimited list and convert it into a
      * {@code String} array.
-     * <p>A single {@code delimiter} may consist of more than one character,
-     * but it will still be considered as a single delimiter string, rather
-     * than as bunch of potential delimiter characters, in contrast to
-     * {@link #tokenizeToStringArray}.
-     * @param str the input {@code String}
-     * @param delimiter the delimiter between elements (this is a single delimiter,
-     * rather than a bunch individual delimiter characters)
-     * @return an array of the tokens in the list
-     * @see #tokenizeToStringArray
      */
     public static String[] delimitedListToStringArray( String str,  String delimiter) {
         return delimitedListToStringArray(str, delimiter, null);
@@ -1072,17 +861,6 @@ public abstract class StringToolkit  {
     /**
      * Take a {@code String} that is a delimited list and convert it into
      * a {@code String} array.
-     * <p>A single {@code delimiter} may consist of more than one character,
-     * but it will still be considered as a single delimiter string, rather
-     * than as bunch of potential delimiter characters, in contrast to
-     * {@link #tokenizeToStringArray}.
-     * @param str the input {@code String}
-     * @param delimiter the delimiter between elements (this is a single delimiter,
-     * rather than a bunch individual delimiter characters)
-     * @param charsToDelete a set of characters to delete; useful for deleting unwanted
-     * line breaks: e.g. "\r\n\f" will delete all new lines and line feeds in a {@code String}
-     * @return an array of the tokens in the list
-     * @see #tokenizeToStringArray
      */
     public static String[] delimitedListToStringArray(
              String str,  String delimiter,  String charsToDelete) {
@@ -1118,8 +896,6 @@ public abstract class StringToolkit  {
     /**
      * Convert a comma delimited list (e.g., a row from a CSV file) into an
      * array of strings.
-     * @param str the input {@code String}
-     * @return an array of strings, or the empty array in case of empty input
      */
     public static String[] commaDelimitedListToStringArray( String str) {
         return delimitedListToStringArray(str, ",");
@@ -1128,10 +904,6 @@ public abstract class StringToolkit  {
     /**
      * Convert a comma delimited list (e.g., a row from a CSV file) into a set.
      * <p>Note that this will suppress duplicates, and as of 4.2, the elements in
-     * the returned set will preserve the original order in a {@link LinkedHashSet}.
-     * @param str the input {@code String}
-     * @return a set of {@code String} entries in the list
-     * @see #removeDuplicateStrings(String[])
      */
     public static Set<String> commaDelimitedListToSet( String str) {
         Set<String> set = new LinkedHashSet<>();
@@ -1145,11 +917,6 @@ public abstract class StringToolkit  {
     /**
      * Convert a {@link Collection} to a delimited {@code String} (e.g. CSV).
      * <p>Useful for {@code toString()} implementations.
-     * @param coll the {@code Collection} to convert
-     * @param delim the delimiter to use (typically a ",")
-     * @param prefix the {@code String} to start each element with
-     * @param suffix the {@code String} to end each element with
-     * @return the delimited {@code String}
      */
     public static String collectionToDelimitedString(
              Collection<?> coll, String delim, String prefix, String suffix) {
@@ -1172,9 +939,6 @@ public abstract class StringToolkit  {
     /**
      * Convert a {@code Collection} into a delimited {@code String} (e.g. CSV).
      * <p>Useful for {@code toString()} implementations.
-     * @param coll the {@code Collection} to convert
-     * @param delim the delimiter to use (typically a ",")
-     * @return the delimited {@code String}
      */
     public static String collectionToDelimitedString( Collection<?> coll, String delim) {
         return collectionToDelimitedString(coll, delim, "", "");
@@ -1183,8 +947,6 @@ public abstract class StringToolkit  {
     /**
      * Convert a {@code Collection} into a delimited {@code String} (e.g., CSV).
      * <p>Useful for {@code toString()} implementations.
-     * @param coll the {@code Collection} to convert
-     * @return the delimited {@code String}
      */
     public static String collectionToCommaDelimitedString(Collection<?> coll) {
         return collectionToDelimitedString(coll, ",");
@@ -1193,9 +955,6 @@ public abstract class StringToolkit  {
     /**
      * Convert a {@code String} array into a delimited {@code String} (e.g. CSV).
      * <p>Useful for {@code toString()} implementations.
-     * @param arr the array to display
-     * @param delim the delimiter to use (typically a ",")
-     * @return the delimited {@code String}
      */
     public static String arrayToDelimitedString( Object[] arr, String delim) {
         if (ObjectToolkit.isEmpty(arr)) {
@@ -1219,49 +978,25 @@ public abstract class StringToolkit  {
      * Convert a {@code String} array into a comma delimited {@code String}
      * (i.e., CSV).
      * <p>Useful for {@code toString()} implementations.
-     * @param arr the array to display
-     * @return the delimited {@code String}
      */
     public static String arrayToCommaDelimitedString( Object[] arr) {
         return arrayToDelimitedString(arr, ",");
     }
 
 
-    /**
-     * A String for a space character.
-     *
-     * @since 3.2
-     */
+
     public static final String SPACE = " ";
 
-    /**
-     * The empty String {@code ""}.
-     * @since 2.0
-     */
+
     public static final String EMPTY = "";
 
-    /**
-     * A String for linefeed LF ("\n").
-     *
-     * @see <a href="http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.10.6">JLF: Escape Sequences
-     *      for Character and String Literals</a>
-     * @since 3.2
-     */
+
     public static final String LF = "\n";
 
-    /**
-     * A String for carriage return CR ("\r").
-     *
-     * @see <a href="http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.10.6">JLF: Escape Sequences
-     *      for Character and String Literals</a>
-     * @since 3.2
-     */
+
     public static final String CR = "\r";
 
-    /**
-     * Represents a failed index search.
-     * @since 2.1
-     */
+
     public static final int INDEX_NOT_FOUND = -1;
 
     /**
@@ -1269,79 +1004,22 @@ public abstract class StringToolkit  {
      */
     private static final int PAD_LIMIT = 8192;
 
-    /**
-     * <p>{@code StringToolkit} instances should NOT be constructed in
-     * standard programming. Instead, the class should be used as
-     * {@code StringToolkit.trim(" foo ");}.</p>
-     *
-     * <p>This constructor is public to permit tools that require a JavaBean
-     * instance to operate.</p>
-     */
+
     public StringToolkit() {
         super();
     }
 
-    // Empty checks
-    //-----------------------------------------------------------------------
-    /**
-     * <p>Checks if a CharSequence is empty ("") or null.</p>
-     *
-     * <pre>
-     * StringToolkit.isEmpty(null)      = true
-     * StringToolkit.isEmpty("")        = true
-     * StringToolkit.isEmpty(" ")       = false
-     * StringToolkit.isEmpty("bob")     = false
-     * StringToolkit.isEmpty("  bob  ") = false
-     * </pre>
-     *
-     * <p>NOTE: This method changed in Lang version 2.0.
-     * It no longer trims the CharSequence.
-     * That functionality is available in isBlank().</p>
-     *
-     * @param cs  the CharSequence to check, may be null
-     * @return {@code true} if the CharSequence is empty or null
-     * @since 3.0 Changed signature from isEmpty(String) to isEmpty(CharSequence)
-     */
+
     public static boolean isEmpty(final CharSequence cs) {
         return cs == null || cs.length() == 0;
     }
 
-    /**
-     * <p>Checks if a CharSequence is not empty ("") and not null.</p>
-     *
-     * <pre>
-     * StringToolkit.isNotEmpty(null)      = false
-     * StringToolkit.isNotEmpty("")        = false
-     * StringToolkit.isNotEmpty(" ")       = true
-     * StringToolkit.isNotEmpty("bob")     = true
-     * StringToolkit.isNotEmpty("  bob  ") = true
-     * </pre>
-     *
-     * @param cs  the CharSequence to check, may be null
-     * @return {@code true} if the CharSequence is not empty and not null
-     * @since 3.0 Changed signature from isNotEmpty(String) to isNotEmpty(CharSequence)
-     */
+
     public static boolean isNotEmpty(final CharSequence cs) {
         return !isEmpty(cs);
     }
 
-    /**
-     * <p>Checks if any one of the CharSequences are empty ("") or null.</p>
-     *
-     * <pre>
-     * StringToolkit.isAnyEmpty(null)             = true
-     * StringToolkit.isAnyEmpty(null, "foo")      = true
-     * StringToolkit.isAnyEmpty("", "bar")        = true
-     * StringToolkit.isAnyEmpty("bob", "")        = true
-     * StringToolkit.isAnyEmpty("  bob  ", null)  = true
-     * StringToolkit.isAnyEmpty(" ", "bar")       = false
-     * StringToolkit.isAnyEmpty("foo", "bar")     = false
-     * </pre>
-     *
-     * @param css  the CharSequences to check, may be null or empty
-     * @return {@code true} if any of the CharSequences are empty or null
-     * @since 3.2
-     */
+
     public static boolean isAnyEmpty(final CharSequence... css) {
         if (ObjectToolkit.isEmpty(css)) {
             return true;
@@ -1354,42 +1032,11 @@ public abstract class StringToolkit  {
         return false;
     }
 
-    /**
-     * <p>Checks if none of the CharSequences are empty ("") or null.</p>
-     *
-     * <pre>
-     * StringToolkit.isNoneEmpty(null)             = false
-     * StringToolkit.isNoneEmpty(null, "foo")      = false
-     * StringToolkit.isNoneEmpty("", "bar")        = false
-     * StringToolkit.isNoneEmpty("bob", "")        = false
-     * StringToolkit.isNoneEmpty("  bob  ", null)  = false
-     * StringToolkit.isNoneEmpty(" ", "bar")       = true
-     * StringToolkit.isNoneEmpty("foo", "bar")     = true
-     * </pre>
-     *
-     * @param css  the CharSequences to check, may be null or empty
-     * @return {@code true} if none of the CharSequences are empty or null
-     * @since 3.2
-     */
+
     public static boolean isNoneEmpty(final CharSequence... css) {
         return !isAnyEmpty(css);
     }
-    /**
-     * <p>Checks if a CharSequence is whitespace, empty ("") or null.</p>
-     *
-     * <pre>
-     * StringToolkit.isBlank(null)      = true
-     * StringToolkit.isBlank("")        = true
-     * StringToolkit.isBlank(" ")       = true
-     * StringToolkit.isBlank("bob")     = false
-     * StringToolkit.isBlank("  bob  ") = false
-     * </pre>
-     *
-     * @param cs  the CharSequence to check, may be null
-     * @return {@code true} if the CharSequence is null, empty or whitespace
-     * @since 2.0
-     * @since 3.0 Changed signature from isBlank(String) to isBlank(CharSequence)
-     */
+
     public static boolean isBlank(final CharSequence cs) {
         int strLen;
         if (cs == null || (strLen = cs.length()) == 0) {
@@ -1403,45 +1050,12 @@ public abstract class StringToolkit  {
         return true;
     }
 
-    /**
-     * <p>Checks if a CharSequence is not empty (""), not null and not whitespace only.</p>
-     *
-     * <pre>
-     * StringToolkit.isNotBlank(null)      = false
-     * StringToolkit.isNotBlank("")        = false
-     * StringToolkit.isNotBlank(" ")       = false
-     * StringToolkit.isNotBlank("bob")     = true
-     * StringToolkit.isNotBlank("  bob  ") = true
-     * </pre>
-     *
-     * @param cs  the CharSequence to check, may be null
-     * @return {@code true} if the CharSequence is
-     *  not empty and not null and not whitespace
-     * @since 2.0
-     * @since 3.0 Changed signature from isNotBlank(String) to isNotBlank(CharSequence)
-     */
+
     public static boolean isNotBlank(final CharSequence cs) {
         return !isBlank(cs);
     }
 
-    /**
-     * <p>Checks if any one of the CharSequences are blank ("") or null and not whitespace only..</p>
-     *
-     * <pre>
-     * StringToolkit.isAnyBlank(null)             = true
-     * StringToolkit.isAnyBlank(null, "foo")      = true
-     * StringToolkit.isAnyBlank(null, null)       = true
-     * StringToolkit.isAnyBlank("", "bar")        = true
-     * StringToolkit.isAnyBlank("bob", "")        = true
-     * StringToolkit.isAnyBlank("  bob  ", null)  = true
-     * StringToolkit.isAnyBlank(" ", "bar")       = true
-     * StringToolkit.isAnyBlank("foo", "bar")     = false
-     * </pre>
-     *
-     * @param css  the CharSequences to check, may be null or empty
-     * @return {@code true} if any of the CharSequences are blank or null or whitespace only
-     * @since 3.2
-     */
+
     public static boolean isAnyBlank(final CharSequence... css) {
         if (ObjectToolkit.isEmpty(css)) {
             return true;
@@ -1454,160 +1068,34 @@ public abstract class StringToolkit  {
         return false;
     }
 
-    /**
-     * <p>Checks if none of the CharSequences are blank ("") or null and whitespace only..</p>
-     *
-     * <pre>
-     * StringToolkit.isNoneBlank(null)             = false
-     * StringToolkit.isNoneBlank(null, "foo")      = false
-     * StringToolkit.isNoneBlank(null, null)       = false
-     * StringToolkit.isNoneBlank("", "bar")        = false
-     * StringToolkit.isNoneBlank("bob", "")        = false
-     * StringToolkit.isNoneBlank("  bob  ", null)  = false
-     * StringToolkit.isNoneBlank(" ", "bar")       = false
-     * StringToolkit.isNoneBlank("foo", "bar")     = true
-     * </pre>
-     *
-     * @param css  the CharSequences to check, may be null or empty
-     * @return {@code true} if none of the CharSequences are blank or null or whitespace only
-     * @since 3.2
-     */
+
     public static boolean isNoneBlank(final CharSequence... css) {
         return !isAnyBlank(css);
     }
 
     // Trim
     //-----------------------------------------------------------------------
-    /**
-     * <p>Removes control characters (char &lt;= 32) from both
-     * ends of this String, handling {@code null} by returning
-     * {@code null}.</p>
-     *
-     * <p>The String is trimmed using {@link String#trim()}.
-     * Trim removes start and end characters &lt;= 32.
-     * To strip whitespace use {@link #strip(String)}.</p>
-     *
-     * <p>To trim your choice of characters, use the
-     * {@link #strip(String, String)} methods.</p>
-     *
-     * <pre>
-     * StringToolkit.trim(null)          = null
-     * StringToolkit.trim("")            = ""
-     * StringToolkit.trim("     ")       = ""
-     * StringToolkit.trim("abc")         = "abc"
-     * StringToolkit.trim("    abc    ") = "abc"
-     * </pre>
-     *
-     * @param str  the String to be trimmed, may be null
-     * @return the trimmed string, {@code null} if null String input
-     */
+
     public static String trim(final String str) {
         return str == null ? null : str.trim();
     }
 
-    /**
-     * <p>Removes control characters (char &lt;= 32) from both
-     * ends of this String returning {@code null} if the String is
-     * empty ("") after the trim or if it is {@code null}.
-     *
-     * <p>The String is trimmed using {@link String#trim()}.
-     * Trim removes start and end characters &lt;= 32.
-     * To strip whitespace use {@link #stripToNull(String)}.</p>
-     *
-     * <pre>
-     * StringToolkit.trimToNull(null)          = null
-     * StringToolkit.trimToNull("")            = null
-     * StringToolkit.trimToNull("     ")       = null
-     * StringToolkit.trimToNull("abc")         = "abc"
-     * StringToolkit.trimToNull("    abc    ") = "abc"
-     * </pre>
-     *
-     * @param str  the String to be trimmed, may be null
-     * @return the trimmed String,
-     *  {@code null} if only chars &lt;= 32, empty or null String input
-     * @since 2.0
-     */
+
     public static String trimToNull(final String str) {
         final String ts = trim(str);
         return isEmpty(ts) ? null : ts;
     }
 
-    /**
-     * <p>Removes control characters (char &lt;= 32) from both
-     * ends of this String returning an empty String ("") if the String
-     * is empty ("") after the trim or if it is {@code null}.
-     *
-     * <p>The String is trimmed using {@link String#trim()}.
-     * Trim removes start and end characters &lt;= 32.
-     * To strip whitespace use {@link #stripToEmpty(String)}.</p>
-     *
-     * <pre>
-     * StringToolkit.trimToEmpty(null)          = ""
-     * StringToolkit.trimToEmpty("")            = ""
-     * StringToolkit.trimToEmpty("     ")       = ""
-     * StringToolkit.trimToEmpty("abc")         = "abc"
-     * StringToolkit.trimToEmpty("    abc    ") = "abc"
-     * </pre>
-     *
-     * @param str  the String to be trimmed, may be null
-     * @return the trimmed String, or an empty String if {@code null} input
-     * @since 2.0
-     */
+
     public static String trimToEmpty(final String str) {
         return str == null ? EMPTY : str.trim();
     }
 
-    // Stripping
-    //-----------------------------------------------------------------------
-    /**
-     * <p>Strips whitespace from the start and end of a String.</p>
-     *
-     * <p>This is similar to {@link #trim(String)} but removes whitespace.
-     * Whitespace is defined by {@link Character#isWhitespace(char)}.</p>
-     *
-     * <p>A {@code null} input String returns {@code null}.</p>
-     *
-     * <pre>
-     * StringToolkit.strip(null)     = null
-     * StringToolkit.strip("")       = ""
-     * StringToolkit.strip("   ")    = ""
-     * StringToolkit.strip("abc")    = "abc"
-     * StringToolkit.strip("  abc")  = "abc"
-     * StringToolkit.strip("abc  ")  = "abc"
-     * StringToolkit.strip(" abc ")  = "abc"
-     * StringToolkit.strip(" ab c ") = "ab c"
-     * </pre>
-     *
-     * @param str  the String to remove whitespace from, may be null
-     * @return the stripped String, {@code null} if null String input
-     */
+
     public static String strip(final String str) {
         return strip(str, null);
     }
 
-    /**
-     * <p>Strips whitespace from the start and end of a String  returning
-     * {@code null} if the String is empty ("") after the strip.</p>
-     *
-     * <p>This is similar to {@link #trimToNull(String)} but removes whitespace.
-     * Whitespace is defined by {@link Character#isWhitespace(char)}.</p>
-     *
-     * <pre>
-     * StringToolkit.stripToNull(null)     = null
-     * StringToolkit.stripToNull("")       = null
-     * StringToolkit.stripToNull("   ")    = null
-     * StringToolkit.stripToNull("abc")    = "abc"
-     * StringToolkit.stripToNull("  abc")  = "abc"
-     * StringToolkit.stripToNull("abc  ")  = "abc"
-     * StringToolkit.stripToNull(" abc ")  = "abc"
-     * StringToolkit.stripToNull(" ab c ") = "ab c"
-     * </pre>
-     *
-     * @param str  the String to be stripped, may be null
-     * @return the stripped String,
-     *  {@code null} if whitespace, empty or null String input
-     * @since 2.0
-     */
     public static String stripToNull(String str) {
         if (str == null) {
             return null;
@@ -1616,58 +1104,12 @@ public abstract class StringToolkit  {
         return str.isEmpty() ? null : str;
     }
 
-    /**
-     * <p>Strips whitespace from the start and end of a String  returning
-     * an empty String if {@code null} input.</p>
-     *
-     * <p>This is similar to {@link #trimToEmpty(String)} but removes whitespace.
-     * Whitespace is defined by {@link Character#isWhitespace(char)}.</p>
-     *
-     * <pre>
-     * StringToolkit.stripToEmpty(null)     = ""
-     * StringToolkit.stripToEmpty("")       = ""
-     * StringToolkit.stripToEmpty("   ")    = ""
-     * StringToolkit.stripToEmpty("abc")    = "abc"
-     * StringToolkit.stripToEmpty("  abc")  = "abc"
-     * StringToolkit.stripToEmpty("abc  ")  = "abc"
-     * StringToolkit.stripToEmpty(" abc ")  = "abc"
-     * StringToolkit.stripToEmpty(" ab c ") = "ab c"
-     * </pre>
-     *
-     * @param str  the String to be stripped, may be null
-     * @return the trimmed String, or an empty String if {@code null} input
-     * @since 2.0
-     */
+
     public static String stripToEmpty(final String str) {
         return str == null ? EMPTY : strip(str, null);
     }
 
-    /**
-     * <p>Strips any of a set of characters from the start and end of a String.
-     * This is similar to {@link String#trim()} but allows the characters
-     * to be stripped to be controlled.</p>
-     *
-     * <p>A {@code null} input String returns {@code null}.
-     * An empty string ("") input returns the empty string.</p>
-     *
-     * <p>If the stripChars String is {@code null}, whitespace is
-     * stripped as defined by {@link Character#isWhitespace(char)}.
-     * Alternatively use {@link #strip(String)}.</p>
-     *
-     * <pre>
-     * StringToolkit.strip(null, *)          = null
-     * StringToolkit.strip("", *)            = ""
-     * StringToolkit.strip("abc", null)      = "abc"
-     * StringToolkit.strip("  abc", null)    = "abc"
-     * StringToolkit.strip("abc  ", null)    = "abc"
-     * StringToolkit.strip(" abc ", null)    = "abc"
-     * StringToolkit.strip("  abcyx", "xyz") = "  abc"
-     * </pre>
-     *
-     * @param str  the String to remove characters from, may be null
-     * @param stripChars  the characters to remove, null treated as whitespace
-     * @return the stripped String, {@code null} if null String input
-     */
+
     public static String strip(String str, final String stripChars) {
         if (isEmpty(str)) {
             return str;
@@ -1676,30 +1118,6 @@ public abstract class StringToolkit  {
         return stripEnd(str, stripChars);
     }
 
-    /**
-     * <p>Strips any of a set of characters from the start of a String.</p>
-     *
-     * <p>A {@code null} input String returns {@code null}.
-     * An empty string ("") input returns the empty string.</p>
-     *
-     * <p>If the stripChars String is {@code null}, whitespace is
-     * stripped as defined by {@link Character#isWhitespace(char)}.</p>
-     *
-     * <pre>
-     * StringToolkit.stripStart(null, *)          = null
-     * StringToolkit.stripStart("", *)            = ""
-     * StringToolkit.stripStart("abc", "")        = "abc"
-     * StringToolkit.stripStart("abc", null)      = "abc"
-     * StringToolkit.stripStart("  abc", null)    = "abc"
-     * StringToolkit.stripStart("abc  ", null)    = "abc  "
-     * StringToolkit.stripStart(" abc ", null)    = "abc "
-     * StringToolkit.stripStart("yxabc  ", "xyz") = "abc  "
-     * </pre>
-     *
-     * @param str  the String to remove characters from, may be null
-     * @param stripChars  the characters to remove, null treated as whitespace
-     * @return the stripped String, {@code null} if null String input
-     */
     public static String stripStart(final String str, final String stripChars) {
         int strLen;
         if (str == null || (strLen = str.length()) == 0) {
@@ -1720,31 +1138,7 @@ public abstract class StringToolkit  {
         return str.substring(start);
     }
 
-    /**
-     * <p>Strips any of a set of characters from the end of a String.</p>
-     *
-     * <p>A {@code null} input String returns {@code null}.
-     * An empty string ("") input returns the empty string.</p>
-     *
-     * <p>If the stripChars String is {@code null}, whitespace is
-     * stripped as defined by {@link Character#isWhitespace(char)}.</p>
-     *
-     * <pre>
-     * StringToolkit.stripEnd(null, *)          = null
-     * StringToolkit.stripEnd("", *)            = ""
-     * StringToolkit.stripEnd("abc", "")        = "abc"
-     * StringToolkit.stripEnd("abc", null)      = "abc"
-     * StringToolkit.stripEnd("  abc", null)    = "  abc"
-     * StringToolkit.stripEnd("abc  ", null)    = "abc"
-     * StringToolkit.stripEnd(" abc ", null)    = " abc"
-     * StringToolkit.stripEnd("  abcyx", "xyz") = "  abc"
-     * StringToolkit.stripEnd("120.00", ".0")   = "12"
-     * </pre>
-     *
-     * @param str  the String to remove characters from, may be null
-     * @param stripChars  the set of characters to remove, null treated as whitespace
-     * @return the stripped String, {@code null} if null String input
-     */
+
     public static String stripEnd(final String str, final String stripChars) {
         int end;
         if (str == null || (end = str.length()) == 0) {
@@ -1768,40 +1162,18 @@ public abstract class StringToolkit  {
     // StripAll
     //-----------------------------------------------------------------------
     /**
-     * <p>Strips whitespace from the start and end of every String in an array.
-     * Whitespace is defined by {@link Character#isWhitespace(char)}.</p>
-     *
-     * <p>A new array is returned each time, except for length zero.
-     * A {@code null} array will return {@code null}.
-     * An empty array will return itself.
-     * A {@code null} array entry will be ignored.</p>
-     *
      * <pre>
      * StringToolkit.stripAll(null)             = null
      * StringToolkit.stripAll([])               = []
      * StringToolkit.stripAll(["abc", "  abc"]) = ["abc", "abc"]
      * StringToolkit.stripAll(["abc  ", null])  = ["abc", null]
      * </pre>
-     *
-     * @param strs  the array to remove whitespace from, may be null
-     * @return the stripped Strings, {@code null} if null array input
      */
     public static String[] stripAll(final String... strs) {
         return stripAll(strs, null);
     }
 
     /**
-     * <p>Strips any of a set of characters from the start and end of every
-     * String in an array.</p>
-     * <p>Whitespace is defined by {@link Character#isWhitespace(char)}.</p>
-     *
-     * <p>A new array is returned each time, except for length zero.
-     * A {@code null} array will return {@code null}.
-     * An empty array will return itself.
-     * A {@code null} array entry will be ignored.
-     * A {@code null} stripChars will strip whitespace as defined by
-     * {@link Character#isWhitespace(char)}.</p>
-     *
      * <pre>
      * StringToolkit.stripAll(null, *)                = null
      * StringToolkit.stripAll([], *)                  = []
@@ -1810,10 +1182,6 @@ public abstract class StringToolkit  {
      * StringToolkit.stripAll(["abc  ", null], "yz")  = ["abc  ", null]
      * StringToolkit.stripAll(["yabcz", null], "yz")  = ["abc", null]
      * </pre>
-     *
-     * @param strs  the array to remove characters from, may be null
-     * @param stripChars  the characters to remove, null treated as whitespace
-     * @return the stripped Strings, {@code null} if null array input
      */
     public static String[] stripAll(final String[] strs, final String stripChars) {
         int strsLen;
@@ -1828,21 +1196,12 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Removes diacritics (~= accents) from a string. The case will not be altered.</p>
-     * <p>For instance, '&agrave;' will be replaced by 'a'.</p>
-     * <p>Note that ligatures will be left as is.</p>
-     *
      * <pre>
      * StringToolkit.stripAccents(null)                = null
      * StringToolkit.stripAccents("")                  = ""
      * StringToolkit.stripAccents("control")           = "control"
      * StringToolkit.stripAccents("&eacute;clair")     = "eclair"
      * </pre>
-     *
-     * @param input String to be stripped
-     * @return input text with diacritics removed
-     *
-     * @since 3.0
      */
     // See also Lucene's ASCIIFoldingFilter (Lucene 2.9) that replaces accented characters by their unaccented equivalent (and uncommitted bug fix: https://issues.apache.org/jira/browse/LUCENE-1343?focusedCommentId=12858907&page=com.atlassian.jira.plugin.system.issuetabpanels%3Acomment-tabpanel#action_12858907).
     public static String stripAccents(final String input) {
@@ -1858,12 +1217,6 @@ public abstract class StringToolkit  {
     // Equals
     //-----------------------------------------------------------------------
     /**
-     * <p>Compares two CharSequences, returning {@code true} if they represent
-     * equal sequences of characters.</p>
-     *
-     * <p>{@code null}s are handled without exceptions. Two {@code null}
-     * references are considered to be equal. The comparison is case sensitive.</p>
-     *
      * <pre>
      * StringToolkit.equals(null, null)   = true
      * StringToolkit.equals(null, "abc")  = false
@@ -1871,12 +1224,6 @@ public abstract class StringToolkit  {
      * StringToolkit.equals("abc", "abc") = true
      * StringToolkit.equals("abc", "ABC") = false
      * </pre>
-     *
-     * @see Object#equals(Object)
-     * @param cs1  the first CharSequence, may be {@code null}
-     * @param cs2  the second CharSequence, may be {@code null}
-     * @return {@code true} if the CharSequences are equal (case-sensitive), or both {@code null}
-     * @since 3.0 Changed signature from equals(String, String) to equals(CharSequence, CharSequence)
      */
     public static boolean equals(final CharSequence cs1, final CharSequence cs2) {
         if (cs1 == cs2) {
@@ -1892,12 +1239,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Compares two CharSequences, returning {@code true} if they represent
-     * equal sequences of characters, ignoring case.</p>
-     *
-     * <p>{@code null}s are handled without exceptions. Two {@code null}
-     * references are considered equal. Comparison is case insensitive.</p>
-     *
      * <pre>
      * StringToolkit.equalsIgnoreCase(null, null)   = true
      * StringToolkit.equalsIgnoreCase(null, "abc")  = false
@@ -1905,12 +1246,6 @@ public abstract class StringToolkit  {
      * StringToolkit.equalsIgnoreCase("abc", "abc") = true
      * StringToolkit.equalsIgnoreCase("abc", "ABC") = true
      * </pre>
-     *
-     * @param str1  the first CharSequence, may be null
-     * @param str2  the second CharSequence, may be null
-     * @return {@code true} if the CharSequence are equal, case insensitive, or
-     *  both {@code null}
-     * @since 3.0 Changed signature from equalsIgnoreCase(String, String) to equalsIgnoreCase(CharSequence, CharSequence)
      */
     public static boolean equalsIgnoreCase(final CharSequence str1, final CharSequence str2) {
         if (str1 == null || str2 == null) {
@@ -1927,24 +1262,12 @@ public abstract class StringToolkit  {
     // IndexOf
     //-----------------------------------------------------------------------
     /**
-     * <p>Finds the first index within a CharSequence, handling {@code null}.
-     * This method uses {@link String#indexOf(int, int)} if possible.</p>
-     *
-     * <p>A {@code null} or empty ("") CharSequence will return {@code INDEX_NOT_FOUND (-1)}.</p>
-     *
      * <pre>
      * StringToolkit.indexOf(null, *)         = -1
      * StringToolkit.indexOf("", *)           = -1
      * StringToolkit.indexOf("aabaabaa", 'a') = 0
      * StringToolkit.indexOf("aabaabaa", 'b') = 2
      * </pre>
-     *
-     * @param seq  the CharSequence to check, may be null
-     * @param searchChar  the character to find
-     * @return the first index of the search character,
-     *  -1 if no match or {@code null} string input
-     * @since 2.0
-     * @since 3.0 Changed signature from indexOf(String, int) to indexOf(CharSequence, int)
      */
     public static int indexOf(final CharSequence seq, final int searchChar) {
         if (isEmpty(seq)) {
@@ -1954,14 +1277,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Finds the first index within a CharSequence from a start position,
-     * handling {@code null}.
-     * This method uses {@link String#indexOf(int, int)} if possible.</p>
-     *
-     * <p>A {@code null} or empty ("") CharSequence will return {@code (INDEX_NOT_FOUND) -1}.
-     * A negative start position is treated as zero.
-     * A start position greater than the string length returns {@code -1}.</p>
-     *
      * <pre>
      * StringToolkit.indexOf(null, *, *)          = -1
      * StringToolkit.indexOf("", *, *)            = -1
@@ -1970,14 +1285,6 @@ public abstract class StringToolkit  {
      * StringToolkit.indexOf("aabaabaa", 'b', 9)  = -1
      * StringToolkit.indexOf("aabaabaa", 'b', -1) = 2
      * </pre>
-     *
-     * @param seq  the CharSequence to check, may be null
-     * @param searchChar  the character to find
-     * @param startPos  the start position, negative treated as zero
-     * @return the first index of the search character (always &ge; startPos),
-     *  -1 if no match or {@code null} string input
-     * @since 2.0
-     * @since 3.0 Changed signature from indexOf(String, int, int) to indexOf(CharSequence, int, int)
      */
     public static int indexOf(final CharSequence seq, final int searchChar, final int startPos) {
         if (isEmpty(seq)) {
@@ -1987,11 +1294,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Finds the first index within a CharSequence, handling {@code null}.
-     * This method uses {@link String#indexOf(String, int)} if possible.</p>
-     *
-     * <p>A {@code null} CharSequence will return {@code -1}.</p>
-     *
      * <pre>
      * StringToolkit.indexOf(null, *)          = -1
      * StringToolkit.indexOf(*, null)          = -1
@@ -2002,13 +1304,6 @@ public abstract class StringToolkit  {
      * StringToolkit.indexOf("aabaabaa", "ab") = 1
      * StringToolkit.indexOf("aabaabaa", "")   = 0
      * </pre>
-     *
-     * @param seq  the CharSequence to check, may be null
-     * @param searchSeq  the CharSequence to find, may be null
-     * @return the first index of the search CharSequence,
-     *  -1 if no match or {@code null} string input
-     * @since 2.0
-     * @since 3.0 Changed signature from indexOf(String, String) to indexOf(CharSequence, CharSequence)
      */
     public static int indexOf(final CharSequence seq, final CharSequence searchSeq) {
         if (seq == null || searchSeq == null) {
@@ -2018,15 +1313,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Finds the first index within a CharSequence, handling {@code null}.
-     * This method uses {@link String#indexOf(String, int)} if possible.</p>
-     *
-     * <p>A {@code null} CharSequence will return {@code -1}.
-     * A negative start position is treated as zero.
-     * An empty ("") search CharSequence always matches.
-     * A start position greater than the string length only matches
-     * an empty search CharSequence.</p>
-     *
      * <pre>
      * StringToolkit.indexOf(null, *, *)          = -1
      * StringToolkit.indexOf(*, null, *)          = -1
@@ -2041,14 +1327,6 @@ public abstract class StringToolkit  {
      * StringToolkit.indexOf("aabaabaa", "", 2)   = 2
      * StringToolkit.indexOf("abc", "", 9)        = 3
      * </pre>
-     *
-     * @param seq  the CharSequence to check, may be null
-     * @param searchSeq  the CharSequence to find, may be null
-     * @param startPos  the start position, negative treated as zero
-     * @return the first index of the search CharSequence (always &ge; startPos),
-     *  -1 if no match or {@code null} string input
-     * @since 2.0
-     * @since 3.0 Changed signature from indexOf(String, String, int) to indexOf(CharSequence, CharSequence, int)
      */
     public static int indexOf(final CharSequence seq, final CharSequence searchSeq, final int startPos) {
         if (seq == null || searchSeq == null) {
@@ -2058,11 +1336,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Finds the n-th index within a CharSequence, handling {@code null}.
-     * This method uses {@link String#indexOf(String)} if possible.</p>
-     *
-     * <p>A {@code null} CharSequence will return {@code -1}.</p>
-     *
      * <pre>
      * StringToolkit.ordinalIndexOf(null, *, *)          = -1
      * StringToolkit.ordinalIndexOf(*, null, *)          = -1
@@ -2076,38 +1349,11 @@ public abstract class StringToolkit  {
      * StringToolkit.ordinalIndexOf("aabaabaa", "", 1)   = 0
      * StringToolkit.ordinalIndexOf("aabaabaa", "", 2)   = 0
      * </pre>
-     *
-     * <p>Note that 'head(CharSequence str, int n)' may be implemented as: </p>
-     *
-     * <pre>
-     *   str.substring(0, lastOrdinalIndexOf(str, "\n", n))
-     * </pre>
-     *
-     * @param str  the CharSequence to check, may be null
-     * @param searchStr  the CharSequence to find, may be null
-     * @param ordinal  the n-th {@code searchStr} to find
-     * @return the n-th index of the search CharSequence,
-     *  {@code -1} ({@code INDEX_NOT_FOUND}) if no match or {@code null} string input
-     * @since 2.1
-     * @since 3.0 Changed signature from ordinalIndexOf(String, String, int) to ordinalIndexOf(CharSequence, CharSequence, int)
      */
     public static int ordinalIndexOf(final CharSequence str, final CharSequence searchStr, final int ordinal) {
         return ordinalIndexOf(str, searchStr, ordinal, false);
     }
 
-    /**
-     * <p>Finds the n-th index within a String, handling {@code null}.
-     * This method uses {@link String#indexOf(String)} if possible.</p>
-     *
-     * <p>A {@code null} CharSequence will return {@code -1}.</p>
-     *
-     * @param str  the CharSequence to check, may be null
-     * @param searchStr  the CharSequence to find, may be null
-     * @param ordinal  the n-th {@code searchStr} to find
-     * @param lastIndex true if lastOrdinalIndexOf() otherwise false if ordinalIndexOf()
-     * @return the n-th index of the search CharSequence,
-     *  {@code -1} ({@code INDEX_NOT_FOUND}) if no match or {@code null} string input
-     */
     // Shared code between ordinalIndexOf(String,String,int) and lastOrdinalIndexOf(String,String,int)
     private static int ordinalIndexOf(final CharSequence str, final CharSequence searchStr, final int ordinal, final boolean lastIndex) {
         if (str == null || searchStr == null || ordinal <= 0) {
@@ -2133,14 +1379,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Case in-sensitive find of the first index within a CharSequence.</p>
-     *
-     * <p>A {@code null} CharSequence will return {@code -1}.
-     * A negative start position is treated as zero.
-     * An empty ("") search CharSequence always matches.
-     * A start position greater than the string length only matches
-     * an empty search CharSequence.</p>
-     *
      * <pre>
      * StringToolkit.indexOfIgnoreCase(null, *)          = -1
      * StringToolkit.indexOfIgnoreCase(*, null)          = -1
@@ -2149,28 +1387,12 @@ public abstract class StringToolkit  {
      * StringToolkit.indexOfIgnoreCase("aabaabaa", "b")  = 2
      * StringToolkit.indexOfIgnoreCase("aabaabaa", "ab") = 1
      * </pre>
-     *
-     * @param str  the CharSequence to check, may be null
-     * @param searchStr  the CharSequence to find, may be null
-     * @return the first index of the search CharSequence,
-     *  -1 if no match or {@code null} string input
-     * @since 2.5
-     * @since 3.0 Changed signature from indexOfIgnoreCase(String, String) to indexOfIgnoreCase(CharSequence, CharSequence)
      */
     public static int indexOfIgnoreCase(final CharSequence str, final CharSequence searchStr) {
         return indexOfIgnoreCase(str, searchStr, 0);
     }
 
     /**
-     * <p>Case in-sensitive find of the first index within a CharSequence
-     * from the specified position.</p>
-     *
-     * <p>A {@code null} CharSequence will return {@code -1}.
-     * A negative start position is treated as zero.
-     * An empty ("") search CharSequence always matches.
-     * A start position greater than the string length only matches
-     * an empty search CharSequence.</p>
-     *
      * <pre>
      * StringToolkit.indexOfIgnoreCase(null, *, *)          = -1
      * StringToolkit.indexOfIgnoreCase(*, null, *)          = -1
@@ -2184,14 +1406,6 @@ public abstract class StringToolkit  {
      * StringToolkit.indexOfIgnoreCase("aabaabaa", "", 2)   = 2
      * StringToolkit.indexOfIgnoreCase("abc", "", 9)        = 3
      * </pre>
-     *
-     * @param str  the CharSequence to check, may be null
-     * @param searchStr  the CharSequence to find, may be null
-     * @param startPos  the start position, negative treated as zero
-     * @return the first index of the search CharSequence (always &ge; startPos),
-     *  -1 if no match or {@code null} string input
-     * @since 2.5
-     * @since 3.0 Changed signature from indexOfIgnoreCase(String, String, int) to indexOfIgnoreCase(CharSequence, CharSequence, int)
      */
     public static int indexOfIgnoreCase(final CharSequence str, final CharSequence searchStr, int startPos) {
         if (str == null || searchStr == null) {
@@ -2218,24 +1432,12 @@ public abstract class StringToolkit  {
     // LastIndexOf
     //-----------------------------------------------------------------------
     /**
-     * <p>Finds the last index within a CharSequence, handling {@code null}.
-     * This method uses {@link String#lastIndexOf(int)} if possible.</p>
-     *
-     * <p>A {@code null} or empty ("") CharSequence will return {@code -1}.</p>
-     *
      * <pre>
      * StringToolkit.lastIndexOf(null, *)         = -1
      * StringToolkit.lastIndexOf("", *)           = -1
      * StringToolkit.lastIndexOf("aabaabaa", 'a') = 7
      * StringToolkit.lastIndexOf("aabaabaa", 'b') = 5
      * </pre>
-     *
-     * @param seq  the CharSequence to check, may be null
-     * @param searchChar  the character to find
-     * @return the last index of the search character,
-     *  -1 if no match or {@code null} string input
-     * @since 2.0
-     * @since 3.0 Changed signature from lastIndexOf(String, int) to lastIndexOf(CharSequence, int)
      */
     public static int lastIndexOf(final CharSequence seq, final int searchChar) {
         if (isEmpty(seq)) {
@@ -2245,17 +1447,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Finds the last index within a CharSequence from a start position,
-     * handling {@code null}.
-     * This method uses {@link String#lastIndexOf(int, int)} if possible.</p>
-     *
-     * <p>A {@code null} or empty ("") CharSequence will return {@code -1}.
-     * A negative start position returns {@code -1}.
-     * A start position greater than the string length searches the whole string.
-     * The search starts at the startPos and works backwards; matches starting after the start
-     * position are ignored.
-     * </p>
-     *
      * <pre>
      * StringToolkit.lastIndexOf(null, *, *)          = -1
      * StringToolkit.lastIndexOf("", *,  *)           = -1
@@ -2266,14 +1457,6 @@ public abstract class StringToolkit  {
      * StringToolkit.lastIndexOf("aabaabaa", 'b', -1) = -1
      * StringToolkit.lastIndexOf("aabaabaa", 'a', 0)  = 0
      * </pre>
-     *
-     * @param seq  the CharSequence to check, may be null
-     * @param searchChar  the character to find
-     * @param startPos  the start position
-     * @return the last index of the search character (always &le; startPos),
-     *  -1 if no match or {@code null} string input
-     * @since 2.0
-     * @since 3.0 Changed signature from lastIndexOf(String, int, int) to lastIndexOf(CharSequence, int, int)
      */
     public static int lastIndexOf(final CharSequence seq, final int searchChar, final int startPos) {
         if (isEmpty(seq)) {
@@ -2283,11 +1466,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Finds the last index within a CharSequence, handling {@code null}.
-     * This method uses {@link String#lastIndexOf(String)} if possible.</p>
-     *
-     * <p>A {@code null} CharSequence will return {@code -1}.</p>
-     *
      * <pre>
      * StringToolkit.lastIndexOf(null, *)          = -1
      * StringToolkit.lastIndexOf(*, null)          = -1
@@ -2297,13 +1475,6 @@ public abstract class StringToolkit  {
      * StringToolkit.lastIndexOf("aabaabaa", "ab") = 4
      * StringToolkit.lastIndexOf("aabaabaa", "")   = 8
      * </pre>
-     *
-     * @param seq  the CharSequence to check, may be null
-     * @param searchSeq  the CharSequence to find, may be null
-     * @return the last index of the search String,
-     *  -1 if no match or {@code null} string input
-     * @since 2.0
-     * @since 3.0 Changed signature from lastIndexOf(String, String) to lastIndexOf(CharSequence, CharSequence)
      */
     public static int lastIndexOf(final CharSequence seq, final CharSequence searchSeq) {
         if (seq == null || searchSeq == null) {
@@ -2313,11 +1484,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Finds the n-th last index within a String, handling {@code null}.
-     * This method uses {@link String#lastIndexOf(String)}.</p>
-     *
-     * <p>A {@code null} String will return {@code -1}.</p>
-     *
      * <pre>
      * StringToolkit.lastOrdinalIndexOf(null, *, *)          = -1
      * StringToolkit.lastOrdinalIndexOf(*, null, *)          = -1
@@ -2331,37 +1497,12 @@ public abstract class StringToolkit  {
      * StringToolkit.lastOrdinalIndexOf("aabaabaa", "", 1)   = 8
      * StringToolkit.lastOrdinalIndexOf("aabaabaa", "", 2)   = 8
      * </pre>
-     *
-     * <p>Note that 'tail(CharSequence str, int n)' may be implemented as: </p>
-     *
-     * <pre>
-     *   str.substring(lastOrdinalIndexOf(str, "\n", n) + 1)
-     * </pre>
-     *
-     * @param str  the CharSequence to check, may be null
-     * @param searchStr  the CharSequence to find, may be null
-     * @param ordinal  the n-th last {@code searchStr} to find
-     * @return the n-th last index of the search CharSequence,
-     *  {@code -1} ({@code INDEX_NOT_FOUND}) if no match or {@code null} string input
-     * @since 2.5
-     * @since 3.0 Changed signature from lastOrdinalIndexOf(String, String, int) to lastOrdinalIndexOf(CharSequence, CharSequence, int)
      */
     public static int lastOrdinalIndexOf(final CharSequence str, final CharSequence searchStr, final int ordinal) {
         return ordinalIndexOf(str, searchStr, ordinal, true);
     }
 
     /**
-     * <p>Finds the last index within a CharSequence, handling {@code null}.
-     * This method uses {@link String#lastIndexOf(String, int)} if possible.</p>
-     *
-     * <p>A {@code null} CharSequence will return {@code -1}.
-     * A negative start position returns {@code -1}.
-     * An empty ("") search CharSequence always matches unless the start position is negative.
-     * A start position greater than the string length searches the whole string.
-     * The search starts at the startPos and works backwards; matches starting after the start
-     * position are ignored.
-     * </p>
-     *
      * <pre>
      * StringToolkit.lastIndexOf(null, *, *)          = -1
      * StringToolkit.lastIndexOf(*, null, *)          = -1
@@ -2377,14 +1518,6 @@ public abstract class StringToolkit  {
      * StringToolkit.lastIndexOf("aabaabaa", "ba", 2)  = -1
      * StringToolkit.lastIndexOf("aabaabaa", "ba", 2)  = 2
      * </pre>
-     *
-     * @param seq  the CharSequence to check, may be null
-     * @param searchSeq  the CharSequence to find, may be null
-     * @param startPos  the start position, negative treated as zero
-     * @return the last index of the search CharSequence (always &le; startPos),
-     *  -1 if no match or {@code null} string input
-     * @since 2.0
-     * @since 3.0 Changed signature from lastIndexOf(String, String, int) to lastIndexOf(CharSequence, CharSequence, int)
      */
     public static int lastIndexOf(final CharSequence seq, final CharSequence searchSeq, final int startPos) {
         if (seq == null || searchSeq == null) {
@@ -2394,13 +1527,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Case in-sensitive find of the last index within a CharSequence.</p>
-     *
-     * <p>A {@code null} CharSequence will return {@code -1}.
-     * A negative start position returns {@code -1}.
-     * An empty ("") search CharSequence always matches unless the start position is negative.
-     * A start position greater than the string length searches the whole string.</p>
-     *
      * <pre>
      * StringToolkit.lastIndexOfIgnoreCase(null, *)          = -1
      * StringToolkit.lastIndexOfIgnoreCase(*, null)          = -1
@@ -2408,13 +1534,6 @@ public abstract class StringToolkit  {
      * StringToolkit.lastIndexOfIgnoreCase("aabaabaa", "B")  = 5
      * StringToolkit.lastIndexOfIgnoreCase("aabaabaa", "AB") = 4
      * </pre>
-     *
-     * @param str  the CharSequence to check, may be null
-     * @param searchStr  the CharSequence to find, may be null
-     * @return the first index of the search CharSequence,
-     *  -1 if no match or {@code null} string input
-     * @since 2.5
-     * @since 3.0 Changed signature from lastIndexOfIgnoreCase(String, String) to lastIndexOfIgnoreCase(CharSequence, CharSequence)
      */
     public static int lastIndexOfIgnoreCase(final CharSequence str, final CharSequence searchStr) {
         if (str == null || searchStr == null) {
@@ -2424,17 +1543,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Case in-sensitive find of the last index within a CharSequence
-     * from the specified position.</p>
-     *
-     * <p>A {@code null} CharSequence will return {@code -1}.
-     * A negative start position returns {@code -1}.
-     * An empty ("") search CharSequence always matches unless the start position is negative.
-     * A start position greater than the string length searches the whole string.
-     * The search starts at the startPos and works backwards; matches starting after the start
-     * position are ignored.
-     * </p>
-     *
      * <pre>
      * StringToolkit.lastIndexOfIgnoreCase(null, *, *)          = -1
      * StringToolkit.lastIndexOfIgnoreCase(*, null, *)          = -1
@@ -2446,14 +1554,6 @@ public abstract class StringToolkit  {
      * StringToolkit.lastIndexOfIgnoreCase("aabaabaa", "A", 0)  = 0
      * StringToolkit.lastIndexOfIgnoreCase("aabaabaa", "B", 0)  = -1
      * </pre>
-     *
-     * @param str  the CharSequence to check, may be null
-     * @param searchStr  the CharSequence to find, may be null
-     * @param startPos  the start position
-     * @return the last index of the search CharSequence (always &le; startPos),
-     *  -1 if no match or {@code null} input
-     * @since 2.5
-     * @since 3.0 Changed signature from lastIndexOfIgnoreCase(String, String, int) to lastIndexOfIgnoreCase(CharSequence, CharSequence, int)
      */
     public static int lastIndexOfIgnoreCase(final CharSequence str, final CharSequence searchStr, int startPos) {
         if (str == null || searchStr == null) {
@@ -2480,24 +1580,12 @@ public abstract class StringToolkit  {
     // Contains
     //-----------------------------------------------------------------------
     /**
-     * <p>Checks if CharSequence contains a search character, handling {@code null}.
-     * This method uses {@link String#indexOf(int)} if possible.</p>
-     *
-     * <p>A {@code null} or empty ("") CharSequence will return {@code false}.</p>
-     *
      * <pre>
      * StringToolkit.contains(null, *)    = false
      * StringToolkit.contains("", *)      = false
      * StringToolkit.contains("abc", 'a') = true
      * StringToolkit.contains("abc", 'z') = false
      * </pre>
-     *
-     * @param seq  the CharSequence to check, may be null
-     * @param searchChar  the character to find
-     * @return true if the CharSequence contains the search character,
-     *  false if not or {@code null} string input
-     * @since 2.0
-     * @since 3.0 Changed signature from contains(String, int) to contains(CharSequence, int)
      */
     public static boolean contains(final CharSequence seq, final int searchChar) {
         if (isEmpty(seq)) {
@@ -2507,11 +1595,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Checks if CharSequence contains a search CharSequence, handling {@code null}.
-     * This method uses {@link String#indexOf(String)} if possible.</p>
-     *
-     * <p>A {@code null} CharSequence will return {@code false}.</p>
-     *
      * <pre>
      * StringToolkit.contains(null, *)     = false
      * StringToolkit.contains(*, null)     = false
@@ -2520,13 +1603,6 @@ public abstract class StringToolkit  {
      * StringToolkit.contains("abc", "a")  = true
      * StringToolkit.contains("abc", "z")  = false
      * </pre>
-     *
-     * @param seq  the CharSequence to check, may be null
-     * @param searchSeq  the CharSequence to find, may be null
-     * @return true if the CharSequence contains the search CharSequence,
-     *  false if not or {@code null} string input
-     * @since 2.0
-     * @since 3.0 Changed signature from contains(String, String) to contains(CharSequence, CharSequence)
      */
     public static boolean contains(final CharSequence seq, final CharSequence searchSeq) {
         if (seq == null || searchSeq == null) {
@@ -2536,12 +1612,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Checks if CharSequence contains a search CharSequence irrespective of case,
-     * handling {@code null}. Case-insensitivity is defined as by
-     * {@link String#equalsIgnoreCase(String)}.
-     *
-     * <p>A {@code null} CharSequence will return {@code false}.</p>
-     *
      * <pre>
      * StringToolkit.contains(null, *) = false
      * StringToolkit.contains(*, null) = false
@@ -2552,12 +1622,6 @@ public abstract class StringToolkit  {
      * StringToolkit.contains("abc", "A") = true
      * StringToolkit.contains("abc", "Z") = false
      * </pre>
-     *
-     * @param str  the CharSequence to check, may be null
-     * @param searchStr  the CharSequence to find, may be null
-     * @return true if the CharSequence contains the search CharSequence irrespective of
-     * case or false if not or {@code null} string input
-     * @since 3.0 Changed signature from containsIgnoreCase(String, String) to containsIgnoreCase(CharSequence, CharSequence)
      */
     public static boolean containsIgnoreCase(final CharSequence str, final CharSequence searchStr) {
         if (str == null || searchStr == null) {
@@ -2573,14 +1637,6 @@ public abstract class StringToolkit  {
         return false;
     }
 
-    /**
-     * Check whether the given CharSequence contains any whitespace characters.
-     * @param seq the CharSequence to check (may be {@code null})
-     * @return {@code true} if the CharSequence is not empty and
-     * contains at least 1 whitespace character
-     * @see Character#isWhitespace
-     * @since 3.0
-     */
     // From org.springframework.util.StringToolkit, under Apache License 2.0
     public static boolean containsWhitespace(final CharSequence seq) {
         if (isEmpty(seq)) {
@@ -2598,12 +1654,6 @@ public abstract class StringToolkit  {
     // IndexOfAny chars
     //-----------------------------------------------------------------------
     /**
-     * <p>Search a CharSequence to find the first index of any
-     * character in the given set of characters.</p>
-     *
-     * <p>A {@code null} String will return {@code -1}.
-     * A {@code null} or zero length search array will return {@code -1}.</p>
-     *
      * <pre>
      * StringToolkit.indexOfAny(null, *)                = -1
      * StringToolkit.indexOfAny("", *)                  = -1
@@ -2613,12 +1663,6 @@ public abstract class StringToolkit  {
      * StringToolkit.indexOfAny("zzabyycdxx",['b','y']) = 3
      * StringToolkit.indexOfAny("aba", ['z'])           = -1
      * </pre>
-     *
-     * @param cs  the CharSequence to check, may be null
-     * @param searchChars  the chars to search for, may be null
-     * @return the index of any of the chars, -1 if no match or null input
-     * @since 2.0
-     * @since 3.0 Changed signature from indexOfAny(String, char[]) to indexOfAny(CharSequence, char...)
      */
     public static int indexOfAny(final CharSequence cs, final char... searchChars) {
         if (isEmpty(cs) || ObjectToolkit.isEmpty(searchChars)) {
@@ -2647,12 +1691,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Search a CharSequence to find the first index of any
-     * character in the given set of characters.</p>
-     *
-     * <p>A {@code null} String will return {@code -1}.
-     * A {@code null} search string will return {@code -1}.</p>
-     *
      * <pre>
      * StringToolkit.indexOfAny(null, *)            = -1
      * StringToolkit.indexOfAny("", *)              = -1
@@ -2662,12 +1700,6 @@ public abstract class StringToolkit  {
      * StringToolkit.indexOfAny("zzabyycdxx", "by") = 3
      * StringToolkit.indexOfAny("aba","z")          = -1
      * </pre>
-     *
-     * @param cs  the CharSequence to check, may be null
-     * @param searchChars  the chars to search for, may be null
-     * @return the index of any of the chars, -1 if no match or null input
-     * @since 2.0
-     * @since 3.0 Changed signature from indexOfAny(String, String) to indexOfAny(CharSequence, String)
      */
     public static int indexOfAny(final CharSequence cs, final String searchChars) {
         if (isEmpty(cs) || isEmpty(searchChars)) {
@@ -2679,12 +1711,6 @@ public abstract class StringToolkit  {
     // ContainsAny
     //-----------------------------------------------------------------------
     /**
-     * <p>Checks if the CharSequence contains any character in the given
-     * set of characters.</p>
-     *
-     * <p>A {@code null} CharSequence will return {@code false}.
-     * A {@code null} or zero length search array will return {@code false}.</p>
-     *
      * <pre>
      * StringToolkit.containsAny(null, *)                = false
      * StringToolkit.containsAny("", *)                  = false
@@ -2694,13 +1720,6 @@ public abstract class StringToolkit  {
      * StringToolkit.containsAny("zzabyycdxx",['b','y']) = true
      * StringToolkit.containsAny("aba", ['z'])           = false
      * </pre>
-     *
-     * @param cs  the CharSequence to check, may be null
-     * @param searchChars  the chars to search for, may be null
-     * @return the {@code true} if any of the chars are found,
-     * {@code false} if no match or null input
-     * @since 2.4
-     * @since 3.0 Changed signature from containsAny(String, char[]) to containsAny(CharSequence, char...)
      */
     public static boolean containsAny(final CharSequence cs, final char... searchChars) {
         if (isEmpty(cs) || ObjectToolkit.isEmpty(searchChars)) {
@@ -2733,15 +1752,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>
-     * Checks if the CharSequence contains any character in the given set of characters.
-     * </p>
-     *
-     * <p>
-     * A {@code null} CharSequence will return {@code false}. A {@code null} search CharSequence will return
-     * {@code false}.
-     * </p>
-     *
      * <pre>
      * StringToolkit.containsAny(null, *)            = false
      * StringToolkit.containsAny("", *)              = false
@@ -2751,14 +1761,6 @@ public abstract class StringToolkit  {
      * StringToolkit.containsAny("zzabyycdxx", "by") = true
      * StringToolkit.containsAny("aba","z")          = false
      * </pre>
-     *
-     * @param cs
-     *            the CharSequence to check, may be null
-     * @param searchChars
-     *            the chars to search for, may be null
-     * @return the {@code true} if any of the chars are found, {@code false} if no match or null input
-     * @since 2.4
-     * @since 3.0 Changed signature from containsAny(String, String) to containsAny(CharSequence, CharSequence)
      */
     public static boolean containsAny(final CharSequence cs, final CharSequence searchChars) {
         if (searchChars == null) {
@@ -2768,13 +1770,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Checks if the CharSequence contains any of the CharSequences in the given array.</p>
-     *
-     * <p>
-     * A {@code null} CharSequence will return {@code false}. A {@code null} or zero
-     * length search array will return {@code false}.
-     * </p>
-     *
      * <pre>
      * StringToolkit.containsAny(null, *)            = false
      * StringToolkit.containsAny("", *)              = false
@@ -2783,12 +1778,6 @@ public abstract class StringToolkit  {
      * StringToolkit.containsAny("abcd", "ab", "cd") = false
      * StringToolkit.containsAny("abc", "d", "abc")  = true
      * </pre>
-     *
-     *
-     * @param cs The CharSequence to check, may be null
-     * @param searchCharSequences The array of CharSequences to search for, may be null
-     * @return {@code true} if any of the search CharSequences are found, {@code false} otherwise
-     * @since 3.4
      */
     public static boolean containsAny(CharSequence cs, CharSequence... searchCharSequences) {
         if (isEmpty(cs) || ObjectToolkit.isEmpty(searchCharSequences)) {
@@ -2805,12 +1794,6 @@ public abstract class StringToolkit  {
     // IndexOfAnyBut chars
     //-----------------------------------------------------------------------
     /**
-     * <p>Searches a CharSequence to find the first index of any
-     * character not in the given set of characters.</p>
-     *
-     * <p>A {@code null} CharSequence will return {@code -1}.
-     * A {@code null} or zero length search array will return {@code -1}.</p>
-     *
      * <pre>
      * StringToolkit.indexOfAnyBut(null, *)                              = -1
      * StringToolkit.indexOfAnyBut("", *)                                = -1
@@ -2821,12 +1804,6 @@ public abstract class StringToolkit  {
      * StringToolkit.indexOfAnyBut("aba", new char[] {'a', 'b'} )        = -1
 
      * </pre>
-     *
-     * @param cs  the CharSequence to check, may be null
-     * @param searchChars  the chars to search for, may be null
-     * @return the index of any of the chars, -1 if no match or null input
-     * @since 2.0
-     * @since 3.0 Changed signature from indexOfAnyBut(String, char[]) to indexOfAnyBut(CharSequence, char...)
      */
     public static int indexOfAnyBut(final CharSequence cs, final char... searchChars) {
         if (isEmpty(cs) || ObjectToolkit.isEmpty(searchChars)) {
@@ -2856,12 +1833,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Search a CharSequence to find the first index of any
-     * character not in the given set of characters.</p>
-     *
-     * <p>A {@code null} CharSequence will return {@code -1}.
-     * A {@code null} or empty search string will return {@code -1}.</p>
-     *
      * <pre>
      * StringToolkit.indexOfAnyBut(null, *)            = -1
      * StringToolkit.indexOfAnyBut("", *)              = -1
@@ -2871,12 +1842,6 @@ public abstract class StringToolkit  {
      * StringToolkit.indexOfAnyBut("zzabyycdxx", "")   = -1
      * StringToolkit.indexOfAnyBut("aba","ab")         = -1
      * </pre>
-     *
-     * @param seq  the CharSequence to check, may be null
-     * @param searchChars  the chars to search for, may be null
-     * @return the index of any of the chars, -1 if no match or null input
-     * @since 2.0
-     * @since 3.0 Changed signature from indexOfAnyBut(String, String) to indexOfAnyBut(CharSequence, CharSequence)
      */
     public static int indexOfAnyBut(final CharSequence seq, final CharSequence searchChars) {
         if (isEmpty(seq) || isEmpty(searchChars)) {
@@ -2903,12 +1868,6 @@ public abstract class StringToolkit  {
     // ContainsOnly
     //-----------------------------------------------------------------------
     /**
-     * <p>Checks if the CharSequence contains only certain characters.</p>
-     *
-     * <p>A {@code null} CharSequence will return {@code false}.
-     * A {@code null} valid character array will return {@code false}.
-     * An empty CharSequence (length()=0) always returns {@code true}.</p>
-     *
      * <pre>
      * StringToolkit.containsOnly(null, *)       = false
      * StringToolkit.containsOnly(*, null)       = false
@@ -2918,11 +1877,6 @@ public abstract class StringToolkit  {
      * StringToolkit.containsOnly("ab1", 'abc')  = false
      * StringToolkit.containsOnly("abz", 'abc')  = false
      * </pre>
-     *
-     * @param cs  the String to check, may be null
-     * @param valid  an array of valid chars, may be null
-     * @return true if it only contains valid chars and is non-null
-     * @since 3.0 Changed signature from containsOnly(String, char[]) to containsOnly(CharSequence, char...)
      */
     public static boolean containsOnly(final CharSequence cs, final char... valid) {
         // All these pre-checks are to maintain API with an older version
@@ -2939,12 +1893,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Checks if the CharSequence contains only certain characters.</p>
-     *
-     * <p>A {@code null} CharSequence will return {@code false}.
-     * A {@code null} valid character String will return {@code false}.
-     * An empty String (length()=0) always returns {@code true}.</p>
-     *
      * <pre>
      * StringToolkit.containsOnly(null, *)       = false
      * StringToolkit.containsOnly(*, null)       = false
@@ -2954,12 +1902,6 @@ public abstract class StringToolkit  {
      * StringToolkit.containsOnly("ab1", "abc")  = false
      * StringToolkit.containsOnly("abz", "abc")  = false
      * </pre>
-     *
-     * @param cs  the CharSequence to check, may be null
-     * @param validChars  a String of valid chars, may be null
-     * @return true if it only contains valid chars and is non-null
-     * @since 2.0
-     * @since 3.0 Changed signature from containsOnly(String, String) to containsOnly(CharSequence, String)
      */
     public static boolean containsOnly(final CharSequence cs, final String validChars) {
         if (cs == null || validChars == null) {
@@ -2971,12 +1913,6 @@ public abstract class StringToolkit  {
     // ContainsNone
     //-----------------------------------------------------------------------
     /**
-     * <p>Checks that the CharSequence does not contain certain characters.</p>
-     *
-     * <p>A {@code null} CharSequence will return {@code true}.
-     * A {@code null} invalid character array will return {@code true}.
-     * An empty CharSequence (length()=0) always returns true.</p>
-     *
      * <pre>
      * StringToolkit.containsNone(null, *)       = true
      * StringToolkit.containsNone(*, null)       = true
@@ -2986,12 +1922,6 @@ public abstract class StringToolkit  {
      * StringToolkit.containsNone("ab1", 'xyz')  = true
      * StringToolkit.containsNone("abz", 'xyz')  = false
      * </pre>
-     *
-     * @param cs  the CharSequence to check, may be null
-     * @param searchChars  an array of invalid chars, may be null
-     * @return true if it contains none of the invalid chars, or is null
-     * @since 2.0
-     * @since 3.0 Changed signature from containsNone(String, char[]) to containsNone(CharSequence, char...)
      */
     public static boolean containsNone(final CharSequence cs, final char... searchChars) {
         if (cs == null || searchChars == null) {
@@ -3024,12 +1954,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Checks that the CharSequence does not contain certain characters.</p>
-     *
-     * <p>A {@code null} CharSequence will return {@code true}.
-     * A {@code null} invalid character array will return {@code true}.
-     * An empty String ("") always returns true.</p>
-     *
      * <pre>
      * StringToolkit.containsNone(null, *)       = true
      * StringToolkit.containsNone(*, null)       = true
@@ -3039,12 +1963,6 @@ public abstract class StringToolkit  {
      * StringToolkit.containsNone("ab1", "xyz")  = true
      * StringToolkit.containsNone("abz", "xyz")  = false
      * </pre>
-     *
-     * @param cs  the CharSequence to check, may be null
-     * @param invalidChars  a String of invalid chars, may be null
-     * @return true if it contains none of the invalid chars, or is null
-     * @since 2.0
-     * @since 3.0 Changed signature from containsNone(String, String) to containsNone(CharSequence, String)
      */
     public static boolean containsNone(final CharSequence cs, final String invalidChars) {
         if (cs == null || invalidChars == null) {
@@ -3056,14 +1974,6 @@ public abstract class StringToolkit  {
     // IndexOfAny strings
     //-----------------------------------------------------------------------
     /**
-     * <p>Find the first index of any of a set of potential substrings.</p>
-     *
-     * <p>A {@code null} CharSequence will return {@code -1}.
-     * A {@code null} or zero length search array will return {@code -1}.
-     * A {@code null} search array entry will be ignored, but a search
-     * array containing "" will return {@code 0} if {@code str} is not
-     * null. This method uses {@link String#indexOf(String)} if possible.</p>
-     *
      * <pre>
      * StringToolkit.indexOfAny(null, *)                     = -1
      * StringToolkit.indexOfAny(*, null)                     = -1
@@ -3076,11 +1986,6 @@ public abstract class StringToolkit  {
      * StringToolkit.indexOfAny("", [""])                    = 0
      * StringToolkit.indexOfAny("", ["a"])                   = -1
      * </pre>
-     *
-     * @param str  the CharSequence to check, may be null
-     * @param searchStrs  the CharSequences to search for, may be null
-     * @return the first index of any of the searchStrs in str, -1 if no match
-     * @since 3.0 Changed signature from indexOfAny(String, String[]) to indexOfAny(CharSequence, CharSequence...)
      */
     public static int indexOfAny(final CharSequence str, final CharSequence... searchStrs) {
         if (str == null || searchStrs == null) {
@@ -3111,14 +2016,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Find the latest index of any of a set of potential substrings.</p>
-     *
-     * <p>A {@code null} CharSequence will return {@code -1}.
-     * A {@code null} search array will return {@code -1}.
-     * A {@code null} or zero length search array entry will be ignored,
-     * but a search array containing "" will return the length of {@code str}
-     * if {@code str} is not null. This method uses {@link String#indexOf(String)} if possible</p>
-     *
      * <pre>
      * StringToolkit.lastIndexOfAny(null, *)                   = -1
      * StringToolkit.lastIndexOfAny(*, null)                   = -1
@@ -3130,11 +2027,6 @@ public abstract class StringToolkit  {
      * StringToolkit.lastIndexOfAny("zzabyycdxx", ["mn","op"]) = -1
      * StringToolkit.lastIndexOfAny("zzabyycdxx", ["mn",""])   = 10
      * </pre>
-     *
-     * @param str  the CharSequence to check, may be null
-     * @param searchStrs  the CharSequences to search for, may be null
-     * @return the last index of any of the CharSequences, -1 if no match
-     * @since 3.0 Changed signature from lastIndexOfAny(String, String[]) to lastIndexOfAny(CharSequence, CharSequence)
      */
     public static int lastIndexOfAny(final CharSequence str, final CharSequence... searchStrs) {
         if (str == null || searchStrs == null) {
@@ -3159,14 +2051,6 @@ public abstract class StringToolkit  {
     // Substring
     //-----------------------------------------------------------------------
     /**
-     * <p>Gets a substring from the specified String avoiding exceptions.</p>
-     *
-     * <p>A negative start position can be used to start {@code n}
-     * characters from the end of the String.</p>
-     *
-     * <p>A {@code null} String will return {@code null}.
-     * An empty ("") String will return "".</p>
-     *
      * <pre>
      * StringToolkit.substring(null, *)   = null
      * StringToolkit.substring("", *)     = ""
@@ -3176,11 +2060,6 @@ public abstract class StringToolkit  {
      * StringToolkit.substring("abc", -2) = "bc"
      * StringToolkit.substring("abc", -4) = "abc"
      * </pre>
-     *
-     * @param str  the String to get the substring from, may be null
-     * @param start  the position to start from, negative means
-     *  count back from the end of the String by this many characters
-     * @return substring from start position, {@code null} if null String input
      */
     public static String substring(final String str, int start) {
         if (str == null) {
@@ -3203,20 +2082,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Gets a substring from the specified String avoiding exceptions.</p>
-     *
-     * <p>A negative start position can be used to start/end {@code n}
-     * characters from the end of the String.</p>
-     *
-     * <p>The returned substring starts with the character in the {@code start}
-     * position and ends before the {@code end} position. All position counting is
-     * zero-based -- i.e., to start at the beginning of the string use
-     * {@code start = 0}. Negative start and end positions can be used to
-     * specify offsets relative to the end of the String.</p>
-     *
-     * <p>If {@code start} is not strictly to the left of {@code end}, ""
-     * is returned.</p>
-     *
      * <pre>
      * StringToolkit.substring(null, *, *)    = null
      * StringToolkit.substring("", * ,  *)    = "";
@@ -3228,14 +2093,6 @@ public abstract class StringToolkit  {
      * StringToolkit.substring("abc", -2, -1) = "b"
      * StringToolkit.substring("abc", -4, 2)  = "ab"
      * </pre>
-     *
-     * @param str  the String to get the substring from, may be null
-     * @param start  the position to start from, negative means
-     *  count back from the end of the String by this many characters
-     * @param end  the position to end at (exclusive), negative means
-     *  count back from the end of the String by this many characters
-     * @return substring from start position to end position,
-     *  {@code null} if null String input
      */
     public static String substring(final String str, int start, int end) {
         if (str == null) {
@@ -3273,12 +2130,6 @@ public abstract class StringToolkit  {
     // Left/Right/Mid
     //-----------------------------------------------------------------------
     /**
-     * <p>Gets the leftmost {@code len} characters of a String.</p>
-     *
-     * <p>If {@code len} characters are not available, or the
-     * String is {@code null}, the String will be returned without
-     * an exception. An empty String is returned if len is negative.</p>
-     *
      * <pre>
      * StringToolkit.left(null, *)    = null
      * StringToolkit.left(*, -ve)     = ""
@@ -3287,10 +2138,6 @@ public abstract class StringToolkit  {
      * StringToolkit.left("abc", 2)   = "ab"
      * StringToolkit.left("abc", 4)   = "abc"
      * </pre>
-     *
-     * @param str  the String to get the leftmost characters from, may be null
-     * @param len  the length of the required String
-     * @return the leftmost characters, {@code null} if null String input
      */
     public static String left(final String str, final int len) {
         if (str == null) {
@@ -3306,12 +2153,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Gets the rightmost {@code len} characters of a String.</p>
-     *
-     * <p>If {@code len} characters are not available, or the String
-     * is {@code null}, the String will be returned without an
-     * an exception. An empty String is returned if len is negative.</p>
-     *
      * <pre>
      * StringToolkit.right(null, *)    = null
      * StringToolkit.right(*, -ve)     = ""
@@ -3320,10 +2161,6 @@ public abstract class StringToolkit  {
      * StringToolkit.right("abc", 2)   = "bc"
      * StringToolkit.right("abc", 4)   = "abc"
      * </pre>
-     *
-     * @param str  the String to get the rightmost characters from, may be null
-     * @param len  the length of the required String
-     * @return the rightmost characters, {@code null} if null String input
      */
     public static String right(final String str, final int len) {
         if (str == null) {
@@ -3339,14 +2176,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Gets {@code len} characters from the middle of a String.</p>
-     *
-     * <p>If {@code len} characters are not available, the remainder
-     * of the String will be returned without an exception. If the
-     * String is {@code null}, {@code null} will be returned.
-     * An empty String is returned if len is negative or exceeds the
-     * length of {@code str}.</p>
-     *
      * <pre>
      * StringToolkit.mid(null, *, *)    = null
      * StringToolkit.mid(*, *, -ve)     = ""
@@ -3357,11 +2186,6 @@ public abstract class StringToolkit  {
      * StringToolkit.mid("abc", 4, 2)   = ""
      * StringToolkit.mid("abc", -2, 2)  = "ab"
      * </pre>
-     *
-     * @param str  the String to get the characters from, may be null
-     * @param pos  the position to start from, negative treated as zero
-     * @param len  the length of the required String
-     * @return the middle characters, {@code null} if null String input
      */
     public static String mid(final String str, int pos, final int len) {
         if (str == null) {
@@ -3382,15 +2206,6 @@ public abstract class StringToolkit  {
     // SubStringAfter/SubStringBefore
     //-----------------------------------------------------------------------
     /**
-     * <p>Gets the substring before the first occurrence of a separator.
-     * The separator is not returned.</p>
-     *
-     * <p>A {@code null} string input will return {@code null}.
-     * An empty ("") string input will return the empty string.
-     * A {@code null} separator will return the input string.</p>
-     *
-     * <p>If nothing is found, the string input is returned.</p>
-     *
      * <pre>
      * StringToolkit.substringBefore(null, *)      = null
      * StringToolkit.substringBefore("", *)        = ""
@@ -3401,12 +2216,6 @@ public abstract class StringToolkit  {
      * StringToolkit.substringBefore("abc", "")    = ""
      * StringToolkit.substringBefore("abc", null)  = "abc"
      * </pre>
-     *
-     * @param str  the String to get a substring from, may be null
-     * @param separator  the String to search for, may be null
-     * @return the substring before the first occurrence of the separator,
-     *  {@code null} if null String input
-     * @since 2.0
      */
     public static String substringBefore(final String str, final String separator) {
         if (isEmpty(str) || separator == null) {
@@ -3423,16 +2232,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Gets the substring after the first occurrence of a separator.
-     * The separator is not returned.</p>
-     *
-     * <p>A {@code null} string input will return {@code null}.
-     * An empty ("") string input will return the empty string.
-     * A {@code null} separator will return the empty string if the
-     * input string is not {@code null}.</p>
-     *
-     * <p>If nothing is found, the empty string is returned.</p>
-     *
      * <pre>
      * StringToolkit.substringAfter(null, *)      = null
      * StringToolkit.substringAfter("", *)        = ""
@@ -3443,12 +2242,6 @@ public abstract class StringToolkit  {
      * StringToolkit.substringAfter("abc", "d")   = ""
      * StringToolkit.substringAfter("abc", "")    = "abc"
      * </pre>
-     *
-     * @param str  the String to get a substring from, may be null
-     * @param separator  the String to search for, may be null
-     * @return the substring after the first occurrence of the separator,
-     *  {@code null} if null String input
-     * @since 2.0
      */
     public static String substringAfter(final String str, final String separator) {
         if (isEmpty(str)) {
@@ -3465,15 +2258,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Gets the substring before the last occurrence of a separator.
-     * The separator is not returned.</p>
-     *
-     * <p>A {@code null} string input will return {@code null}.
-     * An empty ("") string input will return the empty string.
-     * An empty or {@code null} separator will return the input string.</p>
-     *
-     * <p>If nothing is found, the string input is returned.</p>
-     *
      * <pre>
      * StringToolkit.substringBeforeLast(null, *)      = null
      * StringToolkit.substringBeforeLast("", *)        = ""
@@ -3484,12 +2268,6 @@ public abstract class StringToolkit  {
      * StringToolkit.substringBeforeLast("a", null)    = "a"
      * StringToolkit.substringBeforeLast("a", "")      = "a"
      * </pre>
-     *
-     * @param str  the String to get a substring from, may be null
-     * @param separator  the String to search for, may be null
-     * @return the substring before the last occurrence of the separator,
-     *  {@code null} if null String input
-     * @since 2.0
      */
     public static String substringBeforeLast(final String str, final String separator) {
         if (isEmpty(str) || isEmpty(separator)) {
@@ -3503,17 +2281,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Gets the substring after the last occurrence of a separator.
-     * The separator is not returned.</p>
-     *
-     * <p>A {@code null} string input will return {@code null}.
-     * An empty ("") string input will return the empty string.
-     * An empty or {@code null} separator will return the empty string if
-     * the input string is not {@code null}.</p>
-     *
-     * <p>If nothing is found, the empty string is returned.</p>
-     *
-     * <pre>
      * StringToolkit.substringAfterLast(null, *)      = null
      * StringToolkit.substringAfterLast("", *)        = ""
      * StringToolkit.substringAfterLast(*, "")        = ""
@@ -3524,12 +2291,6 @@ public abstract class StringToolkit  {
      * StringToolkit.substringAfterLast("a", "a")     = ""
      * StringToolkit.substringAfterLast("a", "z")     = ""
      * </pre>
-     *
-     * @param str  the String to get a substring from, may be null
-     * @param separator  the String to search for, may be null
-     * @return the substring after the last occurrence of the separator,
-     *  {@code null} if null String input
-     * @since 2.0
      */
     public static String substringAfterLast(final String str, final String separator) {
         if (isEmpty(str)) {
@@ -3548,12 +2309,6 @@ public abstract class StringToolkit  {
     // Substring between
     //-----------------------------------------------------------------------
     /**
-     * <p>Gets the String that is nested in between two instances of the
-     * same String.</p>
-     *
-     * <p>A {@code null} input String returns {@code null}.
-     * A {@code null} tag returns {@code null}.</p>
-     *
      * <pre>
      * StringToolkit.substringBetween(null, *)            = null
      * StringToolkit.substringBetween("", "")             = ""
@@ -3562,24 +2317,12 @@ public abstract class StringToolkit  {
      * StringToolkit.substringBetween("tagabctag", "")    = ""
      * StringToolkit.substringBetween("tagabctag", "tag") = "abc"
      * </pre>
-     *
-     * @param str  the String containing the substring, may be null
-     * @param tag  the String before and after the substring, may be null
-     * @return the substring, {@code null} if no match
-     * @since 2.0
      */
     public static String substringBetween(final String str, final String tag) {
         return substringBetween(str, tag, tag);
     }
 
     /**
-     * <p>Gets the String that is nested in between two Strings.
-     * Only the first match is returned.</p>
-     *
-     * <p>A {@code null} input String returns {@code null}.
-     * A {@code null} open/close returns {@code null} (no match).
-     * An empty ("") open and close returns an empty string.</p>
-     *
      * <pre>
      * StringToolkit.substringBetween("wx[b]yz", "[", "]") = "b"
      * StringToolkit.substringBetween(null, *, *)          = null
@@ -3592,12 +2335,6 @@ public abstract class StringToolkit  {
      * StringToolkit.substringBetween("yabcz", "y", "z")   = "abc"
      * StringToolkit.substringBetween("yabczyabcz", "y", "z")   = "abc"
      * </pre>
-     *
-     * @param str  the String containing the substring, may be null
-     * @param open  the String before the substring, may be null
-     * @param close  the String after the substring, may be null
-     * @return the substring, {@code null} if no match
-     * @since 2.0
      */
     public static String substringBetween(final String str, final String open, final String close) {
         if (str == null || open == null || close == null) {
@@ -3614,13 +2351,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Searches a String for substrings delimited by a start and end tag,
-     * returning all matching substrings in an array.</p>
-     *
-     * <p>A {@code null} input String returns {@code null}.
-     * A {@code null} open/close returns {@code null} (no match).
-     * An empty ("") open/close returns {@code null} (no match).</p>
-     *
      * <pre>
      * StringToolkit.substringsBetween("[a][b][c]", "[", "]") = ["a","b","c"]
      * StringToolkit.substringsBetween(null, *, *)            = null
@@ -3628,12 +2358,6 @@ public abstract class StringToolkit  {
      * StringToolkit.substringsBetween(*, *, null)            = null
      * StringToolkit.substringsBetween("", "[", "]")          = []
      * </pre>
-     *
-     * @param str  the String containing the substrings, null returns null, empty returns empty
-     * @param open  the String identifying the start of the substring, empty returns null
-     * @param close  the String identifying the end of the substring, empty returns null
-     * @return a String Array of substrings, or {@code null} if no match
-     * @since 2.3
      */
     public static String[] substringsBetween(final String str, final String open, final String close) {
         if (str == null || isEmpty(open) || isEmpty(close)) {
@@ -3672,16 +2396,6 @@ public abstract class StringToolkit  {
     // Splitting
     //-----------------------------------------------------------------------
     /**
-     * <p>Splits the provided text into an array, using whitespace as the
-     * separator.
-     * Whitespace is defined by {@link Character#isWhitespace(char)}.</p>
-     *
-     * <p>The separator is not included in the returned String array.
-     * Adjacent separators are treated as one separator.
-     * For more control over the split use the StrTokenizer class.</p>
-     *
-     * <p>A {@code null} input String returns {@code null}.</p>
-     *
      * <pre>
      * StringToolkit.split(null)       = null
      * StringToolkit.split("")         = []
@@ -3689,24 +2403,12 @@ public abstract class StringToolkit  {
      * StringToolkit.split("abc  def") = ["abc", "def"]
      * StringToolkit.split(" abc ")    = ["abc"]
      * </pre>
-     *
-     * @param str  the String to parse, may be null
-     * @return an array of parsed Strings, {@code null} if null String input
      */
     public static String[] split(final String str) {
         return split(str, null, -1);
     }
 
     /**
-     * <p>Splits the provided text into an array, separator specified.
-     * This is an alternative to using StringTokenizer.</p>
-     *
-     * <p>The separator is not included in the returned String array.
-     * Adjacent separators are treated as one separator.
-     * For more control over the split use the StrTokenizer class.</p>
-     *
-     * <p>A {@code null} input String returns {@code null}.</p>
-     *
      * <pre>
      * StringToolkit.split(null, *)         = null
      * StringToolkit.split("", *)           = []
@@ -3715,27 +2417,12 @@ public abstract class StringToolkit  {
      * StringToolkit.split("a:b:c", '.')    = ["a:b:c"]
      * StringToolkit.split("a b c", ' ')    = ["a", "b", "c"]
      * </pre>
-     *
-     * @param str  the String to parse, may be null
-     * @param separatorChar  the character used as the delimiter
-     * @return an array of parsed Strings, {@code null} if null String input
-     * @since 2.0
      */
     public static String[] split(final String str, final char separatorChar) {
         return splitWorker(str, separatorChar, false);
     }
 
     /**
-     * <p>Splits the provided text into an array, separators specified.
-     * This is an alternative to using StringTokenizer.</p>
-     *
-     * <p>The separator is not included in the returned String array.
-     * Adjacent separators are treated as one separator.
-     * For more control over the split use the StrTokenizer class.</p>
-     *
-     * <p>A {@code null} input String returns {@code null}.
-     * A {@code null} separatorChars splits on whitespace.</p>
-     *
      * <pre>
      * StringToolkit.split(null, *)         = null
      * StringToolkit.split("", *)           = []
@@ -3744,30 +2431,12 @@ public abstract class StringToolkit  {
      * StringToolkit.split("abc  def", " ") = ["abc", "def"]
      * StringToolkit.split("ab:cd:ef", ":") = ["ab", "cd", "ef"]
      * </pre>
-     *
-     * @param str  the String to parse, may be null
-     * @param separatorChars  the characters used as the delimiters,
-     *  {@code null} splits on whitespace
-     * @return an array of parsed Strings, {@code null} if null String input
      */
     public static String[] split(final String str, final String separatorChars) {
         return splitWorker(str, separatorChars, -1, false);
     }
 
     /**
-     * <p>Splits the provided text into an array with a maximum length,
-     * separators specified.</p>
-     *
-     * <p>The separator is not included in the returned String array.
-     * Adjacent separators are treated as one separator.</p>
-     *
-     * <p>A {@code null} input String returns {@code null}.
-     * A {@code null} separatorChars splits on whitespace.</p>
-     *
-     * <p>If more than {@code max} delimited substrings are found, the last
-     * returned string includes all characters after the first {@code max - 1}
-     * returned strings (including separator characters).</p>
-     *
      * <pre>
      * StringToolkit.split(null, *, *)            = null
      * StringToolkit.split("", *, *)              = []
@@ -3776,231 +2445,17 @@ public abstract class StringToolkit  {
      * StringToolkit.split("ab:cd:ef", ":", 0)    = ["ab", "cd", "ef"]
      * StringToolkit.split("ab:cd:ef", ":", 2)    = ["ab", "cd:ef"]
      * </pre>
-     *
-     * @param str  the String to parse, may be null
-     * @param separatorChars  the characters used as the delimiters,
-     *  {@code null} splits on whitespace
-     * @param max  the maximum number of elements to include in the
-     *  array. A zero or negative value implies no limit
-     * @return an array of parsed Strings, {@code null} if null String input
      */
     public static String[] split(final String str, final String separatorChars, final int max) {
         return splitWorker(str, separatorChars, max, false);
     }
 
-    /**
-     * <p>Splits the provided text into an array, separator string specified.</p>
-     *
-     * <p>The separator(s) will not be included in the returned String array.
-     * Adjacent separators are treated as one separator.</p>
-     *
-     * <p>A {@code null} input String returns {@code null}.
-     * A {@code null} separator splits on whitespace.</p>
-     *
-     * <pre>
-     * StringToolkit.splitByWholeSeparator(null, *)               = null
-     * StringToolkit.splitByWholeSeparator("", *)                 = []
-     * StringToolkit.splitByWholeSeparator("ab de fg", null)      = ["ab", "de", "fg"]
-     * StringToolkit.splitByWholeSeparator("ab   de fg", null)    = ["ab", "de", "fg"]
-     * StringToolkit.splitByWholeSeparator("ab:cd:ef", ":")       = ["ab", "cd", "ef"]
-     * StringToolkit.splitByWholeSeparator("ab-!-cd-!-ef", "-!-") = ["ab", "cd", "ef"]
-     * </pre>
-     *
-     * @param str  the String to parse, may be null
-     * @param separator  String containing the String to be used as a delimiter,
-     *  {@code null} splits on whitespace
-     * @return an array of parsed Strings, {@code null} if null String was input
-     */
-    public static String[] splitByWholeSeparator(final String str, final String separator) {
-        return splitByWholeSeparatorWorker( str, separator, -1, false ) ;
-    }
 
-    /**
-     * <p>Splits the provided text into an array, separator string specified.
-     * Returns a maximum of {@code max} substrings.</p>
-     *
-     * <p>The separator(s) will not be included in the returned String array.
-     * Adjacent separators are treated as one separator.</p>
-     *
-     * <p>A {@code null} input String returns {@code null}.
-     * A {@code null} separator splits on whitespace.</p>
-     *
-     * <pre>
-     * StringToolkit.splitByWholeSeparator(null, *, *)               = null
-     * StringToolkit.splitByWholeSeparator("", *, *)                 = []
-     * StringToolkit.splitByWholeSeparator("ab de fg", null, 0)      = ["ab", "de", "fg"]
-     * StringToolkit.splitByWholeSeparator("ab   de fg", null, 0)    = ["ab", "de", "fg"]
-     * StringToolkit.splitByWholeSeparator("ab:cd:ef", ":", 2)       = ["ab", "cd:ef"]
-     * StringToolkit.splitByWholeSeparator("ab-!-cd-!-ef", "-!-", 5) = ["ab", "cd", "ef"]
-     * StringToolkit.splitByWholeSeparator("ab-!-cd-!-ef", "-!-", 2) = ["ab", "cd-!-ef"]
-     * </pre>
-     *
-     * @param str  the String to parse, may be null
-     * @param separator  String containing the String to be used as a delimiter,
-     *  {@code null} splits on whitespace
-     * @param max  the maximum number of elements to include in the returned
-     *  array. A zero or negative value implies no limit.
-     * @return an array of parsed Strings, {@code null} if null String was input
-     */
-    public static String[] splitByWholeSeparator( final String str, final String separator, final int max ) {
-        return splitByWholeSeparatorWorker(str, separator, max, false);
-    }
 
-    /**
-     * <p>Splits the provided text into an array, separator string specified. </p>
-     *
-     * <p>The separator is not included in the returned String array.
-     * Adjacent separators are treated as separators for empty tokens.
-     * For more control over the split use the StrTokenizer class.</p>
-     *
-     * <p>A {@code null} input String returns {@code null}.
-     * A {@code null} separator splits on whitespace.</p>
-     *
-     * <pre>
-     * StringToolkit.splitByWholeSeparatorPreserveAllTokens(null, *)               = null
-     * StringToolkit.splitByWholeSeparatorPreserveAllTokens("", *)                 = []
-     * StringToolkit.splitByWholeSeparatorPreserveAllTokens("ab de fg", null)      = ["ab", "de", "fg"]
-     * StringToolkit.splitByWholeSeparatorPreserveAllTokens("ab   de fg", null)    = ["ab", "", "", "de", "fg"]
-     * StringToolkit.splitByWholeSeparatorPreserveAllTokens("ab:cd:ef", ":")       = ["ab", "cd", "ef"]
-     * StringToolkit.splitByWholeSeparatorPreserveAllTokens("ab-!-cd-!-ef", "-!-") = ["ab", "cd", "ef"]
-     * </pre>
-     *
-     * @param str  the String to parse, may be null
-     * @param separator  String containing the String to be used as a delimiter,
-     *  {@code null} splits on whitespace
-     * @return an array of parsed Strings, {@code null} if null String was input
-     * @since 2.4
-     */
-    public static String[] splitByWholeSeparatorPreserveAllTokens(final String str, final String separator) {
-        return splitByWholeSeparatorWorker(str, separator, -1, true);
-    }
 
-    /**
-     * <p>Splits the provided text into an array, separator string specified.
-     * Returns a maximum of {@code max} substrings.</p>
-     *
-     * <p>The separator is not included in the returned String array.
-     * Adjacent separators are treated as separators for empty tokens.
-     * For more control over the split use the StrTokenizer class.</p>
-     *
-     * <p>A {@code null} input String returns {@code null}.
-     * A {@code null} separator splits on whitespace.</p>
-     *
-     * <pre>
-     * StringToolkit.splitByWholeSeparatorPreserveAllTokens(null, *, *)               = null
-     * StringToolkit.splitByWholeSeparatorPreserveAllTokens("", *, *)                 = []
-     * StringToolkit.splitByWholeSeparatorPreserveAllTokens("ab de fg", null, 0)      = ["ab", "de", "fg"]
-     * StringToolkit.splitByWholeSeparatorPreserveAllTokens("ab   de fg", null, 0)    = ["ab", "", "", "de", "fg"]
-     * StringToolkit.splitByWholeSeparatorPreserveAllTokens("ab:cd:ef", ":", 2)       = ["ab", "cd:ef"]
-     * StringToolkit.splitByWholeSeparatorPreserveAllTokens("ab-!-cd-!-ef", "-!-", 5) = ["ab", "cd", "ef"]
-     * StringToolkit.splitByWholeSeparatorPreserveAllTokens("ab-!-cd-!-ef", "-!-", 2) = ["ab", "cd-!-ef"]
-     * </pre>
-     *
-     * @param str  the String to parse, may be null
-     * @param separator  String containing the String to be used as a delimiter,
-     *  {@code null} splits on whitespace
-     * @param max  the maximum number of elements to include in the returned
-     *  array. A zero or negative value implies no limit.
-     * @return an array of parsed Strings, {@code null} if null String was input
-     * @since 2.4
-     */
-    public static String[] splitByWholeSeparatorPreserveAllTokens(final String str, final String separator, final int max) {
-        return splitByWholeSeparatorWorker(str, separator, max, true);
-    }
-
-    /**
-     * Performs the logic for the {@code splitByWholeSeparatorPreserveAllTokens} methods.
-     *
-     * @param str  the String to parse, may be {@code null}
-     * @param separator  String containing the String to be used as a delimiter,
-     *  {@code null} splits on whitespace
-     * @param max  the maximum number of elements to include in the returned
-     *  array. A zero or negative value implies no limit.
-     * @param preserveAllTokens if {@code true}, adjacent separators are
-     * treated as empty token separators; if {@code false}, adjacent
-     * separators are treated as one separator.
-     * @return an array of parsed Strings, {@code null} if null String input
-     * @since 2.4
-     */
-    private static String[] splitByWholeSeparatorWorker(
-            final String str, final String separator, final int max, final boolean preserveAllTokens) {
-        if (str == null) {
-            return null;
-        }
-
-        final int len = str.length();
-
-        if (len == 0) {
-            return new String[0];
-        }
-
-        if (separator == null || EMPTY.equals(separator)) {
-            // Split on whitespace.
-            return splitWorker(str, null, max, preserveAllTokens);
-        }
-
-        final int separatorLength = separator.length();
-
-        final ArrayList<String> substrings = new ArrayList<String>();
-        int numberOfSubstrings = 0;
-        int beg = 0;
-        int end = 0;
-        while (end < len) {
-            end = str.indexOf(separator, beg);
-
-            if (end > -1) {
-                if (end > beg) {
-                    numberOfSubstrings += 1;
-
-                    if (numberOfSubstrings == max) {
-                        end = len;
-                        substrings.add(str.substring(beg));
-                    } else {
-                        // The following is OK, because String.substring( beg, end ) excludes
-                        // the character at the position 'end'.
-                        substrings.add(str.substring(beg, end));
-
-                        // Set the starting point for the next search.
-                        // The following is equivalent to beg = end + (separatorLength - 1) + 1,
-                        // which is the right calculation:
-                        beg = end + separatorLength;
-                    }
-                } else {
-                    // We found a consecutive occurrence of the separator, so skip it.
-                    if (preserveAllTokens) {
-                        numberOfSubstrings += 1;
-                        if (numberOfSubstrings == max) {
-                            end = len;
-                            substrings.add(str.substring(beg));
-                        } else {
-                            substrings.add(EMPTY);
-                        }
-                    }
-                    beg = end + separatorLength;
-                }
-            } else {
-                // String.substring( beg ) goes from 'beg' to the end of the String.
-                substrings.add(str.substring(beg));
-                end = len;
-            }
-        }
-
-        return substrings.toArray(new String[substrings.size()]);
-    }
 
     // -----------------------------------------------------------------------
     /**
-     * <p>Splits the provided text into an array, using whitespace as the
-     * separator, preserving all tokens, including empty tokens created by
-     * adjacent separators. This is an alternative to using StringTokenizer.
-     * Whitespace is defined by {@link Character#isWhitespace(char)}.</p>
-     *
-     * <p>The separator is not included in the returned String array.
-     * Adjacent separators are treated as separators for empty tokens.
-     * For more control over the split use the StrTokenizer class.</p>
-     *
-     * <p>A {@code null} input String returns {@code null}.</p>
-     *
      * <pre>
      * StringToolkit.splitPreserveAllTokens(null)       = null
      * StringToolkit.splitPreserveAllTokens("")         = []
@@ -4008,26 +2463,12 @@ public abstract class StringToolkit  {
      * StringToolkit.splitPreserveAllTokens("abc  def") = ["abc", "", "def"]
      * StringToolkit.splitPreserveAllTokens(" abc ")    = ["", "abc", ""]
      * </pre>
-     *
-     * @param str  the String to parse, may be {@code null}
-     * @return an array of parsed Strings, {@code null} if null String input
-     * @since 2.1
      */
     public static String[] splitPreserveAllTokens(final String str) {
         return splitWorker(str, null, -1, true);
     }
 
     /**
-     * <p>Splits the provided text into an array, separator specified,
-     * preserving all tokens, including empty tokens created by adjacent
-     * separators. This is an alternative to using StringTokenizer.</p>
-     *
-     * <p>The separator is not included in the returned String array.
-     * Adjacent separators are treated as separators for empty tokens.
-     * For more control over the split use the StrTokenizer class.</p>
-     *
-     * <p>A {@code null} input String returns {@code null}.</p>
-     *
      * <pre>
      * StringToolkit.splitPreserveAllTokens(null, *)         = null
      * StringToolkit.splitPreserveAllTokens("", *)           = []
@@ -4042,29 +2483,11 @@ public abstract class StringToolkit  {
      * StringToolkit.splitPreserveAllTokens("  a b c", ' ')  = ["", "", a", "b", "c"]
      * StringToolkit.splitPreserveAllTokens(" a b c ", ' ')  = ["", a", "b", "c", ""]
      * </pre>
-     *
-     * @param str  the String to parse, may be {@code null}
-     * @param separatorChar  the character used as the delimiter,
-     *  {@code null} splits on whitespace
-     * @return an array of parsed Strings, {@code null} if null String input
-     * @since 2.1
      */
     public static String[] splitPreserveAllTokens(final String str, final char separatorChar) {
         return splitWorker(str, separatorChar, true);
     }
 
-    /**
-     * Performs the logic for the {@code split} and
-     * {@code splitPreserveAllTokens} methods that do not return a
-     * maximum array length.
-     *
-     * @param str  the String to parse, may be {@code null}
-     * @param separatorChar the separate character
-     * @param preserveAllTokens if {@code true}, adjacent separators are
-     * treated as empty token separators; if {@code false}, adjacent
-     * separators are treated as one separator.
-     * @return an array of parsed Strings, {@code null} if null String input
-     */
     private static String[] splitWorker(final String str, final char separatorChar, final boolean preserveAllTokens) {
         // Performance tuned for 2.0 (JDK1.4)
 
@@ -4100,17 +2523,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Splits the provided text into an array, separators specified,
-     * preserving all tokens, including empty tokens created by adjacent
-     * separators. This is an alternative to using StringTokenizer.</p>
-     *
-     * <p>The separator is not included in the returned String array.
-     * Adjacent separators are treated as separators for empty tokens.
-     * For more control over the split use the StrTokenizer class.</p>
-     *
-     * <p>A {@code null} input String returns {@code null}.
-     * A {@code null} separatorChars splits on whitespace.</p>
-     *
      * <pre>
      * StringToolkit.splitPreserveAllTokens(null, *)           = null
      * StringToolkit.splitPreserveAllTokens("", *)             = []
@@ -4125,33 +2537,12 @@ public abstract class StringToolkit  {
      * StringToolkit.splitPreserveAllTokens("::cd:ef", ":")    = ["", "", cd", "ef"]
      * StringToolkit.splitPreserveAllTokens(":cd:ef:", ":")    = ["", cd", "ef", ""]
      * </pre>
-     *
-     * @param str  the String to parse, may be {@code null}
-     * @param separatorChars  the characters used as the delimiters,
-     *  {@code null} splits on whitespace
-     * @return an array of parsed Strings, {@code null} if null String input
-     * @since 2.1
      */
     public static String[] splitPreserveAllTokens(final String str, final String separatorChars) {
         return splitWorker(str, separatorChars, -1, true);
     }
 
     /**
-     * <p>Splits the provided text into an array with a maximum length,
-     * separators specified, preserving all tokens, including empty tokens
-     * created by adjacent separators.</p>
-     *
-     * <p>The separator is not included in the returned String array.
-     * Adjacent separators are treated as separators for empty tokens.
-     * Adjacent separators are treated as one separator.</p>
-     *
-     * <p>A {@code null} input String returns {@code null}.
-     * A {@code null} separatorChars splits on whitespace.</p>
-     *
-     * <p>If more than {@code max} delimited substrings are found, the last
-     * returned string includes all characters after the first {@code max - 1}
-     * returned strings (including separator characters).</p>
-     *
      * <pre>
      * StringToolkit.splitPreserveAllTokens(null, *, *)            = null
      * StringToolkit.splitPreserveAllTokens("", *, *)              = []
@@ -4163,33 +2554,11 @@ public abstract class StringToolkit  {
      * StringToolkit.splitPreserveAllTokens("ab   de fg", null, 3) = ["ab", "", " de fg"]
      * StringToolkit.splitPreserveAllTokens("ab   de fg", null, 4) = ["ab", "", "", "de fg"]
      * </pre>
-     *
-     * @param str  the String to parse, may be {@code null}
-     * @param separatorChars  the characters used as the delimiters,
-     *  {@code null} splits on whitespace
-     * @param max  the maximum number of elements to include in the
-     *  array. A zero or negative value implies no limit
-     * @return an array of parsed Strings, {@code null} if null String input
-     * @since 2.1
      */
     public static String[] splitPreserveAllTokens(final String str, final String separatorChars, final int max) {
         return splitWorker(str, separatorChars, max, true);
     }
 
-    /**
-     * Performs the logic for the {@code split} and
-     * {@code splitPreserveAllTokens} methods that return a maximum array
-     * length.
-     *
-     * @param str  the String to parse, may be {@code null}
-     * @param separatorChars the separate character
-     * @param max  the maximum number of elements to include in the
-     *  array. A zero or negative value implies no limit.
-     * @param preserveAllTokens if {@code true}, adjacent separators are
-     * treated as empty token separators; if {@code false}, adjacent
-     * separators are treated as one separator.
-     * @return an array of parsed Strings, {@code null} if null String input
-     */
     private static String[] splitWorker(final String str, final String separatorChars, final int max, final boolean preserveAllTokens) {
         // Performance tuned for 2.0 (JDK1.4)
         // Direct code is quicker than StringTokenizer.
@@ -4276,9 +2645,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Splits a String by Character type as returned by
-     * {@code java.com.sina.sparrowframework.tools.lang.Character.getType(char)}. Groups of contiguous
-     * characters of the same type are returned as complete tokens.
      * <pre>
      * StringToolkit.splitByCharacterType(null)         = null
      * StringToolkit.splitByCharacterType("")           = []
@@ -4290,23 +2656,12 @@ public abstract class StringToolkit  {
      * StringToolkit.splitByCharacterType("foo200Bar")  = ["foo", "200", "B", "ar"]
      * StringToolkit.splitByCharacterType("ASFRules")   = ["ASFR", "ules"]
      * </pre>
-     * @param str the String to split, may be {@code null}
-     * @return an array of parsed Strings, {@code null} if null String input
-     * @since 2.4
      */
     public static String[] splitByCharacterType(final String str) {
         return splitByCharacterType(str, false);
     }
 
     /**
-     * <p>Splits a String by Character type as returned by
-     * {@code java.com.sina.sparrowframework.tools.lang.Character.getType(char)}. Groups of contiguous
-     * characters of the same type are returned as complete tokens, with the
-     * following exception: the character of type
-     * {@code Character.UPPERCASE_LETTER}, if any, immediately
-     * preceding a token of type {@code Character.LOWERCASE_LETTER}
-     * will belong to the following token rather than to the preceding, if any,
-     * {@code Character.UPPERCASE_LETTER} token.
      * <pre>
      * StringToolkit.splitByCharacterTypeCamelCase(null)         = null
      * StringToolkit.splitByCharacterTypeCamelCase("")           = []
@@ -4318,27 +2673,12 @@ public abstract class StringToolkit  {
      * StringToolkit.splitByCharacterTypeCamelCase("foo200Bar")  = ["foo", "200", "Bar"]
      * StringToolkit.splitByCharacterTypeCamelCase("ASFRules")   = ["ASF", "Rules"]
      * </pre>
-     * @param str the String to split, may be {@code null}
-     * @return an array of parsed Strings, {@code null} if null String input
-     * @since 2.4
      */
     public static String[] splitByCharacterTypeCamelCase(final String str) {
         return splitByCharacterType(str, true);
     }
 
     /**
-     * <p>Splits a String by Character type as returned by
-     * {@code java.com.sina.sparrowframework.tools.lang.Character.getType(char)}. Groups of contiguous
-     * characters of the same type are returned as complete tokens, with the
-     * following exception: if {@code camelCase} is {@code true},
-     * the character of type {@code Character.UPPERCASE_LETTER}, if any,
-     * immediately preceding a token of type {@code Character.LOWERCASE_LETTER}
-     * will belong to the following token rather than to the preceding, if any,
-     * {@code Character.UPPERCASE_LETTER} token.
-     * @param str the String to split, may be {@code null}
-     * @param camelCase whether to use so-called "camel-case" for letter types
-     * @return an array of parsed Strings, {@code null} if null String input
-     * @since 2.4
      */
     private static String[] splitByCharacterType(final String str, final boolean camelCase) {
         if (str == null) {
@@ -4375,13 +2715,6 @@ public abstract class StringToolkit  {
     // Joining
     //-----------------------------------------------------------------------
     /**
-     * <p>Joins the elements of the provided array into a single String
-     * containing the provided list of elements.</p>
-     *
-     * <p>No separator is added to the joined String.
-     * Null objects or empty strings within the array are represented by
-     * empty strings.</p>
-     *
      * <pre>
      * StringToolkit.join(null)            = null
      * StringToolkit.join([])              = ""
@@ -4389,25 +2722,12 @@ public abstract class StringToolkit  {
      * StringToolkit.join(["a", "b", "c"]) = "abc"
      * StringToolkit.join([null, "", "a"]) = "a"
      * </pre>
-     *
-     * @param <T> the specific type of values to join together
-     * @param elements  the values to join together, may be null
-     * @return the joined String, {@code null} if null array input
-     * @since 2.0
-     * @since 3.0 Changed signature to use varargs
      */
     public static <T> String join(final T... elements) {
         return join(elements, null);
     }
 
     /**
-     * <p>Joins the elements of the provided array into a single String
-     * containing the provided list of elements.</p>
-     *
-     * <p>No delimiter is added before or after the list.
-     * Null objects or empty strings within the array are represented by
-     * empty strings.</p>
-     *
      * <pre>
      * StringToolkit.join(null, *)               = null
      * StringToolkit.join([], *)                 = ""
@@ -4416,11 +2736,6 @@ public abstract class StringToolkit  {
      * StringToolkit.join(["a", "b", "c"], null) = "abc"
      * StringToolkit.join([null, "", "a"], ';')  = ";;a"
      * </pre>
-     *
-     * @param array  the array of values to join together, may be null
-     * @param separator  the separator character to use
-     * @return the joined String, {@code null} if null array input
-     * @since 2.0
      */
     public static String join(final Object[] array, final char separator) {
         if (array == null) {
@@ -4430,15 +2745,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>
-     * Joins the elements of the provided array into a single String containing the provided list of elements.
-     * </p>
-     *
-     * <p>
-     * No delimiter is added before or after the list. Null objects or empty strings within the array are represented
-     * by empty strings.
-     * </p>
-     *
      * <pre>
      * StringToolkit.join(null, *)               = null
      * StringToolkit.join([], *)                 = ""
@@ -4446,13 +2752,6 @@ public abstract class StringToolkit  {
      * StringToolkit.join([1, 2, 3], ';')  = "1;2;3"
      * StringToolkit.join([1, 2, 3], null) = "123"
      * </pre>
-     *
-     * @param array
-     *            the array of values to join together, may be null
-     * @param separator
-     *            the separator character to use
-     * @return the joined String, {@code null} if null array input
-     * @since 3.2
      */
     public static String join(final long[] array, final char separator) {
         if (array == null) {
@@ -4462,15 +2761,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>
-     * Joins the elements of the provided array into a single String containing the provided list of elements.
-     * </p>
-     *
-     * <p>
-     * No delimiter is added before or after the list. Null objects or empty strings within the array are represented
-     * by empty strings.
-     * </p>
-     *
      * <pre>
      * StringToolkit.join(null, *)               = null
      * StringToolkit.join([], *)                 = ""
@@ -4478,13 +2768,6 @@ public abstract class StringToolkit  {
      * StringToolkit.join([1, 2, 3], ';')  = "1;2;3"
      * StringToolkit.join([1, 2, 3], null) = "123"
      * </pre>
-     *
-     * @param array
-     *            the array of values to join together, may be null
-     * @param separator
-     *            the separator character to use
-     * @return the joined String, {@code null} if null array input
-     * @since 3.2
      */
     public static String join(final int[] array, final char separator) {
         if (array == null) {
@@ -4494,15 +2777,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>
-     * Joins the elements of the provided array into a single String containing the provided list of elements.
-     * </p>
-     *
-     * <p>
-     * No delimiter is added before or after the list. Null objects or empty strings within the array are represented
-     * by empty strings.
-     * </p>
-     *
      * <pre>
      * StringToolkit.join(null, *)               = null
      * StringToolkit.join([], *)                 = ""
@@ -4510,13 +2784,6 @@ public abstract class StringToolkit  {
      * StringToolkit.join([1, 2, 3], ';')  = "1;2;3"
      * StringToolkit.join([1, 2, 3], null) = "123"
      * </pre>
-     *
-     * @param array
-     *            the array of values to join together, may be null
-     * @param separator
-     *            the separator character to use
-     * @return the joined String, {@code null} if null array input
-     * @since 3.2
      */
     public static String join(final short[] array, final char separator) {
         if (array == null) {
@@ -4526,15 +2793,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>
-     * Joins the elements of the provided array into a single String containing the provided list of elements.
-     * </p>
-     *
-     * <p>
-     * No delimiter is added before or after the list. Null objects or empty strings within the array are represented
-     * by empty strings.
-     * </p>
-     *
      * <pre>
      * StringToolkit.join(null, *)               = null
      * StringToolkit.join([], *)                 = ""
@@ -4542,13 +2800,6 @@ public abstract class StringToolkit  {
      * StringToolkit.join([1, 2, 3], ';')  = "1;2;3"
      * StringToolkit.join([1, 2, 3], null) = "123"
      * </pre>
-     *
-     * @param array
-     *            the array of values to join together, may be null
-     * @param separator
-     *            the separator character to use
-     * @return the joined String, {@code null} if null array input
-     * @since 3.2
      */
     public static String join(final byte[] array, final char separator) {
         if (array == null) {
@@ -4558,15 +2809,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>
-     * Joins the elements of the provided array into a single String containing the provided list of elements.
-     * </p>
-     *
-     * <p>
-     * No delimiter is added before or after the list. Null objects or empty strings within the array are represented
-     * by empty strings.
-     * </p>
-     *
      * <pre>
      * StringToolkit.join(null, *)               = null
      * StringToolkit.join([], *)                 = ""
@@ -4574,13 +2816,6 @@ public abstract class StringToolkit  {
      * StringToolkit.join([1, 2, 3], ';')  = "1;2;3"
      * StringToolkit.join([1, 2, 3], null) = "123"
      * </pre>
-     *
-     * @param array
-     *            the array of values to join together, may be null
-     * @param separator
-     *            the separator character to use
-     * @return the joined String, {@code null} if null array input
-     * @since 3.2
      */
     public static String join(final char[] array, final char separator) {
         if (array == null) {
@@ -4590,15 +2825,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>
-     * Joins the elements of the provided array into a single String containing the provided list of elements.
-     * </p>
-     *
-     * <p>
-     * No delimiter is added before or after the list. Null objects or empty strings within the array are represented
-     * by empty strings.
-     * </p>
-     *
      * <pre>
      * StringToolkit.join(null, *)               = null
      * StringToolkit.join([], *)                 = ""
@@ -4606,13 +2832,6 @@ public abstract class StringToolkit  {
      * StringToolkit.join([1, 2, 3], ';')  = "1;2;3"
      * StringToolkit.join([1, 2, 3], null) = "123"
      * </pre>
-     *
-     * @param array
-     *            the array of values to join together, may be null
-     * @param separator
-     *            the separator character to use
-     * @return the joined String, {@code null} if null array input
-     * @since 3.2
      */
     public static String join(final float[] array, final char separator) {
         if (array == null) {
@@ -4622,15 +2841,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>
-     * Joins the elements of the provided array into a single String containing the provided list of elements.
-     * </p>
-     *
-     * <p>
-     * No delimiter is added before or after the list. Null objects or empty strings within the array are represented
-     * by empty strings.
-     * </p>
-     *
      * <pre>
      * StringToolkit.join(null, *)               = null
      * StringToolkit.join([], *)                 = ""
@@ -4638,13 +2848,6 @@ public abstract class StringToolkit  {
      * StringToolkit.join([1, 2, 3], ';')  = "1;2;3"
      * StringToolkit.join([1, 2, 3], null) = "123"
      * </pre>
-     *
-     * @param array
-     *            the array of values to join together, may be null
-     * @param separator
-     *            the separator character to use
-     * @return the joined String, {@code null} if null array input
-     * @since 3.2
      */
     public static String join(final double[] array, final char separator) {
         if (array == null) {
@@ -4655,13 +2858,6 @@ public abstract class StringToolkit  {
 
 
     /**
-     * <p>Joins the elements of the provided array into a single String
-     * containing the provided list of elements.</p>
-     *
-     * <p>No delimiter is added before or after the list.
-     * Null objects or empty strings within the array are represented by
-     * empty strings.</p>
-     *
      * <pre>
      * StringToolkit.join(null, *)               = null
      * StringToolkit.join([], *)                 = ""
@@ -4670,15 +2866,6 @@ public abstract class StringToolkit  {
      * StringToolkit.join(["a", "b", "c"], null) = "abc"
      * StringToolkit.join([null, "", "a"], ';')  = ";;a"
      * </pre>
-     *
-     * @param array  the array of values to join together, may be null
-     * @param separator  the separator character to use
-     * @param startIndex the first index to start joining from.  It is
-     * an error to pass in an end index past the end of the array
-     * @param endIndex the index to stop joining from (exclusive). It is
-     * an error to pass in an end index past the end of the array
-     * @return the joined String, {@code null} if null array input
-     * @since 2.0
      */
     public static String join(final Object[] array, final char separator, final int startIndex, final int endIndex) {
         if (array == null) {
@@ -4701,15 +2888,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>
-     * Joins the elements of the provided array into a single String containing the provided list of elements.
-     * </p>
-     *
-     * <p>
-     * No delimiter is added before or after the list. Null objects or empty strings within the array are represented
-     * by empty strings.
-     * </p>
-     *
      * <pre>
      * StringToolkit.join(null, *)               = null
      * StringToolkit.join([], *)                 = ""
@@ -4717,19 +2895,6 @@ public abstract class StringToolkit  {
      * StringToolkit.join([1, 2, 3], ';')  = "1;2;3"
      * StringToolkit.join([1, 2, 3], null) = "123"
      * </pre>
-     *
-     * @param array
-     *            the array of values to join together, may be null
-     * @param separator
-     *            the separator character to use
-     * @param startIndex
-     *            the first index to start joining from. It is an error to pass in an end index past the end of the
-     *            array
-     * @param endIndex
-     *            the index to stop joining from (exclusive). It is an error to pass in an end index past the end of
-     *            the array
-     * @return the joined String, {@code null} if null array input
-     * @since 3.2
      */
     public static String join(final long[] array, final char separator, final int startIndex, final int endIndex) {
         if (array == null) {
@@ -4750,15 +2915,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>
-     * Joins the elements of the provided array into a single String containing the provided list of elements.
-     * </p>
-     *
-     * <p>
-     * No delimiter is added before or after the list. Null objects or empty strings within the array are represented
-     * by empty strings.
-     * </p>
-     *
      * <pre>
      * StringToolkit.join(null, *)               = null
      * StringToolkit.join([], *)                 = ""
@@ -4766,19 +2922,6 @@ public abstract class StringToolkit  {
      * StringToolkit.join([1, 2, 3], ';')  = "1;2;3"
      * StringToolkit.join([1, 2, 3], null) = "123"
      * </pre>
-     *
-     * @param array
-     *            the array of values to join together, may be null
-     * @param separator
-     *            the separator character to use
-     * @param startIndex
-     *            the first index to start joining from. It is an error to pass in an end index past the end of the
-     *            array
-     * @param endIndex
-     *            the index to stop joining from (exclusive). It is an error to pass in an end index past the end of
-     *            the array
-     * @return the joined String, {@code null} if null array input
-     * @since 3.2
      */
     public static String join(final int[] array, final char separator, final int startIndex, final int endIndex) {
         if (array == null) {
@@ -4799,15 +2942,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>
-     * Joins the elements of the provided array into a single String containing the provided list of elements.
-     * </p>
-     *
-     * <p>
-     * No delimiter is added before or after the list. Null objects or empty strings within the array are represented
-     * by empty strings.
-     * </p>
-     *
      * <pre>
      * StringToolkit.join(null, *)               = null
      * StringToolkit.join([], *)                 = ""
@@ -4815,19 +2949,6 @@ public abstract class StringToolkit  {
      * StringToolkit.join([1, 2, 3], ';')  = "1;2;3"
      * StringToolkit.join([1, 2, 3], null) = "123"
      * </pre>
-     *
-     * @param array
-     *            the array of values to join together, may be null
-     * @param separator
-     *            the separator character to use
-     * @param startIndex
-     *            the first index to start joining from. It is an error to pass in an end index past the end of the
-     *            array
-     * @param endIndex
-     *            the index to stop joining from (exclusive). It is an error to pass in an end index past the end of
-     *            the array
-     * @return the joined String, {@code null} if null array input
-     * @since 3.2
      */
     public static String join(final byte[] array, final char separator, final int startIndex, final int endIndex) {
         if (array == null) {
@@ -4848,15 +2969,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>
-     * Joins the elements of the provided array into a single String containing the provided list of elements.
-     * </p>
-     *
-     * <p>
-     * No delimiter is added before or after the list. Null objects or empty strings within the array are represented
-     * by empty strings.
-     * </p>
-     *
      * <pre>
      * StringToolkit.join(null, *)               = null
      * StringToolkit.join([], *)                 = ""
@@ -4864,19 +2976,6 @@ public abstract class StringToolkit  {
      * StringToolkit.join([1, 2, 3], ';')  = "1;2;3"
      * StringToolkit.join([1, 2, 3], null) = "123"
      * </pre>
-     *
-     * @param array
-     *            the array of values to join together, may be null
-     * @param separator
-     *            the separator character to use
-     * @param startIndex
-     *            the first index to start joining from. It is an error to pass in an end index past the end of the
-     *            array
-     * @param endIndex
-     *            the index to stop joining from (exclusive). It is an error to pass in an end index past the end of
-     *            the array
-     * @return the joined String, {@code null} if null array input
-     * @since 3.2
      */
     public static String join(final short[] array, final char separator, final int startIndex, final int endIndex) {
         if (array == null) {
@@ -4897,15 +2996,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>
-     * Joins the elements of the provided array into a single String containing the provided list of elements.
-     * </p>
-     *
-     * <p>
-     * No delimiter is added before or after the list. Null objects or empty strings within the array are represented
-     * by empty strings.
-     * </p>
-     *
      * <pre>
      * StringToolkit.join(null, *)               = null
      * StringToolkit.join([], *)                 = ""
@@ -4913,19 +3003,6 @@ public abstract class StringToolkit  {
      * StringToolkit.join([1, 2, 3], ';')  = "1;2;3"
      * StringToolkit.join([1, 2, 3], null) = "123"
      * </pre>
-     *
-     * @param array
-     *            the array of values to join together, may be null
-     * @param separator
-     *            the separator character to use
-     * @param startIndex
-     *            the first index to start joining from. It is an error to pass in an end index past the end of the
-     *            array
-     * @param endIndex
-     *            the index to stop joining from (exclusive). It is an error to pass in an end index past the end of
-     *            the array
-     * @return the joined String, {@code null} if null array input
-     * @since 3.2
      */
     public static String join(final char[] array, final char separator, final int startIndex, final int endIndex) {
         if (array == null) {
@@ -4946,15 +3023,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>
-     * Joins the elements of the provided array into a single String containing the provided list of elements.
-     * </p>
-     *
-     * <p>
-     * No delimiter is added before or after the list. Null objects or empty strings within the array are represented
-     * by empty strings.
-     * </p>
-     *
      * <pre>
      * StringToolkit.join(null, *)               = null
      * StringToolkit.join([], *)                 = ""
@@ -4962,19 +3030,6 @@ public abstract class StringToolkit  {
      * StringToolkit.join([1, 2, 3], ';')  = "1;2;3"
      * StringToolkit.join([1, 2, 3], null) = "123"
      * </pre>
-     *
-     * @param array
-     *            the array of values to join together, may be null
-     * @param separator
-     *            the separator character to use
-     * @param startIndex
-     *            the first index to start joining from. It is an error to pass in an end index past the end of the
-     *            array
-     * @param endIndex
-     *            the index to stop joining from (exclusive). It is an error to pass in an end index past the end of
-     *            the array
-     * @return the joined String, {@code null} if null array input
-     * @since 3.2
      */
     public static String join(final double[] array, final char separator, final int startIndex, final int endIndex) {
         if (array == null) {
@@ -4995,15 +3050,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>
-     * Joins the elements of the provided array into a single String containing the provided list of elements.
-     * </p>
-     *
-     * <p>
-     * No delimiter is added before or after the list. Null objects or empty strings within the array are represented
-     * by empty strings.
-     * </p>
-     *
      * <pre>
      * StringToolkit.join(null, *)               = null
      * StringToolkit.join([], *)                 = ""
@@ -5011,19 +3057,6 @@ public abstract class StringToolkit  {
      * StringToolkit.join([1, 2, 3], ';')  = "1;2;3"
      * StringToolkit.join([1, 2, 3], null) = "123"
      * </pre>
-     *
-     * @param array
-     *            the array of values to join together, may be null
-     * @param separator
-     *            the separator character to use
-     * @param startIndex
-     *            the first index to start joining from. It is an error to pass in an end index past the end of the
-     *            array
-     * @param endIndex
-     *            the index to stop joining from (exclusive). It is an error to pass in an end index past the end of
-     *            the array
-     * @return the joined String, {@code null} if null array input
-     * @since 3.2
      */
     public static String join(final float[] array, final char separator, final int startIndex, final int endIndex) {
         if (array == null) {
@@ -5045,14 +3078,6 @@ public abstract class StringToolkit  {
 
 
     /**
-     * <p>Joins the elements of the provided array into a single String
-     * containing the provided list of elements.</p>
-     *
-     * <p>No delimiter is added before or after the list.
-     * A {@code null} separator is the same as an empty String ("").
-     * Null objects or empty strings within the array are represented by
-     * empty strings.</p>
-     *
      * <pre>
      * StringToolkit.join(null, *)                = null
      * StringToolkit.join([], *)                  = ""
@@ -5062,10 +3087,6 @@ public abstract class StringToolkit  {
      * StringToolkit.join(["a", "b", "c"], "")    = "abc"
      * StringToolkit.join([null, "", "a"], ',')   = ",,a"
      * </pre>
-     *
-     * @param array  the array of values to join together, may be null
-     * @param separator  the separator character to use, null treated as ""
-     * @return the joined String, {@code null} if null array input
      */
     public static String join(final Object[] array, final String separator) {
         if (array == null) {
@@ -5075,14 +3096,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Joins the elements of the provided array into a single String
-     * containing the provided list of elements.</p>
-     *
-     * <p>No delimiter is added before or after the list.
-     * A {@code null} separator is the same as an empty String ("").
-     * Null objects or empty strings within the array are represented by
-     * empty strings.</p>
-     *
      * <pre>
      * StringToolkit.join(null, *, *, *)                = null
      * StringToolkit.join([], *, *, *)                  = ""
@@ -5095,19 +3108,6 @@ public abstract class StringToolkit  {
      * StringToolkit.join(["a", "b", "c"], "", 0, 3)    = "abc"
      * StringToolkit.join([null, "", "a"], ',', 0, 3)   = ",,a"
      * </pre>
-     *
-     * @param array  the array of values to join together, may be null
-     * @param separator  the separator character to use, null treated as ""
-     * @param startIndex the first index to start joining from.
-     * @param endIndex the index to stop joining from (exclusive).
-     * @return the joined String, {@code null} if null array input; or the empty string
-     * if {@code endIndex - startIndex <= 0}. The number of joined entries is given by
-     * {@code endIndex - startIndex}
-     * @throws ArrayIndexOutOfBoundsException ife<br>
-     * {@code startIndex < 0} or <br>
-     * {@code startIndex >= array.length()} or <br>
-     * {@code endIndex < 0} or <br>
-     * {@code endIndex > array.length()}
      */
     public static String join(final Object[] array, String separator, final int startIndex, final int endIndex) {
         if (array == null) {
@@ -5138,18 +3138,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Joins the elements of the provided {@code Iterator} into
-     * a single String containing the provided elements.</p>
-     *
-     * <p>No delimiter is added before or after the list. Null objects or empty
-     * strings within the iteration are represented by empty strings.</p>
-     *
-     * <p>See the examples here: {@link #join(Object[],char)}. </p>
-     *
-     * @param iterator  the {@code Iterator} of values to join together, may be null
-     * @param separator  the separator character to use
-     * @return the joined String, {@code null} if null iterator input
-     * @since 2.0
      */
     public static String join(final Iterator<?> iterator, final char separator) {
 
@@ -5186,17 +3174,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Joins the elements of the provided {@code Iterator} into
-     * a single String containing the provided elements.</p>
-     *
-     * <p>No delimiter is added before or after the list.
-     * A {@code null} separator is the same as an empty String ("").</p>
-     *
-     * <p>See the examples here: {@link #join(Object[],String)}. </p>
-     *
-     * @param iterator  the {@code Iterator} of values to join together, may be null
-     * @param separator  the separator character to use, null treated as ""
-     * @return the joined String, {@code null} if null iterator input
      */
     public static String join(final Iterator<?> iterator, final String separator) {
 
@@ -5233,18 +3210,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Joins the elements of the provided {@code Iterable} into
-     * a single String containing the provided elements.</p>
-     *
-     * <p>No delimiter is added before or after the list. Null objects or empty
-     * strings within the iteration are represented by empty strings.</p>
-     *
-     * <p>See the examples here: {@link #join(Object[],char)}. </p>
-     *
-     * @param iterable  the {@code Iterable} providing the values to join together, may be null
-     * @param separator  the separator character to use
-     * @return the joined String, {@code null} if null iterator input
-     * @since 2.3
      */
     public static String join(final Iterable<?> iterable, final char separator) {
         if (iterable == null) {
@@ -5253,20 +3218,6 @@ public abstract class StringToolkit  {
         return join(iterable.iterator(), separator);
     }
 
-    /**
-     * <p>Joins the elements of the provided {@code Iterable} into
-     * a single String containing the provided elements.</p>
-     *
-     * <p>No delimiter is added before or after the list.
-     * A {@code null} separator is the same as an empty String ("").</p>
-     *
-     * <p>See the examples here: {@link #join(Object[],String)}. </p>
-     *
-     * @param iterable  the {@code Iterable} providing the values to join together, may be null
-     * @param separator  the separator character to use, null treated as ""
-     * @return the joined String, {@code null} if null iterator input
-     * @since 2.3
-     */
     public static String join(final Iterable<?> iterable, final String separator) {
         if (iterable == null) {
             return null;
@@ -5277,18 +3228,12 @@ public abstract class StringToolkit  {
     // Delete
     //-----------------------------------------------------------------------
     /**
-     * <p>Deletes all whitespaces from a String as defined by
-     * {@link Character#isWhitespace(char)}.</p>
-     *
      * <pre>
      * StringToolkit.deleteWhitespace(null)         = null
      * StringToolkit.deleteWhitespace("")           = ""
      * StringToolkit.deleteWhitespace("abc")        = "abc"
      * StringToolkit.deleteWhitespace("   ab  c  ") = "abc"
      * </pre>
-     *
-     * @param str  the String to delete whitespace from, may be null
-     * @return the String without whitespaces, {@code null} if null String input
      */
     public static String deleteWhitespace(final String str) {
         if (isEmpty(str)) {
@@ -5311,12 +3256,6 @@ public abstract class StringToolkit  {
     // Remove
     //-----------------------------------------------------------------------
     /**
-     * <p>Removes a substring only if it is at the beginning of a source string,
-     * otherwise returns the source string.</p>
-     *
-     * <p>A {@code null} source string will return {@code null}.
-     * An empty ("") source string will return the empty string.
-     * A {@code null} search string will return the source string.</p>
      *
      * <pre>
      * StringToolkit.removeStart(null, *)      = null
@@ -5327,12 +3266,6 @@ public abstract class StringToolkit  {
      * StringToolkit.removeStart("www.domain.com", "domain") = "www.domain.com"
      * StringToolkit.removeStart("abc", "")    = "abc"
      * </pre>
-     *
-     * @param str  the source String to search, may be null
-     * @param remove  the String to search for and remove, may be null
-     * @return the substring with the string removed if found,
-     *  {@code null} if null String input
-     * @since 2.1
      */
     public static String removeStart(final String str, final String remove) {
         if (isEmpty(str) || isEmpty(remove)) {
@@ -5345,12 +3278,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Case insensitive removal of a substring if it is at the beginning of a source string,
-     * otherwise returns the source string.</p>
-     *
-     * <p>A {@code null} source string will return {@code null}.
-     * An empty ("") source string will return the empty string.
-     * A {@code null} search string will return the source string.</p>
      *
      * <pre>
      * StringToolkit.removeStartIgnoreCase(null, *)      = null
@@ -5362,12 +3289,6 @@ public abstract class StringToolkit  {
      * StringToolkit.removeStartIgnoreCase("www.domain.com", "domain") = "www.domain.com"
      * StringToolkit.removeStartIgnoreCase("abc", "")    = "abc"
      * </pre>
-     *
-     * @param str  the source String to search, may be null
-     * @param remove  the String to search for (case insensitive) and remove, may be null
-     * @return the substring with the string removed if found,
-     *  {@code null} if null String input
-     * @since 2.4
      */
     public static String removeStartIgnoreCase(final String str, final String remove) {
         if (isEmpty(str) || isEmpty(remove)) {
@@ -5380,13 +3301,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Removes a substring only if it is at the end of a source string,
-     * otherwise returns the source string.</p>
-     *
-     * <p>A {@code null} source string will return {@code null}.
-     * An empty ("") source string will return the empty string.
-     * A {@code null} search string will return the source string.</p>
-     *
      * <pre>
      * StringToolkit.removeEnd(null, *)      = null
      * StringToolkit.removeEnd("", *)        = ""
@@ -5396,12 +3310,6 @@ public abstract class StringToolkit  {
      * StringToolkit.removeEnd("www.domain.com", "domain") = "www.domain.com"
      * StringToolkit.removeEnd("abc", "")    = "abc"
      * </pre>
-     *
-     * @param str  the source String to search, may be null
-     * @param remove  the String to search for and remove, may be null
-     * @return the substring with the string removed if found,
-     *  {@code null} if null String input
-     * @since 2.1
      */
     public static String removeEnd(final String str, final String remove) {
         if (isEmpty(str) || isEmpty(remove)) {
@@ -5414,13 +3322,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Case insensitive removal of a substring if it is at the end of a source string,
-     * otherwise returns the source string.</p>
-     *
-     * <p>A {@code null} source string will return {@code null}.
-     * An empty ("") source string will return the empty string.
-     * A {@code null} search string will return the source string.</p>
-     *
      * <pre>
      * StringToolkit.removeEndIgnoreCase(null, *)      = null
      * StringToolkit.removeEndIgnoreCase("", *)        = ""
@@ -5432,12 +3333,6 @@ public abstract class StringToolkit  {
      * StringToolkit.removeEndIgnoreCase("www.domain.com", ".COM") = "www.domain")
      * StringToolkit.removeEndIgnoreCase("www.domain.COM", ".com") = "www.domain")
      * </pre>
-     *
-     * @param str  the source String to search, may be null
-     * @param remove  the String to search for (case insensitive) and remove, may be null
-     * @return the substring with the string removed if found,
-     *  {@code null} if null String input
-     * @since 2.4
      */
     public static String removeEndIgnoreCase(final String str, final String remove) {
         if (isEmpty(str) || isEmpty(remove)) {
@@ -5450,13 +3345,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Removes all occurrences of a substring from within the source string.</p>
-     *
-     * <p>A {@code null} source string will return {@code null}.
-     * An empty ("") source string will return the empty string.
-     * A {@code null} remove string will return the source string.
-     * An empty ("") remove string will return the source string.</p>
-     *
      * <pre>
      * StringToolkit.remove(null, *)        = null
      * StringToolkit.remove("", *)          = ""
@@ -5465,12 +3353,6 @@ public abstract class StringToolkit  {
      * StringToolkit.remove("queued", "ue") = "qd"
      * StringToolkit.remove("queued", "zz") = "queued"
      * </pre>
-     *
-     * @param str  the source String to search, may be null
-     * @param remove  the String to search for and remove, may be null
-     * @return the substring with the string removed if found,
-     *  {@code null} if null String input
-     * @since 2.1
      */
     public static String remove(final String str, final String remove) {
         if (isEmpty(str) || isEmpty(remove)) {
@@ -5480,23 +3362,12 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Removes all occurrences of a character from within the source string.</p>
-     *
-     * <p>A {@code null} source string will return {@code null}.
-     * An empty ("") source string will return the empty string.</p>
-     *
      * <pre>
      * StringToolkit.remove(null, *)       = null
      * StringToolkit.remove("", *)         = ""
      * StringToolkit.remove("queued", 'u') = "qeed"
      * StringToolkit.remove("queued", 'z') = "queued"
      * </pre>
-     *
-     * @param str  the source String to search, may be null
-     * @param remove  the char to search for and remove, may be null
-     * @return the substring with the char removed if found,
-     *  {@code null} if null String input
-     * @since 2.1
      */
     public static String remove(final String str, final char remove) {
         if (isEmpty(str) || str.indexOf(remove) == INDEX_NOT_FOUND) {
@@ -5515,10 +3386,6 @@ public abstract class StringToolkit  {
     // Replacing
     //-----------------------------------------------------------------------
     /**
-     * <p>Replaces a String with another String inside a larger String, once.</p>
-     *
-     * <p>A {@code null} reference passed to this method is a no-op.</p>
-     *
      * <pre>
      * StringToolkit.replaceOnce(null, *, *)        = null
      * StringToolkit.replaceOnce("", *, *)          = ""
@@ -5529,63 +3396,21 @@ public abstract class StringToolkit  {
      * StringToolkit.replaceOnce("aba", "a", "")    = "ba"
      * StringToolkit.replaceOnce("aba", "a", "z")   = "zba"
      * </pre>
-     *
-     * @see #replace(String text, String searchString, String replacement, int max)
-     * @param text  text to search and replace in, may be null
-     * @param searchString  the String to search for, may be null
-     * @param replacement  the String to replace with, may be null
-     * @return the text with any replacements processed,
-     *  {@code null} if null String input
      */
     public static String replaceOnce(final String text, final String searchString, final String replacement) {
         return replace(text, searchString, replacement, 1);
     }
 
-    /**
-     * Replaces each substring of the source String that matches the given regular expression with the given
-     * replacement using the {@link Pattern#DOTALL} option. DOTALL is also know as single-line mode in Perl. This call
-     * is also equivalent to:
-     * <ul>
-     * <li>{@code source.replaceAll(&quot;(?s)&quot; + regex, replacement)}</li>
-     * <li>{@code Pattern.compile(regex, Pattern.DOTALL).matcher(source).replaceAll(replacement)}</li>
-     * </ul>
-     *
-     * @param source
-     *            the source string
-     * @param regex
-     *            the regular expression to which this string is to be matched
-     * @param replacement
-     *            the string to be substituted for each match
-     * @return The resulting {@code String}
-     * @see String#replaceAll(String, String)
-     * @see Pattern#DOTALL
-     * @since 3.2
-     */
     public static String replacePattern(final String source, final String regex, final String replacement) {
         return Pattern.compile(regex, Pattern.DOTALL).matcher(source).replaceAll(replacement);
     }
 
-    /**
-     * Removes each substring of the source String that matches the given regular expression using the DOTALL option.
-     *
-     * @param source
-     *            the source string
-     * @param regex
-     *            the regular expression to which this string is to be matched
-     * @return The resulting {@code String}
-     * @see String#replaceAll(String, String)
-     * @see Pattern#DOTALL
-     * @since 3.2
-     */
+
     public static String removePattern(final String source, final String regex) {
         return replacePattern(source, regex, StringToolkit.EMPTY);
     }
 
     /**
-     * <p>Replaces all occurrences of a String within another String.</p>
-     *
-     * <p>A {@code null} reference passed to this method is a no-op.</p>
-     *
      * <pre>
      * StringToolkit.replace(null, *, *)        = null
      * StringToolkit.replace("", *, *)          = ""
@@ -5596,24 +3421,12 @@ public abstract class StringToolkit  {
      * StringToolkit.replace("aba", "a", "")    = "b"
      * StringToolkit.replace("aba", "a", "z")   = "zbz"
      * </pre>
-     *
-     * @see #replace(String text, String searchString, String replacement, int max)
-     * @param text  text to search and replace in, may be null
-     * @param searchString  the String to search for, may be null
-     * @param replacement  the String to replace it with, may be null
-     * @return the text with any replacements processed,
-     *  {@code null} if null String input
      */
     public static String replace(final String text, final String searchString, final String replacement) {
         return replace(text, searchString, replacement, -1);
     }
 
     /**
-     * <p>Replaces a String with another String inside a larger String,
-     * for the first {@code max} values of the search String.</p>
-     *
-     * <p>A {@code null} reference passed to this method is a no-op.</p>
-     *
      * <pre>
      * StringToolkit.replace(null, *, *, *)         = null
      * StringToolkit.replace("", *, *, *)           = ""
@@ -5628,13 +3441,6 @@ public abstract class StringToolkit  {
      * StringToolkit.replace("abaa", "a", "z", 2)   = "zbza"
      * StringToolkit.replace("abaa", "a", "z", -1)  = "zbzz"
      * </pre>
-     *
-     * @param text  text to search and replace in, may be null
-     * @param searchString  the String to search for, may be null
-     * @param replacement  the String to replace it with, may be null
-     * @param max  maximum number of values to replace, or {@code -1} if no maximum
-     * @return the text with any replacements processed,
-     *  {@code null} if null String input
      */
     public static String replace(final String text, final String searchString, final String replacement, int max) {
         if (isEmpty(text) || isEmpty(searchString) || replacement == null || max == 0) {
@@ -5663,17 +3469,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>
-     * Replaces all occurrences of Strings within another String.
-     * </p>
-     *
-     * <p>
-     * A {@code null} reference passed to this method is a no-op, or if
-     * any "search string" or "string to replace" is null, that replace will be
-     * ignored. This will not repeat. For repeating replaces, call the
-     * overloaded method.
-     * </p>
-     *
      * <pre>
      *  StringToolkit.replaceEach(null, *, *)        = null
      *  StringToolkit.replaceEach("", *, *)          = ""
@@ -5687,35 +3482,12 @@ public abstract class StringToolkit  {
      *  (example of how it does not repeat)
      *  StringToolkit.replaceEach("abcde", new String[]{"ab", "d"}, new String[]{"d", "t"})  = "dcte"
      * </pre>
-     *
-     * @param text
-     *            text to search and replace in, no-op if null
-     * @param searchList
-     *            the Strings to search for, no-op if null
-     * @param replacementList
-     *            the Strings to replace them with, no-op if null
-     * @return the text with any replacements processed, {@code null} if
-     *         null String input
-     * @throws IllegalArgumentException
-     *             if the lengths of the arrays are not the same (null is ok,
-     *             and/or size 0)
-     * @since 2.4
      */
     public static String replaceEach(final String text, final String[] searchList, final String[] replacementList) {
         return replaceEach(text, searchList, replacementList, false, 0);
     }
 
     /**
-     * <p>
-     * Replaces all occurrences of Strings within another String.
-     * </p>
-     *
-     * <p>
-     * A {@code null} reference passed to this method is a no-op, or if
-     * any "search string" or "string to replace" is null, that replace will be
-     * ignored.
-     * </p>
-     *
      * <pre>
      *  StringToolkit.replaceEachRepeatedly(null, *, *) = null
      *  StringToolkit.replaceEachRepeatedly("", *, *) = ""
@@ -5730,22 +3502,6 @@ public abstract class StringToolkit  {
      *  StringToolkit.replaceEachRepeatedly("abcde", new String[]{"ab", "d"}, new String[]{"d", "t"}) = "tcte"
      *  StringToolkit.replaceEachRepeatedly("abcde", new String[]{"ab", "d"}, new String[]{"d", "ab"}) = IllegalStateException
      * </pre>
-     *
-     * @param text
-     *            text to search and replace in, no-op if null
-     * @param searchList
-     *            the Strings to search for, no-op if null
-     * @param replacementList
-     *            the Strings to replace them with, no-op if null
-     * @return the text with any replacements processed, {@code null} if
-     *         null String input
-     * @throws IllegalStateException
-     *             if the search is repeating and there is an endless loop due
-     *             to outputs of one being inputs to another
-     * @throws IllegalArgumentException
-     *             if the lengths of the arrays are not the same (null is ok,
-     *             and/or size 0)
-     * @since 2.4
      */
     public static String replaceEachRepeatedly(final String text, final String[] searchList, final String[] replacementList) {
         // timeToLive should be 0 if not used or nothing to replace, else it's
@@ -5755,18 +3511,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>
-     * Replace all occurrences of Strings within another String.
-     * This is a private recursive helper method for {@link #replaceEachRepeatedly(String, String[], String[])} and
-     * {@link #replaceEach(String, String[], String[])}
-     * </p>
-     *
-     * <p>
-     * A {@code null} reference passed to this method is a no-op, or if
-     * any "search string" or "string to replace" is null, that replace will be
-     * ignored.
-     * </p>
-     *
      * <pre>
      *  StringToolkit.replaceEach(null, *, *, *, *) = null
      *  StringToolkit.replaceEach("", *, *, *, *) = ""
@@ -5782,27 +3526,6 @@ public abstract class StringToolkit  {
      *  StringToolkit.replaceEach("abcde", new String[]{"ab", "d"}, new String[]{"d", "t"}, true, >=2) = "tcte"
      *  StringToolkit.replaceEach("abcde", new String[]{"ab", "d"}, new String[]{"d", "ab"}, *, *) = IllegalStateException
      * </pre>
-     *
-     * @param text
-     *            text to search and replace in, no-op if null
-     * @param searchList
-     *            the Strings to search for, no-op if null
-     * @param replacementList
-     *            the Strings to replace them with, no-op if null
-     * @param repeat if true, then replace repeatedly
-     *       until there are no more possible replacements or timeToLive < 0
-     * @param timeToLive
-     *            if less than 0 then there is a circular reference and endless
-     *            loop
-     * @return the text with any replacements processed, {@code null} if
-     *         null String input
-     * @throws IllegalStateException
-     *             if the search is repeating and there is an endless loop due
-     *             to outputs of one being inputs to another
-     * @throws IllegalArgumentException
-     *             if the lengths of the arrays are not the same (null is ok,
-     *             and/or size 0)
-     * @since 2.4
      */
     private static String replaceEach(
             final String text, final String[] searchList, final String[] replacementList, final boolean repeat, final int timeToLive) {
@@ -5935,24 +3658,12 @@ public abstract class StringToolkit  {
     // Replace, character based
     //-----------------------------------------------------------------------
     /**
-     * <p>Replaces all occurrences of a character in a String with another.
-     * This is a null-safe version of {@link String#replace(char, char)}.</p>
-     *
-     * <p>A {@code null} string input returns {@code null}.
-     * An empty ("") string input returns an empty string.</p>
-     *
      * <pre>
      * StringToolkit.replaceChars(null, *, *)        = null
      * StringToolkit.replaceChars("", *, *)          = ""
      * StringToolkit.replaceChars("abcba", 'b', 'y') = "aycya"
      * StringToolkit.replaceChars("abcba", 'z', 'y') = "abcba"
      * </pre>
-     *
-     * @param str  String to replace characters in, may be null
-     * @param searchChar  the character to search for, may be null
-     * @param replaceChar  the character to replace, may be null
-     * @return modified String, {@code null} if null string input
-     * @since 2.0
      */
     public static String replaceChars(final String str, final char searchChar, final char replaceChar) {
         if (str == null) {
@@ -5962,23 +3673,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Replaces multiple characters in a String in one go.
-     * This method can also be used to delete characters.</p>
-     *
-     * <p>For example:<br>
-     * <code>replaceChars(&quot;hello&quot;, &quot;ho&quot;, &quot;jy&quot;) = jelly</code>.</p>
-     *
-     * <p>A {@code null} string input returns {@code null}.
-     * An empty ("") string input returns an empty string.
-     * A null or empty set of search characters returns the input string.</p>
-     *
-     * <p>The length of the search characters should normally equal the length
-     * of the replace characters.
-     * If the search characters is longer, then the extra search characters
-     * are deleted.
-     * If the search characters is shorter, then the extra replace characters
-     * are ignored.</p>
-     *
      * <pre>
      * StringToolkit.replaceChars(null, *, *)           = null
      * StringToolkit.replaceChars("", *, *)             = ""
@@ -5990,12 +3684,6 @@ public abstract class StringToolkit  {
      * StringToolkit.replaceChars("abcba", "bc", "y")   = "ayya"
      * StringToolkit.replaceChars("abcba", "bc", "yzx") = "ayzya"
      * </pre>
-     *
-     * @param str  String to replace characters in, may be null
-     * @param searchChars  a set of characters to search for, may be null
-     * @param replaceChars  a set of characters to replace, may be null
-     * @return modified String, {@code null} if null string input
-     * @since 2.0
      */
     public static String replaceChars(final String str, final String searchChars, String replaceChars) {
         if (isEmpty(str) || isEmpty(searchChars)) {
@@ -6029,13 +3717,6 @@ public abstract class StringToolkit  {
     // Overlay
     //-----------------------------------------------------------------------
     /**
-     * <p>Overlays part of a String with another String.</p>
-     *
-     * <p>A {@code null} string input returns {@code null}.
-     * A negative index is treated as zero.
-     * An index greater than the string length is treated as the string length.
-     * The start index is always the smaller of the two indices.</p>
-     *
      * <pre>
      * StringToolkit.overlay(null, *, *, *)            = null
      * StringToolkit.overlay("", "abc", 0, 0)          = "abc"
@@ -6049,13 +3730,6 @@ public abstract class StringToolkit  {
      * StringToolkit.overlay("abcdef", "zzzz", -2, -3) = "zzzzabcdef"
      * StringToolkit.overlay("abcdef", "zzzz", 8, 10)  = "abcdefzzzz"
      * </pre>
-     *
-     * @param str  the String to do overlaying in, may be null
-     * @param overlay  the String to overlay, may be null
-     * @param start  the position to start overlaying at
-     * @param end  the position to stop overlaying before
-     * @return overlayed String, {@code null} if null String input
-     * @since 2.0
      */
     public static String overlay(final String str, String overlay, int start, int end) {
         if (str == null) {
@@ -6092,9 +3766,6 @@ public abstract class StringToolkit  {
     // Padding
     //-----------------------------------------------------------------------
     /**
-     * <p>Repeat a String {@code repeat} times to form a
-     * new String.</p>
-     *
      * <pre>
      * StringToolkit.repeat(null, 2) = null
      * StringToolkit.repeat("", 0)   = ""
@@ -6103,11 +3774,6 @@ public abstract class StringToolkit  {
      * StringToolkit.repeat("ab", 2) = "abab"
      * StringToolkit.repeat("a", -2) = ""
      * </pre>
-     *
-     * @param str  the String to repeat, may be null
-     * @param repeat  number of times to repeat str, negative treated as zero
-     * @return a new String consisting of the original String repeated,
-     *  {@code null} if null String input
      */
     public static String repeat(final String str, final int repeat) {
         // Performance tuned for 2.0 (JDK1.4)
@@ -6149,9 +3815,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Repeat a String {@code repeat} times to form a
-     * new String, with a String separator injected each time. </p>
-     *
      * <pre>
      * StringToolkit.repeat(null, null, 2) = null
      * StringToolkit.repeat(null, "x", 2)  = null
@@ -6160,13 +3823,6 @@ public abstract class StringToolkit  {
      * StringToolkit.repeat("", "x", 3)    = "xxx"
      * StringToolkit.repeat("?", ", ", 3)  = "?, ?, ?"
      * </pre>
-     *
-     * @param str        the String to repeat, may be null
-     * @param separator  the String to inject, may be null
-     * @param repeat     number of times to repeat str, negative treated as zero
-     * @return a new String consisting of the original String repeated,
-     *  {@code null} if null String input
-     * @since 2.5
      */
     public static String repeat(final String str, final String separator, final int repeat) {
         if(str == null || separator == null) {
@@ -6178,26 +3834,11 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Returns padding using the specified delimiter repeated
-     * to a given length.</p>
-     *
      * <pre>
      * StringToolkit.repeat('e', 0)  = ""
      * StringToolkit.repeat('e', 3)  = "eee"
      * StringToolkit.repeat('e', -2) = ""
      * </pre>
-     *
-     * <p>Note: this method doesn't not support padding with
-     * <a href="http://www.unicode.org/glossary/#supplementary_character">Unicode Supplementary Characters</a>
-     * as they require a pair of {@code char}s to be represented.
-     * If you are needing to support full I18N of your applications
-     * consider using {@link #repeat(String, int)} instead.
-     * </p>
-     *
-     * @param ch  character to repeat
-     * @param repeat  number of times to repeat char, negative treated as zero
-     * @return String with repeated character
-     * @see #repeat(String, int)
      */
     public static String repeat(final char ch, final int repeat) {
         final char[] buf = new char[repeat];
@@ -6208,10 +3849,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Right pad a String with spaces (' ').</p>
-     *
-     * <p>The String is padded to the size of {@code size}.</p>
-     *
      * <pre>
      * StringToolkit.rightPad(null, *)   = null
      * StringToolkit.rightPad("", 3)     = "   "
@@ -6220,21 +3857,12 @@ public abstract class StringToolkit  {
      * StringToolkit.rightPad("bat", 1)  = "bat"
      * StringToolkit.rightPad("bat", -1) = "bat"
      * </pre>
-     *
-     * @param str  the String to pad out, may be null
-     * @param size  the size to pad to
-     * @return right padded String or original String if no padding is necessary,
-     *  {@code null} if null String input
      */
     public static String rightPad(final String str, final int size) {
         return rightPad(str, size, ' ');
     }
 
     /**
-     * <p>Right pad a String with a specified character.</p>
-     *
-     * <p>The String is padded to the size of {@code size}.</p>
-     *
      * <pre>
      * StringToolkit.rightPad(null, *, *)     = null
      * StringToolkit.rightPad("", 3, 'z')     = "zzz"
@@ -6243,13 +3871,6 @@ public abstract class StringToolkit  {
      * StringToolkit.rightPad("bat", 1, 'z')  = "bat"
      * StringToolkit.rightPad("bat", -1, 'z') = "bat"
      * </pre>
-     *
-     * @param str  the String to pad out, may be null
-     * @param size  the size to pad to
-     * @param padChar  the character to pad with
-     * @return right padded String or original String if no padding is necessary,
-     *  {@code null} if null String input
-     * @since 2.0
      */
     public static String rightPad(final String str, final int size, final char padChar) {
         if (str == null) {
@@ -6266,10 +3887,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Right pad a String with a specified String.</p>
-     *
-     * <p>The String is padded to the size of {@code size}.</p>
-     *
      * <pre>
      * StringToolkit.rightPad(null, *, *)      = null
      * StringToolkit.rightPad("", 3, "z")      = "zzz"
@@ -6281,12 +3898,6 @@ public abstract class StringToolkit  {
      * StringToolkit.rightPad("bat", 5, null)  = "bat  "
      * StringToolkit.rightPad("bat", 5, "")    = "bat  "
      * </pre>
-     *
-     * @param str  the String to pad out, may be null
-     * @param size  the size to pad to
-     * @param padStr  the String to pad with, null or empty treated as single space
-     * @return right padded String or original String if no padding is necessary,
-     *  {@code null} if null String input
      */
     public static String rightPad(final String str, final int size, String padStr) {
         if (str == null) {
@@ -6320,10 +3931,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Left pad a String with spaces (' ').</p>
-     *
-     * <p>The String is padded to the size of {@code size}.</p>
-     *
      * <pre>
      * StringToolkit.leftPad(null, *)   = null
      * StringToolkit.leftPad("", 3)     = "   "
@@ -6332,21 +3939,12 @@ public abstract class StringToolkit  {
      * StringToolkit.leftPad("bat", 1)  = "bat"
      * StringToolkit.leftPad("bat", -1) = "bat"
      * </pre>
-     *
-     * @param str  the String to pad out, may be null
-     * @param size  the size to pad to
-     * @return left padded String or original String if no padding is necessary,
-     *  {@code null} if null String input
      */
     public static String leftPad(final String str, final int size) {
         return leftPad(str, size, ' ');
     }
 
     /**
-     * <p>Left pad a String with a specified character.</p>
-     *
-     * <p>Pad to a size of {@code size}.</p>
-     *
      * <pre>
      * StringToolkit.leftPad(null, *, *)     = null
      * StringToolkit.leftPad("", 3, 'z')     = "zzz"
@@ -6355,13 +3953,6 @@ public abstract class StringToolkit  {
      * StringToolkit.leftPad("bat", 1, 'z')  = "bat"
      * StringToolkit.leftPad("bat", -1, 'z') = "bat"
      * </pre>
-     *
-     * @param str  the String to pad out, may be null
-     * @param size  the size to pad to
-     * @param padChar  the character to pad with
-     * @return left padded String or original String if no padding is necessary,
-     *  {@code null} if null String input
-     * @since 2.0
      */
     public static String leftPad(final String str, final int size, final char padChar) {
         if (str == null) {
@@ -6378,10 +3969,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Left pad a String with a specified String.</p>
-     *
-     * <p>Pad to a size of {@code size}.</p>
-     *
      * <pre>
      * StringToolkit.leftPad(null, *, *)      = null
      * StringToolkit.leftPad("", 3, "z")      = "zzz"
@@ -6393,12 +3980,6 @@ public abstract class StringToolkit  {
      * StringToolkit.leftPad("bat", 5, null)  = "  bat"
      * StringToolkit.leftPad("bat", 5, "")    = "  bat"
      * </pre>
-     *
-     * @param str  the String to pad out, may be null
-     * @param size  the size to pad to
-     * @param padStr  the String to pad with, null or empty treated as single space
-     * @return left padded String or original String if no padding is necessary,
-     *  {@code null} if null String input
      */
     public static String leftPad(final String str, final int size, String padStr) {
         if (str == null) {
@@ -6431,17 +4012,7 @@ public abstract class StringToolkit  {
         }
     }
 
-    /**
-     * Gets a CharSequence length or {@code 0} if the CharSequence is
-     * {@code null}.
-     *
-     * @param cs
-     *            a CharSequence or {@code null}
-     * @return CharSequence length or {@code 0} if the CharSequence is
-     *         {@code null}.
-     * @since 2.4
-     * @since 3.0 Changed signature from length(String) to length(CharSequence)
-     */
+
     public static int length(final CharSequence cs) {
         return cs == null ? 0 : cs.length();
     }
@@ -6449,15 +4020,6 @@ public abstract class StringToolkit  {
     // Centering
     //-----------------------------------------------------------------------
     /**
-     * <p>Centers a String in a larger String of size {@code size}
-     * using the space character (' ').</p>
-     *
-     * <p>If the size is less than the String length, the String is returned.
-     * A {@code null} String returns {@code null}.
-     * A negative size is treated as zero.</p>
-     *
-     * <p>Equivalent to {@code center(str, size, " ")}.</p>
-     *
      * <pre>
      * StringToolkit.center(null, *)   = null
      * StringToolkit.center("", 4)     = "    "
@@ -6466,23 +4028,12 @@ public abstract class StringToolkit  {
      * StringToolkit.center("abcd", 2) = "abcd"
      * StringToolkit.center("a", 4)    = " a  "
      * </pre>
-     *
-     * @param str  the String to center, may be null
-     * @param size  the int size of new String, negative treated as zero
-     * @return centered String, {@code null} if null String input
      */
     public static String center(final String str, final int size) {
         return center(str, size, ' ');
     }
 
     /**
-     * <p>Centers a String in a larger String of size {@code size}.
-     * Uses a supplied character as the value to pad the String with.</p>
-     *
-     * <p>If the size is less than the String length, the String is returned.
-     * A {@code null} String returns {@code null}.
-     * A negative size is treated as zero.</p>
-     *
      * <pre>
      * StringToolkit.center(null, *, *)     = null
      * StringToolkit.center("", 4, ' ')     = "    "
@@ -6492,12 +4043,6 @@ public abstract class StringToolkit  {
      * StringToolkit.center("a", 4, ' ')    = " a  "
      * StringToolkit.center("a", 4, 'y')    = "yayy"
      * </pre>
-     *
-     * @param str  the String to center, may be null
-     * @param size  the int size of new String, negative treated as zero
-     * @param padChar  the character to pad the new String with
-     * @return centered String, {@code null} if null String input
-     * @since 2.0
      */
     public static String center(String str, final int size, final char padChar) {
         if (str == null || size <= 0) {
@@ -6514,13 +4059,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Centers a String in a larger String of size {@code size}.
-     * Uses a supplied String as the value to pad the String with.</p>
-     *
-     * <p>If the size is less than the String length, the String is returned.
-     * A {@code null} String returns {@code null}.
-     * A negative size is treated as zero.</p>
-     *
      * <pre>
      * StringToolkit.center(null, *, *)     = null
      * StringToolkit.center("", 4, " ")     = "    "
@@ -6532,12 +4070,6 @@ public abstract class StringToolkit  {
      * StringToolkit.center("abc", 7, null) = "  abc  "
      * StringToolkit.center("abc", 7, "")   = "  abc  "
      * </pre>
-     *
-     * @param str  the String to center, may be null
-     * @param size  the int size of new String, negative treated as zero
-     * @param padStr  the String to pad the new String with, must not be null or empty
-     * @return centered String, {@code null} if null String input
-     * @throws IllegalArgumentException if padStr is {@code null} or empty
      */
     public static String center(String str, final int size, String padStr) {
         if (str == null || size <= 0) {
@@ -6559,23 +4091,11 @@ public abstract class StringToolkit  {
     // Case conversion
     //-----------------------------------------------------------------------
     /**
-     * <p>Converts a String to upper case as per {@link String#toUpperCase()}.</p>
-     *
-     * <p>A {@code null} input String returns {@code null}.</p>
-     *
      * <pre>
      * StringToolkit.upperCase(null)  = null
      * StringToolkit.upperCase("")    = ""
      * StringToolkit.upperCase("aBc") = "ABC"
      * </pre>
-     *
-     * <p><strong>Note:</strong> As described in the documentation for {@link String#toUpperCase()},
-     * the result of this method is affected by the current locale.
-     * For platform-independent case transformations, the method {@link #lowerCase(String, Locale)}
-     * should be used with a specific locale (e.g. {@link Locale#ENGLISH}).</p>
-     *
-     * @param str  the String to upper case, may be null
-     * @return the upper cased String, {@code null} if null String input
      */
     public static String upperCase(final String str) {
         if (str == null) {
@@ -6585,20 +4105,12 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Converts a String to upper case as per {@link String#toUpperCase(Locale)}.</p>
-     *
-     * <p>A {@code null} input String returns {@code null}.</p>
      *
      * <pre>
      * StringToolkit.upperCase(null, Locale.ENGLISH)  = null
      * StringToolkit.upperCase("", Locale.ENGLISH)    = ""
      * StringToolkit.upperCase("aBc", Locale.ENGLISH) = "ABC"
      * </pre>
-     *
-     * @param str  the String to upper case, may be null
-     * @param locale  the locale that defines the case transformation rules, must not be null
-     * @return the upper cased String, {@code null} if null String input
-     * @since 2.5
      */
     public static String upperCase(final String str, final Locale locale) {
         if (str == null) {
@@ -6608,23 +4120,11 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Converts a String to lower case as per {@link String#toLowerCase()}.</p>
-     *
-     * <p>A {@code null} input String returns {@code null}.</p>
-     *
      * <pre>
      * StringToolkit.lowerCase(null)  = null
      * StringToolkit.lowerCase("")    = ""
      * StringToolkit.lowerCase("aBc") = "abc"
      * </pre>
-     *
-     * <p><strong>Note:</strong> As described in the documentation for {@link String#toLowerCase()},
-     * the result of this method is affected by the current locale.
-     * For platform-independent case transformations, the method {@link #lowerCase(String, Locale)}
-     * should be used with a specific locale (e.g. {@link Locale#ENGLISH}).</p>
-     *
-     * @param str  the String to lower case, may be null
-     * @return the lower cased String, {@code null} if null String input
      */
     public static String lowerCase(final String str) {
         if (str == null) {
@@ -6634,20 +4134,11 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Converts a String to lower case as per {@link String#toLowerCase(Locale)}.</p>
-     *
-     * <p>A {@code null} input String returns {@code null}.</p>
-     *
      * <pre>
      * StringToolkit.lowerCase(null, Locale.ENGLISH)  = null
      * StringToolkit.lowerCase("", Locale.ENGLISH)    = ""
      * StringToolkit.lowerCase("aBc", Locale.ENGLISH) = "abc"
      * </pre>
-     *
-     * @param str  the String to lower case, may be null
-     * @param locale  the locale that defines the case transformation rules, must not be null
-     * @return the lower cased String, {@code null} if null String input
-     * @since 2.5
      */
     public static String lowerCase(final String str, final Locale locale) {
         if (str == null) {
@@ -6657,24 +4148,12 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Capitalizes a String changing the first letter to title case as
-     * per {@link Character#toTitleCase(char)}. No other letters are changed.</p>
-     *
-     * <p>For a word based algorithm, see {@link org.apache.commons.lang3.text.WordUtils#capitalize(String)}.
-     * A {@code null} input String returns {@code null}.</p>
-     *
      * <pre>
      * StringToolkit.capitalize(null)  = null
      * StringToolkit.capitalize("")    = ""
      * StringToolkit.capitalize("cat") = "Cat"
      * StringToolkit.capitalize("cAt") = "CAt"
      * </pre>
-     *
-     * @param str the String to capitalize, may be null
-     * @return the capitalized String, {@code null} if null String input
-     * @see org.apache.commons.lang3.text.WordUtils#capitalize(String)
-     * @see #uncapitalize(String)
-     * @since 2.0
      */
     public static String capitalize(final String str) {
         int strLen;
@@ -6695,24 +4174,12 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Uncapitalizes a String changing the first letter to title case as
-     * per {@link Character#toLowerCase(char)}. No other letters are changed.</p>
-     *
-     * <p>For a word based algorithm, see {@link org.apache.commons.lang3.text.WordUtils#uncapitalize(String)}.
-     * A {@code null} input String returns {@code null}.</p>
-     *
      * <pre>
      * StringToolkit.uncapitalize(null)  = null
      * StringToolkit.uncapitalize("")    = ""
      * StringToolkit.uncapitalize("Cat") = "cat"
      * StringToolkit.uncapitalize("CAT") = "cAT"
      * </pre>
-     *
-     * @param str the String to uncapitalize, may be null
-     * @return the uncapitalized String, {@code null} if null String input
-     * @see org.apache.commons.lang3.text.WordUtils#uncapitalize(String)
-     * @see #capitalize(String)
-     * @since 2.0
      */
     public static String uncapitalize(final String str) {
         int strLen;
@@ -6733,31 +4200,11 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Swaps the case of a String changing upper and title case to
-     * lower case, and lower case to upper case.</p>
-     *
-     * <ul>
-     *  <li>Upper case character converts to Lower case</li>
-     *  <li>Title case character converts to Lower case</li>
-     *  <li>Lower case character converts to Upper case</li>
-     * </ul>
-     *
-     * <p>For a word based algorithm, see {@link org.apache.commons.lang3.text.WordUtils#swapCase(String)}.
-     * A {@code null} input String returns {@code null}.</p>
-     *
      * <pre>
      * StringToolkit.swapCase(null)                 = null
      * StringToolkit.swapCase("")                   = ""
      * StringToolkit.swapCase("The dog has a BONE") = "tHE DOG HAS A bone"
      * </pre>
-     *
-     * <p>NOTE: This method changed in Lang version 2.0.
-     * It no longer performs a word based algorithm.
-     * If you only use ASCII, you will notice no change.
-     * That functionality is available in org.apache.commons.lang3.text.WordUtils.</p>
-     *
-     * @param str  the String to swap case, may be null
-     * @return the changed String, {@code null} if null String input
      */
     public static String swapCase(final String str) {
         if (StringToolkit.isEmpty(str)) {
@@ -6782,10 +4229,6 @@ public abstract class StringToolkit  {
     // Count matches
     //-----------------------------------------------------------------------
     /**
-     * <p>Counts how many times the substring appears in the larger string.</p>
-     *
-     * <p>A {@code null} or empty ("") String input returns {@code 0}.</p>
-     *
      * <pre>
      * StringToolkit.countMatches(null, *)       = 0
      * StringToolkit.countMatches("", *)         = 0
@@ -6795,11 +4238,6 @@ public abstract class StringToolkit  {
      * StringToolkit.countMatches("abba", "ab")  = 1
      * StringToolkit.countMatches("abba", "xxx") = 0
      * </pre>
-     *
-     * @param str  the CharSequence to check, may be null
-     * @param sub  the substring to count, may be null
-     * @return the number of occurrences, 0 if either CharSequence is {@code null}
-     * @since 3.0 Changed signature from countMatches(String, String) to countMatches(CharSequence, CharSequence)
      */
     public static int countMatches(final CharSequence str, final CharSequence sub) {
         if (isEmpty(str) || isEmpty(sub)) {
@@ -6815,10 +4253,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Counts how many times the char appears in the given string.</p>
-     *
-     * <p>A {@code null} or empty ("") String input returns {@code 0}.</p>
-     *
      * <pre>
      * StringToolkit.countMatches(null, *)       = 0
      * StringToolkit.countMatches("", *)         = 0
@@ -6827,11 +4261,6 @@ public abstract class StringToolkit  {
      * StringToolkit.countMatches("abba", 'b')  = 2
      * StringToolkit.countMatches("abba", 'x') = 0
      * </pre>
-     *
-     * @param str  the CharSequence to check, may be null
-     * @param ch  the char to count
-     * @return the number of occurrences, 0 if the CharSequence is {@code null}
-     * @since 3.4
      */
     public static int countMatches(final CharSequence str, final char ch) {
         if (isEmpty(str)) {
@@ -6850,11 +4279,6 @@ public abstract class StringToolkit  {
     // Character Tests
     //-----------------------------------------------------------------------
     /**
-     * <p>Checks if the CharSequence contains only Unicode letters.</p>
-     *
-     * <p>{@code null} will return {@code false}.
-     * An empty CharSequence (length()=0) will return {@code false}.</p>
-     *
      * <pre>
      * StringToolkit.isAlpha(null)   = false
      * StringToolkit.isAlpha("")     = false
@@ -6863,11 +4287,6 @@ public abstract class StringToolkit  {
      * StringToolkit.isAlpha("ab2c") = false
      * StringToolkit.isAlpha("ab-c") = false
      * </pre>
-     *
-     * @param cs  the CharSequence to check, may be null
-     * @return {@code true} if only contains letters, and is non-null
-     * @since 3.0 Changed signature from isAlpha(String) to isAlpha(CharSequence)
-     * @since 3.0 Changed "" to return false and not true
      */
     public static boolean isAlpha(final CharSequence cs) {
         if (isEmpty(cs)) {
@@ -6883,12 +4302,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Checks if the CharSequence contains only Unicode letters and
-     * space (' ').</p>
-     *
-     * <p>{@code null} will return {@code false}
-     * An empty CharSequence (length()=0) will return {@code true}.</p>
-     *
      * <pre>
      * StringToolkit.isAlphaSpace(null)   = false
      * StringToolkit.isAlphaSpace("")     = true
@@ -6898,11 +4311,6 @@ public abstract class StringToolkit  {
      * StringToolkit.isAlphaSpace("ab2c") = false
      * StringToolkit.isAlphaSpace("ab-c") = false
      * </pre>
-     *
-     * @param cs  the CharSequence to check, may be null
-     * @return {@code true} if only contains letters and space,
-     *  and is non-null
-     * @since 3.0 Changed signature from isAlphaSpace(String) to isAlphaSpace(CharSequence)
      */
     public static boolean isAlphaSpace(final CharSequence cs) {
         if (cs == null) {
@@ -6918,11 +4326,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Checks if the CharSequence contains only Unicode letters or digits.</p>
-     *
-     * <p>{@code null} will return {@code false}.
-     * An empty CharSequence (length()=0) will return {@code false}.</p>
-     *
      * <pre>
      * StringToolkit.isAlphanumeric(null)   = false
      * StringToolkit.isAlphanumeric("")     = false
@@ -6932,12 +4335,6 @@ public abstract class StringToolkit  {
      * StringToolkit.isAlphanumeric("ab2c") = true
      * StringToolkit.isAlphanumeric("ab-c") = false
      * </pre>
-     *
-     * @param cs  the CharSequence to check, may be null
-     * @return {@code true} if only contains letters or digits,
-     *  and is non-null
-     * @since 3.0 Changed signature from isAlphanumeric(String) to isAlphanumeric(CharSequence)
-     * @since 3.0 Changed "" to return false and not true
      */
     public static boolean isAlphanumeric(final CharSequence cs) {
         if (isEmpty(cs)) {
@@ -6953,12 +4350,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Checks if the CharSequence contains only Unicode letters, digits
-     * or space ({@code ' '}).</p>
-     *
-     * <p>{@code null} will return {@code false}.
-     * An empty CharSequence (length()=0) will return {@code true}.</p>
-     *
      * <pre>
      * StringToolkit.isAlphanumericSpace(null)   = false
      * StringToolkit.isAlphanumericSpace("")     = true
@@ -6968,11 +4359,6 @@ public abstract class StringToolkit  {
      * StringToolkit.isAlphanumericSpace("ab2c") = true
      * StringToolkit.isAlphanumericSpace("ab-c") = false
      * </pre>
-     *
-     * @param cs  the CharSequence to check, may be null
-     * @return {@code true} if only contains letters, digits or space,
-     *  and is non-null
-     * @since 3.0 Changed signature from isAlphanumericSpace(String) to isAlphanumericSpace(CharSequence)
      */
     public static boolean isAlphanumericSpace(final CharSequence cs) {
         if (cs == null) {
@@ -6989,17 +4375,6 @@ public abstract class StringToolkit  {
 
 
     /**
-     * <p>Checks if the CharSequence contains only Unicode digits.
-     * A decimal point is not a Unicode digit and returns false.</p>
-     *
-     * <p>{@code null} will return {@code false}.
-     * An empty CharSequence (length()=0) will return {@code false}.</p>
-     *
-     * <p>Note that the method does not allow for a leading sign, either positive or negative.
-     * Also, if a String passes the numeric test, it may still generate a NumberFormatException
-     * when parsed by Integer.parseInt or Long.parseLong, e.g. if the value is outside the range
-     * for int or long respectively.</p>
-     *
      * <pre>
      * StringToolkit.isNumeric(null)   = false
      * StringToolkit.isNumeric("")     = false
@@ -7013,11 +4388,6 @@ public abstract class StringToolkit  {
      * StringToolkit.isNumeric("-123") = false
      * StringToolkit.isNumeric("+123") = false
      * </pre>
-     *
-     * @param cs  the CharSequence to check, may be null
-     * @return {@code true} if only contains digits, and is non-null
-     * @since 3.0 Changed signature from isNumeric(String) to isNumeric(CharSequence)
-     * @since 3.0 Changed "" to return false and not true
      */
     public static boolean isNumeric(final CharSequence cs) {
         if (isEmpty(cs)) {
@@ -7033,13 +4403,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Checks if the CharSequence contains only Unicode digits or space
-     * ({@code ' '}).
-     * A decimal point is not a Unicode digit and returns false.</p>
-     *
-     * <p>{@code null} will return {@code false}.
-     * An empty CharSequence (length()=0) will return {@code true}.</p>
-     *
      * <pre>
      * StringToolkit.isNumericSpace(null)   = false
      * StringToolkit.isNumericSpace("")     = true
@@ -7052,11 +4415,6 @@ public abstract class StringToolkit  {
      * StringToolkit.isNumericSpace("12-3") = false
      * StringToolkit.isNumericSpace("12.3") = false
      * </pre>
-     *
-     * @param cs  the CharSequence to check, may be null
-     * @return {@code true} if only contains digits or space,
-     *  and is non-null
-     * @since 3.0 Changed signature from isNumericSpace(String) to isNumericSpace(CharSequence)
      */
     public static boolean isNumericSpace(final CharSequence cs) {
         if (cs == null) {
@@ -7072,11 +4430,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Checks if the CharSequence contains only whitespace.</p>
-     *
-     * <p>{@code null} will return {@code false}.
-     * An empty CharSequence (length()=0) will return {@code true}.</p>
-     *
      * <pre>
      * StringToolkit.isWhitespace(null)   = false
      * StringToolkit.isWhitespace("")     = true
@@ -7085,11 +4438,6 @@ public abstract class StringToolkit  {
      * StringToolkit.isWhitespace("ab2c") = false
      * StringToolkit.isWhitespace("ab-c") = false
      * </pre>
-     *
-     * @param cs  the CharSequence to check, may be null
-     * @return {@code true} if only contains whitespace, and is non-null
-     * @since 2.0
-     * @since 3.0 Changed signature from isWhitespace(String) to isWhitespace(CharSequence)
      */
     public static boolean isWhitespace(final CharSequence cs) {
         if (cs == null) {
@@ -7105,11 +4453,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Checks if the CharSequence contains only lowercase characters.</p>
-     *
-     * <p>{@code null} will return {@code false}.
-     * An empty CharSequence (length()=0) will return {@code false}.</p>
-     *
      * <pre>
      * StringToolkit.isAllLowerCase(null)   = false
      * StringToolkit.isAllLowerCase("")     = false
@@ -7120,11 +4463,6 @@ public abstract class StringToolkit  {
      * StringToolkit.isAllLowerCase("ab1c") = false
      * StringToolkit.isAllLowerCase("ab/c") = false
      * </pre>
-     *
-     * @param cs  the CharSequence to check, may be null
-     * @return {@code true} if only contains lowercase characters, and is non-null
-     * @since 2.5
-     * @since 3.0 Changed signature from isAllLowerCase(String) to isAllLowerCase(CharSequence)
      */
     public static boolean isAllLowerCase(final CharSequence cs) {
         if (cs == null || isEmpty(cs)) {
@@ -7140,11 +4478,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Checks if the CharSequence contains only uppercase characters.</p>
-     *
-     * <p>{@code null} will return {@code false}.
-     * An empty String (length()=0) will return {@code false}.</p>
-     *
      * <pre>
      * StringToolkit.isAllUpperCase(null)   = false
      * StringToolkit.isAllUpperCase("")     = false
@@ -7155,11 +4488,6 @@ public abstract class StringToolkit  {
      * StringToolkit.isAllUpperCase("A1C")  = false
      * StringToolkit.isAllUpperCase("A/C")  = false
      * </pre>
-     *
-     * @param cs the CharSequence to check, may be null
-     * @return {@code true} if only contains uppercase characters, and is non-null
-     * @since 2.5
-     * @since 3.0 Changed signature from isAllUpperCase(String) to isAllUpperCase(CharSequence)
      */
     public static boolean isAllUpperCase(final CharSequence cs) {
         if (cs == null || isEmpty(cs)) {
@@ -7177,48 +4505,28 @@ public abstract class StringToolkit  {
     // Defaults
     //-----------------------------------------------------------------------
     /**
-     * <p>Returns either the passed in String,
-     * or if the String is {@code null}, an empty String ("").</p>
-     *
      * <pre>
      * StringToolkit.defaultString(null)  = ""
      * StringToolkit.defaultString("")    = ""
      * StringToolkit.defaultString("bat") = "bat"
      * </pre>
-     *
-     * @see String#valueOf(Object)
-     * @param str  the String to check, may be null
-     * @return the passed in String, or the empty String if it
-     *  was {@code null}
      */
     public static String defaultString(final String str) {
         return str == null ? EMPTY : str;
     }
 
     /**
-     * <p>Returns either the passed in String, or if the String is
-     * {@code null}, the value of {@code defaultStr}.</p>
-     *
      * <pre>
      * StringToolkit.defaultString(null, "NULL")  = "NULL"
      * StringToolkit.defaultString("", "NULL")    = ""
      * StringToolkit.defaultString("bat", "NULL") = "bat"
      * </pre>
-     *
-     * @see String#valueOf(Object)
-     * @param str  the String to check, may be null
-     * @param defaultStr  the default String to return
-     *  if the input is {@code null}, may be null
-     * @return the passed in String, or the default if it was {@code null}
      */
     public static String defaultString(final String str, final String defaultStr) {
         return str == null ? defaultStr : str;
     }
 
     /**
-     * <p>Returns either the passed in CharSequence, or if the CharSequence is
-     * whitespace, empty ("") or {@code null}, the value of {@code defaultStr}.</p>
-     *
      * <pre>
      * StringToolkit.defaultIfBlank(null, "NULL")  = "NULL"
      * StringToolkit.defaultIfBlank("", "NULL")    = "NULL"
@@ -7226,20 +4534,12 @@ public abstract class StringToolkit  {
      * StringToolkit.defaultIfBlank("bat", "NULL") = "bat"
      * StringToolkit.defaultIfBlank("", null)      = null
      * </pre>
-     * @param <T> the specific kind of CharSequence
-     * @param str the CharSequence to check, may be null
-     * @param defaultStr  the default CharSequence to return
-     *  if the input is whitespace, empty ("") or {@code null}, may be null
-     * @return the passed in CharSequence, or the default
      */
     public static <T extends CharSequence> T defaultIfBlank(final T str, final T defaultStr) {
         return isBlank(str) ? defaultStr : str;
     }
 
     /**
-     * <p>Returns either the passed in CharSequence, or if the CharSequence is
-     * empty or {@code null}, the value of {@code defaultStr}.</p>
-     *
      * <pre>
      * StringToolkit.defaultIfEmpty(null, "NULL")  = "NULL"
      * StringToolkit.defaultIfEmpty("", "NULL")    = "NULL"
@@ -7247,11 +4547,6 @@ public abstract class StringToolkit  {
      * StringToolkit.defaultIfEmpty("bat", "NULL") = "bat"
      * StringToolkit.defaultIfEmpty("", null)      = null
      * </pre>
-     * @param <T> the specific kind of CharSequence
-     * @param str  the CharSequence to check, may be null
-     * @param defaultStr  the default CharSequence to return
-     *  if the input is empty ("") or {@code null}, may be null
-     * @return the passed in CharSequence, or the default
      */
     public static <T extends CharSequence> T defaultIfEmpty(final T str, final T defaultStr) {
         return isEmpty(str) ? defaultStr : str;
@@ -7260,18 +4555,11 @@ public abstract class StringToolkit  {
     // Reversing
     //-----------------------------------------------------------------------
     /**
-     * <p>Reverses a String as per {@link StringBuilder#reverse()}.</p>
-     *
-     * <p>A {@code null} String returns {@code null}.</p>
-     *
      * <pre>
      * StringToolkit.reverse(null)  = null
      * StringToolkit.reverse("")    = ""
      * StringToolkit.reverse("bat") = "tab"
      * </pre>
-     *
-     * @param str  the String to reverse, may be null
-     * @return the reversed String, {@code null} if null String input
      */
     public static String reverse(final String str) {
         if (str == null) {
@@ -7285,20 +4573,6 @@ public abstract class StringToolkit  {
     // Abbreviating
     //-----------------------------------------------------------------------
     /**
-     * <p>Abbreviates a String using ellipses. This will turn
-     * "Now is the time for all good men" into "Now is the time for..."</p>
-     *
-     * <p>Specifically:</p>
-     * <ul>
-     *   <li>If the number of characters in {@code str} is less than or equal to
-     *       {@code maxWidth}, return {@code str}.</li>
-     *   <li>Else abbreviate it to {@code (substring(str, 0, max-3) + "...")}.</li>
-     *   <li>If {@code maxWidth} is less than {@code 4}, throw an
-     *       {@code IllegalArgumentException}.</li>
-     *   <li>In no case will it return a String of length greater than
-     *       {@code maxWidth}.</li>
-     * </ul>
-     *
      * <pre>
      * StringToolkit.abbreviate(null, *)      = null
      * StringToolkit.abbreviate("", 4)        = ""
@@ -7308,29 +4582,12 @@ public abstract class StringToolkit  {
      * StringToolkit.abbreviate("abcdefg", 4) = "a..."
      * StringToolkit.abbreviate("abcdefg", 3) = IllegalArgumentException
      * </pre>
-     *
-     * @param str  the String to check, may be null
-     * @param maxWidth  maximum length of result String, must be at least 4
-     * @return abbreviated String, {@code null} if null String input
-     * @throws IllegalArgumentException if the width is too small
-     * @since 2.0
      */
     public static String abbreviate(final String str, final int maxWidth) {
         return abbreviate(str, 0, maxWidth);
     }
 
     /**
-     * <p>Abbreviates a String using ellipses. This will turn
-     * "Now is the time for all good men" into "...is the time for..."</p>
-     *
-     * <p>Works like {@code abbreviate(String, int)}, but allows you to specify
-     * a "left edge" offset.  Note that this left edge is not necessarily going to
-     * be the leftmost character in the result, or the first character following the
-     * ellipses, but it will appear somewhere in the result.
-     *
-     * <p>In no case will it return a String of length greater than
-     * {@code maxWidth}.</p>
-     *
      * <pre>
      * StringToolkit.abbreviate(null, *, *)                = null
      * StringToolkit.abbreviate("", 0, 4)                  = ""
@@ -7346,13 +4603,6 @@ public abstract class StringToolkit  {
      * StringToolkit.abbreviate("abcdefghij", 0, 3)        = IllegalArgumentException
      * StringToolkit.abbreviate("abcdefghij", 5, 6)        = IllegalArgumentException
      * </pre>
-     *
-     * @param str  the String to check, may be null
-     * @param offset  left edge of source String
-     * @param maxWidth  maximum length of result String, must be at least 4
-     * @return abbreviated String, {@code null} if null String input
-     * @throws IllegalArgumentException if the width is too small
-     * @since 2.0
      */
     public static String abbreviate(final String str, int offset, final int maxWidth) {
         if (str == null) {
@@ -7384,20 +4634,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Abbreviates a String to the length passed, replacing the middle characters with the supplied
-     * replacement String.</p>
-     *
-     * <p>This abbreviation only occurs if the following criteria is met:</p>
-     * <ul>
-     * <li>Neither the String for abbreviation nor the replacement String are null or empty </li>
-     * <li>The length to truncate to is less than the length of the supplied String</li>
-     * <li>The length to truncate to is greater than 0</li>
-     * <li>The abbreviated String will have enough room for the length supplied replacement String
-     * and the first and last characters of the supplied String for abbreviation</li>
-     * </ul>
-     * <p>Otherwise, the returned String will be the same as the supplied String for abbreviation.
-     * </p>
-     *
      * <pre>
      * StringToolkit.abbreviateMiddle(null, null, 0)      = null
      * StringToolkit.abbreviateMiddle("abc", null, 0)      = "abc"
@@ -7405,12 +4641,6 @@ public abstract class StringToolkit  {
      * StringToolkit.abbreviateMiddle("abc", ".", 3)      = "abc"
      * StringToolkit.abbreviateMiddle("abcdef", ".", 4)     = "ab.f"
      * </pre>
-     *
-     * @param str  the String to abbreviate, may be null
-     * @param middle the String to replace the middle characters with, may be null
-     * @param length the length to abbreviate {@code str} to.
-     * @return the abbreviated String if the above criteria is met, or the original String supplied for abbreviation.
-     * @since 2.5
      */
     public static String abbreviateMiddle(final String str, final String middle, final int length) {
         if (isEmpty(str) || isEmpty(middle)) {
@@ -7436,14 +4666,6 @@ public abstract class StringToolkit  {
     // Difference
     //-----------------------------------------------------------------------
     /**
-     * <p>Compares two Strings, and returns the portion where they differ.
-     * More precisely, return the remainder of the second String,
-     * starting from where it's different from the first. This means that
-     * the difference between "abc" and "ab" is the empty String and not "c". </p>
-     *
-     * <p>For example,
-     * {@code difference("i am a machine", "i am a robot") -> "robot"}.</p>
-     *
      * <pre>
      * StringToolkit.difference(null, null) = null
      * StringToolkit.difference("", "") = ""
@@ -7455,13 +4677,6 @@ public abstract class StringToolkit  {
      * StringToolkit.difference("abcde", "abxyz") = "xyz"
      * StringToolkit.difference("abcde", "xyz") = "xyz"
      * </pre>
-     *
-     * @param str1  the first String, may be null
-     * @param str2  the second String, may be null
-     * @return the portion of str2 where it differs from str1; returns the
-     * empty String if they are equal
-     * @see #indexOfDifference(CharSequence,CharSequence)
-     * @since 2.0
      */
     public static String difference(final String str1, final String str2) {
         if (str1 == null) {
@@ -7478,12 +4693,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Compares two CharSequences, and returns the index at which the
-     * CharSequences begin to differ.</p>
-     *
-     * <p>For example,
-     * {@code indexOfDifference("i am a machine", "i am a robot") -> 7}</p>
-     *
      * <pre>
      * StringToolkit.indexOfDifference(null, null) = -1
      * StringToolkit.indexOfDifference("", "") = -1
@@ -7494,13 +4703,6 @@ public abstract class StringToolkit  {
      * StringToolkit.indexOfDifference("abcde", "abxyz") = 2
      * StringToolkit.indexOfDifference("abcde", "xyz") = 0
      * </pre>
-     *
-     * @param cs1  the first CharSequence, may be null
-     * @param cs2  the second CharSequence, may be null
-     * @return the index where cs1 and cs2 begin to differ; -1 if they are equal
-     * @since 2.0
-     * @since 3.0 Changed signature from indexOfDifference(String, String) to
-     * indexOfDifference(CharSequence, CharSequence)
      */
     public static int indexOfDifference(final CharSequence cs1, final CharSequence cs2) {
         if (cs1 == cs2) {
@@ -7522,12 +4724,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Compares all CharSequences in an array and returns the index at which the
-     * CharSequences begin to differ.</p>
-     *
-     * <p>For example,
-     * <code>indexOfDifference(new String[] {"i am a machine", "i am a robot"}) -&gt; 7</code></p>
-     *
      * <pre>
      * StringToolkit.indexOfDifference(null) = -1
      * StringToolkit.indexOfDifference(new String[] {}) = -1
@@ -7547,11 +4743,6 @@ public abstract class StringToolkit  {
      * StringToolkit.indexOfDifference(new String[] {"xyz", "abcde"}) = 0
      * StringToolkit.indexOfDifference(new String[] {"i am a machine", "i am a robot"}) = 7
      * </pre>
-     *
-     * @param css  array of CharSequences, entries may be null
-     * @return the index where the strings begin to differ; -1 if they are all equal
-     * @since 2.4
-     * @since 3.0 Changed signature from indexOfDifference(String...) to indexOfDifference(CharSequence...)
      */
     public static int indexOfDifference(final CharSequence... css) {
         if (css == null || css.length <= 1) {
@@ -7612,12 +4803,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Compares all Strings in an array and returns the initial sequence of
-     * characters that is common to all of them.</p>
-     *
-     * <p>For example,
-     * <code>getCommonPrefix(new String[] {"i am a machine", "i am a robot"}) -&gt; "i am a "</code></p>
-     *
      * <pre>
      * StringToolkit.getCommonPrefix(null) = ""
      * StringToolkit.getCommonPrefix(new String[] {}) = ""
@@ -7637,12 +4822,6 @@ public abstract class StringToolkit  {
      * StringToolkit.getCommonPrefix(new String[] {"xyz", "abcde"}) = ""
      * StringToolkit.getCommonPrefix(new String[] {"i am a machine", "i am a robot"}) = "i am a "
      * </pre>
-     *
-     * @param strs  array of String objects, entries may be null
-     * @return the initial sequence of characters that are common to all Strings
-     * in the array; empty String if the array is null, the elements are all null
-     * or if there is no common prefix.
-     * @since 2.4
      */
     public static String getCommonPrefix(final String... strs) {
         if (strs == null || strs.length == 0) {
@@ -7667,20 +4846,6 @@ public abstract class StringToolkit  {
     // Misc
     //-----------------------------------------------------------------------
     /**
-     * <p>Find the Levenshtein distance between two Strings.</p>
-     *
-     * <p>This is the number of changes needed to change one String into
-     * another, where each change is a single character modification (deletion,
-     * insertion or substitution).</p>
-     *
-     * <p>The previous implementation of the Levenshtein distance algorithm
-     * was from <a href="http://www.merriampark.com/ld.htm">http://www.merriampark.com/ld.htm</a></p>
-     *
-     * <p>Chas Emerick has written an implementation in Java, which avoids an OutOfMemoryError
-     * which can occur when my Java implementation is used with very large strings.<br>
-     * This implementation of the Levenshtein distance algorithm
-     * is from <a href="http://www.merriampark.com/ldjava.htm">http://www.merriampark.com/ldjava.htm</a></p>
-     *
      * <pre>
      * StringToolkit.getLevenshteinDistance(null, *)             = IllegalArgumentException
      * StringToolkit.getLevenshteinDistance(*, null)             = IllegalArgumentException
@@ -7695,12 +4860,6 @@ public abstract class StringToolkit  {
      * StringToolkit.getLevenshteinDistance("hello", "hallo")    = 1
      * </pre>
      *
-     * @param s  the first String, must not be null
-     * @param t  the second String, must not be null
-     * @return result distance
-     * @throws IllegalArgumentException if either String input {@code null}
-     * @since 3.0 Changed signature from getLevenshteinDistance(String, String) to
-     * getLevenshteinDistance(CharSequence, CharSequence)
      */
     public static int getLevenshteinDistance(CharSequence s, CharSequence t) {
         if (s == null || t == null) {
@@ -7780,17 +4939,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Find the Levenshtein distance between two Strings if it's less than or equal to a given
-     * threshold.</p>
-     *
-     * <p>This is the number of changes needed to change one String into
-     * another, where each change is a single character modification (deletion,
-     * insertion or substitution).</p>
-     *
-     * <p>This implementation follows from Algorithms on Strings, Trees and Sequences by Dan Gusfield
-     * and Chas Emerick's implementation of the Levenshtein distance algorithm from
-     * <a href="http://www.merriampark.com/ld.htm">http://www.merriampark.com/ld.htm</a></p>
-     *
      * <pre>
      * StringToolkit.getLevenshteinDistance(null, *, *)             = IllegalArgumentException
      * StringToolkit.getLevenshteinDistance(*, null, *)             = IllegalArgumentException
@@ -7804,12 +4952,6 @@ public abstract class StringToolkit  {
      * StringToolkit.getLevenshteinDistance("hippo", "elephant", 7) = 7
      * StringToolkit.getLevenshteinDistance("hippo", "elephant", 6) = -1
      * </pre>
-     *
-     * @param s  the first String, must not be null
-     * @param t  the second String, must not be null
-     * @param threshold the target threshold, must not be negative
-     * @return result distance, or {@code -1} if the distance would be greater than the threshold
-     * @throws IllegalArgumentException if either String input {@code null} or negative threshold
      */
     public static int getLevenshteinDistance(CharSequence s, CharSequence t, final int threshold) {
         if (s == null || t == null) {
@@ -7941,14 +5083,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Find the Jaro Winkler Distance which indicates the similarity score between two Strings.</p>
-     *
-     * <p>The Jaro measure is the weighted sum of percentage of matched characters from each file and transposed characters.
-     * Winkler increased this measure for matching initial characters.</p>
-     *
-     * <p>This implementation is based on the Jaro Winkler similarity algorithm
-     * from <a href="http://en.wikipedia.org/wiki/Jaro%E2%80%93Winkler_distance">http://en.wikipedia.org/wiki/Jaro%E2%80%93Winkler_distance</a>.</p>
-     *
      * <pre>
      * StringToolkit.getJaroWinklerDistance(null, null)          = IllegalArgumentException
      * StringToolkit.getJaroWinklerDistance("","")               = 0.0
@@ -7965,12 +5099,6 @@ public abstract class StringToolkit  {
      * StringToolkit.getJaroWinklerDistance("My Gym Children's Fitness Center", "My Gym. Childrens Fitness") = 0.94
      * StringToolkit.getJaroWinklerDistance("PENNSYLVANIA", "PENNCISYLVNIA")    = 0.9
      * </pre>
-     *
-     * @param first the first String, must not be null
-     * @param second the second String, must not be null
-     * @return result distance
-     * @throws IllegalArgumentException if either String input {@code null}
-     * @since 3.3
      */
     public static double getJaroWinklerDistance(final CharSequence first, final CharSequence second) {
         final double DEFAULT_SCALING_FACTOR = 0.1;
@@ -7986,12 +5114,7 @@ public abstract class StringToolkit  {
         return  matchScore;
     }
 
-    /**
-     * This method returns the Jaro-Winkler score for string matching.
-     * @param first the first string to be matched
-     * @param second the second string to be machted
-     * @return matching score without scaling factor impact
-     */
+
     private static double score(final CharSequence first, final CharSequence second) {
         String shorter;
         String longer;
@@ -8038,12 +5161,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Find the Fuzzy Distance which indicates the similarity score between two Strings.</p>
-     *
-     * <p>This string matching algorithm is similar to the algorithms of editors such as Sublime Text,
-     * TextMate, Atom and others. One point is given for every matched character. Subsequent
-     * matches yield two bonus points. A higher score indicates a higher similarity.</p>
-     *
      * <pre>
      * StringToolkit.getFuzzyDistance(null, null, null)                                    = IllegalArgumentException
      * StringToolkit.getFuzzyDistance("", "", Locale.ENGLISH)                              = 0
@@ -8054,14 +5171,6 @@ public abstract class StringToolkit  {
      * StringToolkit.getFuzzyDistance("Workshop", "wo", Locale.ENGLISH)                    = 4
      * StringToolkit.getFuzzyDistance("Apache Software Foundation", "asf", Locale.ENGLISH) = 3
      * </pre>
-     *
-     * @param term a full term that should be matched against, must not be null
-     * @param query the query that will be matched against a term, must not be null
-     * @param locale This string matching logic is case insensitive. A locale is necessary to normalize
-     *  both Strings to lower case.
-     * @return result score
-     * @throws IllegalArgumentException if either String input {@code null} or Locale input {@code null}
-     * @since 3.4
      */
     public static int getFuzzyDistance(final CharSequence term, final CharSequence query, final Locale locale) {
         if (term == null || query == null) {
@@ -8117,15 +5226,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * Gets a set of matching characters between two strings.
-     *
-     * <p><Two characters from the first string and the second string are considered matching if the character's
-     * respective positions are no farther than the limit value.</p>
-     *
-     * @param first The first string.
-     * @param second The second string.
-     * @param limit The maximum distance to consider.
-     * @return A string contain the set of common characters.
      */
     private static String getSetOfMatchingCharacterWithin(final CharSequence first, final CharSequence second, final int limit) {
         final StringBuilder common = new StringBuilder();
@@ -8181,11 +5281,6 @@ public abstract class StringToolkit  {
     //-----------------------------------------------------------------------
 
     /**
-     * <p>Check if a CharSequence starts with a specified prefix.</p>
-     *
-     * <p>{@code null}s are handled without exceptions. Two {@code null}
-     * references are considered to be equal. The comparison is case sensitive.</p>
-     *
      * <pre>
      * StringToolkit.startsWith(null, null)      = true
      * StringToolkit.startsWith(null, "abc")     = false
@@ -8193,25 +5288,12 @@ public abstract class StringToolkit  {
      * StringToolkit.startsWith("abcdef", "abc") = true
      * StringToolkit.startsWith("ABCDEF", "abc") = false
      * </pre>
-     *
-     * @see String#startsWith(String)
-     * @param str  the CharSequence to check, may be null
-     * @param prefix the prefix to find, may be null
-     * @return {@code true} if the CharSequence starts with the prefix, case sensitive, or
-     *  both {@code null}
-     * @since 2.4
-     * @since 3.0 Changed signature from startsWith(String, String) to startsWith(CharSequence, CharSequence)
      */
     public static boolean startsWith(final CharSequence str, final CharSequence prefix) {
         return startsWith(str, prefix, false);
     }
 
     /**
-     * <p>Case insensitive check if a CharSequence starts with a specified prefix.</p>
-     *
-     * <p>{@code null}s are handled without exceptions. Two {@code null}
-     * references are considered to be equal. The comparison is case insensitive.</p>
-     *
      * <pre>
      * StringToolkit.startsWithIgnoreCase(null, null)      = true
      * StringToolkit.startsWithIgnoreCase(null, "abc")     = false
@@ -8219,29 +5301,12 @@ public abstract class StringToolkit  {
      * StringToolkit.startsWithIgnoreCase("abcdef", "abc") = true
      * StringToolkit.startsWithIgnoreCase("ABCDEF", "abc") = true
      * </pre>
-     *
-     * @see String#startsWith(String)
-     * @param str  the CharSequence to check, may be null
-     * @param prefix the prefix to find, may be null
-     * @return {@code true} if the CharSequence starts with the prefix, case insensitive, or
-     *  both {@code null}
-     * @since 2.4
-     * @since 3.0 Changed signature from startsWithIgnoreCase(String, String) to startsWithIgnoreCase(CharSequence, CharSequence)
      */
     public static boolean startsWithIgnoreCase(final CharSequence str, final CharSequence prefix) {
         return startsWith(str, prefix, true);
     }
 
     /**
-     * <p>Check if a CharSequence starts with a specified prefix (optionally case insensitive).</p>
-     *
-     * @see String#startsWith(String)
-     * @param str  the CharSequence to check, may be null
-     * @param prefix the prefix to find, may be null
-     * @param ignoreCase indicates whether the compare should ignore case
-     *  (case insensitive) or not.
-     * @return {@code true} if the CharSequence starts with the prefix or
-     *  both {@code null}
      */
     private static boolean startsWith(final CharSequence str, final CharSequence prefix, final boolean ignoreCase) {
         if (str == null || prefix == null) {
@@ -8254,8 +5319,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Check if a CharSequence starts with any of an array of specified strings.</p>
-     *
      * <pre>
      * StringToolkit.startsWithAny(null, null)      = false
      * StringToolkit.startsWithAny(null, new String[] {"abc"})  = false
@@ -8265,12 +5328,6 @@ public abstract class StringToolkit  {
      * StringToolkit.startsWithAny("abcxyz", new String[] {null, "xyz", "abc"}) = true
      * </pre>
      *
-     * @param string  the CharSequence to check, may be null
-     * @param searchStrings the CharSequences to find, may be null or empty
-     * @return {@code true} if the CharSequence starts with any of the the prefixes, case insensitive, or
-     *  both {@code null}
-     * @since 2.5
-     * @since 3.0 Changed signature from startsWithAny(String, String[]) to startsWithAny(CharSequence, CharSequence...)
      */
     public static boolean startsWithAny(final CharSequence string, final CharSequence... searchStrings) {
         if (isEmpty(string) || ObjectToolkit.isEmpty(searchStrings)) {
@@ -8288,11 +5345,6 @@ public abstract class StringToolkit  {
     //-----------------------------------------------------------------------
 
     /**
-     * <p>Check if a CharSequence ends with a specified suffix.</p>
-     *
-     * <p>{@code null}s are handled without exceptions. Two {@code null}
-     * references are considered to be equal. The comparison is case sensitive.</p>
-     *
      * <pre>
      * StringToolkit.endsWith(null, null)      = true
      * StringToolkit.endsWith(null, "def")     = false
@@ -8301,25 +5353,12 @@ public abstract class StringToolkit  {
      * StringToolkit.endsWith("ABCDEF", "def") = false
      * StringToolkit.endsWith("ABCDEF", "cde") = false
      * </pre>
-     *
-     * @see String#endsWith(String)
-     * @param str  the CharSequence to check, may be null
-     * @param suffix the suffix to find, may be null
-     * @return {@code true} if the CharSequence ends with the suffix, case sensitive, or
-     *  both {@code null}
-     * @since 2.4
-     * @since 3.0 Changed signature from endsWith(String, String) to endsWith(CharSequence, CharSequence)
      */
     public static boolean endsWith(final CharSequence str, final CharSequence suffix) {
         return endsWith(str, suffix, false);
     }
 
     /**
-     * <p>Case insensitive check if a CharSequence ends with a specified suffix.</p>
-     *
-     * <p>{@code null}s are handled without exceptions. Two {@code null}
-     * references are considered to be equal. The comparison is case insensitive.</p>
-     *
      * <pre>
      * StringToolkit.endsWithIgnoreCase(null, null)      = true
      * StringToolkit.endsWithIgnoreCase(null, "def")     = false
@@ -8328,30 +5367,11 @@ public abstract class StringToolkit  {
      * StringToolkit.endsWithIgnoreCase("ABCDEF", "def") = true
      * StringToolkit.endsWithIgnoreCase("ABCDEF", "cde") = false
      * </pre>
-     *
-     * @see String#endsWith(String)
-     * @param str  the CharSequence to check, may be null
-     * @param suffix the suffix to find, may be null
-     * @return {@code true} if the CharSequence ends with the suffix, case insensitive, or
-     *  both {@code null}
-     * @since 2.4
-     * @since 3.0 Changed signature from endsWithIgnoreCase(String, String) to endsWithIgnoreCase(CharSequence, CharSequence)
      */
     public static boolean endsWithIgnoreCase(final CharSequence str, final CharSequence suffix) {
         return endsWith(str, suffix, true);
     }
 
-    /**
-     * <p>Check if a CharSequence ends with a specified suffix (optionally case insensitive).</p>
-     *
-     * @see String#endsWith(String)
-     * @param str  the CharSequence to check, may be null
-     * @param suffix the suffix to find, may be null
-     * @param ignoreCase indicates whether the compare should ignore case
-     *  (case insensitive) or not.
-     * @return {@code true} if the CharSequence starts with the prefix or
-     *  both {@code null}
-     */
     private static boolean endsWith(final CharSequence str, final CharSequence suffix, final boolean ignoreCase) {
         if (str == null || suffix == null) {
             return str == null && suffix == null;
@@ -8401,8 +5421,6 @@ public abstract class StringToolkit  {
      *      href="http://www.w3.org/TR/xpath/#function-normalize-space">http://www.w3.org/TR/xpath/#function-normalize-space</a>
      * @param str the source String to normalize whitespaces from, may be null
      * @return the modified string with whitespace normalized, {@code null} if null String input
-     *
-     * @since 3.0
      */
     public static String normalizeSpace(final String str) {
         // LANG-1020: Improved performance significantly by normalizing manually instead of using regex
@@ -8436,8 +5454,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>Check if a CharSequence ends with any of an array of specified strings.</p>
-     *
      * <pre>
      * StringToolkit.endsWithAny(null, null)      = false
      * StringToolkit.endsWithAny(null, new String[] {"abc"})  = false
@@ -8446,12 +5462,6 @@ public abstract class StringToolkit  {
      * StringToolkit.endsWithAny("abcxyz", new String[] {"xyz"}) = true
      * StringToolkit.endsWithAny("abcxyz", new String[] {null, "xyz", "abc"}) = true
      * </pre>
-     *
-     * @param string  the CharSequence to check, may be null
-     * @param searchStrings the CharSequences to find, may be null or empty
-     * @return {@code true} if the CharSequence ends with any of the the prefixes, case insensitive, or
-     *  both {@code null}
-     * @since 3.0
      */
     public static boolean endsWithAny(final CharSequence string, final CharSequence... searchStrings) {
         if (isEmpty(string) || ObjectToolkit.isEmpty(searchStrings)) {
@@ -8491,9 +5501,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * Appends the suffix to the end of the string if the string does not
-     * already end with any the suffixes.
-     *
      * <pre>
      * StringToolkit.appendIfMissing(null, null) = null
      * StringToolkit.appendIfMissing("abc", null) = "abc"
@@ -8516,22 +5523,12 @@ public abstract class StringToolkit  {
      * StringToolkit.appendIfMissing("abcMNO", "xyz", "mno") = "abcMNOxyz"
      * </pre>
      *
-     * @param str The string.
-     * @param suffix The suffix to append to the end of the string.
-     * @param suffixes Additional suffixes that are valid terminators.
-     *
-     * @return A new String if suffix was appened, the same string otherwise.
-     *
-     * @since 3.2
      */
     public static String appendIfMissing(final String str, final CharSequence suffix, final CharSequence... suffixes) {
         return appendIfMissing(str, suffix, false, suffixes);
     }
 
     /**
-     * Appends the suffix to the end of the string if the string does not
-     * already end, case insensitive, with any of the suffixes.
-     *
      * <pre>
      * StringToolkit.appendIfMissingIgnoreCase(null, null) = null
      * StringToolkit.appendIfMissingIgnoreCase("abc", null) = "abc"
@@ -8553,14 +5550,6 @@ public abstract class StringToolkit  {
      * StringToolkit.appendIfMissingIgnoreCase("abcXYZ", "xyz", "mno") = "abcXYZ"
      * StringToolkit.appendIfMissingIgnoreCase("abcMNO", "xyz", "mno") = "abcMNO"
      * </pre>
-     *
-     * @param str The string.
-     * @param suffix The suffix to append to the end of the string.
-     * @param suffixes Additional suffixes that are valid terminators.
-     *
-     * @return A new String if suffix was appened, the same string otherwise.
-     *
-     * @since 3.2
      */
     public static String appendIfMissingIgnoreCase(final String str, final CharSequence suffix, final CharSequence... suffixes) {
         return appendIfMissing(str, suffix, true, suffixes);
@@ -8569,13 +5558,6 @@ public abstract class StringToolkit  {
     /**
      * Prepends the prefix to the start of the string if the string does not
      * already start with any of the prefixes.
-     *
-     * @param str The string.
-     * @param prefix The prefix to prepend to the start of the string.
-     * @param ignoreCase Indicates whether the compare should ignore case.
-     * @param prefixes Additional prefixes that are valid (optional).
-     *
-     * @return A new String if prefix was prepended, the same string otherwise.
      */
     private static String prependIfMissing(final String str, final CharSequence prefix, final boolean ignoreCase, final CharSequence... prefixes) {
         if (str == null || isEmpty(prefix) || startsWith(str, prefix, ignoreCase)) {
@@ -8592,9 +5574,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * Prepends the prefix to the start of the string if the string does not
-     * already start with any of the prefixes.
-     *
      * <pre>
      * StringToolkit.prependIfMissing(null, null) = null
      * StringToolkit.prependIfMissing("abc", null) = "abc"
@@ -8616,23 +5595,12 @@ public abstract class StringToolkit  {
      * StringToolkit.prependIfMissing("XYZabc", "xyz", "mno") = "xyzXYZabc"
      * StringToolkit.prependIfMissing("MNOabc", "xyz", "mno") = "xyzMNOabc"
      * </pre>
-     *
-     * @param str The string.
-     * @param prefix The prefix to prepend to the start of the string.
-     * @param prefixes Additional prefixes that are valid.
-     *
-     * @return A new String if prefix was prepended, the same string otherwise.
-     *
-     * @since 3.2
      */
     public static String prependIfMissing(final String str, final CharSequence prefix, final CharSequence... prefixes) {
         return prependIfMissing(str, prefix, false, prefixes);
     }
 
     /**
-     * Prepends the prefix to the start of the string if the string does not
-     * already start, case insensitive, with any of the prefixes.
-     *
      * <pre>
      * StringToolkit.prependIfMissingIgnoreCase(null, null) = null
      * StringToolkit.prependIfMissingIgnoreCase("abc", null) = "abc"
@@ -8654,14 +5622,6 @@ public abstract class StringToolkit  {
      * StringToolkit.prependIfMissingIgnoreCase("XYZabc", "xyz", "mno") = "XYZabc"
      * StringToolkit.prependIfMissingIgnoreCase("MNOabc", "xyz", "mno") = "MNOabc"
      * </pre>
-     *
-     * @param str The string.
-     * @param prefix The prefix to prepend to the start of the string.
-     * @param prefixes Additional prefixes that are valid (optional).
-     *
-     * @return A new String if prefix was prepended, the same string otherwise.
-     *
-     * @since 3.2
      */
     public static String prependIfMissingIgnoreCase(final String str, final CharSequence prefix, final CharSequence... prefixes) {
         return prependIfMissing(str, prefix, true, prefixes);
@@ -8669,17 +5629,6 @@ public abstract class StringToolkit  {
 
     /**
      * Converts a <code>byte[]</code> to a String using the specified character encoding.
-     *
-     * @param bytes
-     *            the byte array to read from
-     * @param charsetName
-     *            the encoding to use, if null then use the platform default
-     * @return a new String
-     * @throws UnsupportedEncodingException
-     *             If the named charset is not supported
-     * @throws NullPointerException
-     *             if the input is null
-     * @since 3.1
      */
     @Deprecated
     public static String toString(final byte[] bytes, final String charsetName) throws UnsupportedEncodingException {
@@ -8688,26 +5637,12 @@ public abstract class StringToolkit  {
 
     /**
      * Converts a <code>byte[]</code> to a String using the specified character encoding.
-     *
-     * @param bytes
-     *            the byte array to read from
-     * @param charset
-     *            the encoding to use, if null then use the platform default
-     * @return a new String
-     * @throws NullPointerException
-     *             if {@code bytes} is null
-     * @since 3.2
-     * @since 3.3 No longer throws {@link UnsupportedEncodingException}.
      */
     public static String toEncodedString(final byte[] bytes, final Charset charset) {
         return new String(bytes, charset != null ? charset : Charset.defaultCharset());
     }
 
     /**
-     * <p>
-     * Wraps a string with a char.
-     * </p>
-     *
      * <pre>
      * StringToolkit.wrap(null, *)        = null
      * StringToolkit.wrap("", *)          = ""
@@ -8716,13 +5651,6 @@ public abstract class StringToolkit  {
      * StringToolkit.wrap("ab", '\'')     = "'ab'"
      * StringToolkit.wrap("\"ab\"", '\"') = "\"\"ab\"\""
      * </pre>
-     *
-     * @param str
-     *            the string to be wrapped, may be {@code null}
-     * @param wrapWith
-     *            the char that will wrap {@code str}
-     * @return the wrapped string, or {@code null} if {@code str==null}
-     * @since 3.4
      */
     public static String wrap(final String str, final char wrapWith) {
 
@@ -8734,14 +5662,6 @@ public abstract class StringToolkit  {
     }
 
     /**
-     * <p>
-     * Wraps a String with another String.
-     * </p>
-     *
-     * <p>
-     * A {@code null} input String returns {@code null}.
-     * </p>
-     *
      * <pre>
      * StringToolkit.wrap(null, *)         = null
      * StringToolkit.wrap("", *)           = ""
@@ -8754,13 +5674,6 @@ public abstract class StringToolkit  {
      * StringToolkit.wrap("\"abcd\"", "'") = "'\"abcd\"'"
      * StringToolkit.wrap("'abcd'", "\"")  = "\"'abcd'\""
      * </pre>
-     *
-     * @param str
-     *            the String to be wrapper, may be null
-     * @param wrapWith
-     *            the String that will wrap str
-     * @return wrapped String, {@code null} if null String input
-     * @since 3.4
      */
     public static String wrap(final String str, final String wrapWith) {
 

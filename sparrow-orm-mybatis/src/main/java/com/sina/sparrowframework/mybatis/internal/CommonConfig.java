@@ -1,6 +1,6 @@
 package com.sina.sparrowframework.mybatis.internal;
 
-import com.sina.sparrowframework.tools.utility.StringPool;
+import com.sina.sparrowframework.tools.utility.StrPool;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -29,7 +29,7 @@ public abstract class CommonConfig implements EnvironmentAware, ApplicationConte
         StringBuilder sb = new StringBuilder();
         sb.append(env.getRequiredProperty(baseTopicName));
         if (ArrayUtils.isNotEmpty(tags)) {
-            sb.append(StringPool.COLON);
+            sb.append(StrPool.COLON);
             if (tags.length == 1) {
                 sb.append(tags[0]);
             } else {
@@ -37,7 +37,7 @@ public abstract class CommonConfig implements EnvironmentAware, ApplicationConte
                     if (i == tags.length - 1) {
                         sb.append(tags[i]);
                     } else {
-                        sb.append(tags[i]).append(StringPool.COLON);
+                        sb.append(tags[i]).append(StrPool.COLON);
                     }
                 }
             }

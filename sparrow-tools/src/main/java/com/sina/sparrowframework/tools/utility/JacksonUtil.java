@@ -24,9 +24,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import java.util.TimeZone;
 
-
 /**
- * @author tianye6
  * @date 2019/6/18 11:03
  */
 public class JacksonUtil {
