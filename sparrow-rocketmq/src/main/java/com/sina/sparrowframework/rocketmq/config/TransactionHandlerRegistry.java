@@ -24,8 +24,8 @@ public class TransactionHandlerRegistry implements DisposableBean {
     public void registerTransactionHandler(TransactionHandler handler) throws MQClientException {
         if (listenerContainers.contains(handler.getName())) {
             throw new MQClientException(-1,
-                String
-                    .format("The transaction name [%s] has been defined in TransactionListener [%s]", handler.getName(),
+                String.format("The transaction name [%s] has been defined in TransactionListener [%s]",
+                        handler.getName(),
                         handler.getBeanName()));
         }
         listenerContainers.add(handler.getName());

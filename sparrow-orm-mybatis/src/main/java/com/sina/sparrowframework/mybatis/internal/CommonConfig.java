@@ -11,8 +11,6 @@ import org.springframework.util.Assert;
 
 /**
  * 基础服务类
- *
- * @author tianye6
  * @date 2019/7/7 10:42
  */
 public abstract class CommonConfig implements EnvironmentAware, ApplicationContextAware {

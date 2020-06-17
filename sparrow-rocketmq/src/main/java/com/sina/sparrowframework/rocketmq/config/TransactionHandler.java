@@ -57,9 +57,14 @@ class TransactionHandler {
     }
 
     public void setCheckExecutor(int corePoolSize, int maxPoolSize, long keepAliveTime, int blockingQueueSize) {
-        this.checkExecutor = new ThreadPoolExecutor(corePoolSize, maxPoolSize,
-            keepAliveTime, TimeUnit.MILLISECONDS,
-            new LinkedBlockingDeque<>(blockingQueueSize));
+        this.checkExecutor = new ThreadPoolExecutor(
+                corePoolSize,
+                maxPoolSize,
+                keepAliveTime,
+                TimeUnit.MILLISECONDS,
+
+                new LinkedBlockingDeque<>(blockingQueueSize)
+        );
     }
 
     public ThreadPoolExecutor getCheckExecutor() {
