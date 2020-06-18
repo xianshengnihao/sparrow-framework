@@ -1,6 +1,5 @@
 package com.sina.sparrowframework.tools.utility;
 
-
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
@@ -326,6 +325,21 @@ public abstract class Assert  {
     public static void assertNotEmpty(Map<?, ?> map, String format, Object... args) throws IllegalArgumentException {
         if (map.isEmpty() || null == map) {
             throwIllegalArgumentException(format, args);
+        }
+    }
+
+    /**
+     * Assert that the given String contains valid text content; that is, it must not
+     * be {@code null} and must contain at least one non-whitespace character.
+     * <pre class="code">Assert.hasText(name, "'name' must not be empty");</pre>
+     * @param text the String to check
+     * @param message the exception message to use if the assertion fails
+     * @see StringToolkit#hasText
+     * @throws IllegalArgumentException if the text does not contain valid text content
+     */
+    public static void hasText(String text, String message) {
+        if (!StringToolkit.hasText(text)) {
+            throw new IllegalArgumentException(message);
         }
     }
 

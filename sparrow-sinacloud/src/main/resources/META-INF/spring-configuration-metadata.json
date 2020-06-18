@@ -1,0 +1,10 @@
+{
+  "properties": [
+    {
+      "defaultValue": true,
+      "name": "tasty.cloud.store.enable",
+      "description": "是否 tasty 云存储",
+      "type": "java.lang.Boolean"
+    }
+  ]
+}

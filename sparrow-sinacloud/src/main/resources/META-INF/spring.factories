@@ -1,0 +1,5 @@
+
+
+
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.sina.sparrowframework.sinacloud.config.TastyCloudStoreAuto
