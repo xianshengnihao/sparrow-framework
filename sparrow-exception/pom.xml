@@ -11,5 +11,10 @@
     </parent>
     <artifactId>sparrow-exception</artifactId>
 
-
+    <dependencies>
+        <dependency>
+            <groupId>com.sina.sparrowframework</groupId>
+            <artifactId>sparrow-tools</artifactId>
+        </dependency>
+    </dependencies>
 </project>
