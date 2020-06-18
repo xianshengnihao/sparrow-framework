@@ -11,7 +11,7 @@ import java.util.*;
  * @author Arjen Poutsma
  * @since 1.1.3
  */
-public abstract class CollectionToolkit {
+public abstract class CollToolkit {
 
     /**
      * Return {@code true} if the supplied Collection is {@code null} or empty.
@@ -21,6 +21,10 @@ public abstract class CollectionToolkit {
      */
     public static boolean isEmpty( Collection<?> collection) {
         return (collection == null || collection.isEmpty());
+    }
+
+    public static boolean isNotEmpty( Collection<?> collection) {
+        return !(collection == null || collection.isEmpty());
     }
 
     /**

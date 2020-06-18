@@ -26,6 +26,7 @@
         <module>sparrow-rocketmq</module>
         <module>sparrow-constants</module>
         <module>sparrow-metadata</module>
+        <module>sparrow-extra</module>
     </modules>
 
     <properties>

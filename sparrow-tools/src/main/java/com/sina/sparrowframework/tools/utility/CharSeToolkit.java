@@ -3,7 +3,7 @@ package com.sina.sparrowframework.tools.utility;
 /**
  *
  */
-public class CharSequenceToolkit {
+public class CharSeToolkit {
 
     private static final int NOT_FOUND = -1;
 
@@ -14,7 +14,7 @@ public class CharSequenceToolkit {
      * <p>This constructor is public to permit tools that require a JavaBean
      * instance to operate.</p>
      */
-    public CharSequenceToolkit() {
+    public CharSeToolkit() {
         super();
     }
 

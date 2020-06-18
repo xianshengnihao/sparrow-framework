@@ -97,7 +97,7 @@ public class EncryptUtil {
      * @return
      */
     public static String desensitizationName(String name) {
-        if (StringToolkit.isEmpty(name)) {
+        if (StrToolkit.isEmpty(name)) {
             return name;
         }
         char[] chars = name.toCharArray();

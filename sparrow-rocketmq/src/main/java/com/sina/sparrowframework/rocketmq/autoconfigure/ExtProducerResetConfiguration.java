@@ -3,6 +3,7 @@ package com.sina.sparrowframework.rocketmq.autoconfigure;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sina.sparrowframework.rocketmq.annotation.ExtRocketMQTemplateConfiguration;
 import com.sina.sparrowframework.rocketmq.core.RocketMQTemplate;
+import com.sina.sparrowframework.tools.utility.StrToolkit;
 import org.apache.rocketmq.acl.common.AclClientRPCHook;
 import org.apache.rocketmq.acl.common.SessionCredentials;
 import org.apache.rocketmq.client.exception.MQClientException;
@@ -19,7 +20,6 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.core.env.StandardEnvironment;
-import org.springframework.util.StringUtils;
 
 import java.util.Map;
 import java.util.Objects;
@@ -97,17 +97,17 @@ public class ExtProducerResetConfiguration implements ApplicationContextAware, S
         }
         final String nameServer = environment.resolvePlaceholders(annotation.nameServer());
         String groupName = environment.resolvePlaceholders(annotation.group());
-        groupName = StringUtils.isEmpty(groupName) ? producerConfig.getGroup() : groupName;
+        groupName = StrToolkit.isEmpty(groupName) ? producerConfig.getGroup() : groupName;
 
         String ak = environment.resolvePlaceholders(annotation.accessKey());
-        ak = StringUtils.isEmpty(ak) ? producerConfig.getAccessKey() : annotation.accessKey();
+        ak = StrToolkit.isEmpty(ak) ? producerConfig.getAccessKey() : annotation.accessKey();
         String sk = environment.resolvePlaceholders(annotation.secretKey());
-        sk = StringUtils.isEmpty(sk) ? producerConfig.getSecretKey() : annotation.secretKey();
+        sk = StrToolkit.isEmpty(sk) ? producerConfig.getSecretKey() : annotation.secretKey();
         String customizedTraceTopic = environment.resolvePlaceholders(annotation.customizedTraceTopic());
-        customizedTraceTopic = StringUtils.isEmpty(customizedTraceTopic) ? producerConfig.getCustomizedTraceTopic()
+        customizedTraceTopic = StrToolkit.isEmpty(customizedTraceTopic) ? producerConfig.getCustomizedTraceTopic()
                 : customizedTraceTopic;
 
-        if (!StringUtils.isEmpty(ak) && !StringUtils.isEmpty(sk)) {
+        if (!StrToolkit.isEmpty(ak) && !StrToolkit.isEmpty(sk)) {
             producer = new DefaultMQProducer(groupName, new AclClientRPCHook(new SessionCredentials(ak, sk)),
                     annotation.enableMsgTrace(), customizedTraceTopic);
             producer.setVipChannelEnabled(false);

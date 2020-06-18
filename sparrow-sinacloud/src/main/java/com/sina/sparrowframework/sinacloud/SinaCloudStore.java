@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.FileSystemResource;
-import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.CacheControl;
 import org.springframework.http.ContentDisposition;
@@ -337,7 +336,7 @@ public final class SinaCloudStore implements CloudStore, EnvironmentAware {
         if (!prefix.endsWith("/")) {
             prefix = prefix + "/";
         }
-        if (StringToolkit.hasText(customPrefix)) {
+        if (StrToolkit.hasText(customPrefix)) {
             customPrefix = encodeText(customPrefix);
             if (customPrefix.startsWith("/")) {
                 customPrefix = customPrefix.substring(1);
@@ -468,7 +467,7 @@ public final class SinaCloudStore implements CloudStore, EnvironmentAware {
         final String fileName = getFileName(form);
         final String md5 = createMd5(file);
 
-        if (!StringToolkit.hasText(form.getMd5())) {
+        if (!StrToolkit.hasText(form.getMd5())) {
             // 没有 md5 值,说明文件未加密
             form.setMd5(md5);
         }
@@ -608,7 +607,7 @@ public final class SinaCloudStore implements CloudStore, EnvironmentAware {
 
     private String getFileName(StoreForm form) {
         String name = form.getName();
-        if (!StringToolkit.hasText(name)) {
+        if (!StrToolkit.hasText(name)) {
             name = UUID.randomUUID().toString().toLowerCase();
         }
         return name;
@@ -657,7 +656,7 @@ public final class SinaCloudStore implements CloudStore, EnvironmentAware {
 
         String versionStr = metaMap.get(META_CIPHER_VERSION);
         Integer version = null;
-        if (StringToolkit.hasText(versionStr)) {
+        if (StrToolkit.hasText(versionStr)) {
             try {
                 version = Integer.parseInt(versionStr);
             } catch (NumberFormatException e) {
@@ -737,7 +736,7 @@ public final class SinaCloudStore implements CloudStore, EnvironmentAware {
 
     private LocalDateTime getUploadTime(String timeText) {
         LocalDateTime time;
-        if (StringToolkit.hasText(timeText)) {
+        if (StrToolkit.hasText(timeText)) {
             time = LocalDateTime.parse(timeText, TimeUtils.DATETIME_FORMATTER);
         } else {
             time = TimeUtils.SOURCE_DATE_TIME;
@@ -748,7 +747,7 @@ public final class SinaCloudStore implements CloudStore, EnvironmentAware {
     private long getFileLength(Map<String, String> metaMap) {
         String text = metaMap.get(META_LENGTH);
         long length = -1;
-        if (StringToolkit.hasText(text)) {
+        if (StrToolkit.hasText(text)) {
             length = Long.parseLong(text);
         }
         return length;
@@ -760,7 +759,7 @@ public final class SinaCloudStore implements CloudStore, EnvironmentAware {
         Map<String, String> metaMap = meta.getUserMetadata();
 
         String name;
-        if (StringToolkit.hasText(metaMap.get(META_FILE_NAME_BASE_64))) {
+        if (StrToolkit.hasText(metaMap.get(META_FILE_NAME_BASE_64))) {
             // 最新上传的文件都会到这里.
             name = decodeBase64(metaMap.get(META_FILE_NAME_BASE_64));
         } else if (disposition != null) {
@@ -769,11 +768,11 @@ public final class SinaCloudStore implements CloudStore, EnvironmentAware {
         } else {
             // 获取元数据 或不是 本组件上传
             String text = metaMap.get(META_FILE_NAME);
-            if (StringToolkit.hasText(text)) {
+            if (StrToolkit.hasText(text)) {
                 name = decodeText(text);
             } else {
                 // 不是本组件上传.
-                name = StringToolkit.getFilename(path);
+                name = StrToolkit.getFilename(path);
             }
         }
         return name;
@@ -783,7 +782,7 @@ public final class SinaCloudStore implements CloudStore, EnvironmentAware {
     private AcceptMode getAcceptMode(final Map<String, String> metaMap) {
         String text = metaMap.get(META_ACCEPT_MODE);
         AcceptMode acceptMode;
-        if (StringToolkit.hasText(text)) {
+        if (StrToolkit.hasText(text)) {
             acceptMode = AcceptMode.valueOf(text);
         } else {
             acceptMode = AcceptMode.PUBLIC;
@@ -795,7 +794,7 @@ public final class SinaCloudStore implements CloudStore, EnvironmentAware {
         String text = meta.getUserMetadata().get(META_MEDIA_TYPE);
 
         MediaType mediaType;
-        if (StringToolkit.hasText(text)) {
+        if (StrToolkit.hasText(text)) {
             mediaType = MediaType.valueOf(decodeBase64(text));
         } else {
             // 兼容旧实现

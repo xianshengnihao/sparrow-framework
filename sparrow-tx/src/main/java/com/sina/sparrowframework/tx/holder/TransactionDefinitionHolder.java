@@ -1,5 +1,6 @@
 package com.sina.sparrowframework.tx.holder;
 
+import com.sina.sparrowframework.tools.utility.StrToolkit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.NamedThreadLocal;
@@ -8,7 +9,6 @@ import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Method;
 import java.util.Collections;
@@ -66,10 +66,10 @@ public abstract class TransactionDefinitionHolder {
             if (null != transactional) {
                 String val = transactional.value();
                 String transactionManager = transactional.transactionManager();
-                if (!StringUtils.isEmpty(val)) {
+                if (!StrToolkit.isEmpty(val)) {
                     TX_NAME_HOLDER.set(val);
                 } else {
-                    if (!StringUtils.isEmpty(transactionManager)) {
+                    if (!StrToolkit.isEmpty(transactionManager)) {
                         TX_NAME_HOLDER.set(transactionManager);
                     }
                 }

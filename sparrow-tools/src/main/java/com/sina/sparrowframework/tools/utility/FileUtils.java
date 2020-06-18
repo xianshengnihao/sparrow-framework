@@ -34,7 +34,7 @@ public abstract class FileUtils {
     public static File createTempFile(String extension) throws IOException {
 
         String fileName = UUID.randomUUID().toString();
-        if (StringToolkit.hasText(extension)) {
+        if (StrToolkit.hasText(extension)) {
             fileName = fileName + "." + extension;
         }
         return createTempFileWithName(fileName);
@@ -87,9 +87,9 @@ public abstract class FileUtils {
      */
     public static File createNewNamedFileIfExists(final File file) throws IOException {
 
-        final String fileNamePrefix = StringToolkit.getFileNamePrefix(file.getName());
+        final String fileNamePrefix = StrToolkit.getFileNamePrefix(file.getName());
         final String actualPrefix = parseFileNamePrefix(fileNamePrefix);
-        final String extension = StringToolkit.getFilenameExtension(file.getName());
+        final String extension = StrToolkit.getFilenameExtension(file.getName());
         String prefix, newName;
 
         File newFile = file;
@@ -160,8 +160,8 @@ public abstract class FileUtils {
         }
 
         final File dir = file.getParentFile();
-        final String prefix = StringToolkit.getFileNamePrefix(file.getName());
-        final String extension = StringToolkit.getFilenameExtension(file.getName());
+        final String prefix = StrToolkit.getFileNamePrefix(file.getName());
+        final String extension = StrToolkit.getFilenameExtension(file.getName());
         final int max = 1000;
 
         File newFile;
@@ -189,7 +189,7 @@ public abstract class FileUtils {
         }
 
         final File dir = directory.getParentFile();
-        final String prefix = StringToolkit.getFileNamePrefix(directory.getName());
+        final String prefix = StrToolkit.getFileNamePrefix(directory.getName());
         final int max = 10;
 
         File newDir;

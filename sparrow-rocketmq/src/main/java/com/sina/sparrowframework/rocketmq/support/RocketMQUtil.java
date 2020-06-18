@@ -3,6 +3,8 @@ package com.sina.sparrowframework.rocketmq.support;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sina.sparrowframework.rocketmq.core.RocketMQLocalTransactionListener;
 import com.sina.sparrowframework.rocketmq.core.RocketMQLocalTransactionState;
+import com.sina.sparrowframework.tools.utility.CollToolkit;
+import com.sina.sparrowframework.tools.utility.StrToolkit;
 import org.apache.rocketmq.acl.common.AclClientRPCHook;
 import org.apache.rocketmq.acl.common.SessionCredentials;
 import org.apache.rocketmq.client.exception.MQClientException;
@@ -18,8 +20,6 @@ import org.springframework.core.env.Environment;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.MessagingException;
 import org.springframework.messaging.support.MessageBuilder;
-import org.springframework.util.CollectionUtils;
-import org.springframework.util.StringUtils;
 
 import java.nio.charset.Charset;
 import java.util.Map;
@@ -86,7 +86,7 @@ public class RocketMQUtil {
     }
 
     private static void addUserProperties(Map<String, String> properties, MessageBuilder messageBuilder) {
-        if (!CollectionUtils.isEmpty(properties)) {
+        if (!CollToolkit.isEmpty(properties)) {
             properties.forEach((key, val) -> {
                 if (!MessageConst.STRING_HASH_SET.contains(key) && !MessageHeaders.ID.equals(key)
                     && !MessageHeaders.TIMESTAMP.equals(key)) {
@@ -140,7 +140,7 @@ public class RocketMQUtil {
         MessageHeaders headers = message.getHeaders();
         if (Objects.nonNull(headers) && !headers.isEmpty()) {
             Object keys = headers.get(RocketMQHeaders.KEYS);
-            if (!StringUtils.isEmpty(keys)) { // if headers has 'KEYS', set rocketMQ message key
+            if (!StrToolkit.isEmpty(keys)) { // if headers has 'KEYS', set rocketMQ message key
                 rocketMsg.setKeys(keys.toString());
             }
 
@@ -182,7 +182,7 @@ public class RocketMQUtil {
             ak = null;
             sk = null;
         }
-        if (!StringUtils.isEmpty(ak) && !StringUtils.isEmpty(sk)) {
+        if (!StrToolkit.isEmpty(ak) && !StrToolkit.isEmpty(sk)) {
             return new AclClientRPCHook(new SessionCredentials(ak, sk));
         }
         return null;

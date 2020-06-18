@@ -5,6 +5,8 @@ import com.sina.sparrowframework.rocketmq.config.RocketMQConfigUtils;
 import com.sina.sparrowframework.rocketmq.config.RocketMQTransactionAnnotationProcessor;
 import com.sina.sparrowframework.rocketmq.config.TransactionHandlerRegistry;
 import com.sina.sparrowframework.rocketmq.core.RocketMQTemplate;
+import com.sina.sparrowframework.tools.utility.Assert;
+import com.sina.sparrowframework.tools.utility.StrToolkit;
 import org.apache.rocketmq.acl.common.AclClientRPCHook;
 import org.apache.rocketmq.acl.common.SessionCredentials;
 import org.apache.rocketmq.client.AccessChannel;
@@ -27,8 +29,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Role;
 import org.springframework.core.env.Environment;
-import org.springframework.util.Assert;
-import org.springframework.util.StringUtils;
+
 
 import javax.annotation.PostConstruct;
 
@@ -69,7 +70,7 @@ public class RocketMQAutoConfiguration {
         DefaultMQProducer producer;
         String ak = rocketMQProperties.getProducer().getAccessKey();
         String sk = rocketMQProperties.getProducer().getSecretKey();
-        if (!StringUtils.isEmpty(ak) && !StringUtils.isEmpty(sk)) {
+        if (!StrToolkit.isEmpty(ak) && !StrToolkit.isEmpty(sk)) {
             producer = new DefaultMQProducer(groupName, new AclClientRPCHook(new SessionCredentials(ak, sk)),
                 rocketMQProperties.getProducer().isEnableMsgTrace(),
                 rocketMQProperties.getProducer().getCustomizedTraceTopic());
@@ -80,7 +81,7 @@ public class RocketMQAutoConfiguration {
         }
 
         producer.setNamesrvAddr(nameServer);
-        if (!StringUtils.isEmpty(accessChannel)) {
+        if (!StrToolkit.isEmpty(accessChannel)) {
             producer.setAccessChannel(AccessChannel.valueOf(accessChannel));
         }
         producer.setSendMsgTimeout(producerConfig.getSendMessageTimeout());

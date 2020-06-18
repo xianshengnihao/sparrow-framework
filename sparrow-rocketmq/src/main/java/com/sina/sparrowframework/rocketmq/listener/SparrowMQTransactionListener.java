@@ -8,7 +8,7 @@ import com.sina.sparrowframework.rocketmq.db.LocalTransactionService;
 import com.sina.sparrowframework.rocketmq.support.RocketMQHeaders;
 import com.sina.sparrowframework.rocketmq.support.RocketMQUtil;
 import com.sina.sparrowframework.tools.utility.ObjectToolkit;
-import com.sina.sparrowframework.tools.utility.StringToolkit;
+import com.sina.sparrowframework.tools.utility.StrToolkit;
 
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
@@ -44,7 +44,7 @@ public class SparrowMQTransactionListener implements RocketMQLocalTransactionLis
 
         try {
 
-            if (ObjectToolkit.isEmpty(msg)  || StringToolkit.isBlank(transactionId)) {
+            if (ObjectToolkit.isEmpty(msg)  || StrToolkit.isBlank(transactionId)) {
                 log.error("rocketmq checkLocalTransaction msg or transactionId is null, transactionId:{} , body:{} ." ,
                         transactionId ,
                         new String(body)

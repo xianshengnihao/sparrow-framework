@@ -7,7 +7,7 @@ import java.text.Normalizer;
 import java.util.*;
 import java.util.regex.Pattern;
 
-public abstract class StringToolkit  {
+public abstract class StrToolkit {
 
 
     private static final String FOLDER_SEPARATOR = "/";
@@ -1154,7 +1154,7 @@ public abstract class StringToolkit  {
     public static String collectionToDelimitedString(
              Collection<?> coll, String delim, String prefix, String suffix) {
 
-        if (CollectionToolkit.isEmpty(coll)) {
+        if (CollToolkit.isEmpty(coll)) {
             return "";
         }
 
@@ -1277,7 +1277,7 @@ public abstract class StringToolkit  {
      * <p>This constructor is public to permit tools that require a JavaBean
      * instance to operate.</p>
      */
-    public StringToolkit() {
+    public StrToolkit() {
         super();
     }
 
@@ -1888,7 +1888,7 @@ public abstract class StringToolkit  {
         if (cs1 instanceof String && cs2 instanceof String) {
             return cs1.equals(cs2);
         }
-        return CharSequenceToolkit.regionMatches(cs1, false, 0, cs2, 0, Math.max(cs1.length(), cs2.length()));
+        return CharSeToolkit.regionMatches(cs1, false, 0, cs2, 0, Math.max(cs1.length(), cs2.length()));
     }
 
     /**
@@ -1920,7 +1920,7 @@ public abstract class StringToolkit  {
         } else if (str1.length() != str2.length()) {
             return false;
         } else {
-            return CharSequenceToolkit.regionMatches(str1, true, 0, str2, 0, str1.length());
+            return CharSeToolkit.regionMatches(str1, true, 0, str2, 0, str1.length());
         }
     }
 
@@ -1950,7 +1950,7 @@ public abstract class StringToolkit  {
         if (isEmpty(seq)) {
             return INDEX_NOT_FOUND;
         }
-        return CharSequenceToolkit.indexOf(seq, searchChar, 0);
+        return CharSeToolkit.indexOf(seq, searchChar, 0);
     }
 
     /**
@@ -1983,7 +1983,7 @@ public abstract class StringToolkit  {
         if (isEmpty(seq)) {
             return INDEX_NOT_FOUND;
         }
-        return CharSequenceToolkit.indexOf(seq, searchChar, startPos);
+        return CharSeToolkit.indexOf(seq, searchChar, startPos);
     }
 
     /**
@@ -2014,7 +2014,7 @@ public abstract class StringToolkit  {
         if (seq == null || searchSeq == null) {
             return INDEX_NOT_FOUND;
         }
-        return CharSequenceToolkit.indexOf(seq, searchSeq, 0);
+        return CharSeToolkit.indexOf(seq, searchSeq, 0);
     }
 
     /**
@@ -2054,7 +2054,7 @@ public abstract class StringToolkit  {
         if (seq == null || searchSeq == null) {
             return INDEX_NOT_FOUND;
         }
-        return CharSequenceToolkit.indexOf(seq, searchSeq, startPos);
+        return CharSeToolkit.indexOf(seq, searchSeq, startPos);
     }
 
     /**
@@ -2120,9 +2120,9 @@ public abstract class StringToolkit  {
         int index = lastIndex ? str.length() : INDEX_NOT_FOUND;
         do {
             if (lastIndex) {
-                index = CharSequenceToolkit.lastIndexOf(str, searchStr, index - searchStr.length());
+                index = CharSeToolkit.lastIndexOf(str, searchStr, index - searchStr.length());
             } else {
-                index = CharSequenceToolkit.indexOf(str, searchStr, index + searchStr.length());
+                index = CharSeToolkit.indexOf(str, searchStr, index + searchStr.length());
             }
             if (index < 0) {
                 return index;
@@ -2208,7 +2208,7 @@ public abstract class StringToolkit  {
             return startPos;
         }
         for (int i = startPos; i < endLimit; i++) {
-            if (CharSequenceToolkit.regionMatches(str, true, i, searchStr, 0, searchStr.length())) {
+            if (CharSeToolkit.regionMatches(str, true, i, searchStr, 0, searchStr.length())) {
                 return i;
             }
         }
@@ -2241,7 +2241,7 @@ public abstract class StringToolkit  {
         if (isEmpty(seq)) {
             return INDEX_NOT_FOUND;
         }
-        return CharSequenceToolkit.lastIndexOf(seq, searchChar, seq.length());
+        return CharSeToolkit.lastIndexOf(seq, searchChar, seq.length());
     }
 
     /**
@@ -2279,7 +2279,7 @@ public abstract class StringToolkit  {
         if (isEmpty(seq)) {
             return INDEX_NOT_FOUND;
         }
-        return CharSequenceToolkit.lastIndexOf(seq, searchChar, startPos);
+        return CharSeToolkit.lastIndexOf(seq, searchChar, startPos);
     }
 
     /**
@@ -2309,7 +2309,7 @@ public abstract class StringToolkit  {
         if (seq == null || searchSeq == null) {
             return INDEX_NOT_FOUND;
         }
-        return CharSequenceToolkit.lastIndexOf(seq, searchSeq, seq.length());
+        return CharSeToolkit.lastIndexOf(seq, searchSeq, seq.length());
     }
 
     /**
@@ -2390,7 +2390,7 @@ public abstract class StringToolkit  {
         if (seq == null || searchSeq == null) {
             return INDEX_NOT_FOUND;
         }
-        return CharSequenceToolkit.lastIndexOf(seq, searchSeq, startPos);
+        return CharSeToolkit.lastIndexOf(seq, searchSeq, startPos);
     }
 
     /**
@@ -2470,7 +2470,7 @@ public abstract class StringToolkit  {
         }
 
         for (int i = startPos; i >= 0; i--) {
-            if (CharSequenceToolkit.regionMatches(str, true, i, searchStr, 0, searchStr.length())) {
+            if (CharSeToolkit.regionMatches(str, true, i, searchStr, 0, searchStr.length())) {
                 return i;
             }
         }
@@ -2503,7 +2503,7 @@ public abstract class StringToolkit  {
         if (isEmpty(seq)) {
             return false;
         }
-        return CharSequenceToolkit.indexOf(seq, searchChar, 0) >= 0;
+        return CharSeToolkit.indexOf(seq, searchChar, 0) >= 0;
     }
 
     /**
@@ -2532,7 +2532,7 @@ public abstract class StringToolkit  {
         if (seq == null || searchSeq == null) {
             return false;
         }
-        return CharSequenceToolkit.indexOf(seq, searchSeq, 0) >= 0;
+        return CharSeToolkit.indexOf(seq, searchSeq, 0) >= 0;
     }
 
     /**
@@ -2566,7 +2566,7 @@ public abstract class StringToolkit  {
         final int len = searchStr.length();
         final int max = str.length() - len;
         for (int i = 0; i <= max; i++) {
-            if (CharSequenceToolkit.regionMatches(str, true, i, searchStr, 0, len)) {
+            if (CharSeToolkit.regionMatches(str, true, i, searchStr, 0, len)) {
                 return true;
             }
         }
@@ -2581,7 +2581,7 @@ public abstract class StringToolkit  {
      * @see Character#isWhitespace
      * @since 3.0
      */
-    // From org.springframework.util.StringToolkit, under Apache License 2.0
+    // From StringToolkit, under Apache License 2.0
     public static boolean containsWhitespace(final CharSequence seq) {
         if (isEmpty(seq)) {
             return false;
@@ -2764,7 +2764,7 @@ public abstract class StringToolkit  {
         if (searchChars == null) {
             return false;
         }
-        return containsAny(cs, CharSequenceToolkit.toCharArray(searchChars));
+        return containsAny(cs, CharSeToolkit.toCharArray(searchChars));
     }
 
     /**
@@ -2885,10 +2885,10 @@ public abstract class StringToolkit  {
         final int strLen = seq.length();
         for (int i = 0; i < strLen; i++) {
             final char ch = seq.charAt(i);
-            final boolean chFound = CharSequenceToolkit.indexOf(searchChars, ch, 0) >= 0;
+            final boolean chFound = CharSeToolkit.indexOf(searchChars, ch, 0) >= 0;
             if (i + 1 < strLen && Character.isHighSurrogate(ch)) {
                 final char ch2 = seq.charAt(i + 1);
-                if (chFound && CharSequenceToolkit.indexOf(searchChars, ch2, 0) < 0) {
+                if (chFound && CharSeToolkit.indexOf(searchChars, ch2, 0) < 0) {
                     return i;
                 }
             } else {
@@ -3097,7 +3097,7 @@ public abstract class StringToolkit  {
             if (search == null) {
                 continue;
             }
-            tmp = CharSequenceToolkit.indexOf(str, search, 0);
+            tmp = CharSeToolkit.indexOf(str, search, 0);
             if (tmp == INDEX_NOT_FOUND) {
                 continue;
             }
@@ -3148,7 +3148,7 @@ public abstract class StringToolkit  {
             if (search == null) {
                 continue;
             }
-            tmp = CharSequenceToolkit.lastIndexOf(str, search, str.length());
+            tmp = CharSeToolkit.lastIndexOf(str, search, str.length());
             if (tmp > ret) {
                 ret = tmp;
             }
@@ -5578,7 +5578,7 @@ public abstract class StringToolkit  {
      * @since 3.2
      */
     public static String removePattern(final String source, final String regex) {
-        return replacePattern(source, regex, StringToolkit.EMPTY);
+        return replacePattern(source, regex, StrToolkit.EMPTY);
     }
 
     /**
@@ -6760,7 +6760,7 @@ public abstract class StringToolkit  {
      * @return the changed String, {@code null} if null String input
      */
     public static String swapCase(final String str) {
-        if (StringToolkit.isEmpty(str)) {
+        if (StrToolkit.isEmpty(str)) {
             return str;
         }
 
@@ -6807,7 +6807,7 @@ public abstract class StringToolkit  {
         }
         int count = 0;
         int idx = 0;
-        while ((idx = CharSequenceToolkit.indexOf(str, sub, idx)) != INDEX_NOT_FOUND) {
+        while ((idx = CharSeToolkit.indexOf(str, sub, idx)) != INDEX_NOT_FOUND) {
             count++;
             idx += sub.length();
         }
@@ -8250,7 +8250,7 @@ public abstract class StringToolkit  {
         if (prefix.length() > str.length()) {
             return false;
         }
-        return CharSequenceToolkit.regionMatches(str, ignoreCase, 0, prefix, 0, prefix.length());
+        return CharSeToolkit.regionMatches(str, ignoreCase, 0, prefix, 0, prefix.length());
     }
 
     /**
@@ -8360,7 +8360,7 @@ public abstract class StringToolkit  {
             return false;
         }
         final int strOffset = str.length() - suffix.length();
-        return CharSequenceToolkit.regionMatches(str, ignoreCase, strOffset, suffix, 0, suffix.length());
+        return CharSeToolkit.regionMatches(str, ignoreCase, strOffset, suffix, 0, suffix.length());
     }
 
     /**

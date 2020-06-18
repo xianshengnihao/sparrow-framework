@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * created  on 2018/4/18.
  */
+@Deprecated
 public abstract class TimeUtils {
 
     public static final String CHINA_ZONE = "+08:00";

@@ -70,6 +70,9 @@ public interface StrPool {
     String HTML_QUOTE = "&quot;";
     String HTML_LT = "&lt;";
     String HTML_GT = "&gt;";
+    String TAB_C = "	";
+    String EMPTY_JSON = "{}";
+
 
     // ---------------------------------------------------------------- array
 

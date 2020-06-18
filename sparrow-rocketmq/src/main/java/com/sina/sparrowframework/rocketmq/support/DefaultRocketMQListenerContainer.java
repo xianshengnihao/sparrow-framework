@@ -8,6 +8,7 @@ import com.sina.sparrowframework.rocketmq.annotation.RocketMQMessageListener;
 import com.sina.sparrowframework.rocketmq.annotation.SelectorType;
 import com.sina.sparrowframework.rocketmq.core.RocketMQListener;
 import com.sina.sparrowframework.rocketmq.core.RocketMQPushConsumerLifecycleListener;
+import com.sina.sparrowframework.tools.utility.Assert;
 import org.apache.rocketmq.client.AccessChannel;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.MessageSelector;
@@ -24,7 +25,6 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.SmartLifecycle;
-import org.springframework.util.Assert;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;

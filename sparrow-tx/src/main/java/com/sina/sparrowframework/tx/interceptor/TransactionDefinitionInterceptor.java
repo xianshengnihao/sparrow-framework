@@ -1,5 +1,6 @@
 package com.sina.sparrowframework.tx.interceptor;
 
+import com.sina.sparrowframework.tools.utility.Assert;
 import com.sina.sparrowframework.tx.holder.TransactionDefinitionHolder;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
@@ -14,7 +15,6 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.interceptor.TransactionAttributeSource;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
-import org.springframework.util.Assert;
 
 
 /**

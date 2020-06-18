@@ -328,7 +328,7 @@ public class IdcardUtil {
 	 * </p>
 	 */
 	public static String[] isValidCard10(String idCard) {
-		if (StringToolkit.isBlank(idCard)) {
+		if (StrToolkit.isBlank(idCard)) {
 			return null;
 		}
 		String[] info = new String[3];
@@ -369,7 +369,7 @@ public class IdcardUtil {
 	 * @return 验证码是否符合
 	 */
 	public static boolean isValidTWCard(String idCard) {
-		if (StringToolkit.isEmpty(idCard)) {
+		if (StrToolkit.isEmpty(idCard)) {
 			return false;
 		}
 		String start = idCard.substring(0, 1);
@@ -587,11 +587,11 @@ public class IdcardUtil {
 	 * @param startInclude 开始位置（包含）
 	 * @param endExclude   结束位置（不包含）
 	 * @return 隐藏后的身份证号码
-	 * @see StringToolkit#hide(CharSequence, int, int)
+	 * @see StrToolkit#hide(CharSequence, int, int)
 	 * @since 3.2.2
 	 */
 	public static String hide(String idCard, int startInclude, int endExclude) {
-		return StringToolkit.hide(idCard, startInclude, endExclude);
+		return StrToolkit.hide(idCard, startInclude, endExclude);
 	}
 
 	// ----------------------------------------------------------------------------------- Private method start

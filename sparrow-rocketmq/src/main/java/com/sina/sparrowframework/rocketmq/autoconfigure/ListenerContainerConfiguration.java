@@ -6,8 +6,9 @@ import com.sina.sparrowframework.rocketmq.annotation.MessageModel;
 import com.sina.sparrowframework.rocketmq.annotation.RocketMQMessageListener;
 import com.sina.sparrowframework.rocketmq.core.RocketMQListener;
 import com.sina.sparrowframework.rocketmq.support.DefaultRocketMQListenerContainer;
+import com.sina.sparrowframework.tools.utility.Assert;
 import com.sina.sparrowframework.tools.utility.StrPool;
-import com.sina.sparrowframework.tools.utility.StringToolkit;
+import com.sina.sparrowframework.tools.utility.StrToolkit;
 import org.apache.rocketmq.client.AccessChannel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,8 +22,6 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.core.env.StandardEnvironment;
-import org.springframework.util.Assert;
-import org.springframework.util.StringUtils;
 
 import java.util.Map;
 import java.util.Objects;
@@ -102,10 +101,10 @@ public class ListenerContainerConfiguration implements ApplicationContextAware, 
         DefaultRocketMQListenerContainer container = new DefaultRocketMQListenerContainer();
 
         String nameServer = environment.resolvePlaceholders(annotation.nameServer());
-        nameServer = StringUtils.isEmpty(nameServer) ? rocketMQProperties.getNameServer() : nameServer;
+        nameServer = StrToolkit.isEmpty(nameServer) ? rocketMQProperties.getNameServer() : nameServer;
         String accessChannel = environment.resolvePlaceholders(annotation.accessChannel());
         container.setNameServer(nameServer);
-        if (!StringUtils.isEmpty(accessChannel)) {
+        if (!StrToolkit.isEmpty(accessChannel)) {
             container.setAccessChannel(AccessChannel.valueOf(accessChannel));
         }
         container.setTopic(environment.resolvePlaceholders(annotation.topic()));
@@ -135,7 +134,7 @@ public class ListenerContainerConfiguration implements ApplicationContextAware, 
         Assert.notNull(consumerGroup , "createRocketMQListenerContainer consumerGroup can not be null.");
         Assert.notNull(topic , "createRocketMQListenerContainer topic can not be null.");
         StringBuilder target = null;
-        if (StringToolkit.isNotBlank(selectorExpression) && !"*".equals(selectorExpression.trim())) {
+        if (StrToolkit.isNotBlank(selectorExpression) && !"*".equals(selectorExpression.trim())) {
             String[] tags = selectorExpression.split("\\|\\|");
             target = new StringBuilder();
             target.append(StrPool.UNDERSCORE);

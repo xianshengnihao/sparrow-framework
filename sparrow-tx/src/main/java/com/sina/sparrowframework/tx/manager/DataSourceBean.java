@@ -2,6 +2,7 @@ package com.sina.sparrowframework.tx.manager;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration;
+import com.sina.sparrowframework.tools.utility.ObjectToolkit;
 import com.sina.sparrowframework.tx.condition.*;
 import com.sina.sparrowframework.tx.helper.Constants;
 import com.sina.sparrowframework.tx.helper.STM;
@@ -19,7 +20,6 @@ import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.env.Environment;
-import org.springframework.util.ObjectUtils;
 
 import javax.sql.DataSource;
 import java.util.HashMap;
@@ -161,37 +161,37 @@ public class DataSourceBean extends BaseCondition implements EnvironmentAware, I
         dsMap.put(Constants.s0, s0);
         if (isSupportDs(env, Constants.s2)) {
             DataSource s2 = slaver2DataSource();
-            if (!ObjectUtils.isEmpty(s2)) {
+            if (!ObjectToolkit.isEmpty(s2)) {
                 dsMap.put(Constants.s2, s2);
             }
         }
         if (isSupportDs(env, Constants.s3)) {
             DataSource s3 = slaver3DataSource();
-            if (!ObjectUtils.isEmpty(s3)) {
+            if (!ObjectToolkit.isEmpty(s3)) {
                 dsMap.put(Constants.s3, s3);
             }
         }
         if (isSupportDs(env, Constants.s4)) {
             DataSource s4 = slaver4DataSource();
-            if (!ObjectUtils.isEmpty(s4)) {
+            if (!ObjectToolkit.isEmpty(s4)) {
                 dsMap.put(Constants.s4, s4);
             }
         }
         if (isSupportDs(env, Constants.s5)) {
             DataSource s5 = slaver5DataSource();
-            if (!ObjectUtils.isEmpty(s5)) {
+            if (!ObjectToolkit.isEmpty(s5)) {
                 dsMap.put(Constants.s5, s5);
             }
         }
         if (isSupportDs(env, Constants.myCat6)) {
             DataSource myCat6 = myCat6DataSource();
-            if (!ObjectUtils.isEmpty(myCat6)) {
+            if (!ObjectToolkit.isEmpty(myCat6)) {
                 dsMap.put(Constants.myCat6, myCat6);
             }
         }
         if (isSupportDs(env, Constants.s7)) {
             DataSource s7 = slaver7DataSource();
-            if (!ObjectUtils.isEmpty(s7)) {
+            if (!ObjectToolkit.isEmpty(s7)) {
                 dsMap.put(Constants.s7, s7);
             }
         }

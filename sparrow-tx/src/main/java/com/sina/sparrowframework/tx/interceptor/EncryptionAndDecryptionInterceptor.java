@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sina.sparrowframework.tools.utility.Assert;
 import com.sina.sparrowframework.tools.utility.EncryptUtil;
 import com.sina.sparrowframework.tools.utility.ObjectToolkit;
-import com.sina.sparrowframework.tools.utility.StringToolkit;
+import com.sina.sparrowframework.tools.utility.StrToolkit;
 import com.sina.sparrowframework.tx.annotation.Decryption;
 import com.sina.sparrowframework.tx.annotation.Encryption;
 import org.apache.ibatis.binding.MapperMethod;
@@ -133,7 +133,7 @@ public class EncryptionAndDecryptionInterceptor implements Interceptor {
         Method set = clazz.getMethod(SET.concat(upper) , get.getReturnType());
 
         String value = (String)get.invoke(model, null);
-        if (StringToolkit.isNotBlank(value) ){
+        if (StrToolkit.isNotBlank(value) ){
             set.invoke(model, EN == 0 ? EncryptUtil.encryptText(value) : EncryptUtil.decryptText(value));
         }
     }

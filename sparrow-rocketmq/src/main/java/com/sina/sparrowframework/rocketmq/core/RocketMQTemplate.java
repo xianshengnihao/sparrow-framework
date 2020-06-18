@@ -9,6 +9,7 @@ import com.sina.sparrowframework.rocketmq.db.LocalTransactionService;
 import com.sina.sparrowframework.rocketmq.db.MessageTransaction;
 import com.sina.sparrowframework.rocketmq.support.RocketMQUtil;
 import com.sina.sparrowframework.tools.tuple.Triple;
+import com.sina.sparrowframework.tools.utility.Assert;
 import org.apache.rocketmq.client.Validators;
 import org.apache.rocketmq.client.exception.MQBrokerException;
 import org.apache.rocketmq.client.exception.MQClientException;
@@ -36,7 +37,6 @@ import org.springframework.messaging.MessagingException;
 import org.springframework.messaging.core.AbstractMessageSendingTemplate;
 import org.springframework.messaging.core.MessagePostProcessor;
 import org.springframework.messaging.support.MessageBuilder;
-import org.springframework.util.Assert;
 import org.springframework.util.MimeTypeUtils;
 
 import java.net.UnknownHostException;

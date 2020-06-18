@@ -1,5 +1,6 @@
 package com.sina.sparrowframework.mybatis.internal;
 
+import com.sina.sparrowframework.tools.utility.Assert;
 import com.sina.sparrowframework.tools.utility.StrPool;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.BeansException;
@@ -7,7 +8,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.core.env.Environment;
-import org.springframework.util.Assert;
 
 /**
  * 基础服务类

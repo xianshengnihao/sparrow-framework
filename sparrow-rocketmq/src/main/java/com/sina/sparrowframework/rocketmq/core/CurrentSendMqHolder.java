@@ -1,6 +1,7 @@
 package com.sina.sparrowframework.rocketmq.core;
 
 import com.sina.sparrowframework.tools.tuple.Triple;
+import com.sina.sparrowframework.tools.utility.CollToolkit;
 import org.apache.rocketmq.client.producer.LocalTransactionState;
 import org.apache.rocketmq.client.producer.SendResult;
 import org.slf4j.Logger;
@@ -8,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.NamedThreadLocal;
 import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +44,7 @@ public class CurrentSendMqHolder {
 
     public static void setTriples(Triple<Boolean , SendResult, LocalTransactionState> triple) {
         List<Triple<Boolean, SendResult, LocalTransactionState>> list = getTriples();
-        if (!CollectionUtils.isEmpty(list)) {
+        if (!CollToolkit.isEmpty(list)) {
             list.add(triple);
             mqMessage.set(list);
         }else {
@@ -73,7 +73,7 @@ public class CurrentSendMqHolder {
             return;
         }
         List<Triple<Boolean, SendResult, LocalTransactionState>> triples = CurrentSendMqHolder.getTriples();
-        if (!CollectionUtils.isEmpty(triples) ) {
+        if (!CollToolkit.isEmpty(triples) ) {
             for (Triple<Boolean, SendResult, LocalTransactionState> triple : triples) {
                 if (triple.getLeft()) {
                     try {

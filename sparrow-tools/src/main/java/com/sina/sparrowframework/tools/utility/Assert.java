@@ -334,11 +334,11 @@ public abstract class Assert  {
      * <pre class="code">Assert.hasText(name, "'name' must not be empty");</pre>
      * @param text the String to check
      * @param message the exception message to use if the assertion fails
-     * @see StringToolkit#hasText
+     * @see StrToolkit#hasText
      * @throws IllegalArgumentException if the text does not contain valid text content
      */
     public static void hasText(String text, String message) {
-        if (!StringToolkit.hasText(text)) {
+        if (!StrToolkit.hasText(text)) {
             throw new IllegalArgumentException(message);
         }
     }
