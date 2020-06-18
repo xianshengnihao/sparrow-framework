@@ -9,12 +9,16 @@
         <artifactId>sparrow-framework</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
+
     <artifactId>sparrow-exception</artifactId>
+    <packaging>jar</packaging>
+    <name>${project.artifactId}</name>
 
     <dependencies>
         <dependency>
             <groupId>com.sina.sparrowframework</groupId>
             <artifactId>sparrow-tools</artifactId>
+            <version>${project.parent.version}</version>
         </dependency>
     </dependencies>
 </project>

@@ -10,5 +10,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <artifactId>sparrow-web</artifactId>
+    <name>${project.artifactId}</name>
+    <packaging>jar</packaging>
 
 </project>

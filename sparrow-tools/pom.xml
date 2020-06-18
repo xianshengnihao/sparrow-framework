@@ -9,7 +9,10 @@
         <artifactId>sparrow-framework</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
+
     <artifactId>sparrow-tools</artifactId>
+    <name>${project.artifactId}</name>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
