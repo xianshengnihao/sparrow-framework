@@ -1,18 +1,20 @@
 package com.sina.sparrowframework.tools.utility;
 
-import java.util.Arrays;
+import com.sina.sparrowframework.tools.struct.CodeEnum;
+
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Map;
 
 /**
  * created  on 2019-03-13.
  * @see KeyUtils
  */
-public enum KeyType {
+public enum KeyType implements CodeEnum {
 
-    AES(100, "AES", Arrays.asList(128) )
+    AES(100, "AES", ArrayUtils.asSet(128) )
 
-   ;
+    ;
 
 
     private final int code;
@@ -21,16 +23,28 @@ public enum KeyType {
 
     private final Collection<Integer> keySizes;
 
-    KeyType(int code,  String display, Collection<Integer> keySizes) {
+    private static final Map<Integer, KeyType> CODE_MAP = CodeEnum.createCodeMap(KeyType.class);
+
+    public static KeyType resolve(int code) {
+        return CODE_MAP.get(code);
+    }
+
+    KeyType(int code, String display, Collection<Integer> keySizes) {
+        Assert.assertNotNull(display,"Display can not be null");
+        Assert.assertTrue(keySizes != null && keySizes.size() > 0,"KeySizes can not be null");
         this.code = code;
         this.display = display;
         this.keySizes = Collections.unmodifiableCollection(keySizes);
     }
 
-    public int getCode() {
+    @Override
+    public int code() {
         return code;
     }
 
-    public String getDisplay() {
+    @Override
+    public String display() {
         return display;
-    }}
+    }
+
+}

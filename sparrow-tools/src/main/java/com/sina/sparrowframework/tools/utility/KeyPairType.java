@@ -1,7 +1,5 @@
 package com.sina.sparrowframework.tools.utility;
 
-import org.springframework.lang.NonNull;
-
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;

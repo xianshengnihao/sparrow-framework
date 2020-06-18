@@ -13,4 +13,11 @@
     <name>${project.artifactId}</name>
     <packaging>jar</packaging>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.sina.sparrowframework</groupId>
+            <artifactId>sparrow-tx</artifactId>
+        </dependency>
+    </dependencies>
+
 </project>

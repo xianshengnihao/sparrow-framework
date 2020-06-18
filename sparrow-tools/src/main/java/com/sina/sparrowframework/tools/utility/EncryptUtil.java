@@ -1,8 +1,6 @@
 package com.sina.sparrowframework.tools.utility;
 
 
-import org.springframework.util.StringUtils;
-
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.security.Key;
@@ -99,7 +97,7 @@ public class EncryptUtil {
      * @return
      */
     public static String desensitizationName(String name) {
-        if (StringUtils.isEmpty(name)) {
+        if (StringToolkit.isEmpty(name)) {
             return name;
         }
         char[] chars = name.toCharArray();

@@ -157,7 +157,7 @@ public abstract class KeyUtils {
     }
 
     public static Key createKey(KeyType type, int keySize) throws Exception {
-        KeyGenerator keyGenerator = KeyGenerator.getInstance(type.getDisplay());
+        KeyGenerator keyGenerator = KeyGenerator.getInstance(type.display());
         keyGenerator.init(keySize);
         return keyGenerator.generateKey();
     }
@@ -180,7 +180,7 @@ public abstract class KeyUtils {
 
         switch (type) {
             case AES:
-                spec = new SecretKeySpec(encoded, type.getDisplay());
+                spec = new SecretKeySpec(encoded, type.display());
                 break;
             default:
                 throw new IllegalArgumentException(String.format("KeyAlgorithm[%s] unknown", type));

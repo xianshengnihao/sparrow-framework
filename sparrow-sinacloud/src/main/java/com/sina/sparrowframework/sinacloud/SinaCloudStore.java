@@ -712,7 +712,7 @@ public final class SinaCloudStore implements CloudStore, EnvironmentAware {
 
             t.setMediaType(getMediaType(meta, clazz))
                     .setAcceptMode(getAcceptMode(metaMap))
-                    .setCache(Boolean.valueOf(metaMap.get(META_CACHE)))
+                    .setCache(Boolean.parseBoolean(metaMap.get(META_CACHE)))
 
                     .setExpiredTime(expiredTime)
                     .setLength(meta.getContentLength())

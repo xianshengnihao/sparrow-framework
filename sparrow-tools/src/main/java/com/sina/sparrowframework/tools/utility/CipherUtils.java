@@ -4,7 +4,6 @@ package com.sina.sparrowframework.tools.utility;
 import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.io.Resource;
 
 import javax.crypto.Cipher;
 import java.io.File;
@@ -80,27 +79,27 @@ public abstract class CipherUtils {
     }
 
 
-    public static void decrypt(Key key, Algorithm algorithm, Resource inResource, File file)
+    public static void decrypt(Key key, Algorithm algorithm, InputStream in, File file)
             throws Exception{
 
-        decrypt(key, algorithm, inResource,new FileOutputStream( file ) );
+        decrypt(key, algorithm, in,new FileOutputStream( file ) );
     }
 
-    public static void decrypt(Key key, Algorithm algorithm, Resource inResource, OutputStream outputStream)
+    public static void decrypt(Key key, Algorithm algorithm, InputStream in, OutputStream outputStream)
             throws Exception{
 
         Cipher cipher = Cipher.getInstance( algorithm.algorithm );
         cipher.init( Cipher.DECRYPT_MODE, key );
 
-        copyStreamWithCipher(inResource.getInputStream(),outputStream,cipher);
+        copyStreamWithCipher(in,outputStream,cipher);
     }
 
-    public static File decrypt(Key key, Algorithm algorithm, Resource inResource)throws Exception{
+    public static File decrypt(Key key, Algorithm algorithm, InputStream in)throws Exception{
         File file = new File( System.getProperty( "java.io.tmpdir" ) , UUID.randomUUID().toString() );
         if(!file.exists() && file.createNewFile()){
-            LOG.info( "创建临时文件,",file.getAbsolutePath() );
+            LOG.info( "创建临时文件,{}",file.getAbsolutePath() );
         }
-        decrypt(key, algorithm, inResource, new FileOutputStream( file ) );
+        decrypt(key, algorithm, in, new FileOutputStream( file ) );
         return file;
     }
 
@@ -195,26 +194,26 @@ public abstract class CipherUtils {
     }
 
 
-    public static void encrypt(Key key, Algorithm algorithm, Resource inResource, OutputStream outputStream)
+    public static void encrypt(Key key, Algorithm algorithm, InputStream in, OutputStream outputStream)
             throws Exception{
 
         Cipher cipher = Cipher.getInstance( algorithm.algorithm );
         cipher.init( Cipher.ENCRYPT_MODE, key );
 
-        copyStreamWithCipher(inResource.getInputStream(),outputStream,cipher);
+        copyStreamWithCipher(in,outputStream,cipher);
     }
 
-    public static void encrypt(Key key, Algorithm algorithm, Resource inResource, File file)
+    public static void encrypt(Key key, Algorithm algorithm, InputStream in, File file)
             throws Exception{
-        encrypt(key, algorithm, inResource, new FileOutputStream( file ) );
+        encrypt(key, algorithm, in, new FileOutputStream( file ) );
     }
 
-    public static File encrypt(Key key, Algorithm algorithm, Resource inResource)throws Exception{
+    public static File encrypt(Key key, Algorithm algorithm, InputStream in)throws Exception{
         File file = new File( System.getProperty( "java.io.tmpdir" ) , UUID.randomUUID().toString() );
         if(!file.exists() && file.createNewFile()){
-            LOG.info( "创建临时文件,",file.getAbsolutePath() );
+            LOG.info( "创建临时文件,{}",file.getAbsolutePath() );
         }
-        encrypt(key, algorithm, inResource, new FileOutputStream( file ) );
+        encrypt(key, algorithm, in, new FileOutputStream( file ) );
         return file;
     }
 
