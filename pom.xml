@@ -29,6 +29,7 @@
         <module>sparrow-extra</module>
         <module>sparrow-distId</module>
         <module>sparrow-poi</module>
+        <module>sparrow-distribute</module>
     </modules>
 
     <properties>
@@ -103,7 +104,17 @@
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
+                <artifactId>sparrow-distId</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>sparrow-poi</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>sparrow-distribute</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -182,31 +193,4 @@
             </plugin>
         </plugins>
     </build>
-
-
-    <!-- 自动打包 -->
-    <distributionManagement>
-        <snapshotRepository>
-            <id>Snapshots</id>
-            <url>http://10.41.22.57:8081/nexus/content/repositories/snapshots</url>
-        </snapshotRepository>
-        <repository>
-            <id>Releases</id>
-            <url>http://10.41.22.57:8081/nexus/content/repositories/releases</url>
-        </repository>
-    </distributionManagement>
-
-
-    <repositories>
-        <repository>
-            <id>sina_finance</id>
-            <url>http://10.41.22.57:8081/nexus/content/groups/public/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
 </project>
