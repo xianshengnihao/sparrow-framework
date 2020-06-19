@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Map;
+import java.util.function.Supplier;
 
 /**
  * <p></p>
@@ -343,10 +344,31 @@ public abstract class Assert  {
         }
     }
 
+    /**
+     * Assert that an object is not {@code null}.
+     * <pre class="code">
+     * Assert.notNull(clazz, () -&gt; "The class '" + clazz.getName() + "' must not be null");
+     * </pre>
+     * @param object the object to check
+     * @param messageSupplier a supplier for the exception message to use if the
+     * assertion fails
+     * @throws IllegalArgumentException if the object is {@code null}
+     * @since 5.0
+     */
+    public static void notNull(Object object, Supplier<String> messageSupplier) {
+        if (object == null) {
+            throw new IllegalArgumentException(nullSafeGet(messageSupplier));
+        }
+    }
+
 
     private static void throwIllegalArgumentException(String format, Object... args) {
         String text = args == null ? format : String.format(format, args);
         throw new IllegalArgumentException(text);
+    }
+
+    private static String nullSafeGet(Supplier<String> messageSupplier) {
+        return (messageSupplier != null ? messageSupplier.get() : null);
     }
 
 }

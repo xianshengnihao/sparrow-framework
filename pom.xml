@@ -27,6 +27,7 @@
         <module>sparrow-constants</module>
         <module>sparrow-metadata</module>
         <module>sparrow-extra</module>
+        <module>sparrow-poi</module>
     </modules>
 
     <properties>
@@ -97,6 +98,11 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>sparrowframework-all</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>sparrow-poi</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
