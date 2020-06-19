@@ -27,6 +27,7 @@
         <module>sparrow-constants</module>
         <module>sparrow-metadata</module>
         <module>sparrow-extra</module>
+        <module>sparrow-distId</module>
         <module>sparrow-poi</module>
     </modules>
 
