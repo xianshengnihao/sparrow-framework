@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.sina.tasty</groupId>
         <artifactId>tasty-dependencies</artifactId>
-        <version>1.0.1</version>
+        <version>1.0.1-SNAPSHOT</version>
     </parent>
 
     <groupId>com.sina.sparrowframework</groupId>
@@ -30,6 +30,7 @@
         <module>sparrow-distId</module>
         <module>sparrow-poi</module>
         <module>sparrow-distribute-lock</module>
+        <module>sparrow-xxl-job</module>
     </modules>
 
     <properties>
@@ -115,6 +116,11 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>sparrow-distribute-lock</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>sparrow-xxl-job</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
