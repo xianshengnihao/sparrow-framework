@@ -34,7 +34,7 @@ public class SparrowEnumTypeHandler<E extends Enum<?>> extends BaseTypeHandler<E
 
     private Invoker invoker;
 
-    private static final String name = "value";
+    private static final String name = "code";
 
     public SparrowEnumTypeHandler(Class<E> type) {
         if (type == null) {

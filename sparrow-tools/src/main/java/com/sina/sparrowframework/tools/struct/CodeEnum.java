@@ -11,16 +11,12 @@ import java.util.Map;
  * 在 mybatis 中使用时,请注意在 在语句中加上
  * <ol>
  * <li>javaType=你的枚举类全称</li>
- * <li>{@code typeHandler=com.yinker.base.mybatis.handler.EnumCodePropertyTypeHandler}</li>
+ * <li>{@code typeHandler=com.sina.sparrowframework.mybatis.typehandler.SparrowEnumTypeHandler}</li>
  * <li></li>
  * </ol>
  * ,否则将出错.
  * 尤其是 update 和 delete 语句,因为 select 可用 resultMap 返回,insert 可使用 实体作为 parameterType
  * </p>
- * created  on 12/03/2018.
- */
-/*
- not java doc
  */
 public interface CodeEnum extends Compare<CodeEnum> {
 
