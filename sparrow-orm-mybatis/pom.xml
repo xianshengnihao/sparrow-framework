@@ -24,6 +24,10 @@
             <optional>true</optional>
             <version>${mybatis-plus.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.sina.sparrowframework</groupId>
+            <artifactId>sparrow-distId</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
