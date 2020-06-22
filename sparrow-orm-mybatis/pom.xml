@@ -18,6 +18,12 @@
             <groupId>com.sina.sparrowframework</groupId>
             <artifactId>sparrow-tx</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-extension</artifactId>
+            <optional>true</optional>
+            <version>${mybatis-plus.version}</version>
+        </dependency>
     </dependencies>
 
 </project>
