@@ -851,4 +851,18 @@ public abstract class ReflectionUtils {
     public static final MethodFilter USER_DECLARED_METHODS =
             (method -> (!method.isBridge() && !method.isSynthetic() && method.getDeclaringClass() != Object.class));
 
+    /**
+     * @return public 修饰的 getter 方法则返回 true
+     */
+    public static boolean isGetter(Method method) {
+        String name = method.getName();
+        return Modifier.isPublic( method.getModifiers() )
+                && !Modifier.isStatic( method.getModifiers() )
+                && name.startsWith( "get" )
+                && !name.equals( "getClass" )
+                && name.length() > 3
+                && Character.isUpperCase( name.charAt( 3 ) )
+                && method.getParameterTypes().length == 0;
+    }
+
 }
