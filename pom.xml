@@ -31,6 +31,7 @@
         <module>sparrow-poi</module>
         <module>sparrow-distribute-lock</module>
         <module>sparrow-xxl-job</module>
+        <module>sparrow-template</module>
     </modules>
 
     <properties>
@@ -121,6 +122,11 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>sparrow-xxl-job</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>sparrow-template</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
