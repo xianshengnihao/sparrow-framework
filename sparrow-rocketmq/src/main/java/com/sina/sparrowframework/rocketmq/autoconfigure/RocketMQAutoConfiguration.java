@@ -1,6 +1,5 @@
 package com.sina.sparrowframework.rocketmq.autoconfigure;
 
-import com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sina.sparrowframework.rocketmq.config.RocketMQConfigUtils;
 import com.sina.sparrowframework.rocketmq.config.RocketMQTransactionAnnotationProcessor;
@@ -8,7 +7,6 @@ import com.sina.sparrowframework.rocketmq.config.TransactionHandlerRegistry;
 import com.sina.sparrowframework.rocketmq.core.RocketMQTemplate;
 import com.sina.sparrowframework.tools.utility.Assert;
 import com.sina.sparrowframework.tools.utility.StrToolkit;
-import com.sina.sparrowframework.tx.manager.DataSourceBean;
 import org.apache.rocketmq.acl.common.AclClientRPCHook;
 import org.apache.rocketmq.acl.common.SessionCredentials;
 import org.apache.rocketmq.client.AccessChannel;
@@ -40,7 +38,7 @@ import javax.annotation.PostConstruct;
 @ConditionalOnClass({ MQAdmin.class, ObjectMapper.class })
 @ConditionalOnProperty(prefix = "rocketmq", value = "name-server", matchIfMissing = true)
 @Import({ ListenerContainerConfiguration.class, ExtProducerResetConfiguration.class })
-@AutoConfigureAfter({JacksonAutoConfiguration.class, MybatisPlusAutoConfiguration.class})
+@AutoConfigureAfter(JacksonAutoConfiguration.class)
 public class RocketMQAutoConfiguration {
     private static final Logger log = LoggerFactory.getLogger(RocketMQAutoConfiguration.class);
 
