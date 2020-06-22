@@ -55,6 +55,16 @@
             <artifactId>sparrow-web</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>sparrow-test</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>sparrow-xxl-job</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
 </project>
