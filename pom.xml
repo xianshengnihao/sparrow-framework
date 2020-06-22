@@ -32,6 +32,7 @@
         <module>sparrow-distribute-lock</module>
         <module>sparrow-xxl-job</module>
         <module>sparrow-template</module>
+        <module>sparrow-test</module>
     </modules>
 
     <properties>
