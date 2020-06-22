@@ -1,4 +1,4 @@
-package com.sina.sparrowframework.distribute;
+package com.sina.sparrowframework.lock;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 

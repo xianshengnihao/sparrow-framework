@@ -1,4 +1,4 @@
-package com.sina.sparrowframework.distribute;
+package com.sina.sparrowframework.lock;
 
 
 import com.sina.sparrowframework.tools.struct.ResultCode;

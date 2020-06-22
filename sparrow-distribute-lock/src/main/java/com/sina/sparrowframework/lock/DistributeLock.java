@@ -1,4 +1,4 @@
-package com.sina.sparrowframework.distribute;
+package com.sina.sparrowframework.lock;
 
 /**
  * 分布式锁

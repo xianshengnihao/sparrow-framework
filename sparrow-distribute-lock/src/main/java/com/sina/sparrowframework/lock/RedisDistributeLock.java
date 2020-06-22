@@ -1,4 +1,4 @@
-package com.sina.sparrowframework.distribute;
+package com.sina.sparrowframework.lock;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

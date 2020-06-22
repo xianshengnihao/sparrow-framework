@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>sparrow-distribute</artifactId>
+    <artifactId>sparrow-distribute-lock</artifactId>
 
     <dependencies>
         <dependency>
