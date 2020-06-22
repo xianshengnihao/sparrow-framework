@@ -8,16 +8,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class TransactionProperties {
 
     private Boolean enabled;
-    private Boolean rocketMq;
-
-    public Boolean getRocketMq() {
-        return rocketMq;
-    }
-
-    public void setRocketMq(Boolean rocketMq) {
-        this.rocketMq = rocketMq;
-    }
-
     public Boolean getEnabled() {
         return enabled;
     }
