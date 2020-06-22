@@ -20,8 +20,7 @@ public class LocalTransactionService extends BaseServiceImpl<LocalTransactionMap
     public boolean exist(String transactionId){
         LambdaQueryWrapper<MessageTransaction> wrapper = Wrappers.lambdaQuery();
         wrapper.eq(MessageTransaction::getTransactionId, transactionId);
-        MessageTransaction entity = baseMapper.selectOne(wrapper);
-        return entity != null;
+        return null != baseMapper.selectOne(wrapper);
     }
 
 }

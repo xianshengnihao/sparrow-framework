@@ -9,11 +9,14 @@ import com.sina.sparrowframework.tx.helper.STM;
 import com.sina.sparrowframework.tx.holder.EnvironmentHolder;
 import com.sina.sparrowframework.tx.interceptor.TransactionDefinitionInterceptor;
 import com.sina.sparrowframework.tx.router.MyRoutingDataSource;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.aop.aspectj.AspectJExpressionPointcut;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
@@ -32,6 +35,7 @@ import java.util.Map;
  */
 @Configuration
 @AutoConfigureBefore(MybatisPlusAutoConfiguration.class)
+@ConditionalOnClass({SqlSessionFactory.class, SqlSessionFactoryBean.class})
 public class DataSourceBean extends BaseCondition implements EnvironmentAware, InitializingBean, STM {
     private Environment env;
 
@@ -264,3 +268,6 @@ public class DataSourceBean extends BaseCondition implements EnvironmentAware, I
 
 
 }
+
+
+

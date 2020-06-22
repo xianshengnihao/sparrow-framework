@@ -11,8 +11,6 @@ import java.util.List;
  * <p>
  *
  * </p>
- *
- * @author tianye6
  * @date 2019/11/20 13:59
  */
 abstract public class BaseCondition{
