@@ -17,6 +17,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
@@ -35,6 +36,7 @@ import java.util.Map;
  */
 @Configuration
 @AutoConfigureBefore(MybatisPlusAutoConfiguration.class)
+@ConditionalOnProperty(prefix = "sparrowframework.trasaction",name = "enable",havingValue = "true",matchIfMissing = true)
 @ConditionalOnClass({SqlSessionFactory.class, SqlSessionFactoryBean.class})
 public class DataSourceBean extends BaseCondition implements EnvironmentAware, InitializingBean, STM {
     private Environment env;

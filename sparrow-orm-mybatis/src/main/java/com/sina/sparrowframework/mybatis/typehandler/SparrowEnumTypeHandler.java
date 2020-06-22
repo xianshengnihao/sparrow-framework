@@ -11,6 +11,7 @@ import org.apache.ibatis.logging.LogFactory;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.annotation.MapperScan;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -51,7 +52,7 @@ public class SparrowEnumTypeHandler<E extends Enum<?>> extends BaseTypeHandler<E
         this.type = type;
         if (CodeEnum.class.isAssignableFrom(type)) {
             try {
-                this.method = type.getMethod("getCode");
+                this.method = type.getMethod("code");
             } catch (NoSuchMethodException e) {
                 throw new IllegalArgumentException(String.format("NoSuchMethod getValue() in Class: %s.", type.getName()));
             }
