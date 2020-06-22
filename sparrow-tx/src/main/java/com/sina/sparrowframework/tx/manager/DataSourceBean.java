@@ -36,7 +36,7 @@ import java.util.Map;
  */
 @Configuration
 @AutoConfigureBefore(MybatisPlusAutoConfiguration.class)
-@ConditionalOnProperty(prefix = "sparrowframework.trasaction",name = "enable",havingValue = "true",matchIfMissing = true)
+@ConditionalOnProperty(prefix = "sparrowframework.transaction",name = "enable",havingValue = "true",matchIfMissing = true)
 @ConditionalOnClass({SqlSessionFactory.class, SqlSessionFactoryBean.class})
 public class DataSourceBean extends BaseCondition implements EnvironmentAware, InitializingBean, STM {
     private Environment env;

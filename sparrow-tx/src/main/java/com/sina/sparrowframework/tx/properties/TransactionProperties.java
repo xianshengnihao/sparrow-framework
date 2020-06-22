@@ -4,7 +4,7 @@ package com.sina.sparrowframework.tx.properties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 
-@ConfigurationProperties(prefix = "sparrow.transaction")
+@ConfigurationProperties(prefix = "sparrowframework.transaction")
 public class TransactionProperties {
 
     private Boolean enabled;
