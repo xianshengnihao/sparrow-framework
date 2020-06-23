@@ -1,0 +1,10 @@
+{
+  "properties": [
+    {
+      "defaultValue": true,
+      "name": "sparrow.transaction.enabled",
+      "description": "是否开启数据源",
+      "type": "java.lang.Boolean"
+    }
+  ]
+}

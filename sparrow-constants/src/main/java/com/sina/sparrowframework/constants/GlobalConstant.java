@@ -216,6 +216,12 @@ public interface GlobalConstant extends StrPool {
     /**
      * h5端请求日志过滤
      */
-    public static final String ROC_LOG_FILTER_URI_LIST = "roc.log.filter.uri.list";
+    String ROC_LOG_FILTER_URI_LIST = "roc.log.filter.uri.list";
 
+    //scan package
+    String SP_SPARROWFRAMEWORK = "com.sina.sparrowframework";
+
+    String SP_SPARROW = "com.sina.sparrow";
+
+    String SP_BASE = "com.sina";
 }
