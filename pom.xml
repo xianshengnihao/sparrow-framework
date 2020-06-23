@@ -29,7 +29,7 @@
         <module>sparrow-extra</module>
         <module>sparrow-distId</module>
         <module>sparrow-poi</module>
-        <module>sparrow-distribute-lock</module>
+        <module>sparrow-distLock</module>
         <module>sparrow-xxl-job</module>
         <module>sparrow-template</module>
         <module>sparrow-test</module>
