@@ -3,6 +3,7 @@ package com.sina.sparrowframework.rocketmq.db;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.sina.sparrowframework.mybatis.internal.BaseServiceImpl;
+import com.sina.sparrowframework.rocketmq.db.mapper.LocalTransactionMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;

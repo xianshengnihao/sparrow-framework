@@ -224,4 +224,6 @@ public interface GlobalConstant extends StrPool {
     String SP_SPARROW = "com.sina.sparrow";
 
     String SP_BASE = "com.sina";
+
+    String SP_BASE_MAPPER = "com.sina.sparrowframework.rocketmq.db.mapper";
 }

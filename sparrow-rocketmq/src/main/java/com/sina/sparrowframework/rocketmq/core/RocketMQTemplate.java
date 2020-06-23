@@ -37,6 +37,7 @@ import org.springframework.messaging.MessagingException;
 import org.springframework.messaging.core.AbstractMessageSendingTemplate;
 import org.springframework.messaging.core.MessagePostProcessor;
 import org.springframework.messaging.support.MessageBuilder;
+import org.springframework.stereotype.Component;
 import org.springframework.util.MimeTypeUtils;
 
 import java.net.UnknownHostException;
@@ -48,6 +49,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 
 @SuppressWarnings({"WeakerAccess", "unused"})
+//@Component
 public class RocketMQTemplate extends AbstractMessageSendingTemplate<String> implements InitializingBean, DisposableBean , EnvironmentAware {
     private static final  Logger log = LoggerFactory.getLogger(RocketMQTemplate.class);
 

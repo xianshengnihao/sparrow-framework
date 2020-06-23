@@ -1,2 +1,2 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.sina.sparrowframework.tx.manager.DataSourceAutoConfiguation
+#org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+#  com.sina.sparrowframework.tx.manager.DataSourceConfiguation

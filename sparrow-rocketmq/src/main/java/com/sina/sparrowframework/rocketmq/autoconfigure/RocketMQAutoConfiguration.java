@@ -1,5 +1,6 @@
 package com.sina.sparrowframework.rocketmq.autoconfigure;
 
+import com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sina.sparrowframework.rocketmq.config.RocketMQConfigUtils;
 import com.sina.sparrowframework.rocketmq.config.RocketMQTransactionAnnotationProcessor;
