@@ -6,7 +6,7 @@ package com.sina.sparrowframework.tools.struct;
  *
  * @see Comparable
  */
-public enum CompareResult implements Compare.Comparer, CodeEnum {
+public enum CompareResult implements Compare.Comparer {
 
     EQUAL(0, "equals") {
         @Override
@@ -113,12 +113,10 @@ public enum CompareResult implements Compare.Comparer, CodeEnum {
         this.display = display;
     }
 
-    @Override
     public int code() {
         return code;
     }
 
-    @Override
     public String display() {
         return display;
     }

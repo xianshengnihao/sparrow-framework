@@ -3,6 +3,8 @@ package com.sina.sparrowframework.tools.struct;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 所有要持久化的枚举的基接口.
@@ -19,6 +21,9 @@ import java.util.Map;
  * </p>
  */
 public interface CodeEnum extends Compare<CodeEnum> {
+
+
+    Set<Class<?>> subClass = Collections.newSetFromMap(new ConcurrentHashMap(50));
 
     /**
      * @return 用于持久化到数据库中的 code

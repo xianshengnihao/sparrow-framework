@@ -44,6 +44,7 @@
         <rocketmq.starter.version>2.0.3</rocketmq.starter.version>
         <rocketmq.client.version>4.5.2</rocketmq.client.version>
         <sina.cloud.storage.version>0.0.9</sina.cloud.storage.version>
+        <reflections.version>0.9.10</reflections.version>
     </properties>
 
 
