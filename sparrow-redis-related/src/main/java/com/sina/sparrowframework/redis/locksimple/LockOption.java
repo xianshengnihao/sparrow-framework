@@ -1,4 +1,4 @@
-package com.sina.sparrowframework.lock;
+package com.sina.sparrowframework.redis.locksimple;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
@@ -11,6 +11,7 @@ import static com.sina.sparrowframework.tools.utility.Assert.hasText;
 /**
  * created  on 2018/9/8.
  */
+/////////////////////////////////////////////////////////////////////////////
 public class LockOption {
 
     private static final long DEFAULT_SECOND = 30L;

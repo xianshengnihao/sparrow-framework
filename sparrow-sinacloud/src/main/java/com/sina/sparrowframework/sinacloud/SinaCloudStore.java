@@ -6,7 +6,7 @@ import com.sina.cloudstorage.services.scs.model.*;
 import com.sina.sparrowframework.tools.struct.ResultCode;
 import com.sina.sparrowframework.tools.tuple.Pair;
 import com.sina.sparrowframework.tools.utility.*;
-import com.sina.sparrowframwork.exception.business.DataException;
+import com.sina.sparrowframework.exception.business.DataException;
 import org.apache.commons.codec.Charsets;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

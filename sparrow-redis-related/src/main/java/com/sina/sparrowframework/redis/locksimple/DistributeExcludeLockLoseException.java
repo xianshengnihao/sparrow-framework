@@ -1,14 +1,15 @@
-package com.sina.sparrowframework.lock;
+package com.sina.sparrowframework.redis.locksimple;
 
 
 import com.sina.sparrowframework.tools.struct.ResultCode;
-import com.sina.sparrowframwork.exception.business.RuntimeBusinessException;
+import com.sina.sparrowframework.exception.business.RuntimeBusinessException;
 
 /**
  * 当分布式排他锁丢失时抛出 可选择性抛出.
  * @see DistributeLock
  * created  on 2018/9/14.
  */
+/////////////////////////////////////////////////////////////////////////////
 public class DistributeExcludeLockLoseException extends RuntimeBusinessException {
 
 

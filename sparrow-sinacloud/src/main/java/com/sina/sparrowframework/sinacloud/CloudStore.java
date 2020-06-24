@@ -1,6 +1,6 @@
 package com.sina.sparrowframework.sinacloud;
 
-import com.sina.sparrowframwork.exception.business.DataException;
+import com.sina.sparrowframework.exception.business.DataException;
 import org.springframework.lang.NonNull;
 
 /**

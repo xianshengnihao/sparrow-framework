@@ -1,9 +1,10 @@
-package com.sina.sparrowframework.lock;
+package com.sina.sparrowframework.redis.locksimple;
 
 /**
  * 分布式锁
  * created  on 2018/9/8.
  */
+/////////////////////////////////////////////////////////////////////////////
 public interface DistributeLock {
 
 
@@ -18,7 +19,7 @@ public interface DistributeLock {
     /**
      * 尝试获取锁,若失败则抛出异常
      */
-    default void tryLockWithException(LockOption option)throws DistributeExcludeLockLoseException{
+    default void tryLockWithException(LockOption option)throws DistributeExcludeLockLoseException {
         if(!tryLock( option )){
             throw new DistributeExcludeLockLoseException(
                     String.format( "holder[%s] fail to acquire lock[%s]",option.holder,option.key ));

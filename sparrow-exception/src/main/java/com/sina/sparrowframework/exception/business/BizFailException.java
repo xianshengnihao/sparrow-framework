@@ -1,4 +1,4 @@
-package com.sina.sparrowframwork.exception.business;
+package com.sina.sparrowframework.exception.business;
 
 /**
  * Created by wxn on 2019-06-30

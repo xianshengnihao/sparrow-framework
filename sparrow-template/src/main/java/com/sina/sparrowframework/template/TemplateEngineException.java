@@ -2,7 +2,7 @@ package com.sina.sparrowframework.template;
 
 
 import com.sina.sparrowframework.tools.struct.ResultCode;
-import com.sina.sparrowframwork.exception.business.RuntimeBusinessException;
+import com.sina.sparrowframework.exception.business.RuntimeBusinessException;
 
 /**
  * 当 {@link TastyTemplateEngine} 出错时抛出.

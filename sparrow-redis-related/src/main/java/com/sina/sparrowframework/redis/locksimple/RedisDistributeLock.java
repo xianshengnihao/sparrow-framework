@@ -1,4 +1,4 @@
-package com.sina.sparrowframework.lock;
+package com.sina.sparrowframework.redis.locksimple;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,13 +22,14 @@ import static com.sina.sparrowframework.tools.utility.Assert.assertNotNull;
  * 这个类是 {@link DistributeLock} 的一个使用 redis 实现的分布式锁
  * created  on 2018/9/8.
  */
+/////////////////////////////////////////////////////////////////////////////
 public class RedisDistributeLock implements DistributeLock, InitializingBean {
 
     private static final Logger LOG  = LoggerFactory.getLogger( RedisDistributeLock.class );
 
-    private static final String LOCK_SCRIPT_PATTEREN = "classpath*:/script/redis/tasty/lock.lua";
+    private static final String LOCK_SCRIPT_PATTEREN = "classpath*:/redis/lua/lock.lua";
 
-    private static final String RELEASE_LOCK_SCRIPT_PATTERN = "classpath*:/script/redis/tasty/releaseLock.lua";
+    private static final String RELEASE_LOCK_SCRIPT_PATTERN = "classpath*:/redis/lua/releaseLock.lua";
 
 
     private final RedisScript<String> LOCK_SCRIPT;

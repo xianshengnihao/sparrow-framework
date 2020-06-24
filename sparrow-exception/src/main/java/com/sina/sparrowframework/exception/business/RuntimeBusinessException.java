@@ -1,4 +1,4 @@
-package com.sina.sparrowframwork.exception.business;
+package com.sina.sparrowframework.exception.business;
 
 import com.sina.sparrowframework.tools.struct.ResultCode;
 
