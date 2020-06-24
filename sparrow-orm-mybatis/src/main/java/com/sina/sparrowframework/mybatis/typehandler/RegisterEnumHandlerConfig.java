@@ -16,6 +16,14 @@ import org.springframework.stereotype.Component;
 
 import java.util.Set;
 
+/**
+ * <p>
+ * <li>从{@link ConfigurationCustomizer} 中获取 {@link TypeHandlerRegistry}</li>
+ * <li>并通过Reflections获取所有{@link CodeEnum}的实现类</li>
+ * <li>然后通过{@link TypeHandlerRegistry}将{@link SparrowEnumTypeHandler } 所有实现类注册上</li>
+ * <li>注意：Reflections：v0.9.10,低版本的未测试,高版本的会有异常 "ReflectionsException: could not get type for name" </li>
+ * </p>
+ */
 @Component
 public class RegisterEnumHandlerConfig implements ConfigurationCustomizer {
 
