@@ -32,7 +32,6 @@
         <module>sparrow-xxl-job</module>
         <module>sparrow-template</module>
         <module>sparrow-test</module>
-        <module>sparrow-redis</module>
         <module>sparrow-redis-related</module>
     </modules>
 
@@ -137,7 +136,7 @@
 
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>sparrow-redis</artifactId>
+                <artifactId>sparrow-redis-related</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
