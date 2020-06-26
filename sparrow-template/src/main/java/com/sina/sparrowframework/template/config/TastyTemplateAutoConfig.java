@@ -12,7 +12,7 @@ import org.thymeleaf.ITemplateEngine;
  * created  on 2019-05-06.
  */
 @ConditionalOnClass({ITemplateEngine.class})
-@ConditionalOnProperty(prefix = "tasty.template",name = {"enable"},havingValue = "true",matchIfMissing = true)
+@ConditionalOnProperty(prefix = "sparrow.template",name = {"enable"},havingValue = "true",matchIfMissing = false)
 @Configuration
 public class TastyTemplateAutoConfig {
 
