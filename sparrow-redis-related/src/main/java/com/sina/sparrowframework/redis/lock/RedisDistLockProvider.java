@@ -20,7 +20,7 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author tianye6
+ * redis provider
  */
 public class RedisDistLockProvider implements IDistributedLock {
 
@@ -42,9 +42,9 @@ public class RedisDistLockProvider implements IDistributedLock {
         this.redisTemplate = redisTemplate;
         this.environment = environment;
         this.LOCK_SCRIPT = getLockScript("redis/lua/lock.lua");
-        logger.debug("初始化加锁脚本成功:\n:{}", LOCK_SCRIPT.getScriptAsString());
+        logger.debug("init lua lock script success:\n:{}", LOCK_SCRIPT.getScriptAsString());
         this.RELEASE_LOCK_SCRIPT = getLockScript("redis/lua/releaseLock.lua");
-        logger.debug("初始化释放锁脚本成功:\n:{}", RELEASE_LOCK_SCRIPT.getScriptAsString());
+        logger.debug("init lua release lock  script susscess:\n:{}", RELEASE_LOCK_SCRIPT.getScriptAsString());
     }
 
     private RedisScript<Long> getLockScript(String lockScriptPath) {
@@ -123,21 +123,15 @@ public class RedisDistLockProvider implements IDistributedLock {
     public boolean unLock(String key) {
         try {
             String redisKey = getKey(key);
-            //组装lua脚本参数
             List<String> keys = Arrays.asList(redisKey, LOCAL_REQUEST_IDS.get());
             logger.debug("unlock :::: redisKey:{},redisVal:{}", redisKey, LOCAL_REQUEST_IDS.get());
-            // 使用lua脚本删除redis中匹配value的key，可以避免由于方法执行时间过长而redis锁自动过期失效的时候误删其他线程的锁
             Long result = (Long) redisTemplate.execute(RELEASE_LOCK_SCRIPT, keys);
-            //如果这里抛异常，后续锁无法释放
             if (!ObjectUtils.isEmpty(result) && result > 0) {
                 logger.info("thread name :{} ,release lock :{} success, Status code reply={}", Thread.currentThread().getName(), key, result);
                 return true;
             } else if (!ObjectUtils.isEmpty(result) && result == -1) {
-                //返回-1说明获取到的KEY值与requestId不一致或者KEY不存在，可能已经过期或被其他线程加锁
-                // 一般发生在key的过期时间短于业务处理时间，属于正常可接受情况
                 logger.warn("thread name :{} ,release lock :{} has expired or released. Status code reply={}", Thread.currentThread().getName(), key, result);
             } else {
-                //其他情况，一般是删除KEY失败，返回0
                 logger.error("thread name :{} ,release lock :{} failed, del key failed. Status code reply={}", Thread.currentThread().getName(), key, result);
             }
         } catch (Exception e) {

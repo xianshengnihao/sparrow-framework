@@ -2,8 +2,6 @@ package com.sina.sparrowframework.redis.lock.manager;
 
 /**
  * 分布式锁统一管理操作接口
- *
- * @author tianye6
  * @date 2019/4/30 15:14
  */
 public interface ILockManager {

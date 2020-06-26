@@ -1,6 +1,9 @@
 package com.sina.sparrowframework.redis.conf;
 
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import net.javacrumbs.shedlock.core.LockProvider;
+import net.javacrumbs.shedlock.provider.redis.spring.RedisLockProvider;
+import net.javacrumbs.shedlock.spring.ScheduledLockConfiguration;
+import net.javacrumbs.shedlock.spring.ScheduledLockConfigurationBuilder;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.EnvironmentAware;
@@ -16,6 +19,7 @@ import java.time.Duration;
 public class SchedulerConf implements EnvironmentAware {
 
     private Environment environment;
+
     @Bean
     @ConditionalOnBean(value = {RedisTemplate.class})
     public LockProvider lockProvider(RedisTemplate redisTemplate) {

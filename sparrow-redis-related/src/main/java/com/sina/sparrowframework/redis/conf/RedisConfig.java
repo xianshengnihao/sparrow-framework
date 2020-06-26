@@ -28,7 +28,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * redis template conf
+ * redis template configuation
  */
 @Configuration
 @EnableCaching
@@ -41,31 +41,14 @@ public class RedisConfig extends CachingConfigurerSupport implements Environment
         this.environment = environment;
     }
 
-    @Bean
-    public RedisCacheManager redisCacheManager(RedisTemplate redisTemplate) {
-        RedisCacheWriter redisCacheWriter = RedisCacheWriter.nonLockingRedisCacheWriter(redisTemplate.getConnectionFactory());
-        RedisCacheConfiguration redisCacheConfiguration = this.getRedisCacheConfiguration(redisTemplate, Duration.ZERO);
-        Map<String, RedisCacheConfiguration> initialCacheConfigurations = new HashMap<>(3);
-        initialCacheConfigurations.put("test", getRedisCacheConfiguration(redisTemplate, Duration.ofSeconds(180L)));
-        initialCacheConfigurations.put("10min", getRedisCacheConfiguration(redisTemplate, Duration.ofMinutes(10L)));
-        initialCacheConfigurations.put("24h", getRedisCacheConfiguration(redisTemplate, Duration.ofHours(24L)));
-        RedisCacheManager redisCacheManager = RedisCacheManager.builder(redisCacheWriter).cacheDefaults(redisCacheConfiguration)
-                //初始化的缓存空间set集合
-                .withInitialCacheConfigurations(initialCacheConfigurations).transactionAware().build();
-        return redisCacheManager;
-    }
-
-    //自定义缓存配置
-    private RedisCacheConfiguration getRedisCacheConfiguration(RedisTemplate redisTemplate, Duration ttl) {
-        return RedisCacheConfiguration.defaultCacheConfig()
-                .serializeValuesWith(
-                        RedisSerializationContext.SerializationPair.fromSerializer(redisTemplate.getValueSerializer())
-                ).entryTtl(ttl).disableCachingNullValues();
-    }
-
+    /**
+     * <p>Jackson serializer redis template</p>
+     * @param redisConnectionFactory
+     * @return RedisTemplate<String, Object>
+     */
     @Bean
     @Primary
-    @ConditionalOnMissingBean(name = "redisTemplate")
+    @ConditionalOnMissingBean(name = "jsonRedisTemplate")
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
         RedisTemplate<String, Object> template = new RedisTemplate<>();
         template.setConnectionFactory(redisConnectionFactory);
@@ -82,6 +65,12 @@ public class RedisConfig extends CachingConfigurerSupport implements Environment
         return template;
     }
 
+
+    /**
+     * 分布式锁
+     * @param redisTemplate
+     * @return
+     */
     @Bean
     @ConditionalOnBean(value = {RedisTemplate.class})
     public RedisDistLockProvider redisDistributedLockProvider(RedisTemplate redisTemplate) {

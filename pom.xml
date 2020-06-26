@@ -32,6 +32,8 @@
         <module>sparrow-xxl-job</module>
         <module>sparrow-template</module>
         <module>sparrow-test</module>
+        <module>sparrow-redis</module>
+        <module>sparrow-redis-related</module>
     </modules>
 
     <properties>
@@ -44,6 +46,8 @@
         <rocketmq.client.version>4.5.2</rocketmq.client.version>
         <sina.cloud.storage.version>0.0.9</sina.cloud.storage.version>
         <reflections.version>0.9.10</reflections.version>
+        <shedlock.spring.version>2.1.0</shedlock.spring.version>
+        <shedlock.redis.version>2.2.0</shedlock.redis.version>
     </properties>
 
 
@@ -130,11 +134,13 @@
                 <artifactId>sparrow-template</artifactId>
                 <version>${project.version}</version>
             </dependency>
+
             <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-boot-starter</artifactId>
-                <version>${mybatis-plus.version}</version>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>sparrow-redis</artifactId>
+                <version>${project.version}</version>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
 

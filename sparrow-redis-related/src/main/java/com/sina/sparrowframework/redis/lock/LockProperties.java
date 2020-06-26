@@ -2,8 +2,6 @@ package com.sina.sparrowframework.redis.lock;
 
 /**
  * 锁基本属性
- *
- * @author tianye6
  * @date 2019/4/29 15:00
  */
 public class LockProperties {
