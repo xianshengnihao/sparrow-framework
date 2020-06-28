@@ -33,6 +33,7 @@
         <module>sparrow-template</module>
         <module>sparrow-test</module>
         <module>sparrow-redis-related</module>
+        <module>sparrow-log</module>
     </modules>
 
     <properties>
@@ -139,9 +140,21 @@
                 <artifactId>sparrow-redis-related</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>sparrow-log</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>
+    
+     <repositories>
+        <repository>
+            <id>sina_finance</id>
+            <url>http://10.41.22.57:8081/nexus/content/groups/public/</url>
+        </repository>
+    </repositories>
 
     <build>
         <resources>

@@ -1,9 +1,9 @@
 {
   "properties": [
     {
-      "defaultValue": true,
-      "name": "tasty.template.enable",
-      "description": "是否使用tasty 模板",
+      "defaultValue": false,
+      "name": "sparrow.template.enabled",
+      "description": "是否使用模板",
       "type": "java.lang.Boolean"
     }
   ]

@@ -17,7 +17,7 @@ import org.springframework.core.env.Environment;
  * created  on 2019-05-13.
  */
 @ConditionalOnClass(value = {SCS.class})
-@ConditionalOnProperty(prefix = "tasty.cloud.store",name = "enable",havingValue = "true",matchIfMissing = true)
+@ConditionalOnProperty(prefix = "sparrow.cloud.store",name = "enable",havingValue = "true",matchIfMissing = false)
 @Configuration
 public class TastyCloudStoreAuto implements EnvironmentAware {
 
