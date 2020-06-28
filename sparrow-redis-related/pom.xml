@@ -9,34 +9,29 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>sparrow-rocketmq</artifactId>
-    <name>${project.artifactId}</name>
-    <packaging>jar</packaging>
-
+    <artifactId>sparrow-redis-related</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>org.apache.rocketmq</groupId>
-            <artifactId>rocketmq-client</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.rocketmq</groupId>
-            <artifactId>rocketmq-acl</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-messaging</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.sina.sparrowframework</groupId>
-            <artifactId>sparrow-tools</artifactId>
+            <artifactId>sparrow-exception</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.sina.sparrowframework</groupId>
-            <artifactId>sparrow-orm-mybatis</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>net.javacrumbs.shedlock</groupId>
+            <artifactId>shedlock-spring</artifactId>
+            <version>${shedlock.spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>net.javacrumbs.shedlock</groupId>
+            <artifactId>shedlock-provider-redis-spring</artifactId>
+            <version>${shedlock.redis.version}</version>
         </dependency>
 
     </dependencies>
-
-
 </project>

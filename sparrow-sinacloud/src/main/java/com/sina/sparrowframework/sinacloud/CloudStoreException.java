@@ -2,7 +2,7 @@ package com.sina.sparrowframework.sinacloud;
 
 
 import com.sina.sparrowframework.tools.struct.ResultCode;
-import com.sina.sparrowframwork.exception.business.RuntimeBusinessException;
+import com.sina.sparrowframework.exception.business.RuntimeBusinessException;
 
 /**
  * created  on 2018/10/12.
