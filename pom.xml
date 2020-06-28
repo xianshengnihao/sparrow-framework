@@ -33,6 +33,7 @@
         <module>sparrow-template</module>
         <module>sparrow-test</module>
         <module>sparrow-redis-related</module>
+        <module>sparrow-log</module>
     </modules>
 
     <properties>
