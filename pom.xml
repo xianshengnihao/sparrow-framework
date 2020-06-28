@@ -32,7 +32,6 @@
         <module>sparrow-xxl-job</module>
         <module>sparrow-template</module>
         <module>sparrow-test</module>
-        <module>sparrow-redis</module>
         <module>sparrow-redis-related</module>
     </modules>
 
@@ -143,6 +142,13 @@
 
         </dependencies>
     </dependencyManagement>
+    
+     <repositories>
+        <repository>
+            <id>sina_finance</id>
+            <url>http://10.41.22.57:8081/nexus/content/groups/public/</url>
+        </repository>
+    </repositories>
 
     <build>
         <resources>

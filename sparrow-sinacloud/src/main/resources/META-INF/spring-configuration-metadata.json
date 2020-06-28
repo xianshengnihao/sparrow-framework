@@ -2,7 +2,7 @@
   "properties": [
     {
       "defaultValue": false,
-      "name": "sparrow.cloudstore.enable",
+      "name": "sparrow.cloudstore.enabled",
       "description": "是否云存储",
       "type": "java.lang.Boolean"
     }

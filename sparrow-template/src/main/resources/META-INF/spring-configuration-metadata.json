@@ -2,7 +2,7 @@
   "properties": [
     {
       "defaultValue": false,
-      "name": "sparrow.template.enable",
+      "name": "sparrow.template.enabled",
       "description": "是否使用模板",
       "type": "java.lang.Boolean"
     }
