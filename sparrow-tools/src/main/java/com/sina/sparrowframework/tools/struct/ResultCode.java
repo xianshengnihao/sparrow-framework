@@ -7,8 +7,10 @@ import java.util.Set;
 
 /**
  * created  on 02/03/2018.
+ * @deprecated use {@link com.sina.sparrowframework.metadata.constants.CodeManager}
  */
 @SuppressWarnings( "unused" )
+@Deprecated
 public enum ResultCode implements CodeEnum {
 
     ok(200, "成功",null),
