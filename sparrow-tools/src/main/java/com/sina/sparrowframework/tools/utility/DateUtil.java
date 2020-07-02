@@ -32,6 +32,7 @@ public abstract class DateUtil {
     public static final TimeZone TIME_ZONE8;
     public static final ZoneOffset ZONE_OFFSET8;
     public static final String MONTH_DAY_FORMAT = "MM-dd";
+    public static final String SLASH_DATE_FORMAT = "uuuu/MM/dd";
     public static final String CLOSE_DATE_FORMAT = "uuuuMMdd";
     public static final String CLOSE_DATE_TIME_FORMAT = "uuuuMMddHHmmss";
     public static final String FULL_DATE_TIME_FORMAT = "uuuu-MM-dd HH:mm:ss.SSS";
@@ -53,6 +54,7 @@ public abstract class DateUtil {
     public static final DateTimeFormatter TIME_FORMATTER;
     public static final DateTimeFormatter MINUTE_FORMATTER;
     public static final DateTimeFormatter DATETIME_FORMATTER;
+    public static final DateTimeFormatter SLASH_DATE_FORMATTER;
     public static final DateTimeFormatter CLOSE_DATE_FORMATTER;
     public static final DateTimeFormatter CLOSE_DATE_TIME_FORMATTER;
     public static final DateTimeFormatter FULL_DATE_TIME_FORMATTER;
@@ -81,6 +83,7 @@ public abstract class DateUtil {
         TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm:ss");
         MINUTE_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
         DATETIME_FORMATTER = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
+        SLASH_DATE_FORMATTER = DateTimeFormatter.ofPattern(SLASH_DATE_FORMAT);
         CLOSE_DATE_FORMATTER = DateTimeFormatter.ofPattern("uuuuMMdd");
         CLOSE_DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("uuuuMMddHHmmss");
         FULL_DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss.SSS");

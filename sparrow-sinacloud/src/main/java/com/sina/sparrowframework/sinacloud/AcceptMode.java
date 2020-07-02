@@ -7,7 +7,11 @@ import java.util.Map;
 
 /**
  * created  on 2018/10/12.
+ * @deprecated by haiyuan1
+ * 此类原本用于路由Bucket(只有两个，一个私有，一个公开)，
+ * 现在Bucket数量不固定，约定文件的访问权限跟随Bucket，不再通过{@link StoreForm#setAcceptMode(AcceptMode)}指定
  */
+@Deprecated
 public enum AcceptMode implements CodeEnum {
 
     PRIVATE( 0, "私有访问权限" ),

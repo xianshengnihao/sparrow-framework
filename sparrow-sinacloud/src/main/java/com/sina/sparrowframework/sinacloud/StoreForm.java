@@ -5,10 +5,8 @@ import org.springframework.http.MediaType;
 import org.springframework.lang.NonNull;
 
 import javax.validation.constraints.Size;
-import java.io.File;
 import java.io.InputStream;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 /**
  * created  on 2018/10/12.
@@ -16,46 +14,26 @@ import java.util.concurrent.TimeUnit;
 public class StoreForm {
 
     /**
-     * file 和 {@link #inputStream} 共同存在时优先使用 file
+     * 上传文件的目标bucket
      */
-    private File file;
+    private String bucket;
 
-    @NonNull
-    private AcceptMode acceptMode;
-
-    @NonNull
     private MediaType mediaType;
 
     /**
-     * 自定义前缀,不能包含 {@code /}
-     */
-    private String prefix;
-
-    /**
-     * file 与 inputStream 不能同时为 null
-     * inputStream 和 {@link #file} 共同存在时优先使用 file
+     * 上传文件的输入流
      */
     private InputStream inputStream;
 
     /**
-     * 文件名
+     * 文件名(原始文件名)
      */
     private String name;
 
     /**
-     * 在 time 时间 后,文件过期.
+     * 上传文件的唯一键，如：/path/test.txt
      */
-    private Long time;
-
-    /**
-     * 当 time 不为 null 时,此字段也不为 null
-     */
-    private TimeUnit timeUnit;
-
-    /**
-     * 允许访问文件时,网络结点进行缓存
-     */
-    private boolean cache;
+    private String key;
 
     /**
      * 加密存储
@@ -85,26 +63,6 @@ public class StoreForm {
     @Size(max = 20)
     private Map<String, String> meta;
 
-
-    public File getFile() {
-        return file;
-    }
-
-    public StoreForm setFile(File file) {
-        this.file = file;
-        return this;
-    }
-
-    @NonNull
-    public AcceptMode getAcceptMode() {
-        return acceptMode;
-    }
-
-    public StoreForm setAcceptMode(@NonNull AcceptMode acceptMode) {
-        this.acceptMode = acceptMode;
-        return this;
-    }
-
     @NonNull
     public MediaType getMediaType() {
         return mediaType;
@@ -121,42 +79,6 @@ public class StoreForm {
 
     public StoreForm setInputStream(InputStream inputStream) {
         this.inputStream = inputStream;
-        return this;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public StoreForm setName(String name) {
-        this.name = name;
-        return this;
-    }
-
-    public Long getTime() {
-        return time;
-    }
-
-    public StoreForm setTime(Long time) {
-        this.time = time;
-        return this;
-    }
-
-    public TimeUnit getTimeUnit() {
-        return timeUnit;
-    }
-
-    public StoreForm setTimeUnit(TimeUnit timeUnit) {
-        this.timeUnit = timeUnit;
-        return this;
-    }
-
-    public boolean isCache() {
-        return cache;
-    }
-
-    public StoreForm setCache(boolean cache) {
-        this.cache = cache;
         return this;
     }
 
@@ -187,12 +109,30 @@ public class StoreForm {
         return this;
     }
 
-    public String getPrefix() {
-        return prefix;
+    public String getBucket() {
+        return bucket;
     }
 
-    public StoreForm setPrefix(String prefix) {
-        this.prefix = prefix;
+    public StoreForm setBucket(String bucket) {
+        this.bucket = bucket;
+        return this;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public StoreForm setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public StoreForm setKey(String key) {
+        this.key = key;
         return this;
     }
 
@@ -211,14 +151,12 @@ public class StoreForm {
         return this;
     }
 
-
     /**
      * 仅供内部实现使用
      */
     String getMd5() {
         return md5;
     }
-
 
     /**
      * 仅供内部实现使用
