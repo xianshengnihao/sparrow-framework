@@ -17,29 +17,28 @@ import org.springframework.core.env.Environment;
  * created  on 2019-05-13.
  */
 @ConditionalOnClass(value = {SCS.class})
-@ConditionalOnProperty(prefix = "sparrow.cloud.store",name = "enable",havingValue = "true",matchIfMissing = false)
+@ConditionalOnProperty(prefix = "sparrow.cloudstore", name = "enabled", havingValue = "true", matchIfMissing = false)
 @Configuration
 public class TastyCloudStoreAuto implements EnvironmentAware {
 
-    private Environment env ;
-
-    @Override
-    public void setEnvironment(Environment environment) {
-        this.env = environment;
-    }
+    private Environment env;
 
     @Bean
-    public CloudStore tastyCloudStore(){
-
+    public CloudStore tastyCloudStore() {
 
         String accessKey = env.getRequiredProperty("tasty.sina.cloud.accessKey");
         String secretKey = env.getRequiredProperty("tasty.sina.cloud.secretKey");
 
         AWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
 
-        SinaCloudStore sinaCloudStore =  new SinaCloudStore();
+        SinaCloudStore sinaCloudStore = new SinaCloudStore();
         sinaCloudStore.setSinaScs(new SCSClient(credentials));
         return sinaCloudStore;
+    }
+
+    @Override
+    public void setEnvironment(Environment environment) {
+        this.env = environment;
     }
 
 }
