@@ -22,7 +22,7 @@ public class XxlJobAutoConfiguration {
         PropertyMapper map = PropertyMapper.get();
 
         map.from(properties::getAdminAddresses).whenNonNull().to(executor::setAdminAddresses);
-        map.from(properties::getExecutorAppName).whenNonNull().to(executor::setAppname);
+        map.from(properties::getExecutorAppname).whenNonNull().to(executor::setAppname);
         map.from(properties::getExecutorAddress).whenNonNull().to(executor::setAddress);
         map.from(properties::getExecutorIp).whenNonNull().to(executor::setIp);
 
