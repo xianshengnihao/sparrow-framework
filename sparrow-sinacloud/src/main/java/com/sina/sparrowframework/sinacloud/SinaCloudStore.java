@@ -581,7 +581,7 @@ public final class SinaCloudStore implements CloudStore, EnvironmentAware {
                     .setUrl(doGetUrl(path))
                     .setPath(path)
                     .setLength(getFileLength(metaMap))
-                    .setOriginalName(metaMap.get(META_ORIGINAL_NAME));
+                    .setOriginalName(decodeBase64(metaMap.get(META_ORIGINAL_NAME)));
             return t;
         } catch (Exception e) {
             throw new CloudStoreException(ResultCode.downloadError, e, e.getMessage());
