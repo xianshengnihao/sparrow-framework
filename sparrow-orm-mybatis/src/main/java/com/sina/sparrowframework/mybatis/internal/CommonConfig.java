@@ -13,6 +13,7 @@ import org.springframework.core.env.Environment;
  * 基础服务类
  * @date 2019/7/7 10:42
  */
+@Deprecated
 public abstract class CommonConfig implements EnvironmentAware, ApplicationContextAware {
 
     public ApplicationContext applicationContext;
