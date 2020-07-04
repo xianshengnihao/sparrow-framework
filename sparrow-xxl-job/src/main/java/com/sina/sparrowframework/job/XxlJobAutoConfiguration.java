@@ -19,18 +19,17 @@ public class XxlJobAutoConfiguration {
     public XxlJobSpringExecutor xxlJobExecutor(XxlJobProperties properties) {
         XxlJobSpringExecutor executor = new XxlJobSpringExecutor();
 
-        PropertyMapper map = PropertyMapper.get();
+        PropertyMapper map = PropertyMapper.get().alwaysApplyingWhenNonNull();
 
-        map.from(properties::getAdminAddresses).whenNonNull().to(executor::setAdminAddresses);
-        map.from(properties::getExecutorAppname).whenNonNull().to(executor::setAppname);
-        map.from(properties::getExecutorAddress).whenNonNull().to(executor::setAddress);
-        map.from(properties::getExecutorIp).whenNonNull().to(executor::setIp);
+        map.from(properties::getAdminAddresses).to(executor::setAdminAddresses);
+        map.from(properties::getExecutorAppname).to(executor::setAppname);
+        map.from(properties::getExecutorAddress).to(executor::setAddress);
+        map.from(properties::getExecutorIp).to(executor::setIp);
 
-        map.from(properties::getExecutorPort).whenNonNull().to(executor::setPort);
-        map.from(properties::getAccessToken).whenNonNull().to(executor::setAccessToken);
-        map.from(properties::getExecutorLogPath).whenNonNull().to(executor::setLogPath);
-        map.from(properties::getExecutorLogRetentionDays).whenNonNull()
-                .to(executor::setLogRetentionDays);
+        map.from(properties::getExecutorPort).to(executor::setPort);
+        map.from(properties::getAccessToken).to(executor::setAccessToken);
+        map.from(properties::getExecutorLogPath).to(executor::setLogPath);
+        map.from(properties::getExecutorLogRetentionDays).to(executor::setLogRetentionDays);
 
         return executor;
     }
