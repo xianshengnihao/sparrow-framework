@@ -33,11 +33,6 @@ public enum BaseCode implements CodeManager {
     }
 
     @Override
-    public String getName() {
-        return this.name();
-    }
-
-    @Override
     public String getDesc() {
         return desc;
     }

@@ -41,23 +41,23 @@ public class GlobalExceptionAop {
     @ExceptionHandler(value = Exception.class)
     public ResponseResult handleException(Exception e) {
         log.error("系统内部异常，异常信息：{}", e.getMessage(), e);
-        return ResponseResult.error(BaseCode.UNKNOWN_ERROR, "未知错误");
+        return ResponseResult.error(BaseCode.UNKNOWN_ERROR.getCode(), "未知错误");
     }
 
     @ExceptionHandler(value = BizFailException.class)
     public ResponseResult handleParamsInvalidException(BizFailException e) {
         log.error("业务数据异常，异常信息：{}", e.getMessage(), e);
-        return ResponseResult.error(e.getErrorCode(), e.getMessage());
+        return ResponseResult.error(e.getErrorCode().getCode(), e.getMessage());
     }
     @ExceptionHandler(value = BizFailIgnoreLogException.class)
     public ResponseResult handleParamsInvalidException(BizFailIgnoreLogException e) {
-        return ResponseResult.error(e.getErrorCode(), e.getMessage());
+        return ResponseResult.error(e.getErrorCode().getCode(), e.getMessage());
     }
 
     @ExceptionHandler(value = IllegalArgumentException.class)
     public ResponseResult handleIllegalArgumentExceptionException(IllegalArgumentException e) {
         log.error("断言错误，异常信息：{}", e.getMessage(), e);
-        return ResponseResult.error(ASSERT_ERROR, e.getMessage());
+        return ResponseResult.error(ASSERT_ERROR.getCode(), e.getMessage());
     }
 
     /**
@@ -75,37 +75,37 @@ public class GlobalExceptionAop {
             message.append(error.getField()).append(error.getDefaultMessage()).append(COMMA);
         }
         message = new StringBuilder(message.substring(0, message.length() - 1));
-        return ResponseResult.error(BAD_REQUEST, message.toString());
+        return ResponseResult.error(BAD_REQUEST.getCode(), message.toString());
     }
 
     @ExceptionHandler({HttpMessageNotReadableException.class, MethodArgumentTypeMismatchException.class})
     public ResponseResult requestNotReadable(HttpMessageNotReadableException nrEx) {
         log.error("字段类型不匹配，异常信息：{}", nrEx.getMessage(), nrEx);
-        return ResponseResult.error(BAD_REQUEST, "字段类型不匹配");
+        return ResponseResult.error(BAD_REQUEST.getCode(), "字段类型不匹配");
     }
 
     @ExceptionHandler(NoHandlerFoundException.class)
     public ResponseResult handlerNoFoundException(Exception e) {
         log.error("路径不存在，异常信息：{}", e.getMessage(), e);
-        return ResponseResult.error(NOT_FOUND, "路径不存在，请检查路径是否正确");
+        return ResponseResult.error(NOT_FOUND.getCode(), "路径不存在，请检查路径是否正确");
     }
 
     @ExceptionHandler({HttpRequestMethodNotSupportedException.class})
     public ResponseResult requestMethodNotSupported(HttpRequestMethodNotSupportedException nsEx) {
         log.error("请求方法不允许，异常信息：{}", nsEx.getMessage(), nsEx);
-        return ResponseResult.error(METHOD_NOT_SUPPORTED, "方法不被允许");
+        return ResponseResult.error(METHOD_NOT_SUPPORTED.getCode(), "方法不被允许");
     }
 
     @ExceptionHandler({HttpMediaTypeNotAcceptableException.class})
     public ResponseResult httpMediaTypeNotAcceptable(HttpMediaTypeNotAcceptableException mtEx) {
         log.error("请求资源不可访问，异常信息：{}", mtEx.getMessage(), mtEx);
-        return ResponseResult.error(MEDIA_TYPE_NOT_ACCEPTABLE, "请求资源不可访问");
+        return ResponseResult.error(MEDIA_TYPE_NOT_ACCEPTABLE.getCode(), "请求资源不可访问");
     }
 
     @ExceptionHandler({HttpMediaTypeNotSupportedException.class})
     public ResponseResult mediaTypeNotSupported(HttpMediaTypeNotSupportedException mtEx) {
         log.error("媒体类型不支持，异常信息：{}", mtEx.getMessage(), mtEx);
-        return ResponseResult.error(HTTP_MEDIA_TYPE_NOT_SUPPORTED, "不支持的媒体类型");
+        return ResponseResult.error(HTTP_MEDIA_TYPE_NOT_SUPPORTED.getCode(), "不支持的媒体类型");
     }
 
     /**
@@ -125,7 +125,7 @@ public class GlobalExceptionAop {
             message.append(pathArr[1]).append(violation.getMessage()).append(COMMA);
         }
         message = new StringBuilder(message.substring(0, message.length() - 1));
-        return ResponseResult.error(BAD_REQUEST, message.toString());
+        return ResponseResult.error(BAD_REQUEST.getCode(), message.toString());
     }
 
 }

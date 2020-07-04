@@ -7,10 +7,7 @@ package com.sina.sparrowframework.metadata.constants;
 public interface CodeManager {
 
     String getCode();
-    String getName();
     String getDesc();
-
-
 
     interface SystemCode {
         /**
@@ -30,6 +27,5 @@ public interface CodeManager {
          */
         String SPARROW_MANAGER = "04";
     }
-
 
 }

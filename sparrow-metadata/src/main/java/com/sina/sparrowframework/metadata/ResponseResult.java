@@ -1,8 +1,5 @@
 package com.sina.sparrowframework.metadata;
 
-import com.sina.sparrowframework.metadata.constants.CodeManager;
-import com.sina.sparrowframework.tools.utility.JsonUtils;
-
 import java.util.Optional;
 
 import static com.sina.sparrowframework.metadata.constants.BaseCode.SUCCESS;
@@ -12,15 +9,15 @@ import static com.sina.sparrowframework.metadata.constants.BaseCode.SUCCESS;
  */
 @SuppressWarnings({"unused", "UnusedReturnValue"})
 public class ResponseResult {
-    private CodeManager code;
+    private String code;
     private String msg;
     private Object data;
 
-    public CodeManager getCode() {
+    public String getCode() {
         return code;
     }
 
-    public ResponseResult setCode(CodeManager code) {
+    public ResponseResult setCode(String code) {
         this.code = code;
         return this;
     }
@@ -43,7 +40,7 @@ public class ResponseResult {
         return this;
     }
 
-    public static ResponseResult error(CodeManager code, String msg) {
+    public static ResponseResult error(String code, String msg) {
         ResponseResult result = new ResponseResult();
         result.setCode(code);
         result.setMsg(Optional.ofNullable(msg).orElse(""));
@@ -52,7 +49,7 @@ public class ResponseResult {
 
     public static ResponseResult success(String msg, Object data) {
         ResponseResult result = new ResponseResult();
-        result.setCode(SUCCESS);
+        result.setCode(SUCCESS.getCode());
         result.setMsg(msg);
         result.setData(data);
         return result;
@@ -63,7 +60,7 @@ public class ResponseResult {
      */
     public static ResponseResult success(Object data) {
         ResponseResult result = new ResponseResult();
-        result.setCode(SUCCESS);
+        result.setCode(SUCCESS.getCode());
         result.setMsg("成功");
         result.setData(data);
         return result;
@@ -74,19 +71,15 @@ public class ResponseResult {
      */
     public static ResponseResult success() {
         ResponseResult result = new ResponseResult();
-        result.setCode(SUCCESS);
+        result.setCode(SUCCESS.getCode());
         result.setMsg("成功");
         return result;
     }
 
     public boolean isSucceed() {
-        return SUCCESS == code;
+        return SUCCESS.getCode().equals(code);
     }
 
-    @Override
-    public String toString() {
-        return JsonUtils.writeToJson(this);
-    }
 }
 
 

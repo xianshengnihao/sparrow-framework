@@ -23,8 +23,6 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
-import com.sina.sparrowframework.metadata.constants.BaseCode;
-import com.sina.sparrowframework.metadata.constants.CodeManager;
 import com.sina.sparrowframework.tools.struct.CodeEnum;
 import com.sina.sparrowframework.tools.struct.ResultCode;
 
@@ -95,31 +93,33 @@ public abstract class JsonUtils {
         }
     };
 
-    private static class CodeManagerDeserializer extends StdScalarDeserializer<CodeManager>
+
+    private static class ResultCodeDeserializer extends StdScalarDeserializer<ResultCode>
             implements ContextualDeserializer {
 
         private static final long serialVersionUID = -2344343670912720214L;
 
-        public static final CodeManagerDeserializer CODE_DESERIALIZER = new CodeManagerDeserializer( true );
+        public static final ResultCodeDeserializer CODE_DESERIALIZER = new ResultCodeDeserializer( true );
 
-        public static final CodeManagerDeserializer NAME_DESERIALIZER = new CodeManagerDeserializer( false );
+        public static final ResultCodeDeserializer NAME_DESERIALIZER = new ResultCodeDeserializer( false );
+
+
 
         private final boolean useNum;
 
-        public CodeManagerDeserializer(boolean useNum) {
+        public ResultCodeDeserializer(boolean useNum) {
             super( CodeEnum.class );
             this.useNum = useNum;
         }
 
         @Override
-        public CodeManager deserialize(JsonParser p, DeserializationContext ctxt)
+        public ResultCode deserialize(JsonParser p, DeserializationContext ctxt)
                 throws IOException, JsonProcessingException {
-            CodeManager code;
+            ResultCode code;
             if (useNum) {
-                ctxt.getContextualType().getRawClass();
-                code = CodeManager();
+                code = ResultCode.resolve(p.getValueAsInt());
             } else {
-                code = CodeManager.valueOf(p.getValueAsString());
+                code = ResultCode.valueOf(p.getValueAsString());
             }
             return code;
         }
@@ -144,17 +144,19 @@ public abstract class JsonUtils {
         }
     }
 
-    public static class CodeManagerSerializer extends StdScalarSerializer<CodeManager> implements ContextualSerializer {
+    public static class ResultCodeSerializer extends StdScalarSerializer<ResultCode> implements ContextualSerializer {
 
         private static final long serialVersionUID = 2978032273225655788L;
 
-        public static final CodeManagerSerializer CODE_SERIALIZER = new CodeManagerSerializer(false);
+        public static final ResultCodeSerializer CODE_SERIALIZER = new ResultCodeSerializer(false);
 
-        public static final CodeManagerSerializer NAME_SERIALIZER = new CodeManagerSerializer(true);
+        public static final ResultCodeSerializer NAME_SERIALIZER = new ResultCodeSerializer(true);
+
 
         private final boolean useName;
 
-        public CodeManagerSerializer(boolean useName) {
+
+        public ResultCodeSerializer(boolean useName) {
             super(CodeEnum.class, true);
             this.useName = useName;
         }
@@ -163,7 +165,7 @@ public abstract class JsonUtils {
         public JsonSerializer<?> createContextual(SerializerProvider prov, BeanProperty property) {
             JsonFormat.Value format = findFormatOverrides(prov,
                     property, handledType());
-            CodeManagerSerializer serializer;
+            ResultCodeSerializer serializer;
             if (isUseName(format)) {
                 serializer = NAME_SERIALIZER;
             } else {
@@ -173,11 +175,11 @@ public abstract class JsonUtils {
         }
 
         @Override
-        public void serialize(CodeManager value, JsonGenerator gen, SerializerProvider provider) throws IOException {
+        public void serialize(ResultCode value, JsonGenerator gen, SerializerProvider provider) throws IOException {
             if (useName) {
-                gen.writeString(value.getName());
+                gen.writeString(value.name());
             } else {
-                gen.writeNumber(value.getCode());
+                gen.writeNumber(value.code());
             }
         }
 
@@ -196,9 +198,8 @@ public abstract class JsonUtils {
         return new SimpleModule(moduleName == null ? "tastyFinanceCustomModule" : moduleName)
 
                 .addSerializer(Number.class, NUMBER_SERIALIZER)
-                .addSerializer(CodeManager.class, CodeManagerSerializer.NAME_SERIALIZER)
-                .addDeserializer(CodeManager.class, ResultCodeDeserializer.CODE_DESERIALIZER)
-                .addD
+                .addSerializer(ResultCode.class, ResultCodeSerializer.NAME_SERIALIZER)
+                .addDeserializer( ResultCode.class, ResultCodeDeserializer.CODE_DESERIALIZER)
                 ;
     }
 
