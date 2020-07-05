@@ -8,16 +8,16 @@ import static com.sina.sparrowframework.metadata.constants.BaseCode.SUCCESS;
  * Created by wxn on 2018/9/12
  */
 @SuppressWarnings({"unused", "UnusedReturnValue"})
-public class ResponseResult {
+public class ResponseResult<T> {
     private String code;
     private String msg;
-    private Object data;
+    private T data;
 
     public String getCode() {
         return code;
     }
 
-    public ResponseResult setCode(String code) {
+    public ResponseResult<T> setCode(String code) {
         this.code = code;
         return this;
     }
@@ -26,29 +26,37 @@ public class ResponseResult {
         return msg;
     }
 
-    public ResponseResult setMsg(String msg) {
+    public ResponseResult<T> setMsg(String msg) {
         this.msg = msg;
         return this;
     }
 
-    public Object getData() {
+    public T getData() {
         return this.data;
     }
 
-    public ResponseResult setData(Object data) {
+    public ResponseResult<T> setData(T data) {
         this.data = data;
         return this;
     }
 
-    public static ResponseResult error(String code, String msg) {
-        ResponseResult result = new ResponseResult();
+    public static <T> ResponseResult<T> error(String code, String msg) {
+        ResponseResult<T> result = new ResponseResult<>();
         result.setCode(code);
         result.setMsg(Optional.ofNullable(msg).orElse(""));
         return result;
     }
 
-    public static ResponseResult success(String msg, Object data) {
-        ResponseResult result = new ResponseResult();
+    public static <T> ResponseResult<T> success(String msg, T data) {
+        ResponseResult<T> result = new ResponseResult<>();
+        result.setCode(SUCCESS.getCode());
+        result.setMsg(msg);
+        result.setData(data);
+        return result;
+    }
+
+    public static <T> ResponseResult<T> success(String msg, T data, Class<T> responseDataType) {
+        ResponseResult<T> result = new ResponseResult<>();
         result.setCode(SUCCESS.getCode());
         result.setMsg(msg);
         result.setData(data);
@@ -58,8 +66,8 @@ public class ResponseResult {
     /**
      * 操作成功（默认描述）
      */
-    public static ResponseResult success(Object data) {
-        ResponseResult result = new ResponseResult();
+    public static <T> ResponseResult<T> success(T data) {
+        ResponseResult<T> result = new ResponseResult<>();
         result.setCode(SUCCESS.getCode());
         result.setMsg("成功");
         result.setData(data);
@@ -69,8 +77,8 @@ public class ResponseResult {
     /**
      * 操作成功（默认描述）
      */
-    public static ResponseResult success() {
-        ResponseResult result = new ResponseResult();
+    public static <T> ResponseResult<T> success() {
+        ResponseResult<T> result = new ResponseResult<>();
         result.setCode(SUCCESS.getCode());
         result.setMsg("成功");
         return result;
