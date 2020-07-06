@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.sina.tasty</groupId>
         <artifactId>tasty-dependencies</artifactId>
-        <version>1.0.4</version>
+        <version>1.0.5-SNAPSHOT</version>
     </parent>
 
     <groupId>com.sina.sparrowframework</groupId>
@@ -38,10 +38,8 @@
 
     <properties>
         <sparrowframework.version>${project.version}</sparrowframework.version>
-        <mybatis-plus.version>3.1.0</mybatis-plus.version>
         <openfeign.version>9.5.1</openfeign.version>
         <bouncycastle.version>1.55</bouncycastle.version>
-        <mybatis-plus.version>3.1.0</mybatis-plus.version>
         <rocketmq.starter.version>2.0.3</rocketmq.starter.version>
         <rocketmq.client.version>4.5.2</rocketmq.client.version>
         <sina.cloud.storage.version>0.0.9</sina.cloud.storage.version>
@@ -148,7 +146,7 @@
 
         </dependencies>
     </dependencyManagement>
-    
+
      <repositories>
         <repository>
             <id>sina_finance</id>
