@@ -6,7 +6,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.time.LocalDateTime;
 
 import static com.sina.sparrowframework.tools.utility.DateUtil.DATE_TIME_FORMAT;
@@ -14,7 +13,7 @@ import static com.sina.sparrowframework.tools.utility.DateUtil.DATE_TIME_FORMAT;
 /**
  * created  on 2018/4/18.
  */
-public class BaseCriteria implements Serializable {
+public class QueryRequest implements Serializable {
 
     private static final long serialVersionUID = 2409449906669029202L;
 
@@ -47,20 +46,24 @@ public class BaseCriteria implements Serializable {
      */
     private Long firstId;
 
-    private BigInteger bigLastId;
-
     /**
-     * 在 getter 中设置了默认值,否则会在 dao 中查出错
+     * 查询起始偏移量，默认为0，即从第一条数据开始查询
      */
     @Min(0)
     private Integer offset;
 
     /**
-     * 在 getter 中设置了默认值,否则会在 dao 中查出错
+     * 分页查询的数据条数
      */
     @Min(1)
     @Max(1000)
-    private Integer rowCount;
+    private Integer pageSize;
+
+    /**
+     * 查询页码
+     */
+    @Min(1)
+    private Integer pageNum = 1;
 
     /**
      * 在 getter 中设置了默认值,否则会在 dao 中查出错
@@ -72,7 +75,7 @@ public class BaseCriteria implements Serializable {
         return offset;
     }
 
-    public BaseCriteria setOffset(Integer offset) {
+    public QueryRequest setOffset(Integer offset) {
         this.offset = offset;
         return this;
     }
@@ -80,15 +83,15 @@ public class BaseCriteria implements Serializable {
     /**
      * 在 getter 中设置了默认值,否则会在 dao 中查出错
      */
-    public Integer getRowCount() {
-        if (rowCount == null) {
-            rowCount = 10;
+    public Integer getPageSize() {
+        if (pageSize == null) {
+            pageSize = 10;
         }
-        return rowCount;
+        return pageSize;
     }
 
-    public BaseCriteria setRowCount(Integer rowCount) {
-        this.rowCount = rowCount;
+    public QueryRequest setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
         return this;
     }
 
@@ -99,7 +102,7 @@ public class BaseCriteria implements Serializable {
         return queryRowCount;
     }
 
-    public BaseCriteria setQueryRowCount(Boolean queryRowCount) {
+    public QueryRequest setQueryRowCount(Boolean queryRowCount) {
         this.queryRowCount = queryRowCount;
         return this;
     }
@@ -111,7 +114,7 @@ public class BaseCriteria implements Serializable {
         return ascOrder;
     }
 
-    public BaseCriteria setAscOrder(Boolean ascOrder) {
+    public QueryRequest setAscOrder(Boolean ascOrder) {
         this.ascOrder = ascOrder;
         return this;
     }
@@ -120,7 +123,7 @@ public class BaseCriteria implements Serializable {
         return startCreateTime;
     }
 
-    public BaseCriteria setStartCreateTime(LocalDateTime startCreateTime) {
+    public QueryRequest setStartCreateTime(LocalDateTime startCreateTime) {
         this.startCreateTime = startCreateTime;
         return this;
     }
@@ -129,7 +132,7 @@ public class BaseCriteria implements Serializable {
         return endCreateTime;
     }
 
-    public BaseCriteria setEndCreateTime(LocalDateTime endCreateTime) {
+    public QueryRequest setEndCreateTime(LocalDateTime endCreateTime) {
         this.endCreateTime = endCreateTime;
         return this;
     }
@@ -138,17 +141,8 @@ public class BaseCriteria implements Serializable {
         return lastId;
     }
 
-    public BaseCriteria setLastId(Long lastId) {
+    public QueryRequest setLastId(Long lastId) {
         this.lastId = lastId;
-        return this;
-    }
-
-    public BigInteger getBigLastId() {
-        return bigLastId;
-    }
-
-    public BaseCriteria setBigLastId(BigInteger bigLastId) {
-        this.bigLastId = bigLastId;
         return this;
     }
 
@@ -156,8 +150,17 @@ public class BaseCriteria implements Serializable {
         return firstId;
     }
 
-    public BaseCriteria setFirstId(Long firstId) {
+    public QueryRequest setFirstId(Long firstId) {
         this.firstId = firstId;
+        return this;
+    }
+
+    public Integer getPageNum() {
+        return pageNum;
+    }
+
+    public QueryRequest setPageNum(Integer pageNum) {
+        this.pageNum = pageNum;
         return this;
     }
 }
