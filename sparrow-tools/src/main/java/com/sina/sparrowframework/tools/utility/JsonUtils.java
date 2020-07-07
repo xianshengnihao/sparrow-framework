@@ -212,6 +212,7 @@ public abstract class JsonUtils {
         mapper.setDateFormat(dateFormat);
 
         mapper.configure(JsonGenerator.Feature.IGNORE_UNKNOWN, true);
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
         DefaultPrettyPrinter prettyPrinter = new DefaultPrettyPrinter();
         prettyPrinter.indentObjectsWith(new DefaultIndenter("  ", "\n"));
@@ -219,7 +220,6 @@ public abstract class JsonUtils {
 
         mapper.registerModule(createTastyCustomModule(null));
         mapper.registerModule(createJavaTimeModule());
-
 
         return mapper;
     }
