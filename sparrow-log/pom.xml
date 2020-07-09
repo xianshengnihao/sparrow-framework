@@ -3,11 +3,11 @@
   <parent>
     <groupId>com.sina.sparrowframework</groupId>
     <artifactId>sparrow-framework</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
   </parent>
   <artifactId>sparrow-log</artifactId>
   <name>sparrow-log</name>
-  
+
 	<dependencies>
 	    <dependency>
  			<groupId>org.apache.logging.log4j</groupId>
@@ -20,5 +20,5 @@
 			<artifactId>sparrow-tools</artifactId>
 		</dependency>
 	</dependencies>
-	
+
 </project>

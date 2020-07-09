@@ -6,12 +6,12 @@
     <parent>
         <groupId>com.sina.tasty</groupId>
         <artifactId>tasty-dependencies</artifactId>
-        <version>1.0.5-SNAPSHOT</version>
+        <version>1.0.6-SNAPSHOT</version>
     </parent>
 
     <groupId>com.sina.sparrowframework</groupId>
     <artifactId>sparrow-framework</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
