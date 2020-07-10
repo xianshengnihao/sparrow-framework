@@ -28,7 +28,7 @@ public class SchedulerConf implements EnvironmentAware {
 
     @Bean
     @ConditionalOnBean(value = {LockProvider.class})
-    public ScheduledLockConfiguration taskScheduler(LockProvider lockProvider) {
+    public ScheduledLockConfiguration scheduledLockConfiguration(LockProvider lockProvider) {
         return ScheduledLockConfigurationBuilder
                 .withLockProvider(lockProvider)
                 .withPoolSize(environment.getProperty("job.scheduled.lock.pool.size", int.class, 20))
