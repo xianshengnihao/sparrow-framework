@@ -410,31 +410,31 @@ public final class SinaCloudStore implements CloudStore, EnvironmentAware {
 
         final ZonedDateTime now = ZonedDateTime.now(TimeUtils.ZONE8);
 
-//        final String contentDisposition = createContentDisposition(form, now);
-//        meta.setContentDisposition(contentDisposition);
-//        meta.setContentType(form.getMediaType().toString());
-//        meta.setContentLength(file.length());
-//        meta.setContentMD5(md5);
+        final String contentDisposition = createContentDisposition(form, now);
+        meta.setContentDisposition(contentDisposition);
+        meta.setContentType(form.getMediaType().toString());
+        meta.setContentLength(file.length());
+        meta.setContentMD5(md5);
 
         // 设置文件元数据
         meta.setUserMetadata(createFileMeta(form, keyVersion, now));
         return meta;
     }
 
-//    private String createContentDisposition(final StoreForm form, final ZonedDateTime now) {
-//        ContentDisposition.Builder builder;
-//        builder = ContentDisposition
-//                .builder(form.isAttachment() ? "attachment" : "inline")
-//                .size(form.getLength())
-//                .creationDate(now)
-//                .modificationDate(now)
-//        ;
-//
-//        if (form.isAttachment()) {
-//            builder.filename(form.getName(), StandardCharsets.UTF_8);
-//        }
-//        return builder.build().toString();
-//    }
+    private String createContentDisposition(final StoreForm form, final ZonedDateTime now) {
+        ContentDisposition.Builder builder;
+        builder = ContentDisposition
+                .builder(form.isAttachment() ? "attachment" : "inline")
+                .size(form.getLength())
+                .creationDate(now)
+                .modificationDate(now)
+        ;
+
+        if (form.isAttachment()) {
+            builder.filename(form.getName(), StandardCharsets.UTF_8);
+        }
+        return builder.build().toString();
+    }
 
     @Deprecated
     private String getBucketWithAcceptMode(AcceptMode acceptMode) {
