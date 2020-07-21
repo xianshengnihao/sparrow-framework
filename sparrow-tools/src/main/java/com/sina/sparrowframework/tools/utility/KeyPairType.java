@@ -7,9 +7,11 @@ import java.util.Collections;
 /**
  * created  on 2019-03-13.
  */
-public enum KeyPairType  {
+public enum KeyPairType {
 
-    RSA(200, "RSA",  Arrays.asList(1024, 2048, 4096));
+    RSA(200, "RSA", Arrays.asList(1024, 2048, 4096)),
+
+    SM3withSM2(300, "EC", Collections.EMPTY_LIST);
 
 
     private final int code;
@@ -19,8 +21,7 @@ public enum KeyPairType  {
     public final Collection<Integer> keySizes;
 
 
-
-    KeyPairType(int code,  String display,  Collection<Integer> keySizes) {
+    KeyPairType(int code, String display, Collection<Integer> keySizes) {
         this.code = code;
         this.display = display;
         this.keySizes = Collections.unmodifiableCollection(keySizes);
@@ -32,4 +33,5 @@ public enum KeyPairType  {
 
     public String getDisplay() {
         return display;
-    }}
+    }
+}

@@ -2,6 +2,8 @@ package com.sina.sparrowframework.tools.utility;
 
 
 import org.apache.commons.codec.binary.Base64;
+import org.bouncycastle.asn1.gm.GMObjectIdentifiers;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import javax.crypto.KeyGenerator;
 import javax.crypto.spec.SecretKeySpec;
@@ -10,6 +12,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.security.*;
+import java.security.spec.ECGenParameterSpec;
 import java.security.spec.KeySpec;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
@@ -23,8 +26,6 @@ public abstract class KeyUtils {
     protected static final String KEY_END = "-----END %s %s KEY-----";
 
     private static final Pattern BOUNDARY_PATTERN = Pattern.compile("(?:^\\s*-+[^-]+-+\\s*(?=[^-])|(?<=[^-])\\s*-+[^-]+-+\\s*$)");
-
-
 
 
     protected KeyUtils() {
@@ -47,13 +48,12 @@ public abstract class KeyUtils {
      */
     public static Key readAesKey(String base64Text) throws RuntimeException {
         try {
-            return readKey(KeyType.AES,base64Text);
+            return readKey(KeyType.AES, base64Text);
         } catch (Exception e) {
-           throw new RuntimeException(e.getMessage(),e);
+            throw new RuntimeException(e.getMessage(), e);
         }
 
     }
-
 
 
     /**
@@ -71,7 +71,7 @@ public abstract class KeyUtils {
      * @throws Exception - 读取失败
      */
     public static PrivateKey readRsaPrivateKey(String base64Text) throws Exception {
-        return readPrivateKey(KeyPairType.RSA,base64Text);
+        return readPrivateKey(KeyPairType.RSA, base64Text);
 
     }
 
@@ -90,7 +90,29 @@ public abstract class KeyUtils {
      * @throws Exception - 读取失败
      */
     public static PublicKey readRsaPublicKey(String base64Text) throws Exception {
-        return readPublicKey(KeyPairType.RSA,base64Text);
+        return readPublicKey(KeyPairType.RSA, base64Text);
+    }
+
+    /**
+     * 从 base64 中读取 sm2WithSm3 私钥
+     *
+     * @param base64Text sm2WithSm3 私钥的 base64 表示
+     * @return sm2WithSm3 私钥
+     * @throws Exception - 读取失败
+     */
+    public static PrivateKey readSM2WithSM3PrivateKey(String base64Text) throws Exception {
+        return readPrivateKey(KeyPairType.SM3withSM2, base64Text);
+    }
+
+    /**
+     * 从 base64 中读取 sm2WithSm3 公钥
+     *
+     * @param base64Text sm2WithSm3 公钥的 base64 表示
+     * @return sm2WithSm3 公钥
+     * @throws Exception - 读取失败
+     */
+    public static PublicKey readSM2WithSM3PublicKey(String base64Text) throws Exception {
+        return readPublicKey(KeyPairType.SM3withSM2, base64Text);
     }
 
 
@@ -99,7 +121,7 @@ public abstract class KeyUtils {
      * @throws Exception 创建失败, key size 错误
      */
     public static Key createAesKey(int keySize) throws Exception {
-        return createKey(KeyType.AES,keySize);
+        return createKey(KeyType.AES, keySize);
     }
 
     /**
@@ -108,7 +130,19 @@ public abstract class KeyUtils {
      * @return RSA 密钥对
      */
     public static KeyPair createRsaKeyPair(int keySize) throws Exception {
-        return createKeyPari(KeyPairType.RSA,keySize);
+        return createKeyPari(KeyPairType.RSA, keySize);
+    }
+
+    /**
+     * 创建 {@link GMObjectIdentifiers#sm2sign_with_sm3} 秘钥对
+     *
+     * @return 秘钥对
+     */
+    public static KeyPair createSM2WithSM3KeyPair() throws Exception {
+        final ECGenParameterSpec sm2Spec = new ECGenParameterSpec("sm2p256v1");
+        KeyPairGenerator kpg = KeyPairGenerator.getInstance("EC", new BouncyCastleProvider());
+        kpg.initialize(sm2Spec);
+        return kpg.generateKeyPair();
     }
 
     /**
@@ -127,30 +161,30 @@ public abstract class KeyUtils {
 
 
     public static String writeToString(Key key) {
-        return Base64.encodeBase64String( key.getEncoded() );
+        return Base64.encodeBase64String(key.getEncoded());
     }
 
 
     public static Key readKey(KeyType type, String base64Text) throws Exception {
         KeySpec spec = getKeySpec(type, getEncoded(base64Text));
-        Key key ;
+        Key key;
         if (type == KeyType.AES) {
             key = (Key) (spec);
-        }else {
+        } else {
             throw new Exception("不支持 key type");
         }
         return key;
     }
 
     public static PrivateKey readPrivateKey(KeyPairType type, String base64Text) throws Exception {
-        KeyFactory keyFactory = KeyFactory.getInstance(type.getDisplay());
+        KeyFactory keyFactory = getKeyFactory(type);
         return keyFactory.generatePrivate(
                 getKeySpec(type, true, getEncoded(base64Text))
         );
     }
 
     public static PublicKey readPublicKey(KeyPairType type, String base64Text) throws Exception {
-        KeyFactory keyFactory = KeyFactory.getInstance(type.getDisplay());
+        KeyFactory keyFactory = getKeyFactory(type);
         return keyFactory.generatePublic(
                 getKeySpec(type, false, getEncoded(base64Text))
         );
@@ -193,6 +227,7 @@ public abstract class KeyUtils {
 
         switch (type) {
             case RSA:
+            case SM3withSM2:
                 spec = privateKey ? new PKCS8EncodedKeySpec(encoded) : new X509EncodedKeySpec(encoded);
                 break;
             default:
@@ -201,8 +236,23 @@ public abstract class KeyUtils {
         return spec;
     }
 
+    protected static KeyFactory getKeyFactory(KeyPairType type) throws Exception {
+        KeyFactory keyFactory;
+        switch (type) {
+            case RSA:
+                keyFactory = KeyFactory.getInstance(type.getDisplay());
+                break;
+            case SM3withSM2:
+                keyFactory = KeyFactory.getInstance(type.getDisplay(), new BouncyCastleProvider());
+                break;
+            default:
+                throw new IllegalArgumentException(String.format("KeyAlgorithm[%s] unknown", type));
+        }
+        return keyFactory;
+    }
 
-    protected static byte[] getEncoded( String base64Text) {
+
+    protected static byte[] getEncoded(String base64Text) {
         return Base64.decodeBase64(
                 BOUNDARY_PATTERN.matcher(base64Text).replaceAll("")
         );
@@ -213,16 +263,16 @@ public abstract class KeyUtils {
     private static void doWriteToFile(BufferedWriter writer, Key key)
             throws IOException {
         final String base64 = Base64.encodeBase64String(key.getEncoded()).replaceAll("\\r?\\n?", "");
-        String typeDesc ;
-        if(key instanceof PrivateKey){
-                typeDesc = "PRIVATE";
-        }else if (key instanceof PublicKey){
+        String typeDesc;
+        if (key instanceof PrivateKey) {
+            typeDesc = "PRIVATE";
+        } else if (key instanceof PublicKey) {
             typeDesc = "PUBLIC";
-        }else {
+        } else {
             typeDesc = "";
         }
         //写入上边界
-        writer.write(String.format(KEY_BEGIN, key.getAlgorithm(),typeDesc));
+        writer.write(String.format(KEY_BEGIN, key.getAlgorithm(), typeDesc));
         writer.newLine();
 
         final int bit = 6, size = 1 << bit;
@@ -240,11 +290,8 @@ public abstract class KeyUtils {
             writer.newLine();
         }
         //写入下边界
-        writer.write(String.format(KEY_END, key.getAlgorithm(),typeDesc));
+        writer.write(String.format(KEY_END, key.getAlgorithm(), typeDesc));
     }
-
-
-
 
 
 }

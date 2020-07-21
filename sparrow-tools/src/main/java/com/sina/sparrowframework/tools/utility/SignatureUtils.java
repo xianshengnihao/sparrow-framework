@@ -1,6 +1,7 @@
 package com.sina.sparrowframework.tools.utility;
 
 import org.apache.commons.codec.binary.Base64;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,6 +31,10 @@ public abstract class SignatureUtils {
 
     public static boolean verifySignatureWithRSA(byte[] contentBytes, String signature, PublicKey publicKey) {
         return verifySignature(SignatureType.SHA256withRSA, contentBytes, signature, publicKey);
+    }
+
+    public static boolean verifySignatureWithSM2WithSM3(String content, String signature, PublicKey publicKey) {
+        return verifySignature(SignatureType.SM2withSM3, content, signature, publicKey);
     }
 
     public static boolean verifySignature(SignatureType name, final InputStream content, final String signature,
@@ -64,6 +69,10 @@ public abstract class SignatureUtils {
         return signature(SignatureType.SHA256withRSA, contentBytes, privateKey);
     }
 
+    public static String signatureWithSM2WithSM3(String content, PrivateKey privateKey) {
+        return signature(SignatureType.SM2withSM3, content, privateKey);
+    }
+
 
     public static String signature(SignatureType name, String content, PrivateKey key) {
         return signature(name, content.getBytes(StandardCharsets.UTF_8), key);
@@ -72,7 +81,7 @@ public abstract class SignatureUtils {
     public static String signature(SignatureType name, byte[] contentBytes, PrivateKey key) {
         String signature = null;
         try {
-            Signature signatureObj = Signature.getInstance(name.display());
+            Signature signatureObj = getSignature(name);
             signatureObj.initSign(key);
             signatureObj.update(contentBytes);
             signature = Base64.encodeBase64String(signatureObj.sign());
@@ -144,7 +153,7 @@ public abstract class SignatureUtils {
     public static boolean verifySignature(SignatureType name, byte[] contentBytes, String signature, PublicKey publicKey) {
         boolean valid = false;
         try {
-            Signature signatureObj = Signature.getInstance(name.name());
+            Signature signatureObj = getSignature(name);
             signatureObj.initVerify(publicKey);
             signatureObj.update(contentBytes);
             valid = signatureObj.verify(Base64.decodeBase64(signature));
@@ -162,5 +171,18 @@ public abstract class SignatureUtils {
 
     public static boolean verifySignature(SignatureType name, String content, String signature, PublicKey publicKey) {
         return verifySignature(name, content.getBytes(StandardCharsets.UTF_8), signature, publicKey);
+    }
+
+    private static Signature getSignature(SignatureType name) throws Exception {
+        Signature signature;
+        switch (name) {
+            case SM2withSM3:
+                signature = Signature.getInstance(name.display(), new BouncyCastleProvider());
+                break;
+            default:
+                signature = Signature.getInstance(name.display());
+                break;
+        }
+        return signature;
     }
 }
