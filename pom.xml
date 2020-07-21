@@ -143,6 +143,11 @@
                 <artifactId>sparrow-log</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcpkix-jdk15on</artifactId>
+                <version>${bcprov-jdk15on.version}</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>
