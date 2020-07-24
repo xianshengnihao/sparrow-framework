@@ -34,6 +34,7 @@
         <module>sparrow-test</module>
         <module>sparrow-redis-related</module>
         <module>sparrow-log</module>
+        <module>sparrow-kafka</module>
     </modules>
 
     <properties>
