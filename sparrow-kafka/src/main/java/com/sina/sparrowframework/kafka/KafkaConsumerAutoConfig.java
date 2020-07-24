@@ -43,7 +43,7 @@ public class KafkaConsumerAutoConfig {
     public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, String>>
     kafkaListenerContainerFactory(KafkaProperties kafkaProperties,
                                   KafkaTemplate<String, String> kafkaTemplate) {
-        return buildKafkaListenerContainerFactory(kafkaProperties, kafkaTemplate);
+        return buildKafkaListenerContainerFactory(kafkaProperties, kafkaTemplate, false);
     }
 
     /**
@@ -55,16 +55,16 @@ public class KafkaConsumerAutoConfig {
     public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, String>>
     ackKafkaListenerContainerFactory(KafkaProperties kafkaProperties,
                                      KafkaTemplate<String, String> kafkaTemplate) {
-        KafkaProperties.Consumer consumer = kafkaProperties.getConsumer();
-        consumer.setEnableAutoCommit(Boolean.FALSE);
-        return buildKafkaListenerContainerFactory(kafkaProperties, kafkaTemplate);
+        return buildKafkaListenerContainerFactory(kafkaProperties, kafkaTemplate, true);
     }
 
     private ConcurrentKafkaListenerContainerFactory<String, String>
     buildKafkaListenerContainerFactory(KafkaProperties kafkaProperties,
-                                       KafkaTemplate<String, String> kafkaTemplate) {
+                                       KafkaTemplate<String, String> kafkaTemplate, boolean ack) {
         ConcurrentKafkaListenerContainerFactory<String, String> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
+
+        kafkaProperties.getConsumer().setEnableAutoCommit(!ack);
 
         factory.setConsumerFactory(consumerFactory(kafkaProperties));
 
@@ -80,6 +80,9 @@ public class KafkaConsumerAutoConfig {
         map.from(() -> kafkaTemplate).whenNonNull().to(factory::setReplyTemplate);
         map.from(properties::getType).whenEqualTo(KafkaProperties.Listener.Type.BATCH)
                 .toCall(() -> factory.setBatchListener(true));
+        if (ack) {
+            factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL_IMMEDIATE);
+        }
         // 配置容器
         configureContainer(factory.getContainerProperties(), kafkaProperties);
         return factory;
