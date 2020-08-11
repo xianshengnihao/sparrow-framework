@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.sina.tasty</groupId>
         <artifactId>tasty-dependencies</artifactId>
-        <version>1.0.6-SNAPSHOT</version>
+        <version>1.0.6</version>
     </parent>
 
     <groupId>com.sina.sparrowframework</groupId>
@@ -165,8 +165,8 @@
 
      <repositories>
         <repository>
-            <id>sina_finance</id>
-            <url>http://10.41.22.57:8081/nexus/content/groups/public/</url>
+            <id>fc-public</id>
+            <url>https://nexus.jr.sina.com.cn/repository/maven-public/</url>
         </repository>
     </repositories>
 
