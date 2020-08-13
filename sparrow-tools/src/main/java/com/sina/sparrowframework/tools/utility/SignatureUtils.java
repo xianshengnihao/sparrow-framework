@@ -75,6 +75,10 @@ public abstract class SignatureUtils {
         return signature(SignatureType.SM2withSM3, content, privateKey, CodecType.HEX);
     }
 
+    public static String signatureWithSM2WithSM3(byte[] contentBytes, PrivateKey privateKey) {
+        return signature(SignatureType.SM2withSM3, contentBytes, privateKey, CodecType.HEX);
+    }
+
 
     public static String signature(SignatureType name, String content, PrivateKey key, CodecType codecType) {
         return signature(name, content.getBytes(StandardCharsets.UTF_8), key, codecType);
