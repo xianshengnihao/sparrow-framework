@@ -252,7 +252,7 @@ public abstract class KeyUtils {
     }
 
 
-    protected static byte[] getEncoded(String base64Text) {
+    public static byte[] getEncoded(String base64Text) {
         return Base64.decodeBase64(
                 BOUNDARY_PATTERN.matcher(base64Text).replaceAll("")
         );
