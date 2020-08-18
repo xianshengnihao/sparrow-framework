@@ -13,7 +13,10 @@ public class IdMetaObjectHandler implements MetaObjectHandler {
 
     @Override
     public void insertFill(MetaObject metaObject) {
-        this.setFieldValByName("id", IdProviderConfig.id.genId(),metaObject);
+        Object id = this.getFieldValByName("id", metaObject);
+        if (id == null) {
+            this.setFieldValByName("id", IdProviderConfig.id.genId(), metaObject);
+        }
     }
 
     @Override
