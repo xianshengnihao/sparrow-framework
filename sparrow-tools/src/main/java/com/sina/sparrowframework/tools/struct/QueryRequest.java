@@ -1,6 +1,7 @@
 package com.sina.sparrowframework.tools.struct;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.sina.sparrowframework.tools.utility.JsonUtils;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Max;
@@ -162,5 +163,10 @@ public class QueryRequest implements Serializable {
     public QueryRequest setPageNum(Integer pageNum) {
         this.pageNum = pageNum;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return JsonUtils.writeToJson(this, true);
     }
 }
