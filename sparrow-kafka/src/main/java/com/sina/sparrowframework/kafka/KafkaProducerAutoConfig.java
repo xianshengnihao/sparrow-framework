@@ -10,11 +10,9 @@ import org.springframework.kafka.core.KafkaTemplate;
 
 /**
  * {@link org.apache.kafka.clients.producer.KafkaProducer} 的配置.
- * <p>
- * 若要使用 KafkaProducer 服务, 需要显示的设置 <code>sparrow.mq.kafka.producer.enable=true</code>
  */
 @Configuration
-@ConditionalOnProperty(prefix = "sparrow.mq.kafka.producer", name = "enable", havingValue = "true")
+@ConditionalOnProperty(prefix = "sparrow.mq.kafka.producer", name = "enable", havingValue = "true", matchIfMissing = true)
 @EnableConfigurationProperties({KafkaProperties.class})
 public class KafkaProducerAutoConfig {
 

@@ -7,6 +7,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.context.properties.PropertyMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Primary;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
@@ -21,13 +22,12 @@ import java.time.Duration;
 
 /**
  * {@link org.apache.kafka.clients.consumer.KafkaConsumer} 的配置.
- * <p>
- * 若要使用 KafkaConsumer 服务, 需要显示的设置 <code>sparrow.mq.kafka.consumer.enable=true</code>
  */
 @Configuration
-@ConditionalOnProperty(prefix = "sparrow.mq.kafka.consumer", name = "enable", havingValue = "true")
+@ConditionalOnProperty(prefix = "sparrow.mq.kafka.consumer", name = "enable", havingValue = "true", matchIfMissing = true)
 @EnableConfigurationProperties({KafkaProperties.class})
 @AutoConfigureAfter(KafkaProducerAutoConfig.class)
+@Import(KafkaProducerAutoConfig.class)
 public class KafkaConsumerAutoConfig {
 
     public static final String ACK_CONTAINER = "ackKafkaListenerContainerFactory";
