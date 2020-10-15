@@ -7,7 +7,7 @@
     <parent>
         <groupId>com.sina.sparrowframework</groupId>
         <artifactId>sparrow-framework</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>0.0.2-SNAPSHOT</version>
     </parent>
 
     <artifactId>sparrow-exception</artifactId>
@@ -19,6 +19,10 @@
             <groupId>com.sina.sparrowframework</groupId>
             <artifactId>sparrow-tools</artifactId>
             <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sina.sparrowframework</groupId>
+            <artifactId>sparrow-metadata</artifactId>
         </dependency>
     </dependencies>
 </project>

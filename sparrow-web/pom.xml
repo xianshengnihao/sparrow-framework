@@ -6,18 +6,43 @@
     <dependencies>
         <dependency>
             <groupId>com.sina.sparrowframework</groupId>
-            <artifactId>sparrow-orm-mybatis</artifactId>
+            <artifactId>sparrow-tools</artifactId>
         </dependency>
         <dependency>
             <groupId>com.sina.sparrowframework</groupId>
             <artifactId>sparrow-metadata</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sina.sparrowframework</groupId>
+            <artifactId>sparrow-exception</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-core</artifactId>
+            <optional>true</optional>
         </dependency>
     </dependencies>
 
     <parent>
         <groupId>com.sina.sparrowframework</groupId>
         <artifactId>sparrow-framework</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>0.0.2-SNAPSHOT</version>
     </parent>
     <artifactId>sparrow-web</artifactId>
     <name>${project.artifactId}</name>

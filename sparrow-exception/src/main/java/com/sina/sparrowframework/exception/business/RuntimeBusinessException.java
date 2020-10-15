@@ -6,6 +6,7 @@ import com.sina.sparrowframework.tools.struct.ResultCode;
  * 运行时业务异常的基类
  * created  on 02/03/2018.
  */
+@Deprecated
 public class RuntimeBusinessException extends RuntimeException implements IBusinessException {
 
 

@@ -18,22 +18,15 @@ public class CloudMeta {
     private String path;
 
     /**
-     * 若不是由 {@link CloudStore} 上传则为 路径后缀
+     * 原始文件名
      */
     @NonNull
-    private String name;
-
-    /**
-     * 若不是由 {@link CloudStore} 上传则为 {@link AcceptMode#PUBLIC}
-     */
-    @NonNull
-    private AcceptMode acceptMode;
+    private String originalName;
 
     /**
      * 若不是由 {@link CloudStore} 上传则为 {@link com.sina.sparrowframework.tools.utility.TimeUtils#SOURCE_DATE_TIME}
      */
     private LocalDateTime expiredTime;
-
 
     @NonNull
     private MediaType mediaType;
@@ -76,7 +69,6 @@ public class CloudMeta {
     @NonNull
     private Map<String, String> meta;
 
-
     @NonNull
     public String getPath() {
         return path;
@@ -88,22 +80,12 @@ public class CloudMeta {
     }
 
     @NonNull
-    public String getName() {
-        return name;
+    public String getOriginalName() {
+        return originalName;
     }
 
-    public CloudMeta setName(@NonNull String name) {
-        this.name = name;
-        return this;
-    }
-
-    @NonNull
-    public AcceptMode getAcceptMode() {
-        return acceptMode;
-    }
-
-    public CloudMeta setAcceptMode(@NonNull AcceptMode acceptMode) {
-        this.acceptMode = acceptMode;
+    public CloudMeta setOriginalName(@NonNull String originalName) {
+        this.originalName = originalName;
         return this;
     }
 

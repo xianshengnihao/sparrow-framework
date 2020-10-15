@@ -1,6 +1,7 @@
 package com.sina.sparrowframework.tools.utility;
 
 import com.sina.sparrowframework.tools.struct.CodeEnum;
+import org.bouncycastle.asn1.gm.GMObjectIdentifiers;
 
 import java.util.Map;
 
@@ -43,7 +44,9 @@ public enum SignatureType implements CodeEnum {
 
     SHA384withECDSA(170, "SHA384withECDSA"),
 
-    SHA512withECDSA(180, "SHA512withECDSA");
+    SHA512withECDSA(180, "SHA512withECDSA"),
+
+    SM2withSM3(190, GMObjectIdentifiers.sm2sign_with_sm3.toString());
 
 
     private final int code;

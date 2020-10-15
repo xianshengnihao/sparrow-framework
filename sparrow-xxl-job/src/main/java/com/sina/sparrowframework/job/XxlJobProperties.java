@@ -9,7 +9,7 @@ public class XxlJobProperties {
 
     private String accessToken;
 
-    private String executorAppName;
+    private String executorAppname;
 
     private String executorAddress;
 
@@ -39,12 +39,12 @@ public class XxlJobProperties {
         return this;
     }
 
-    public String getExecutorAppName() {
-        return executorAppName;
+    public String getExecutorAppname() {
+        return executorAppname;
     }
 
-    public XxlJobProperties setExecutorAppName(String executorAppName) {
-        this.executorAppName = executorAppName;
+    public XxlJobProperties setExecutorAppname(String executorAppname) {
+        this.executorAppname = executorAppname;
         return this;
     }
 

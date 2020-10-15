@@ -3,10 +3,10 @@ package com.sina.sparrowframework.sinacloud;
 import com.sina.cloudstorage.SCSClientException;
 import com.sina.cloudstorage.services.scs.SCS;
 import com.sina.cloudstorage.services.scs.model.*;
+import com.sina.sparrowframework.exception.business.DataException;
 import com.sina.sparrowframework.tools.struct.ResultCode;
 import com.sina.sparrowframework.tools.tuple.Pair;
 import com.sina.sparrowframework.tools.utility.*;
-import com.sina.sparrowframework.exception.business.DataException;
 import org.apache.commons.codec.Charsets;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +14,6 @@ import org.springframework.context.EnvironmentAware;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
-import org.springframework.http.CacheControl;
 import org.springframework.http.ContentDisposition;
 import org.springframework.http.MediaType;
 import org.springframework.lang.NonNull;
@@ -24,19 +23,16 @@ import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.security.Key;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.sina.cloudstorage.services.scs.Headers.EXPIRATION;
 import static com.sina.sparrowframework.tools.utility.Assert.*;
-import static com.sina.sparrowframework.tools.utility.TimeUtils.convertTimeUnit;
 
 /**
  * 这个类是 {@link CloudStore} 一个实现
@@ -59,7 +55,6 @@ public final class SinaCloudStore implements CloudStore, EnvironmentAware {
      */
     private static final String CLOUD_DOWNLOAD_HOST = "tasty.sina.cloud.store.download.host";
 
-
     /**
      * 当前 版本
      */
@@ -73,10 +68,7 @@ public final class SinaCloudStore implements CloudStore, EnvironmentAware {
 
     private static final String META_FILE_NAME = "file-name";
 
-    /**
-     * {@link #META_FILE_NAME} 会把文件名变小写. 所以新加一个元数据
-     */
-    private static final String META_FILE_NAME_BASE_64 = "file-name2";
+    private static final String META_ORIGINAL_NAME = "original-name";
 
     private static final String META_CIPHER_VERSION = "cipher-version";
 
@@ -132,18 +124,14 @@ public final class SinaCloudStore implements CloudStore, EnvironmentAware {
         // 创建元数据
         ObjectMetadata meta = crateMetaAndStoreResult(form, file, version);
 
-
-        String bucket = getBucketWithAcceptMode(form.getAcceptMode());
-        String fileKey;
-
-        fileKey = getFileKey(form.getPrefix());
+        String fileKey = form.getKey();
 
         try {
             // 执行上传
             PutObjectResult putObjectResult;
-            putObjectResult = sinaScs.putObject(new PutObjectRequest(bucket, fileKey, file).withMetadata(meta));
+            putObjectResult = sinaScs.putObject(new PutObjectRequest(form.getBucket(), fileKey, file).withMetadata(meta));
 
-            String path = bucket.concat("/").concat(fileKey);
+            String path = form.getBucket().concat("/").concat(fileKey);
 
             LOG.info("tRestoreExpirationTime:{}", putObjectResult.getExpirationTime());
 
@@ -155,8 +143,10 @@ public final class SinaCloudStore implements CloudStore, EnvironmentAware {
         } catch (SCSClientException e) {
             throw new CloudStoreException(ResultCode.serverUploadError, e, e.getMessage());
         } finally {
-            if (file != null && file.exists() && !file.equals(form.getFile()) && file.delete()) {
-                LOG.info("上传完成,删除临时文件:{}", file);
+            try {
+                Files.delete(file.toPath());
+            } catch (IOException e) {
+                LOG.error("", e);
             }
         }
 
@@ -322,56 +312,23 @@ public final class SinaCloudStore implements CloudStore, EnvironmentAware {
         return env.getRequiredProperty(CLOUD_DOWNLOAD_HOST).concat(path);
     }
 
-
-    /**
-     * @param keyPrefix 调用者定义的前缀
-     * @return 前缀为 {@code /}
-     */
-    private String getFileKey(final String keyPrefix) {
-        String customPrefix = keyPrefix;
-        String prefix = env.getRequiredProperty(PATH_PREFIX);
-        if (prefix.startsWith("/")) {
-            prefix = prefix.substring(1);
-        }
-        if (!prefix.endsWith("/")) {
-            prefix = prefix + "/";
-        }
-        if (StrToolkit.hasText(customPrefix)) {
-            customPrefix = encodeText(customPrefix);
-            if (customPrefix.startsWith("/")) {
-                customPrefix = customPrefix.substring(1);
-            }
-            if (!customPrefix.endsWith("/")) {
-                customPrefix = customPrefix + "/";
-            }
-            prefix = prefix + customPrefix;
-        } else {
-            prefix = prefix + LocalDate.now().format(TimeUtils.CLOSE_DATE_FORMATTER) + "/";
-        }
-        return prefix + UUID.randomUUID().toString().toLowerCase();
+    private String generateFileKey() {
+        return LocalDate.now().format(DateUtil.SLASH_DATE_FORMATTER) + "/" + UUIDUtils.randomUUIDWithNoDash();
     }
-
 
     private void assertStoreForm(StoreForm form) throws DataException {
         assertNotNull(form, "form required");
-        assertNotNull(form.getAcceptMode(), "acceptMode required");
         assertNotNull(form.getMediaType(), "mediaType required");
 
-        if (form.getFile() == null && form.getInputStream() == null) {
-            throw new DataException("file and inputStream is null");
-        }
+        assertNotNull(form.getBucket(), "bucket can't be null");
+        assertNotNull(form.getKey(), "key can't be null");
+        assertNotNull(form.getInputStream(), "inputStream can't be null");
+        assertNotNull(form.getName(), "name can't be null");
 
-        if (form.getTime() != null) {
-            if (form.getTimeUnit() == null) {
-                throw new DataException("time isn't null but timeUnit is null");
-            }
-            assertGtZero(form.getTime(), "time must great than zero");
-        }
         if (form.getMeta() != null) {
             assertTrue(form.getMeta().size() <= 20, "meta size must less or equals then 20");
             assertMeta(form.getMeta());
         }
-
     }
 
     private void assertMeta(Map<String, String> meta) throws DataException {
@@ -386,33 +343,13 @@ public final class SinaCloudStore implements CloudStore, EnvironmentAware {
 
     private File cacheAndEncryptFileIfNeed(StoreForm form, Integer version) throws CloudStoreException {
         try {
-            File file;
-            if (form.getFile() != null) {
-                if (!form.getFile().exists()) {
-                    throw new CloudStoreException(ResultCode.resourceNotFund);
-                }
-                // 记录文件大小
-                form.setLength(form.getFile().length());
-
-                if (form.isCipher()) {
-                    // 记录原文件 md5
-                    form.setMd5(DigestUtils.md5Base64(form.getFile()));
-                    file = encryptFile(new FileSystemResource(form.getFile()), version);
-                } else {
-                    file = form.getFile();
-                }
-
-            } else {
-                file = StreamUtils.copyToFileAndClose(form.getInputStream());
-                // 记录文件大小
-                form.setLength(file.length());
-                if (form.isCipher()) {
-                    // 记录原文件 md5
-                    form.setMd5(DigestUtils.md5Base64(file));
-                    file = encryptFile(new FileSystemResource(file), version);
-                }
-
-
+            File file = StreamUtils.copyToFileAndClose(form.getInputStream());
+            // 记录文件大小
+            form.setLength(file.length());
+            if (form.isCipher()) {
+                // 记录原文件 md5
+                form.setMd5(DigestUtils.md5Base64(file));
+                file = encryptFile(new FileSystemResource(file), version);
             }
             return file;
         } catch (IOException e) {
@@ -464,7 +401,6 @@ public final class SinaCloudStore implements CloudStore, EnvironmentAware {
 
         ObjectMetadata meta = new ObjectMetadata();
 
-        final String fileName = getFileName(form);
         final String md5 = createMd5(file);
 
         if (!StrToolkit.hasText(form.getMd5())) {
@@ -472,36 +408,20 @@ public final class SinaCloudStore implements CloudStore, EnvironmentAware {
             form.setMd5(md5);
         }
 
-
         final ZonedDateTime now = ZonedDateTime.now(TimeUtils.ZONE8);
 
-        final String contentDisposition = createContentDisposition(form, fileName, now);
+        final String contentDisposition = createContentDisposition(form, now);
         meta.setContentDisposition(contentDisposition);
-
-        if (form.getTime() != null) {
-            ZonedDateTime expiredTime = now.withZoneSameInstant(TimeUtils.GMT)
-                    .plus(form.getTime(), convertTimeUnit(form.getTimeUnit()));
-            expiredTime = expiredTime.withZoneSameInstant(TimeUtils.GMT);
-            meta.setRestoreExpirationTime(Date.from(expiredTime.toInstant()));
-            meta.setHeader(EXPIRATION, expiredTime.format(DateTimeFormatter.RFC_1123_DATE_TIME));
-            meta.setHeader(HEADER_EXPIRED_TIME, expiredTime.format(DateTimeFormatter.RFC_1123_DATE_TIME));
-        }
-
-
         meta.setContentType(form.getMediaType().toString());
         meta.setContentLength(file.length());
         meta.setContentMD5(md5);
-        meta.setCacheControl(createCacheHeader(form));
-
-        setAcceptMode(form, meta);
 
         // 设置文件元数据
-        meta.setUserMetadata(createFileMeta(form, fileName, keyVersion, now));
+        meta.setUserMetadata(createFileMeta(form, keyVersion, now));
         return meta;
     }
 
-    private String createContentDisposition(final StoreForm form, final String fileName
-            , final ZonedDateTime now) {
+    private String createContentDisposition(final StoreForm form, final ZonedDateTime now) {
         ContentDisposition.Builder builder;
         builder = ContentDisposition
                 .builder(form.isAttachment() ? "attachment" : "inline")
@@ -509,32 +429,30 @@ public final class SinaCloudStore implements CloudStore, EnvironmentAware {
                 .creationDate(now)
                 .modificationDate(now)
         ;
+
         if (form.isAttachment()) {
-            builder.filename(fileName, StandardCharsets.UTF_8);
+            builder.filename(form.getName(), StandardCharsets.UTF_8);
         }
         return builder.build().toString();
     }
 
+    @Deprecated
     private String getBucketWithAcceptMode(AcceptMode acceptMode) {
         return env.getRequiredProperty(String.format(BUCKET, acceptMode.name().toLowerCase()));
     }
 
 
-    private Map<String, String> createFileMeta(final StoreForm form, final String fileName,
+    private Map<String, String> createFileMeta(final StoreForm form,
                                                final Integer keyVersion, final ZonedDateTime now) {
         Map<String, String> metaMap = new HashMap<>();
 
         metaMap.put(META_CIPHER_VERSION, keyVersion == null ? "" : String.valueOf(keyVersion));
         metaMap.put(META_UPLOAD_TIME, now.format(TimeUtils.DATETIME_FORMATTER));
-        metaMap.put(META_ACCEPT_MODE, form.getAcceptMode().name());
-        metaMap.put(META_CACHE, String.valueOf(form.isCache()));
-
         metaMap.put(META_LENGTH, String.valueOf(form.getLength()));
+
         metaMap.put(META_MD5, String.valueOf(form.getMd5()));
         metaMap.put(META_MEDIA_TYPE, encodeBase64(form.getMediaType().toString()));
-
-        metaMap.put(META_FILE_NAME_BASE_64, encodeBase64(fileName));
-
+        metaMap.put(META_ORIGINAL_NAME, encodeBase64(form.getName()));
 
         if (form.getMeta() != null) {
             for (Map.Entry<String, String> e : form.getMeta().entrySet()) {
@@ -548,69 +466,12 @@ public final class SinaCloudStore implements CloudStore, EnvironmentAware {
 
     }
 
-    private String createCacheHeader(StoreForm form) {
-        String header;
-        if (form.isCache()) {
-            CacheControl cacheControl = CacheControl.empty();
-            switch (form.getAcceptMode()) {
-                case PRIVATE:
-                    cacheControl.cachePrivate();
-                    break;
-                case PUBLIC:
-                    cacheControl.cachePublic();
-                    break;
-                default:
-                    throw new IllegalArgumentException(
-                            String.format("unknown acceptMode[%s]", form.getAcceptMode()));
-            }
-            setMaxCacheTime(form, cacheControl);
-
-            header = cacheControl.getHeaderValue();
-        } else {
-            header = CacheControl.noCache().getHeaderValue();
-        }
-        return header;
-    }
-
-    private void setMaxCacheTime(StoreForm form, CacheControl cacheControl) {
-        Long time = form.getTime();
-        TimeUnit timeUnit = form.getTimeUnit();
-        if (time == null) {
-            time = env.getProperty(DEFAULT_MAX_CACHE_TIME, Long.class, 5L * 60L);
-            timeUnit = TimeUnit.SECONDS;
-        }
-        cacheControl.sMaxAge(time, timeUnit);
-    }
-
-
-    private void setAcceptMode(StoreForm form, ObjectMetadata meta) {
-        switch (form.getAcceptMode()) {
-            case PUBLIC:
-                meta.setHeader(HEADER_ACL, "public-read");
-                break;
-            case PRIVATE:
-                meta.setHeader(HEADER_ACL, "private");
-                break;
-            default:
-                throw new IllegalArgumentException(String.format("unknown acceptMode[%s]", form.getAcceptMode()));
-        }
-
-    }
-
     private String createMd5(File file) throws CloudStoreException {
         try {
             return DigestUtils.md5Base64(file);
         } catch (IOException e) {
             throw new CloudStoreException(ResultCode.serverUploadError);
         }
-    }
-
-    private String getFileName(StoreForm form) {
-        String name = form.getName();
-        if (!StrToolkit.hasText(name)) {
-            name = UUID.randomUUID().toString().toLowerCase();
-        }
-        return name;
     }
 
     private String decodeText(String text) {
@@ -710,24 +571,17 @@ public final class SinaCloudStore implements CloudStore, EnvironmentAware {
                     ? null : ContentDisposition.parse(meta.getContentDisposition());
 
             t.setMediaType(getMediaType(meta, clazz))
-                    .setAcceptMode(getAcceptMode(metaMap))
                     .setCache(Boolean.parseBoolean(metaMap.get(META_CACHE)))
-
                     .setExpiredTime(expiredTime)
                     .setLength(meta.getContentLength())
                     .setMd5(metaMap.getOrDefault(META_MD5, ""))
                     .setContentDisposition(disposition)
-
                     .setUploadTime(getUploadTime(metaMap.get(META_UPLOAD_TIME)))
                     .setMeta(createCustomMeta(metaMap))
                     .setUrl(doGetUrl(path))
-
-                    .setName(getFileName(path, meta))
                     .setPath(path)
                     .setLength(getFileLength(metaMap))
-
-
-            ;
+                    .setOriginalName(decodeBase64(metaMap.get(META_ORIGINAL_NAME)));
             return t;
         } catch (Exception e) {
             throw new CloudStoreException(ResultCode.downloadError, e, e.getMessage());
@@ -753,57 +607,10 @@ public final class SinaCloudStore implements CloudStore, EnvironmentAware {
         return length;
     }
 
-    private String getFileName(String path, ObjectMetadata meta) {
-        ContentDisposition disposition = meta.getContentDisposition() == null
-                ? null : ContentDisposition.parse(meta.getContentDisposition());
-        Map<String, String> metaMap = meta.getUserMetadata();
-
-        String name;
-        if (StrToolkit.hasText(metaMap.get(META_FILE_NAME_BASE_64))) {
-            // 最新上传的文件都会到这里.
-            name = decodeBase64(metaMap.get(META_FILE_NAME_BASE_64));
-        } else if (disposition != null) {
-            // 旧版本上传的文件 且是下载文件而不是 获取元数据时 到这里.
-            name = disposition.getFilename();
-        } else {
-            // 获取元数据 或不是 本组件上传
-            String text = metaMap.get(META_FILE_NAME);
-            if (StrToolkit.hasText(text)) {
-                name = decodeText(text);
-            } else {
-                // 不是本组件上传.
-                name = StrToolkit.getFilename(path);
-            }
-        }
-        return name;
-    }
-
-
-    private AcceptMode getAcceptMode(final Map<String, String> metaMap) {
-        String text = metaMap.get(META_ACCEPT_MODE);
-        AcceptMode acceptMode;
-        if (StrToolkit.hasText(text)) {
-            acceptMode = AcceptMode.valueOf(text);
-        } else {
-            acceptMode = AcceptMode.PUBLIC;
-        }
-        return acceptMode;
-    }
-
     private MediaType getMediaType(ObjectMetadata meta, Class<?> clazz) {
         String text = meta.getUserMetadata().get(META_MEDIA_TYPE);
-
-        MediaType mediaType;
-        if (StrToolkit.hasText(text)) {
-            mediaType = MediaType.valueOf(decodeBase64(text));
-        } else {
-            // 兼容旧实现
-            mediaType = MediaType.valueOf(meta.getContentType());
-        }
-        return mediaType;
-
+        return MediaType.valueOf(decodeBase64(text));
     }
-
 
     /**
      * 新浪云存储有字符串限制所以需要编码
@@ -818,7 +625,6 @@ public final class SinaCloudStore implements CloudStore, EnvironmentAware {
                 , StandardCharsets.UTF_8
         );
     }
-
 
     public void setSinaScs(SCS sinaScs) {
         this.sinaScs = sinaScs;

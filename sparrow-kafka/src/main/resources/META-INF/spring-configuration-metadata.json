@@ -1,0 +1,16 @@
+{
+  "properties": [
+    {
+      "defaultValue": true,
+      "name": "sparrow.mq.kafka.producer.enable",
+      "description": "是否使用kafka生产者",
+      "type": "java.lang.Boolean"
+    },
+    {
+      "defaultValue": true,
+      "name": "sparrow.mq.kafka.consumer.enable",
+      "description": "是否使用kafka消费者",
+      "type": "java.lang.Boolean"
+    }
+  ]
+}

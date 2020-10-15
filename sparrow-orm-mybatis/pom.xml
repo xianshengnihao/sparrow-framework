@@ -7,7 +7,7 @@
     <parent>
         <groupId>com.sina.sparrowframework</groupId>
         <artifactId>sparrow-framework</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>0.0.2-SNAPSHOT</version>
     </parent>
     <artifactId>sparrow-orm-mybatis</artifactId>
     <name>${project.artifactId}</name>
@@ -22,7 +22,6 @@
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-extension</artifactId>
             <optional>true</optional>
-            <version>${mybatis-plus.version}</version>
         </dependency>
         <dependency>
             <groupId>com.sina.sparrowframework</groupId>
@@ -32,6 +31,20 @@
             <groupId>org.reflections</groupId>
             <artifactId>reflections</artifactId>
             <version>${reflections.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-generator</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>mybatis-spring</artifactId>
+                    <groupId>org.mybatis</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
         </dependency>
     </dependencies>
 
