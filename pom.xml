@@ -163,12 +163,17 @@
         </dependencies>
     </dependencyManagement>
 
-     <repositories>
+    <repositories>
         <repository>
             <id>fc-public</id>
             <url>https://nexus.jr.sina.com.cn/repository/maven-public/</url>
         </repository>
     </repositories>
+
+    <scm>
+        <developerConnection>scm:git:git@git.staff.sina.com.cn:fc/sparrow-framework.git</developerConnection>
+    </scm>
+
 
     <build>
         <resources>
