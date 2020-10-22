@@ -107,5 +107,6 @@ public class KafkaConsumerAutoConfig {
         map.from(properties::getMonitorInterval).as(Duration::getSeconds).as(Number::intValue).to(container::setMonitorInterval);
 
         map.from(properties::getLogContainerConfig).to(container::setLogContainerConfig);
+        map.from(properties::isMissingTopicsFatal).to(container::setMissingTopicsFatal);
     }
 }
