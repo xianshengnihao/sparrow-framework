@@ -17,7 +17,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 public class KafkaProducerAutoConfig {
 
     @Bean
-    public KafkaTemplate<String, String> kafkaTemplate(KafkaProperties kafkaProperties) {
+    public KafkaTemplate<String, String> commonKafkaTemplate(KafkaProperties kafkaProperties) {
         return new KafkaTemplate<>(kafkaProducerFactory(kafkaProperties));
     }
 
