@@ -5,7 +5,7 @@
     <parent>
         <artifactId>sparrow-framework</artifactId>
         <groupId>com.sina.sparrowframework</groupId>
-        <version>0.0.7-SNAPSHOT</version>
+        <version>0.0.7</version>
     </parent>
 
     <artifactId>sparrow-constants</artifactId>
