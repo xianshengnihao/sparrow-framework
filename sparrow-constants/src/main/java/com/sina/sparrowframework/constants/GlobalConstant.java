@@ -25,7 +25,7 @@ public interface GlobalConstant extends StrPool {
     /**
      * 鉴权请求头名称
      */
-    String AUTH_HEADER_KEY = "Sparrow-Authorization";
+    String AUTH_HEADER_KEY = "sparrow-authorization";
 
     /**
      * h5拦截路径前缀
