@@ -26,6 +26,16 @@ public interface CodeManager {
          * 理财平台系统
          */
         String SPARROW_MANAGER = "04";
+
+        /**
+         * 酒证系统
+         */
+        String DWC = "06";
+
+        /**
+         * 运营系统
+         */
+        String KANGAROO = "07";
     }
 
 }
