@@ -126,6 +126,26 @@ public class DataSourceConfiguation extends BaseCondition implements Environment
     }
 
     /**
+     * 编号为 8 的从库(dwc项目从库)
+     * 动态数据源
+     */
+    @Bean(name = "slaver8DataSource", initMethod = "init", destroyMethod = "close")
+    @Conditional(S8DataSourceCondition.class)
+    public DruidDataSource slaver8DataSource() {
+        return createMasterDataSource(false, 8);
+    }
+
+    /**
+     * 编号为 9 的从库(bigdata tidb)
+     * 动态数据源
+     */
+    @Bean(name = "slaver9DataSource", initMethod = "init", destroyMethod = "close")
+    @Conditional(S9DataSourceCondition.class)
+    public DruidDataSource slaver9DataSource() {
+        return createMasterDataSource(false, 9);
+    }
+
+    /**
      * 封装 数据源创建逻辑
      */
     private DruidDataSource createMasterDataSource(boolean master, int index) {
@@ -242,9 +262,21 @@ public class DataSourceConfiguation extends BaseCondition implements Environment
         return new DefaultDataSourceTransactionManager(myCat6DataSource());
     }
 
-    @Bean(name = REWARD_MANAGER)
+    @Bean(name = REWARD_TX_MANAGER)
     @Conditional(S7DataSourceCondition.class)
     public DefaultDataSourceTransactionManager s7TxManager() {
+        return new DefaultDataSourceTransactionManager(slaver7DataSource());
+    }
+
+    @Bean(name = DWC_TX_MANAGER)
+    @Conditional(S7DataSourceCondition.class)
+    public DefaultDataSourceTransactionManager s8TxManager() {
+        return new DefaultDataSourceTransactionManager(slaver7DataSource());
+    }
+
+    @Bean(name = BIG_DATA_TX_MANAGER)
+    @Conditional(S7DataSourceCondition.class)
+    public DefaultDataSourceTransactionManager s9TxManager() {
         return new DefaultDataSourceTransactionManager(slaver7DataSource());
     }
 

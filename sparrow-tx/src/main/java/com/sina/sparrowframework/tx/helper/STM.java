@@ -11,5 +11,7 @@ public interface STM {
     /**
      * 红包
      */
-    String REWARD_MANAGER = "rewardTxManager";
+    String REWARD_TX_MANAGER = "rewardTxManager";
+    String DWC_TX_MANAGER = "dwcTxManager";
+    String BIG_DATA_TX_MANAGER = "bigDataTxManager";
 }

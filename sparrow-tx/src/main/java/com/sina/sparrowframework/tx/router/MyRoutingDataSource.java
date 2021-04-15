@@ -49,8 +49,12 @@ public class MyRoutingDataSource extends AbstractRoutingDataSource implements ST
                 index = "5";
             } else if (txName.equals(MY_CAT_MANAGER)) {
                 index = "6";
-            }else if (txName.equals(REWARD_MANAGER)) {
+            } else if (txName.equals(REWARD_TX_MANAGER)) {
                 index = "7";
+            } else if (txName.equals(DWC_TX_MANAGER)) {
+                index = "8";
+            } else if (txName.equals(BIG_DATA_TX_MANAGER)) {
+                index = "9";
             }
         } else {
             pattern = MASTER_PATTER;
