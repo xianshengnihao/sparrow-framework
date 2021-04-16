@@ -269,15 +269,15 @@ public class DataSourceConfiguation extends BaseCondition implements Environment
     }
 
     @Bean(name = DWC_TX_MANAGER)
-    @Conditional(S7DataSourceCondition.class)
+    @Conditional(S8DataSourceCondition.class)
     public DefaultDataSourceTransactionManager s8TxManager() {
-        return new DefaultDataSourceTransactionManager(slaver7DataSource());
+        return new DefaultDataSourceTransactionManager(slaver8DataSource());
     }
 
     @Bean(name = BIG_DATA_TX_MANAGER)
-    @Conditional(S7DataSourceCondition.class)
+    @Conditional(S9DataSourceCondition.class)
     public DefaultDataSourceTransactionManager s9TxManager() {
-        return new DefaultDataSourceTransactionManager(slaver7DataSource());
+        return new DefaultDataSourceTransactionManager(slaver9DataSource());
     }
 
     @Bean
