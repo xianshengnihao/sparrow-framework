@@ -222,6 +222,18 @@ public class DataSourceConfiguation extends BaseCondition implements Environment
                 dsMap.put(Constants.s7, s7);
             }
         }
+        if (isSupportDs(env, Constants.s8)) {
+            DataSource s8 = slaver8DataSource();
+            if (!ObjectToolkit.isEmpty(s8)) {
+                dsMap.put(Constants.s8, s8);
+            }
+        }
+        if (isSupportDs(env, Constants.s9)) {
+            DataSource s9 = slaver9DataSource();
+            if (!ObjectToolkit.isEmpty(s9)) {
+                dsMap.put(Constants.s9, s9);
+            }
+        }
         dataSource.setTargetDataSources(dsMap);
         return dataSource;
     }
