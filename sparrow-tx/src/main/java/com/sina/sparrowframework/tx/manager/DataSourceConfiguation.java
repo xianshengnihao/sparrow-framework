@@ -146,6 +146,16 @@ public class DataSourceConfiguation extends BaseCondition implements Environment
     }
 
     /**
+     * 编号为 10 的从库(kangaroo)
+     * 动态数据源
+     */
+    @Bean(name = "slaver10DataSource", initMethod = "init", destroyMethod = "close")
+    @Conditional(S9DataSourceCondition.class)
+    public DruidDataSource slaver10DataSource() {
+        return createMasterDataSource(false, 10);
+    }
+
+    /**
      * 封装 数据源创建逻辑
      */
     private DruidDataSource createMasterDataSource(boolean master, int index) {
@@ -234,6 +244,12 @@ public class DataSourceConfiguation extends BaseCondition implements Environment
                 dsMap.put(Constants.s9, s9);
             }
         }
+        if (isSupportDs(env, Constants.s10)) {
+            DataSource s10 = slaver10DataSource();
+            if (!ObjectToolkit.isEmpty(s10)) {
+                dsMap.put(Constants.s10, s10);
+            }
+        }
         dataSource.setTargetDataSources(dsMap);
         return dataSource;
     }
@@ -290,6 +306,12 @@ public class DataSourceConfiguation extends BaseCondition implements Environment
     @Conditional(S9DataSourceCondition.class)
     public DefaultDataSourceTransactionManager s9TxManager() {
         return new DefaultDataSourceTransactionManager(slaver9DataSource());
+    }
+
+    @Bean(name = KANGAROO_TX_MANAGER)
+    @Conditional(S10DataSourceCondition.class)
+    public DefaultDataSourceTransactionManager s10TxManager() {
+        return new DefaultDataSourceTransactionManager(slaver10DataSource());
     }
 
     @Bean

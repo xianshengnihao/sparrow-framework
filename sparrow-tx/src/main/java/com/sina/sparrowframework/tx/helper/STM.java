@@ -14,4 +14,5 @@ public interface STM {
     String REWARD_TX_MANAGER = "rewardTxManager";
     String DWC_TX_MANAGER = "dwcTxManager";
     String BIG_DATA_TX_MANAGER = "bigDataTxManager";
+    String KANGAROO_TX_MANAGER = "kangarooTxManager";
 }
