@@ -150,7 +150,7 @@ public class DataSourceConfiguation extends BaseCondition implements Environment
      * 动态数据源
      */
     @Bean(name = "slaver10DataSource", initMethod = "init", destroyMethod = "close")
-    @Conditional(S9DataSourceCondition.class)
+    @Conditional(S10DataSourceCondition.class)
     public DruidDataSource slaver10DataSource() {
         return createMasterDataSource(false, 10);
     }
