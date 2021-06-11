@@ -33,6 +33,7 @@
         <module>sparrow-redis-related</module>
         <module>sparrow-log</module>
         <module>sparrow-kafka</module>
+        <module>sparrow-password</module>
     </modules>
 
     <properties>
