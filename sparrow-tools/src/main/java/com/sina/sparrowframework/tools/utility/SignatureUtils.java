@@ -12,8 +12,8 @@ import java.nio.charset.StandardCharsets;
 import java.security.*;
 
 /**
- * created  on 30/03/2018.
- *
+ * 公共的验签工具类
+ * @author
  * @see KeyUtils
  * @see CipherUtils
  */

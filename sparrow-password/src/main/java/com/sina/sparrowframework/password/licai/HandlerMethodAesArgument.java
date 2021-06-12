@@ -3,6 +3,7 @@ package com.sina.sparrowframework.password.licai;
 import com.sina.sparrowframework.exception.business.BizFailException;
 import com.sina.sparrowframework.metadata.ResponseResult;
 import com.sina.sparrowframework.metadata.constants.BaseCode;
+import com.sina.sparrowframework.tools.utility.CipherUtils;
 import com.sina.sparrowframework.tools.utility.JacksonUtil;
 import com.sina.sparrowframework.tools.utility.StrPool;
 import org.slf4j.Logger;
@@ -42,7 +43,7 @@ public class HandlerMethodAesArgument extends RequestResponseBodyMethodProcessor
     private Logger logger = LoggerFactory.getLogger(HandlerMethodAesArgument.class);
 
     protected Environment environment;
-    private static final ThreadLocal<String> randomKeyLocal = new ThreadLocal<>();
+    private static ThreadLocal<String> randomKeyLocal = new ThreadLocal<>();
 
     public HandlerMethodAesArgument(List<HttpMessageConverter<?>> converters) {
         super(converters);
@@ -113,14 +114,15 @@ public class HandlerMethodAesArgument extends RequestResponseBodyMethodProcessor
             if (returnValue instanceof ResponseResult) {
                 ResponseResult result = (ResponseResult) returnValue;
                 if (result.getData() != null) {
-                        returnValue = result.setData(AESUtil.encryptByAES(
-                                JacksonUtil.objectToJson(result.getData()),randomKeyLocal.get()));
+                    returnValue = result.setData(CipherUtils.encryptByAesEcbPkcs5padding(
+                            JacksonUtil.objectToJson(result.getData())
+                            , randomKeyLocal.get()));
                 }
             }
         } catch (Exception e) {
-            logger.error("理财加密失败...randomKey={}",randomKeyLocal.get());
-            throw new BizFailException(BaseCode.API_SIGN_ERROR,BaseCode.API_SIGN_ERROR.getDesc());
-        }finally {
+            logger.error("理财加密失败...randomKey={}", randomKeyLocal.get());
+            throw new BizFailException(BaseCode.API_SIGN_ERROR, BaseCode.API_SIGN_ERROR.getDesc());
+        } finally {
             randomKeyLocal.remove();
         }
         super.handleReturnValue(returnValue, returnType, mavContainer, webRequest);
@@ -137,7 +139,7 @@ public class HandlerMethodAesArgument extends RequestResponseBodyMethodProcessor
      * @return 解析后返回明文数据
      */
     private String getPlaintext(Map<String, String> requestBodyMap, String appIdChannelValue) {
-        String result = null;
+        String result;
         String passWord = null;
         try {
             passWord = requestBodyMap.get(AesConstant.APP_PASSWORD);
@@ -145,12 +147,15 @@ public class HandlerMethodAesArgument extends RequestResponseBodyMethodProcessor
             String appPrivateKeyValue
                     = environment.getRequiredProperty(String.format(AesConstant.APP_PRIVATE_KEY, appIdChannelValue));
             //解密 password
-            String randomKey = RSASign.decryptByRSA(passWord, appPrivateKeyValue);
-            result = AESUtil.decryptByAES(data, randomKey);
+            String randomKey = CipherUtils.decryptWithRsaPrivate(
+                    appPrivateKeyValue
+                    , CipherUtils.Algorithm.RSA
+                    , passWord);
+            result = CipherUtils.decryptByAesEcbPkcs5padding(data, randomKey);
             randomKeyLocal.set(randomKey);
         } catch (Exception e) {
-            logger.error("理财解密失败...appIdChannelValue = {} randomKey={}",appIdChannelValue,passWord);
-            throw new BizFailException(BaseCode.API_SIGN_ERROR,BaseCode.API_SIGN_ERROR.getDesc());
+            logger.error("理财解密失败...appIdChannelValue = {} randomKey={}", appIdChannelValue, passWord);
+            throw new BizFailException(BaseCode.API_SIGN_ERROR, BaseCode.API_SIGN_ERROR.getDesc());
         }
         return result;
     }
@@ -162,11 +167,10 @@ public class HandlerMethodAesArgument extends RequestResponseBodyMethodProcessor
         if (environment.getProperty(String.format(
                 AesConstant.APP_WHITE_IPS_SWITCH, appIdChannelValue), Boolean.class, true)) {
             String ips = environment.getRequiredProperty(String.format(AesConstant.APP_WHITE_IPS, appIdChannelValue));
-            Optional<String> strOp = Optional.ofNullable(ips);
-            strOp.filter(
+            Optional.ofNullable(ips).filter(
                     s -> Arrays.stream(ips.split(StrPool.COMMA))
                             .anyMatch(ipIndexStr -> ipIndexStr.equals(requestIp)))
-                    .orElseThrow(() -> new BizFailException(BaseCode.IP_WHITE_LIST,BaseCode.IP_WHITE_LIST.getDesc()));
+                    .orElseThrow(() -> new BizFailException(BaseCode.IP_WHITE_LIST, BaseCode.IP_WHITE_LIST.getDesc()));
         }
 
     }
