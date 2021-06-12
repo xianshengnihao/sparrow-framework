@@ -43,7 +43,7 @@ public class HandlerMethodAesArgument extends RequestResponseBodyMethodProcessor
     private Logger logger = LoggerFactory.getLogger(HandlerMethodAesArgument.class);
 
     protected Environment environment;
-    private static ThreadLocal<String> randomKeyLocal = new ThreadLocal<>();
+    private static ThreadLocal<LocalAppSecret> randomKeyLocal = new ThreadLocal<>();
 
     public HandlerMethodAesArgument(List<HttpMessageConverter<?>> converters) {
         super(converters);
@@ -65,15 +65,13 @@ public class HandlerMethodAesArgument extends RequestResponseBodyMethodProcessor
         AesHttpServletRequest aesHttpServletRequest = new AesHttpServletRequest(servletRequest);
         String requestBody = aesHttpServletRequest.getRequestBody();
         Map<String, String> requestBodyMap = JacksonUtil.jsonToMap(requestBody);
-        //兼容非驼峰命名
-        String appId = StringUtils.isEmpty(requestBodyMap.get(AesConstant.APP_ID_NAME))
-                ? requestBodyMap.get(AesConstant.APP_ID) : requestBodyMap.get(AesConstant.APP_ID_NAME);
-        String appIdChannelValue
-                = environment.getRequiredProperty(String.format(AesConstant.APP_ID_CHANNEL, appId));
         //检查白名单
-        this.checkRequestWhiteIp(aesHttpServletRequest, appIdChannelValue);
+        this.checkRequestWhiteIp(aesHttpServletRequest, getAppIdChannel(requestBodyMap));
         //加载明文数据
-        String plainText = this.getPlaintext(requestBodyMap, appIdChannelValue);
+        String plainText = this.getPlaintext(requestBodyMap);
+        logger.info("\r\n[{}渠道访问理财] url:{}\r\n请求明文参数:{}",
+                getAppIdChannel(requestBodyMap)
+                ,aesHttpServletRequest.getRequestUri(), plainText);
         aesHttpServletRequest.setRequestBody(plainText.getBytes(StandardCharsets.UTF_8));
         ServletWebRequest servletWebRequest =
                 new ServletWebRequest(
@@ -111,16 +109,25 @@ public class HandlerMethodAesArgument extends RequestResponseBodyMethodProcessor
             throws IOException, HttpMediaTypeNotAcceptableException
             , HttpMessageNotWritableException {
         try {
+            HttpServletRequest httpServletRequest =
+                    (HttpServletRequest)webRequest.getNativeRequest();
+            logger.info("\r\n[{}渠道访问理] url:{}\r\n响应明文参数:{}",
+                    randomKeyLocal.get().getAppChannel()
+                    ,httpServletRequest.getRequestURI()
+                    , JacksonUtil.objectToJson(returnValue));
             if (returnValue instanceof ResponseResult) {
                 ResponseResult result = (ResponseResult) returnValue;
                 if (result.getData() != null) {
-                    returnValue = result.setData(CipherUtils.encryptByAesEcbPkcs5padding(
+                    returnValue = result.setData(
+                            CipherUtils.encryptByAesEcbPkcs5padding(
                             JacksonUtil.objectToJson(result.getData())
-                            , randomKeyLocal.get()));
+                            , randomKeyLocal.get().getRandomKey()));
                 }
             }
         } catch (Exception e) {
-            logger.error("理财加密失败...randomKey={}", randomKeyLocal.get());
+            logger.error("{}渠道访问理 理财加密失败...randomKey={}"
+                    ,randomKeyLocal.get().getAppChannel()
+                    , randomKeyLocal.get().randomKey);
             throw new BizFailException(BaseCode.API_SIGN_ERROR, BaseCode.API_SIGN_ERROR.getDesc());
         } finally {
             randomKeyLocal.remove();
@@ -138,31 +145,33 @@ public class HandlerMethodAesArgument extends RequestResponseBodyMethodProcessor
      * @param requestBodyMap 客户端请求密文数据
      * @return 解析后返回明文数据
      */
-    private String getPlaintext(Map<String, String> requestBodyMap, String appIdChannelValue) {
+    private String getPlaintext(Map<String, String> requestBodyMap) {
         String result;
         String passWord = null;
         try {
             passWord = requestBodyMap.get(AesConstant.APP_PASSWORD);
             String data = requestBodyMap.get(AesConstant.APP_DATA);
             String appPrivateKeyValue
-                    = environment.getRequiredProperty(String.format(AesConstant.APP_PRIVATE_KEY, appIdChannelValue));
+                    = environment.getRequiredProperty(String.format(AesConstant.APP_PRIVATE_KEY
+                    , getAppIdChannel(requestBodyMap)));
             //解密 password
             String randomKey = CipherUtils.decryptWithRsaPrivate(
                     appPrivateKeyValue
                     , CipherUtils.Algorithm.RSA
                     , passWord);
             result = CipherUtils.decryptByAesEcbPkcs5padding(data, randomKey);
-            randomKeyLocal.set(randomKey);
+            randomKeyLocal.set(
+                    new LocalAppSecret(
+                            getAppIdChannel(requestBodyMap),randomKey));
         } catch (Exception e) {
-            logger.error("理财解密失败...appIdChannelValue = {} randomKey={}", appIdChannelValue, passWord);
+            logger.error("理财解密失败...appIdChannel = {} passWord={}", getAppIdChannel(requestBodyMap), passWord);
             throw new BizFailException(BaseCode.API_SIGN_ERROR, BaseCode.API_SIGN_ERROR.getDesc());
         }
         return result;
     }
 
-
     private void checkRequestWhiteIp(HttpServletRequest request, String appIdChannelValue) {
-        String requestIp = getRequestIp(request);
+        String requestIp = AesConstant.getRequestIp(request);
         logger.info("check request whiteIp ip={} ", requestIp);
         if (environment.getProperty(String.format(
                 AesConstant.APP_WHITE_IPS_SWITCH, appIdChannelValue), Boolean.class, true)) {
@@ -174,36 +183,34 @@ public class HandlerMethodAesArgument extends RequestResponseBodyMethodProcessor
         }
 
     }
-
-    private static String unknown = "unknown";
-
-    private String getRequestIp(HttpServletRequest request) {
-        if (request == null) {
-            throw new RuntimeException("HTTP servlet request is null!");
-        }
-        String ip = request.getHeader("x-forwarded-for");
-        if (ip == null || ip.length() == 0 || unknown.equalsIgnoreCase(ip)) {
-            ip = request.getHeader("Proxy-Client-IP");
-        } else if (ip.indexOf(StrPool.COMMA) > 0) {
-            String[] ipArr = ip.split(StrPool.COMMA);
-            ip = ipArr[0];
-        }
-        if (ip == null || ip.length() == 0 || unknown.equalsIgnoreCase(ip)) {
-            ip = request.getHeader("X-Real-IP");
-        }
-        if (ip == null || ip.length() == 0 || unknown.equalsIgnoreCase(ip)) {
-            ip = request.getHeader("WL-Proxy-Client-IP");
-        }
-        if (ip == null || ip.length() == 0 || unknown.equalsIgnoreCase(ip)) {
-            ip = request.getHeader("HTTP_CLIENT_IP");
-        }
-        if (ip == null || ip.length() == 0 || unknown.equalsIgnoreCase(ip)) {
-            ip = request.getHeader("HTTP_X_FORWARDED_FOR");
-        }
-        if (ip == null || ip.length() == 0 || unknown.equalsIgnoreCase(ip)) {
-            ip = request.getRemoteAddr();
-        }
-        return ip;
+    private String getAppId(Map<String,String> requestBodyMap){
+        //兼容非驼峰命名
+        return StringUtils.isEmpty(
+                requestBodyMap.get(AesConstant.APP_ID_NAME))
+                ? requestBodyMap.get(AesConstant.APP_ID) :
+                requestBodyMap.get(AesConstant.APP_ID_NAME);
     }
 
+    private String getAppIdChannel(Map<String,String> requestBodyMap) {
+        return environment.getRequiredProperty(
+                String.format(AesConstant.APP_ID_CHANNEL
+                        , getAppId(requestBodyMap)));
+    }
+
+    private static class LocalAppSecret{
+        private String appChannel;
+        private String randomKey;
+        public LocalAppSecret(String appChannel
+                , String randomKey
+                ) {
+            this.appChannel = appChannel;
+            this.randomKey = randomKey;
+        }
+        public String getAppChannel() {
+            return appChannel;
+        }
+        public String getRandomKey() {
+            return randomKey;
+        }
+    }
 }

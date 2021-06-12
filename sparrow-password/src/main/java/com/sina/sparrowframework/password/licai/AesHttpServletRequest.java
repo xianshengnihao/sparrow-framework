@@ -17,9 +17,12 @@ public class AesHttpServletRequest extends HttpServletRequestWrapper {
 
     private  byte[] requestBody;
 
+    private String requestUri;
+
     public AesHttpServletRequest(HttpServletRequest request) {
         super(request);
         requestBody = this.getRequestBody(request).getBytes();
+        requestUri = request.getRequestURI();
     }
 
     public String getRequestBody() {
@@ -46,6 +49,10 @@ public class AesHttpServletRequest extends HttpServletRequestWrapper {
                 return byteArrayInputStream.read();
             }
         };
+    }
+
+    public String getRequestUri() {
+        return requestUri;
     }
 
     public void setRequestBody(byte[] requestBody) {
