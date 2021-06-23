@@ -53,6 +53,10 @@
             <groupId>com.sina.sparrowframework</groupId>
             <artifactId>sparrow-exception</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
