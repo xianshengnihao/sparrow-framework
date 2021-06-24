@@ -50,7 +50,7 @@ public class WjMiddleServiceClient {
         watch.start();
         logger.info("\r\nheader:{}\r\n[微聚中台请求]url:{}\r\n请求参数:{}",
                  entity.getHeaders()
-                ,requestUrl, entity.getBody());
+                ,MiddleKeyManager.baseUrl+requestUrl, entity.getBody());
         ResponseEntity<String> response =
                 restPasswordTemplate.
                         exchange(MiddleKeyManager.baseUrl+requestUrl
