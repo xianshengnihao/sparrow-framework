@@ -23,7 +23,7 @@ public abstract class MiddleSignatureUtils {
 
     public static String middleSignature(String signatureContent) {
         String sort = sortSignatureContent(signatureContent);
-        logger.info("middleSignature sort={}",sort);
+        logger.info("\r\nmiddleSignature sort={}",sort);
         return SignatureUtils.signatureWithRSA(sort
                 , MiddleKeyManager.businessPartnerPrivateKey);
     }

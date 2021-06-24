@@ -60,7 +60,7 @@ public class WjMiddleServiceClient {
         watch.stop();
         logger.info("\r\n[微聚中台响应] url:{}\r\n响应Body:{}\r\n响应" +
                         "header:{}\r\n返回code:{}\r\n共计执行:{}ms",
-                requestUrl, response.getBody(), response.getHeaders(),
+                MiddleKeyManager.baseUrl+requestUrl, response.getBody(), response.getHeaders(),
                 response.getStatusCode(),
                 watch.getTotalTimeMillis());
         MiddleServiceResponse<String> middleServiceResponse
