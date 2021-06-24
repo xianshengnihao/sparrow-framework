@@ -17,10 +17,10 @@ import org.apache.http.protocol.HttpContext;
 import org.apache.http.ssl.SSLContexts;
 import org.apache.http.ssl.TrustStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.MediaType;
@@ -42,11 +42,9 @@ import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
- *
- *
- * @author tianye6
- * @date 2019/7/19 11:46
+ * @author wxn
  */
 @Configuration
 public class RestTemplatePasswordConfig implements EnvironmentAware {
@@ -54,8 +52,10 @@ public class RestTemplatePasswordConfig implements EnvironmentAware {
     protected Environment env;
 
     @Bean("restPasswordTemplate")
-    public RestTemplate restPasswordTemplate() {
-        RestTemplate restTemplate = new RestTemplate(simplePasswordClientHttpRequestFactory());
+    public RestTemplate restPasswordTemplate(
+            @Qualifier("simplePasswordClientHttpRequestFactory")
+                    ClientHttpRequestFactory simplePasswordClientHttpRequestFactory) {
+        RestTemplate restTemplate = new RestTemplate(simplePasswordClientHttpRequestFactory);
         List<ClientHttpRequestInterceptor> interceptorsTimeout = new ArrayList<>();
         interceptorsTimeout.add(new HeaderRequestInterceptor());
         restTemplate.setInterceptors(interceptorsTimeout);
@@ -64,7 +64,7 @@ public class RestTemplatePasswordConfig implements EnvironmentAware {
         return restTemplate;
     }
 
-    @Bean
+    @Bean("simplePasswordClientHttpRequestFactory")
     public ClientHttpRequestFactory simplePasswordClientHttpRequestFactory() {
         HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory(httpClient());
         return factory;

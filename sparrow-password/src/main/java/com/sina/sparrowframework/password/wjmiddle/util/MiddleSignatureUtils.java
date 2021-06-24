@@ -18,22 +18,14 @@ import java.util.Map;
  */
 public abstract class MiddleSignatureUtils {
 
-    private static final Logger LOG = LoggerFactory.getLogger(MiddleSignatureUtils.class);
-
-    public static final String SIGN = "sign";
-
-    public static final String DATA = "data";
-
-    public static final String CODE_NODE = "/code";
-
-    public static final String MESSAGE_NODE = "/msg";
-
-    public static final String DATA_NODE = "/data";
-    public static final String SIGN_NODE = "/sign";
+    private static final Logger logger = LoggerFactory.getLogger(MiddleSignatureUtils.class);
 
 
     public static String middleSignature(String signatureContent) {
-        return SignatureUtils.signatureWithRSA(signatureContent, MiddleKeyManager.businessPartnerPrivateKey);
+        String sort = sortSignatureContent(signatureContent);
+        logger.info("middleSignature sort={}",sort);
+        return SignatureUtils.signatureWithRSA(sort
+                , MiddleKeyManager.businessPartnerPrivateKey);
     }
     public static String sortSignatureContent(String json){
         StringBuilder builder = new StringBuilder();

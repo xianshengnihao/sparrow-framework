@@ -11,6 +11,8 @@ import org.springframework.core.env.Environment;
 import org.springframework.http.*;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.util.StopWatch;
 import org.springframework.web.client.RestTemplate;
 
@@ -46,9 +48,9 @@ public class WjMiddleServiceClient {
         HttpEntity<Object> entity = buildEntityData(paramMap);
         final StopWatch watch = new StopWatch("微聚中台请求接口耗时");
         watch.start();
-        logger.info("\r\nheader:{}\r\n[微聚中台请求]url:{}\r\n明文参数:{}\r\n请求参数:{}",
+        logger.info("\r\nheader:{}\r\n[微聚中台请求]url:{}\r\n请求参数:{}",
                  entity.getHeaders()
-                ,requestUrl,JacksonUtil.objectToJson(paramMap), entity.getBody());
+                ,requestUrl, entity.getBody());
         ResponseEntity<String> response =
                 restPasswordTemplate.
                         exchange(MiddleKeyManager.baseUrl+requestUrl
@@ -78,8 +80,12 @@ public class WjMiddleServiceClient {
 
     private static HttpEntity<Object> buildEntityData(Map<String, Object> parMap)  {
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<Object> request = new HttpEntity<>(parMap, httpHeaders);
+        httpHeaders.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+        MultiValueMap<String, Object> param = new LinkedMultiValueMap<>();
+        for (Map.Entry<String, Object> entry : parMap.entrySet()) {
+            param.add(entry.getKey(), entry.getValue());
+        }
+        HttpEntity<Object> request = new HttpEntity<>(param, httpHeaders);
         return request;
     }
 

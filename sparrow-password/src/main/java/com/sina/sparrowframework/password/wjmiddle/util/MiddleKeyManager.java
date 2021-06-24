@@ -22,7 +22,6 @@ public class MiddleKeyManager implements EnvironmentAware  {
 
     private Environment environment;
 
-    //################################### business key properties #####################################
     public static String business;
     public static PrivateKey businessPartnerPrivateKey;
     public static String baseUrl;
