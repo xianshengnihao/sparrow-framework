@@ -38,7 +38,7 @@ public class WjMiddleServiceClient {
      * @throws Exception 业务处理异常
      */
     public  static  <T> MiddleServiceResponse<T> requestWjMiddleService(@NonNull String requestUrl
-            , @NonNull MiddleServiceRequest request, @Nullable Class<T> responseType) throws Exception {
+            , @NonNull MiddleServiceRequest request, @Nullable Class<T> responseType) throws Exception  {
         MiddleServiceResponse middle = new MiddleServiceResponse();
         Map paramMap = JacksonUtil.objectToMap(request);
         paramMap.put("business", MiddleKeyManager.business);
