@@ -22,7 +22,6 @@ import org.springframework.util.StopWatch;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -61,10 +60,6 @@ public class FundBusinessClient {
             return convertResponse(response, responseType,methodUrl);
         } catch (Exception e) {
             logger.error("\r\n,新浪基金请求出错", e);
-            Map contentMap = new HashMap();
-            contentMap.put("url", methodUrl);
-            contentMap.put("req", request);
-
             throw new BizFailException(BaseCode.THIRD_REMOTE_ERROR,"新浪基金请求出错");
         }
 
