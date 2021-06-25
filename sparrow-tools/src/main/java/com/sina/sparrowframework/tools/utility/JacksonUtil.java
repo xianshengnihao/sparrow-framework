@@ -157,7 +157,9 @@ public class JacksonUtil {
 
         return javaTimeModule;
     }
-
+    public static <T> T readValue(JsonNode node, Class<T> clazz) throws IOException {
+        return  getInstance().readValue(node.traverse(), clazz);
+    }
     public static TimeZone getDefaultTimeZone() {
         return TIME_ZONE8;
     }
