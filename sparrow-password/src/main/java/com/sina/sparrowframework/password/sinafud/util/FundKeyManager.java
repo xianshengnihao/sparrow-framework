@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.PostConstruct;
@@ -19,6 +20,7 @@ import java.security.PublicKey;
  * @author wxn
  */
 @Configuration
+@Component("FundPasswordKeyManager")
 public class FundKeyManager implements EnvironmentAware  {
 
 
