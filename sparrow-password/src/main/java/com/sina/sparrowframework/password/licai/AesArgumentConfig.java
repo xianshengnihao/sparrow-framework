@@ -2,7 +2,19 @@ package com.sina.sparrowframework.password.licai;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.*;
+import org.springframework.http.converter.cbor.MappingJackson2CborHttpMessageConverter;
+import org.springframework.http.converter.feed.AtomFeedHttpMessageConverter;
+import org.springframework.http.converter.feed.RssChannelHttpMessageConverter;
+import org.springframework.http.converter.json.GsonHttpMessageConverter;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
+import org.springframework.http.converter.json.JsonbHttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.http.converter.smile.MappingJackson2SmileHttpMessageConverter;
+import org.springframework.http.converter.support.AllEncompassingFormHttpMessageConverter;
+import org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter;
+import org.springframework.http.converter.xml.MappingJackson2XmlHttpMessageConverter;
+import org.springframework.http.converter.xml.SourceHttpMessageConverter;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -36,8 +48,11 @@ public class AesArgumentConfig  implements WebMvcConfigurer {
 
     @Bean
     public HandlerMethodAesArgument handlerMethodAesArgument(){
-        return new HandlerMethodAesArgument(aesConverters);
+        return new HandlerMethodAesArgument(getAesHttpMessageConverter());
     }
 
-
+    private List<HttpMessageConverter<?>> getAesHttpMessageConverter(){
+        aesConverters.add(new ByteArrayHttpMessageConverter());
+        return aesConverters;
+    }
 }
