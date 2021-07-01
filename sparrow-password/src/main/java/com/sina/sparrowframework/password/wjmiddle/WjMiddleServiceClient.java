@@ -1,5 +1,6 @@
 package com.sina.sparrowframework.password.wjmiddle;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.sina.sparrowframework.exception.business.BizFailException;
 import com.sina.sparrowframework.metadata.constants.BaseCode;
 import com.sina.sparrowframework.password.wjmiddle.data.MiddleServiceRequest;
@@ -68,17 +69,17 @@ public class WjMiddleServiceClient {
                     MiddleKeyManager.baseUrl + requestUrl, response.getBody(), response.getHeaders(),
                     response.getStatusCode(),
                     watch.getTotalTimeMillis());
-            MiddleServiceResponse<String> middleServiceResponse
-                    = JacksonUtil.jsonToObject(response.getBody(), MiddleServiceResponse.class);
-            middle.setCode(middleServiceResponse.getCode());
-            middle.setMsg(middleServiceResponse.getMsg());
+            JsonNode root = JacksonUtil.parseTree(response.getBody());
+            middle.setCode(root.at(MiddleSignatureUtils.CODE_NODE).asText());
+            middle.setMsg(root.at(MiddleSignatureUtils.MESSAGE_NODE).asText());
             if (!middle.isSuccess()) {
                 return middle;
             }
+            root = root.at(MiddleSignatureUtils.DATA_NODE);
             if (responseType.equals(String.class)) {
-                middle.setData(middleServiceResponse.getData());
+                middle.setData(root.toString());
             } else {
-                middle.setData(JacksonUtil.jsonToObject(middleServiceResponse.getData(), responseType));
+                middle.setData(JacksonUtil.readValue(root, responseType));
             }
         } catch (Exception e) {
             logger.error("\r\n,微聚中台请求出错", e);

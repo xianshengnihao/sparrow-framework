@@ -2,11 +2,13 @@ package com.sina.sparrowframework.password.wjmiddle.data;
 
 import com.sina.sparrowframework.tools.utility.JacksonUtil;
 
+import java.io.Serializable;
+
 /**
  * @author wxn
  * @date 2021/6/10 10:57 上午
  */
-public class MiddleServiceResponse <T>{
+public class MiddleServiceResponse <T> implements Serializable {
     private String code;
     private String msg;
     private T data;

@@ -19,7 +19,9 @@ import java.util.Map;
 public abstract class MiddleSignatureUtils {
 
     private static final Logger logger = LoggerFactory.getLogger(MiddleSignatureUtils.class);
-
+    public static final String CODE_NODE = "/code";
+    public static final String MESSAGE_NODE = "/msg";
+    public static final String DATA_NODE = "/data";
 
     public static String middleSignature(String signatureContent) {
         String sort = sortSignatureContent(signatureContent);
