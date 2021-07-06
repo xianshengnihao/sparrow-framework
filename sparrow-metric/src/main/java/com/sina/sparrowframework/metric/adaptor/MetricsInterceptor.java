@@ -1,5 +1,6 @@
 package com.sina.sparrowframework.metric.adaptor;
 
+import com.sina.sparrowframework.log.converter.LogIdPatternConverter;
 import com.sina.sparrowframework.metric.StrUtil;
 import io.prometheus.client.Summary;
 import org.slf4j.Logger;
@@ -62,7 +63,8 @@ public class MetricsInterceptor extends HandlerInterceptorAdapter implements Env
         LOG.info("全局接口耗时统计,url:{},共计耗时:{} ms", request.getRequestURI(), endMilli - startMilli);
 
         Holder holder = (Holder) request.getAttribute(HOLDER_REQUEST_ATTR);
-
+        //日志logId清除
+        LogIdPatternConverter.clearLogId();
         if (holder != null) {
             SUMMARY_LATENCY_SECONDS.labels(holder.bean, holder.method, request.getRequestURI(), "0", ex == null ? "none" : ex.getClass().getName())
                     .observe((System.currentTimeMillis() - holder.beginTime) / 1000D);
