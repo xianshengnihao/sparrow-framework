@@ -203,7 +203,12 @@ public abstract class KeyUtils {
     }
 
 
-
+    public static PublicKey readRSAPublicKey(String base64Text) throws Exception {
+        return readPublicKey(KeyPairType.RSA, base64Text);
+    }
+    public static PrivateKey readRSAPrivateKey(String base64Text) throws Exception {
+        return readPrivateKey(KeyPairType.RSA, base64Text);
+    }
 
 
 

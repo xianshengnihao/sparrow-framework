@@ -1,5 +1,6 @@
 package com.sina.sparrowframework.metadata;
 
+import java.io.Serializable;
 import java.util.Optional;
 
 import static com.sina.sparrowframework.metadata.constants.BaseCode.SUCCESS;
@@ -8,7 +9,7 @@ import static com.sina.sparrowframework.metadata.constants.BaseCode.SUCCESS;
  * Created by wxn on 2018/9/12
  */
 @SuppressWarnings({"unused", "UnusedReturnValue"})
-public class ResponseResult<T> {
+public class ResponseResult<T> implements Serializable {
     private String code;
     private String msg;
     private T data;

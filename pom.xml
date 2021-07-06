@@ -33,6 +33,7 @@
         <module>sparrow-log</module>
         <module>sparrow-metric</module>
         <module>sparrow-kafka</module>
+        <module>sparrow-password</module>
     </modules>
 
     <properties>
@@ -168,7 +169,11 @@
                 <artifactId>bcpkix-jdk15on</artifactId>
                 <version>${bcprov-jdk15on.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>sparrow-password</artifactId>
+                <version>${project.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

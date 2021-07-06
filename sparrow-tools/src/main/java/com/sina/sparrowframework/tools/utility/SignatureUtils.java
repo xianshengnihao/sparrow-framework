@@ -12,8 +12,8 @@ import java.nio.charset.StandardCharsets;
 import java.security.*;
 
 /**
- * created  on 30/03/2018.
- *
+ * 公共的验签工具类
+ * @author
  * @see KeyUtils
  * @see CipherUtils
  */
@@ -21,7 +21,9 @@ public abstract class SignatureUtils {
 
     private static final Logger LOG = LoggerFactory.getLogger(SignatureUtils.class);
 
-
+    public static boolean verifySignatureWithRSA1(String content, String signature, PublicKey publicKey) {
+        return verifySignature(SignatureType.SHA1withRSA, content, signature, publicKey,CodecType.BASE64);
+    }
     /**
      * 验证签名
      *
@@ -57,7 +59,13 @@ public abstract class SignatureUtils {
         }
         return valid;
     }
+    public static String signatureWithRSA1(String content, PrivateKey privateKey) {
+        return signature(SignatureType.SHA1withRSA, content, privateKey,CodecType.BASE64);
+    }
 
+    public static String signatureWithRSA1(byte[] contentBytes, PrivateKey privateKey) {
+        return signature(SignatureType.SHA1withRSA, contentBytes, privateKey,CodecType.BASE64);
+    }
     /**
      * 获取签名
      *
