@@ -14,23 +14,23 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class StatisticalInterceptor extends HandlerInterceptorAdapter implements EnvironmentAware {
+public class MetricsInterceptor extends HandlerInterceptorAdapter implements EnvironmentAware {
 
     public Logger LOG = LoggerFactory.getLogger(this.getClass());
 
-    private Environment env;
+    private static Environment env;
 
     private final NamedThreadLocal<Long> startThreadLocal = new NamedThreadLocal<>("统计耗时开始时间");
 
     private static final Summary SUMMARY_LATENCY_SECONDS = Summary.build()
-            .namespace("reward_app")
-            .subsystem("com/sina/sparrowframework/metric/controller")
+            .namespace("licai")
+            .subsystem(env.getProperty("spring.application.name"))
             .name("summary_latency_seconds")
             .labelNames("bean", "method", "url", "status", "exception")
             .help("Summary of controller handle latency in seconds")
             .register();
 
-    private static final String HOLDER_REQUEST_ATTR = StatisticalInterceptor.class.getName() + ".HOLDER_REQUEST_ATTR";
+    private static final String HOLDER_REQUEST_ATTR = MetricsInterceptor.class.getName() + ".HOLDER_REQUEST_ATTR";
 
     @Override
     public void setEnvironment(@NonNull Environment environment) {
