@@ -1,5 +1,6 @@
 package com.sina.sparrowframework.metric.adaptor;
 
+import com.sina.sparrowframework.metric.StrUtil;
 import io.prometheus.client.Summary;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -61,7 +62,7 @@ public class MetricsInterceptor extends HandlerInterceptorAdapter implements Env
 
         final Summary SUMMARY_LATENCY_SECONDS = Summary.build()
                 .namespace("licai")
-                .subsystem(env.getProperty("spring.application.name"))
+                .subsystem(StrUtil.endashTounderscore(env.getProperty("spring.application.name")))
                 .name("summary_latency_seconds")
                 .labelNames("bean", "method", "url", "status", "exception")
                 .help("Summary of controller handle latency in seconds")
