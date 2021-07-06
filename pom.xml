@@ -9,13 +9,12 @@
 
     <groupId>com.sina.sparrowframework</groupId>
     <artifactId>sparrow-framework</artifactId>
-    <version>0.0.13-SNAPSHOT</version>
+    <version>0.0.14-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
         <module>sparrowframework-all</module>
         <module>sparrow-exception</module>
-        <module>sparrow-orm-hibernate</module>
         <module>sparrow-orm-mybatis</module>
         <module>sparrow-sinacloud</module>
         <module>sparrow-tools</module>
@@ -32,6 +31,7 @@
         <module>sparrow-test</module>
         <module>sparrow-redis-related</module>
         <module>sparrow-log</module>
+        <module>sparrow-metric</module>
         <module>sparrow-kafka</module>
     </modules>
 
@@ -45,6 +45,7 @@
         <reflections.version>0.9.10</reflections.version>
         <shedlock.spring.version>2.1.0</shedlock.spring.version>
         <shedlock.redis.version>2.2.0</shedlock.redis.version>
+        <prometheus.version>0.10.0</prometheus.version>
     </properties>
 
 
@@ -68,13 +69,28 @@
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>sparrow-orm-hibernate</artifactId>
+                <artifactId>sparrow-orm-mybatis</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>sparrow-orm-mybatis</artifactId>
-                <version>${project.version}</version>
+                <groupId>io.prometheus</groupId>
+                <artifactId>simpleclient</artifactId>
+                <version>${prometheus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.prometheus</groupId>
+                <artifactId>simpleclient_common</artifactId>
+                <version>${prometheus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.prometheus</groupId>
+                <artifactId>simpleclient_hotspot</artifactId>
+                <version>${prometheus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.prometheus</groupId>
+                <artifactId>simpleclient_httpserver</artifactId>
+                <version>${prometheus.version}</version>
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
@@ -114,11 +130,6 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>sparrow-poi</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>sparrow-distribute-lock</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
