@@ -18,17 +18,9 @@ public class MetricsInterceptor extends HandlerInterceptorAdapter implements Env
 
     public Logger LOG = LoggerFactory.getLogger(this.getClass());
 
-    private static Environment env;
+    private Environment env;
 
     private final NamedThreadLocal<Long> startThreadLocal = new NamedThreadLocal<>("统计耗时开始时间");
-
-    private static final Summary SUMMARY_LATENCY_SECONDS = Summary.build()
-            .namespace("licai")
-            .subsystem(env.getProperty("spring.application.name"))
-            .name("summary_latency_seconds")
-            .labelNames("bean", "method", "url", "status", "exception")
-            .help("Summary of controller handle latency in seconds")
-            .register();
 
     private static final String HOLDER_REQUEST_ATTR = MetricsInterceptor.class.getName() + ".HOLDER_REQUEST_ATTR";
 
@@ -66,6 +58,15 @@ public class MetricsInterceptor extends HandlerInterceptorAdapter implements Env
         LOG.info("全局接口耗时统计,url:{},共计耗时:{} ms", request.getRequestURI(), endMilli - startMilli);
 
         Holder holder = (Holder) request.getAttribute(HOLDER_REQUEST_ATTR);
+
+        final Summary SUMMARY_LATENCY_SECONDS = Summary.build()
+                .namespace("licai")
+                .subsystem(env.getProperty("spring.application.name"))
+                .name("summary_latency_seconds")
+                .labelNames("bean", "method", "url", "status", "exception")
+                .help("Summary of controller handle latency in seconds")
+                .register();
+
         if (holder != null) {
             SUMMARY_LATENCY_SECONDS.labels(holder.bean, holder.method, request.getRequestURI(), "0", ex == null ? "none" : ex.getClass().getName())
                     .observe((System.currentTimeMillis() - holder.beginTime) / 1000D);
