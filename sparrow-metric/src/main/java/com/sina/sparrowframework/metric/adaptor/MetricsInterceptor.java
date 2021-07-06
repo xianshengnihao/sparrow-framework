@@ -4,6 +4,7 @@ import com.sina.sparrowframework.metric.StrUtil;
 import io.prometheus.client.Summary;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.core.NamedThreadLocal;
 import org.springframework.core.env.Environment;
@@ -15,11 +16,13 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class MetricsInterceptor extends HandlerInterceptorAdapter implements EnvironmentAware {
+public class MetricsInterceptor extends HandlerInterceptorAdapter implements EnvironmentAware , InitializingBean {
 
     public Logger LOG = LoggerFactory.getLogger(this.getClass());
 
     private Environment env;
+
+    private Summary SUMMARY_LATENCY_SECONDS;
 
     private final NamedThreadLocal<Long> startThreadLocal = new NamedThreadLocal<>("统计耗时开始时间");
 
@@ -60,7 +63,15 @@ public class MetricsInterceptor extends HandlerInterceptorAdapter implements Env
 
         Holder holder = (Holder) request.getAttribute(HOLDER_REQUEST_ATTR);
 
-        final Summary SUMMARY_LATENCY_SECONDS = Summary.build()
+        if (holder != null) {
+            SUMMARY_LATENCY_SECONDS.labels(holder.bean, holder.method, request.getRequestURI(), "0", ex == null ? "none" : ex.getClass().getName())
+                    .observe((System.currentTimeMillis() - holder.beginTime) / 1000D);
+        }
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        SUMMARY_LATENCY_SECONDS = Summary.build()
                 .namespace("licai")
                 .subsystem(StrUtil.endashTounderscore(env.getProperty("spring.application.name")))
                 .name("summary_latency_seconds")
@@ -68,10 +79,9 @@ public class MetricsInterceptor extends HandlerInterceptorAdapter implements Env
                 .help("Summary of controller handle latency in seconds")
                 .register();
 
-        if (holder != null) {
-            SUMMARY_LATENCY_SECONDS.labels(holder.bean, holder.method, request.getRequestURI(), "0", ex == null ? "none" : ex.getClass().getName())
-                    .observe((System.currentTimeMillis() - holder.beginTime) / 1000D);
-        }
+
+
+
     }
 
     private static class Holder {
