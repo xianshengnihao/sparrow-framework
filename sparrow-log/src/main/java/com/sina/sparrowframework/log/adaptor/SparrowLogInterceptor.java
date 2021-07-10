@@ -32,7 +32,7 @@ public class SparrowLogInterceptor extends HandlerInterceptorAdapter implements 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         LogHttpServletRequest logHttpServletRequest = new LogHttpServletRequest(request);
-        LogHttpServletResponse logHttpServletResponse = new LogHttpServletResponse(response);
+
         String requestBody = logHttpServletRequest.getRequestBody();
         logThreadLocal.set(System.currentTimeMillis());
         if (!StringUtils.isEmpty(env.getProperty(SPARROW_LOG_FILTER_REQUEST_URI_LIST,String.class))
@@ -42,15 +42,13 @@ public class SparrowLogInterceptor extends HandlerInterceptorAdapter implements 
         }else {
             logger.info("请求控制层参数  URL:{} request body:{}", logHttpServletRequest.getRequestURL(),requestBody);
         }
-
-        return super.preHandle(logHttpServletRequest, logHttpServletResponse, handler);
+        return super.preHandle(logHttpServletRequest, response, handler);
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response
             , Object handler, Exception ex) throws Exception {
-        if (response instanceof LogHttpServletResponse) {
-            LogHttpServletResponse logHttpServletResponse = (LogHttpServletResponse) response;
+        LogHttpServletResponse logHttpServletResponse = new LogHttpServletResponse(response);
             Long startMilli = logThreadLocal.get();
             Long endMilli = System.currentTimeMillis();
             if (!StringUtils.isEmpty(env.getProperty(SPARROW_LOG_FILTER_RESPONSE_URI_LIST,String.class))
@@ -62,12 +60,9 @@ public class SparrowLogInterceptor extends HandlerInterceptorAdapter implements 
                 );
                 logHttpServletResponse.copyToResponse();
             }
-        }else {
-            logger.info("请求控制层反馈 url = {} result{}", request.getRequestURL(), "LogHttpServletResponse 被适配无法输出数据");
 
-        }
         LogIdPatternConverter.clearLogId();
-        super.afterCompletion(request, response, handler, ex);
+        super.afterCompletion(request, logHttpServletResponse, handler, ex);
     }
 
     @Override
