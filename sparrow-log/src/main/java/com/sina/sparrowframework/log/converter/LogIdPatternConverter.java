@@ -14,9 +14,9 @@ import com.sina.sparrowframework.tools.utility.ObjectToolkit;
 
 
 /**
- * Created by wxn
  * Date:2020/3/20
  * Time:11:45
+ * @author wxn
  */
 @Plugin(name = "LogIdPatternConverter", category = PatternConverter.CATEGORY)
 @ConverterKeys({ "y", "logId" })
@@ -26,12 +26,25 @@ public class LogIdPatternConverter extends LogEventPatternConverter {
     public static String getThreadLogId(Long threadId) {
         Map<Long,String> threadMap = threadIdLocal.get();
         if (ObjectToolkit.isEmpty(threadMap)) {
-            threadMap = new HashMap<Long, String>();
+            threadMap = new HashMap<>(2);
             threadMap.put(threadId, UUID.randomUUID().toString().replace("-",""));
             threadIdLocal.set(threadMap);
         }
         return threadMap.get(threadId);
     }
+    public static void putThreadLogId(Long threadId, String logId) {
+        Map<Long, String> threadMap = threadIdLocal.get();
+        if (threadMap == null) {
+            threadMap = new HashMap<>();
+            threadIdLocal.set(threadMap);
+        }
+        threadIdLocal.get().put(threadId, logId);
+    }
+
+    public static void putThreadLogId(String logId) {
+        putThreadLogId(Thread.currentThread().getId(), logId);
+    }
+
     public static void clearLogId() {
         threadIdLocal.remove();
     }
