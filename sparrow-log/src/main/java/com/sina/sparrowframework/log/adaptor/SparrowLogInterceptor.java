@@ -27,8 +27,8 @@ public class SparrowLogInterceptor extends HandlerInterceptorAdapter implements 
     /**
      * h5端请求日志过滤
      */
-    public static final String SPARROW_LOG_FILTER_REQUEST_URI_LIST = "sparrow.log.filter.request.uri.list";
-    public static final String SPARROW_LOG_FILTER_RESPONSE_URI_LIST = "sparrow.log.filter.response.uri.list";
+    private static final String SPARROW_LOG_FILTER_REQUEST_URI_LIST = "sparrow.log.filter.request.uri.list";
+    private static final String SPARROW_LOG_FILTER_RESPONSE_URI_LIST = "sparrow.log.filter.response.uri.list";
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         LogHttpServletRequest logHttpServletRequest = new LogHttpServletRequest(request);
