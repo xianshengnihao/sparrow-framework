@@ -1,6 +1,5 @@
 package com.sina.sparrowframework.metric.adaptor;
 
-import com.sina.sparrowframework.log.converter.LogIdPatternConverter;
 import com.sina.sparrowframework.metric.StrUtil;
 import io.prometheus.client.Summary;
 import org.slf4j.Logger;
