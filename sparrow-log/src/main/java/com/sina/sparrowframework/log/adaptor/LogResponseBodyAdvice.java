@@ -45,10 +45,14 @@ public class LogResponseBodyAdvice implements ResponseBodyAdvice<Object>, Enviro
             , Class<? extends HttpMessageConverter<?>> selectedConverterType
             , ServerHttpRequest serverHttpRequest, ServerHttpResponse response) {
         HttpServletRequest request = getRequest();
-        Long startMilli = LogRequestBodyAdvice.logThreadLocal.get();
         Long endMilli = System.currentTimeMillis();
+        Long startMilli = LogRequestBodyAdvice.logThreadLocal.get() ==null ? endMilli
+                : LogRequestBodyAdvice.logThreadLocal.get();
         String obj  ;
-        if (body instanceof String) {
+        if (body == null) {
+            obj =null;
+        }
+        else if (body instanceof String) {
             obj = (String) body;
         }else {
             obj = JacksonUtil.objectToJson(body);
