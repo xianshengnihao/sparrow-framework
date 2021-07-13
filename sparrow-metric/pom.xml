@@ -53,10 +53,6 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.sina.sparrowframework</groupId>
-            <artifactId>sparrow-log</artifactId>
-        </dependency>
     </dependencies>
 
 </project>
