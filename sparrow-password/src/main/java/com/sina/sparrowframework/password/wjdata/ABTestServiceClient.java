@@ -38,6 +38,7 @@ public class ABTestServiceClient {
             watch.start();
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
+            request.setChannel("licai").setApp("web");
             ResponseEntity<String> response = restTemplate.exchange(requestUrl, HttpMethod.POST,new HttpEntity<>(JacksonUtil.objectToJson(request), headers), String.class);
             watch.stop();
             logger.info("\r\n[发起aBTest实验响应] 返回code:{}\r\n返回header:{}\r\n返回值为:{}\r\n共计执行:{}ms",
