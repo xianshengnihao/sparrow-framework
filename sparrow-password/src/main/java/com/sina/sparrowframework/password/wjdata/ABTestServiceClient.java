@@ -51,7 +51,7 @@ public class ABTestServiceClient {
         }
     }
 
-    private static <T> WjDataBaseResponse<T> convertResponse(
+    private static <T> WjDataBaseResponse convertResponse(
             ResponseEntity<String> entity, Class<T> clazz) throws Exception {
         JsonNode root = JacksonUtil.parseTree(entity.getBody());
         WjDataBaseResponse response = new WjDataBaseResponse();
