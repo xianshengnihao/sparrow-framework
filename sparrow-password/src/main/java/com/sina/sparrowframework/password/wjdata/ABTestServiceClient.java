@@ -46,7 +46,7 @@ public class ABTestServiceClient {
                     watch.getTotalTimeMillis());
             return convertResponse(response, responseType);
         } catch (Exception e) {
-            logger.error("\r\n,发起aBTest实验出错", e);
+            logger.error("\r\n发起aBTest实验出错", e);
             throw new BizFailException(BaseCode.THIRD_REMOTE_ERROR,"发起aBTest实验出错");
         }
     }
