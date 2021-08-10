@@ -3,7 +3,7 @@
   <parent>
     <groupId>com.sina.sparrowframework</groupId>
     <artifactId>sparrow-framework</artifactId>
-    <version>0.0.18</version>
+    <version>0.0.19-SNAPSHOT</version>
   </parent>
   <artifactId>sparrow-log</artifactId>
   <name>sparrow-log</name>
