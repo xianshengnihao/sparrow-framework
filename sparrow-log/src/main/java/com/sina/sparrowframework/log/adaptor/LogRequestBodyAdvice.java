@@ -1,5 +1,6 @@
 package com.sina.sparrowframework.log.adaptor;
 
+import com.sina.sparrowframework.log.converter.LogIdPatternConverter;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -60,6 +61,10 @@ public class LogRequestBodyAdvice extends RequestBodyAdviceAdapter implements En
         LOG_THREAD_LOCAL.set(System.currentTimeMillis());
         String json = IOUtils.toString(inputMessage.getBody(), StandardCharsets.UTF_8);
         HttpServletRequest request = getRequest();
+        String logId = request.getHeader(LogIdPatternConverter.SPARROW_LOG_ID);
+        if (!StringUtils.isEmpty(logId)) {
+            LogIdPatternConverter.putThreadLogId(logId);
+        }
         String reqUrl = request.getRequestURI();
         if (!StringUtils.isEmpty(env.getProperty(SPARROW_LOG_FILTER_REQUEST_URI_LIST,String.class))
                 && env.getProperty(SPARROW_LOG_FILTER_REQUEST_URI_LIST, List.class).contains(request.getRequestURI())) {
