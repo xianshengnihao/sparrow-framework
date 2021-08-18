@@ -21,6 +21,7 @@ import com.sina.sparrowframework.tools.utility.ObjectToolkit;
 @Plugin(name = "LogIdPatternConverter", category = PatternConverter.CATEGORY)
 @ConverterKeys({ "y", "logId" })
 public class LogIdPatternConverter extends LogEventPatternConverter {
+    public static final String SPARROW_LOG_ID = "sparrow-log-id";
     private static ThreadLocal<Map<Long,String>> threadIdLocal = new ThreadLocal();
 
     public static String getThreadLogId(Long threadId) {
