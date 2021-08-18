@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.core.MethodParameter;
-import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -46,8 +45,8 @@ public class LogResponseBodyAdvice implements ResponseBodyAdvice<Object>, Enviro
             , ServerHttpRequest serverHttpRequest, ServerHttpResponse response) {
         HttpServletRequest request = getRequest();
         Long endMilli = System.currentTimeMillis();
-        Long startMilli = LogRequestBodyAdvice.logThreadLocal.get() ==null ? endMilli
-                : LogRequestBodyAdvice.logThreadLocal.get();
+        Long startMilli = LogRequestBodyAdvice.LOG_THREAD_LOCAL.get() ==null ? endMilli
+                : LogRequestBodyAdvice.LOG_THREAD_LOCAL.get();
         String obj  ;
         if (body == null) {
             obj =null;

@@ -35,7 +35,7 @@ public class LogIdPatternConverter extends LogEventPatternConverter {
     public static void putThreadLogId(Long threadId, String logId) {
         Map<Long, String> threadMap = threadIdLocal.get();
         if (threadMap == null) {
-            threadMap = new HashMap<>();
+            threadMap = new HashMap<>(10);
             threadIdLocal.set(threadMap);
         }
         threadIdLocal.get().put(threadId, logId);

@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Import;
  * @author wxn
  * @date 2021/6/9 4:56 下午
  */
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @Import(LogScanConf.class)
 public class EnableLogConfiguration {
 

@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.NamedThreadLocal;
-import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpInputMessage;
@@ -32,7 +31,7 @@ import java.util.List;
 @ControllerAdvice
 public class LogRequestBodyAdvice extends RequestBodyAdviceAdapter implements EnvironmentAware {
     public Logger logger= LoggerFactory.getLogger(this.getClass());
-    public static final NamedThreadLocal<Long> logThreadLocal = new NamedThreadLocal<>("接口耗时计算");
+    public static final NamedThreadLocal<Long> LOG_THREAD_LOCAL = new NamedThreadLocal<>("接口耗时计算");
 
     private Environment env;
     /**
@@ -58,7 +57,7 @@ public class LogRequestBodyAdvice extends RequestBodyAdviceAdapter implements En
     @Override
     public HttpInputMessage beforeBodyRead(HttpInputMessage inputMessage, MethodParameter parameter, Type targetType,
                                            Class<? extends HttpMessageConverter<?>> converterType) throws IOException {
-        logThreadLocal.set(System.currentTimeMillis());
+        LOG_THREAD_LOCAL.set(System.currentTimeMillis());
         String json = IOUtils.toString(inputMessage.getBody(), StandardCharsets.UTF_8);
         HttpServletRequest request = getRequest();
         String reqUrl = request.getRequestURI();

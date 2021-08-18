@@ -1,2 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.sina.sparrowframework.log.EnableLogConfiguration
+com.sina.sparrowframework.log.EnableLogConfiguration,\
+com.sina.sparrowframework.log.FeignLogConfiguration
