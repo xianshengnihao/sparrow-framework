@@ -41,7 +41,7 @@ public class GlobalExceptionAop {
     @ExceptionHandler(value = Exception.class)
     public ResponseResult<Object> handleException(Exception e) {
         log.error("系统内部异常，异常信息：{}", e.getMessage(), e);
-        return ResponseResult.error(BaseCode.UNKNOWN_ERROR.getCode(), "未知错误");
+        return ResponseResult.error(BaseCode.UNKNOWN_ERROR.getCode(), "服务开小差了~");
     }
 
     /**
@@ -60,7 +60,7 @@ public class GlobalExceptionAop {
     @ExceptionHandler(value = IllegalArgumentException.class)
     public ResponseResult<Object> handleIllegalArgumentExceptionException(IllegalArgumentException e) {
         log.error("断言错误，异常信息：{}", e.getMessage(), e);
-        return ResponseResult.error(ASSERT_ERROR.getCode(), e.getMessage());
+        return ResponseResult.error(ASSERT_ERROR.getCode(), "服务开小差了~");
     }
 
     /**
