@@ -22,7 +22,7 @@ import com.sina.sparrowframework.tools.utility.ObjectToolkit;
 @ConverterKeys({ "y", "logId" })
 public class LogIdPatternConverter extends LogEventPatternConverter {
     public static final String SPARROW_LOG_ID = "sparrow-log-id";
-    private static ThreadLocal<Map<Long,String>> threadIdLocal = new ThreadLocal();
+    private static ThreadLocal<Map<Long,String>> threadIdLocal = new InheritableThreadLocal<>();
 
     public static String getThreadLogId(Long threadId) {
         Map<Long,String> threadMap = threadIdLocal.get();
