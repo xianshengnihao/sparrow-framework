@@ -62,7 +62,6 @@ public class LogRequestBodyAdvice extends RequestBodyAdviceAdapter implements En
         String json = IOUtils.toString(inputMessage.getBody(), StandardCharsets.UTF_8);
         HttpServletRequest request = getRequest();
         String logId = request.getHeader(LogIdPatternConverter.SPARROW_LOG_ID);
-        logger.info("请求控制层参数 logId={}",logId);
         if (!StringUtils.isEmpty(logId)) {
             LogIdPatternConverter.putThreadLogId(logId);
         }

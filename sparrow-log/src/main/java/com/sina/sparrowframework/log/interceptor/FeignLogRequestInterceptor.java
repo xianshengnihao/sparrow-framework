@@ -19,7 +19,6 @@ public class FeignLogRequestInterceptor implements RequestInterceptor {
     @Override
     public void apply(RequestTemplate template) {
         String logId = LogIdPatternConverter.getThreadLogId(Thread.currentThread().getId());
-        logger.info("日志logId={}",logId);
         template.header(LogIdPatternConverter.SPARROW_LOG_ID,logId);
     }
 }
