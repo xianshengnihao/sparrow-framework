@@ -9,7 +9,7 @@
 
     <groupId>com.sina.sparrowframework</groupId>
     <artifactId>sparrow-framework</artifactId>
-    <version>0.0.19-SNAPSHOT</version>
+    <version>0.0.19</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -192,7 +192,7 @@
 
     <scm>
         <developerConnection>scm:git:git@git.staff.sina.com.cn:fc/sparrow-framework.git</developerConnection>
-      <tag>HEAD</tag>
+      <tag>sparrow-framework-0.0.19</tag>
   </scm>
 
 
