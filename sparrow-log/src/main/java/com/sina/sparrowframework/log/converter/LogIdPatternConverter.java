@@ -11,6 +11,8 @@ import org.apache.logging.log4j.core.config.plugins.Plugin;
 import org.apache.logging.log4j.core.pattern.ConverterKeys;
 import org.apache.logging.log4j.core.pattern.LogEventPatternConverter;
 import org.apache.logging.log4j.core.pattern.PatternConverter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -21,6 +23,8 @@ import org.apache.logging.log4j.core.pattern.PatternConverter;
 @Plugin(name = "LogIdPatternConverter", category = PatternConverter.CATEGORY)
 @ConverterKeys({ "y", "logId" })
 public class LogIdPatternConverter extends LogEventPatternConverter {
+    public static Logger logger= LoggerFactory.getLogger(LogIdPatternConverter.class);
+
     public static final String SPARROW_LOG_ID = "sparrow-log-id";
     private static ThreadLocal<Map<Long,String>> logThreadIdLocal = new TransmittableThreadLocal() {
         @Override
@@ -31,21 +35,26 @@ public class LogIdPatternConverter extends LogEventPatternConverter {
     private static HashMap<Long,String> mainLog =new HashMap();
 
         public static String getThreadLogId(Long threadId) {
-        if (threadId.equals(1L)) {
-            return Optional.ofNullable(mainLog.get(threadId)).orElseGet(()->{
-                mainLog.put(threadId
-                        , UUID.randomUUID().toString().replace("-", ""));
-                return mainLog.get(threadId);
-            });
+            try {
+                if (threadId.equals(1L)) {
+                    return Optional.ofNullable(mainLog.get(threadId)).orElseGet(()->{
+                        mainLog.put(threadId
+                                , UUID.randomUUID().toString().replace("-", ""));
+                        return mainLog.get(threadId);
+                    });
+                }
+                Optional<Map.Entry<Long, String>> first = logThreadIdLocal.get()
+                        .entrySet().stream().findFirst();
+                return first.isPresent() ? first.get().getValue():(String) Optional.empty().orElseGet(()->{
+                    logThreadIdLocal.get().put(threadId
+                            , UUID.randomUUID().toString().replace("-", ""));
+                    return logThreadIdLocal.get().get(threadId);
+                });
+            } catch (Exception e) {
+                logger.info("getThreadLogId 异常",e);
+            }
+            return null;
         }
-        Optional<Map.Entry<Long, String>> first = logThreadIdLocal.get()
-                .entrySet().stream().findFirst();
-        return first.isPresent() ? first.get().getValue():(String) Optional.empty().orElseGet(()->{
-            logThreadIdLocal.get().put(threadId
-                    , UUID.randomUUID().toString().replace("-", ""));
-            return logThreadIdLocal.get().get(threadId);
-        });
-    }
     public static void putThreadLogId(Long threadId, String logId) {
         logThreadIdLocal.get().put(threadId, logId);
     }
