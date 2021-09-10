@@ -1,9 +1,7 @@
 package com.sina.sparrowframework.log.converter;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.alibaba.ttl.TransmittableThreadLocal;
 import org.apache.logging.log4j.core.LogEvent;
@@ -29,7 +27,7 @@ public class LogIdPatternConverter extends LogEventPatternConverter {
     private static ThreadLocal<Map<Long,String>> logThreadIdLocal = new TransmittableThreadLocal() {
         @Override
         protected Map<Long,String> initialValue() {
-            return new HashMap(3);
+            return new ConcurrentHashMap<>(3);
         }
     };
     private static HashMap<Long,String> mainLog =new HashMap();
