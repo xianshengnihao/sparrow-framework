@@ -46,7 +46,7 @@ public abstract class FundSignatureUtils {
             Map<String, Object> signMap = new HashMap<>();
             if (jsonNode.isObject()) {
                 signMap = JacksonUtil.jsonToMap(jsonNode.toString());
-                signMap.entrySet().removeIf(entry -> entry.getValue() == null);
+                signMap.entrySet().removeIf(entry -> entry.getValue() == null || "".equals(entry.getValue()));
                 list.addAll(signMap.keySet());
             }
             list.sort(String::compareTo);
