@@ -14,9 +14,7 @@ import org.springframework.util.ObjectUtils;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -32,7 +30,7 @@ public class RedisDistLockProvider implements IDistributedLock {
     private final RedisScript<Long> RELEASE_LOCK_SCRIPT;
     private final RedisTemplate redisTemplate;
     private final String environment;
-    private static final ThreadLocal<String> LOCAL_REQUEST_IDS = new ThreadLocal<>();
+    private static final ThreadLocal<Map<String,String>> LOCAL_REQUEST_IDS = ThreadLocal.withInitial(() -> new HashMap<>(3));
 
     public RedisDistLockProvider(RedisTemplate redisTemplate) {
         this(redisTemplate, ENV_DEFAULT);
@@ -95,7 +93,7 @@ public class RedisDistLockProvider implements IDistributedLock {
         List<String> keys = Arrays.asList(redisKey, redisVal, String.valueOf(expiration.getExpirationTimeInMilliseconds()));
         Long result = (Long) redisTemplate.execute(LOCK_SCRIPT, keys);
         if (!ObjectUtils.isEmpty(result) && result > 0) {
-            LOCAL_REQUEST_IDS.set(redisVal);
+            putLocalRedisValue(redisKey,redisVal);
             logger.info("thread name :{} ,success to acquire lock:{}, Status code reply:{}", Thread.currentThread().getName(), key, result);
             return Boolean.TRUE;
         }
@@ -121,9 +119,9 @@ public class RedisDistLockProvider implements IDistributedLock {
 
     @Override
     public boolean unLock(String key) {
+        String redisKey = getKey(key);
         try {
-            String redisKey = getKey(key);
-            List<String> keys = Arrays.asList(redisKey, LOCAL_REQUEST_IDS.get());
+            List<String> keys = Arrays.asList(redisKey, getLocalRedisValue(redisKey));
             logger.debug("unlock :::: redisKey:{},redisVal:{}", redisKey, LOCAL_REQUEST_IDS.get());
             Long result = (Long) redisTemplate.execute(RELEASE_LOCK_SCRIPT, keys);
             if (!ObjectUtils.isEmpty(result) && result > 0) {
@@ -137,7 +135,7 @@ public class RedisDistLockProvider implements IDistributedLock {
         } catch (Exception e) {
             logger.error("thread name :{} ,release lock occured an exception:{}", Thread.currentThread().getName(), e.getMessage(), e);
         } finally {
-            LOCAL_REQUEST_IDS.remove();
+            removeLocalRedisValue(redisKey);
         }
         return false;
     }
@@ -150,5 +148,13 @@ public class RedisDistLockProvider implements IDistributedLock {
         }
         return redisKey;
     }
-
+    private static String getLocalRedisValue(String redisKey) {
+        return LOCAL_REQUEST_IDS.get().get(redisKey);
+    }
+    private static void putLocalRedisValue(String redisKey,String redisValue) {
+        LOCAL_REQUEST_IDS.get().put(redisKey,redisValue);
+    }
+    private static String removeLocalRedisValue(String redisKey) {
+        return LOCAL_REQUEST_IDS.get().remove(redisKey);
+    }
 }
