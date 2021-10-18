@@ -109,12 +109,7 @@ public class RedisDistLockProvider implements IDistributedLock {
     }
 
     private static String buildValue() {
-        try {
-            return String.format("%s@%s", UUID.randomUUID().toString().replace("-", ""), InetAddress.getLocalHost());
-        } catch (UnknownHostException e) {
-            logger.error("init threadLocal occured an exception:{}", e.getMessage(), e);
-            return UUID.randomUUID().toString().replace("-", "");
-        }
+        return UUID.randomUUID().toString().replace("-", "");
     }
 
     @Override
