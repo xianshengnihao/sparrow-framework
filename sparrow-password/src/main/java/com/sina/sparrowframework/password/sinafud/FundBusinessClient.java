@@ -19,6 +19,7 @@ import org.springframework.lang.Nullable;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.util.StopWatch;
+import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
@@ -93,7 +94,10 @@ public class FundBusinessClient {
      */
     public static boolean verifySignature(String jsonData,String sign){
         String content = FundSignatureUtils.sortSignatureContent(jsonData);
-        logger.info("verifySignature content={}",content);
+        logger.info("verifySignature content={} jsonData={} sign={} ",content,jsonData,sign);
+        if ((StringUtils.isEmpty(content) && StringUtils.isEmpty(sign))) {
+            return true;
+        }
         return SignatureUtils.verifySignatureWithRSA1(content,sign,FundKeyManager.businessPartnerPublicKey);
     }
 

@@ -41,6 +41,9 @@ public abstract class FundSignatureUtils {
         try {
             JsonNode jsonNode = JacksonUtil.parseTree(json);
             if(jsonNode.isArray()) {
+                if(jsonNode.isEmpty()) {
+                    return null;
+                }
                 list.add(jsonNode.toString());
             }
             Map<String, Object> signMap = new HashMap<>();
