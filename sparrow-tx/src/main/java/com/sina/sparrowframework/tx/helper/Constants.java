@@ -15,6 +15,9 @@ public class Constants {
     public static final String s8 = "s8";
     public static final String s9 = "s9";
     public static final String s10 = "s10";
+    public static final String s11 = "s11";
+    public static final String s12 = "s12";
+    public static final String s13 = "s13";
     public static final String url = "spring.datasource.%s.url[%s]";
     public static final String username = "spring.datasource.%s.username[%s]";
     public static final String password = "spring.datasource.%s.password[%s]";

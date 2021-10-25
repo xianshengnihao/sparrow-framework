@@ -156,6 +156,36 @@ public class DataSourceConfiguation extends BaseCondition implements Environment
     }
 
     /**
+     * 编号为 11 的从库(giraffe)
+     * 动态数据源
+     */
+    @Bean(name = "slaver11DataSource", initMethod = "init", destroyMethod = "close")
+    @Conditional(S11DataSourceCondition.class)
+    public DruidDataSource slaver11DataSource() {
+        return createMasterDataSource(false, 11);
+    }
+
+    /**
+     * 编号为 12 的从库(koala)
+     * 动态数据源
+     */
+    @Bean(name = "slaver12DataSource", initMethod = "init", destroyMethod = "close")
+    @Conditional(S12DataSourceCondition.class)
+    public DruidDataSource slaver12DataSource() {
+        return createMasterDataSource(false, 12);
+    }
+
+    /**
+     * 编号为 13 的从库(sm)
+     * 动态数据源
+     */
+    @Bean(name = "slaver13DataSource", initMethod = "init", destroyMethod = "close")
+    @Conditional(S13DataSourceCondition.class)
+    public DruidDataSource slaver13DataSource() {
+        return createMasterDataSource(false, 13);
+    }
+
+    /**
      * 封装 数据源创建逻辑
      */
     private DruidDataSource createMasterDataSource(boolean master, int index) {
@@ -250,6 +280,24 @@ public class DataSourceConfiguation extends BaseCondition implements Environment
                 dsMap.put(Constants.s10, s10);
             }
         }
+        if (isSupportDs(env, Constants.s11)) {
+            DataSource s11 = slaver11DataSource();
+            if (!ObjectToolkit.isEmpty(s11)) {
+                dsMap.put(Constants.s11, s11);
+            }
+        }
+        if (isSupportDs(env, Constants.s12)) {
+            DataSource s12 = slaver12DataSource();
+            if (!ObjectToolkit.isEmpty(s12)) {
+                dsMap.put(Constants.s12, s12);
+            }
+        }
+        if (isSupportDs(env, Constants.s13)) {
+            DataSource s13 = slaver13DataSource();
+            if (!ObjectToolkit.isEmpty(s13)) {
+                dsMap.put(Constants.s13, s13);
+            }
+        }
         dataSource.setTargetDataSources(dsMap);
         return dataSource;
     }
@@ -312,6 +360,24 @@ public class DataSourceConfiguation extends BaseCondition implements Environment
     @Conditional(S10DataSourceCondition.class)
     public DefaultDataSourceTransactionManager s10TxManager() {
         return new DefaultDataSourceTransactionManager(slaver10DataSource());
+    }
+
+    @Bean(name = GIRAFFE_TX_MANAGER)
+    @Conditional(S11DataSourceCondition.class)
+    public DefaultDataSourceTransactionManager s11TxManager() {
+        return new DefaultDataSourceTransactionManager(slaver11DataSource());
+    }
+
+    @Bean(name = KOALA_TX_MANAGER)
+    @Conditional(S12DataSourceCondition.class)
+    public DefaultDataSourceTransactionManager s12TxManager() {
+        return new DefaultDataSourceTransactionManager(slaver12DataSource());
+    }
+
+    @Bean(name = SM_TX_MANAGER)
+    @Conditional(S13DataSourceCondition.class)
+    public DefaultDataSourceTransactionManager s13TxManager() {
+        return new DefaultDataSourceTransactionManager(slaver13DataSource());
     }
 
     @Bean

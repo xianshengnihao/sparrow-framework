@@ -57,6 +57,12 @@ public class MyRoutingDataSource extends AbstractRoutingDataSource implements ST
                 index = "9";
             } else if (txName.equals(KANGAROO_TX_MANAGER)) {
                 index = "10";
+            }else if (txName.equals(GIRAFFE_TX_MANAGER)) {
+                index = "11";
+            }else if (txName.equals(KOALA_TX_MANAGER)) {
+                index = "12";
+            }else if (txName.equals(SM_TX_MANAGER)) {
+                index = "13";
             }
         } else {
             pattern = MASTER_PATTER;
