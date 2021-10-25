@@ -32,5 +32,6 @@ public class Constants {
     public static final String timeBetweenEvictionRunsMillis = "spring.datasource.%s.timeBetweenEvictionRunsMillis[%s]";
     public static final String removeAbandoned = "spring.datasource.%s.removeAbandoned[%s]";
     public static final String minEvictableIdleTimeMillis = "spring.datasource.%s.minEvictableIdleTimeMillis[%s]";
+    public static final String PROJECT_SUPPORTED_MULTIPLE_TX_MANAGER ="project.supported.multiple.txManager";
 
 }
