@@ -1,9 +1,19 @@
 package com.sina.sparrowframework.tx.manager;
 
+import com.sina.sparrowframework.tx.helper.Constants;
+import com.sina.sparrowframework.tx.helper.STM;
+import com.sina.sparrowframework.tx.holder.EnvironmentHolder;
+import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.support.DefaultTransactionStatus;
 
 import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Arrays;
+import java.util.List;
 
 
 /**
@@ -14,7 +24,8 @@ public class DefaultDataSourceTransactionManager extends DataSourceTransactionMa
 
     private static final long serialVersionUID = 1L;
 
-    public DefaultDataSourceTransactionManager() {}
+    public DefaultDataSourceTransactionManager() {
+    }
 
     public DefaultDataSourceTransactionManager(DataSource dataSource) {
         this();
@@ -29,6 +40,7 @@ public class DefaultDataSourceTransactionManager extends DataSourceTransactionMa
 
     /**
      * 事务成功
+     *
      * @param transaction
      */
     @Override
@@ -38,6 +50,7 @@ public class DefaultDataSourceTransactionManager extends DataSourceTransactionMa
 
     /**
      * 事务失败回滚
+     *
      * @param status
      */
     @Override
@@ -45,5 +58,25 @@ public class DefaultDataSourceTransactionManager extends DataSourceTransactionMa
         super.doRollback(status);
     }
 
+    /**
+     * @param con
+     * @param definition
+     * @throws SQLException
+     */
+    @Override
+    protected void prepareTransactionalConnection(Connection con, TransactionDefinition definition) throws SQLException {
+        Environment env = EnvironmentHolder.getEnvironment();
+        List<?> supportedLst = env.getProperty(Constants.PROJECT_SUPPORTED_MULTIPLE_TX_MANAGER,
+                List.class, Arrays.asList(STM.JELLY_TX_MANAGER));
+        if (supportedLst.contains(STM.JELLY_TX_MANAGER)) {
+            String timeoutKey;
+            try (Statement stmt = con.createStatement()) {
+                timeoutKey = String.format("%s.max.wait.timeout", STM.JELLY_TX_MANAGER);
+                Long timeout = env.getProperty(timeoutKey, Long.class, 28800L);
+                stmt.execute(String.format("SET SESSION wait_timeout = %s", timeout));
+            }
+        }
+        super.prepareTransactionalConnection(con, definition);
+    }
 }
 
