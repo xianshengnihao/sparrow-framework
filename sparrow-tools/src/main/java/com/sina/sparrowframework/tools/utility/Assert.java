@@ -1,5 +1,9 @@
 package com.sina.sparrowframework.tools.utility;
 
+import com.sina.sparrowframework.exception.business.BizFailException;
+import com.sina.sparrowframework.metadata.constants.BaseCode;
+import com.sina.sparrowframework.metadata.constants.CodeManager;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
@@ -364,7 +368,7 @@ public abstract class Assert  {
 
     private static void throwIllegalArgumentException(String format, Object... args) {
         String text = args == null ? format : String.format(format, args);
-        throw new IllegalArgumentException(text);
+        throw new BizFailException(BaseCode.ASSERT_ERROR,text);
     }
 
     private static String nullSafeGet(Supplier<String> messageSupplier) {
