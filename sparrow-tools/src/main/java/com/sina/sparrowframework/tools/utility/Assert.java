@@ -344,7 +344,7 @@ public abstract class Assert  {
      */
     public static void hasText(String text, String message) {
         if (!StrToolkit.hasText(text)) {
-            throw new IllegalArgumentException(message);
+            throw new BizFailException(BaseCode.ASSERT_ERROR,message);
         }
     }
 
@@ -361,7 +361,7 @@ public abstract class Assert  {
      */
     public static void notNull(Object object, Supplier<String> messageSupplier) {
         if (object == null) {
-            throw new IllegalArgumentException(nullSafeGet(messageSupplier));
+            throw new BizFailException(BaseCode.ASSERT_ERROR,nullSafeGet(messageSupplier));
         }
     }
 
