@@ -2,6 +2,8 @@ package com.sina.sparrowframework.password.xiaodai.support;
 
 import java.io.IOException;
 
+import org.springframework.lang.NonNull;
+
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -27,7 +29,7 @@ public class XiaodaiSupportRetryInterceptor implements Interceptor {
     }
 
     @Override
-    public Response intercept(Chain chain) throws IOException {
+    public Response intercept(@NonNull Chain chain) throws IOException {
         Request request = chain.request();
         Response response = null;
         int count = 0;
