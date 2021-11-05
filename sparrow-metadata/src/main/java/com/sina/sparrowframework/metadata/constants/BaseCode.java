@@ -18,7 +18,8 @@ public enum BaseCode implements CodeManager {
     MEDIA_TYPE_NOT_ACCEPTABLE("001130", "请求资源不可访问"),
     HTTP_MEDIA_TYPE_NOT_SUPPORTED("001140", "不支持的媒体类型"),
     IP_WHITE_LIST("001150", "不在IP名单"),
-    UNKNOWN_ERROR("999999", "未知错误");
+    DATA_ERROR("001160", "数据异常"),
+    UNKNOWN_ERROR("999999", "服务开小差了~");
 
     private final String code;
     private final String desc;

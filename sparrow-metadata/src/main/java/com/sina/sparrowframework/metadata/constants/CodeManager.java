@@ -36,6 +36,14 @@ public interface CodeManager {
          * 运营系统
          */
         String KANGAROO = "07";
+        /**
+         * 中转服务
+         */
+        String GIRAFFE= "08";
+        /**
+         * 金融APP服务
+         */
+        String KOALA= "09";
     }
 
 }

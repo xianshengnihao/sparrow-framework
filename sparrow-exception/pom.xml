@@ -15,11 +15,6 @@
     <dependencies>
         <dependency>
             <groupId>com.sina.sparrowframework</groupId>
-            <artifactId>sparrow-tools</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sina.sparrowframework</groupId>
             <artifactId>sparrow-metadata</artifactId>
         </dependency>
     </dependencies>

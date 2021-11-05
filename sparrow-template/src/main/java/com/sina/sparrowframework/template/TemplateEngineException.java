@@ -1,24 +1,24 @@
 package com.sina.sparrowframework.template;
 
 
-import com.sina.sparrowframework.tools.struct.ResultCode;
-import com.sina.sparrowframework.exception.business.RuntimeBusinessException;
+import com.sina.sparrowframework.exception.business.BizFailException;
+import com.sina.sparrowframework.metadata.constants.CodeManager;
 
 /**
  * 当 {@link TastyTemplateEngine} 出错时抛出.
  * created  on 2018-12-19.
  */
-public class TemplateEngineException extends RuntimeBusinessException {
+public class TemplateEngineException extends BizFailException {
 
 
     private static final long serialVersionUID = -8814687630405389592L;
 
-     TemplateEngineException(ResultCode resultCode) {
-        super(resultCode);
+     TemplateEngineException(CodeManager errorCode) {
+        super(errorCode);
     }
 
-     TemplateEngineException(ResultCode resultCode, String message,Object... args) {
-        super(resultCode, message,args);
+     TemplateEngineException(CodeManager errorCode, String message,Object... args) {
+        super(errorCode, message,args);
     }
 
 

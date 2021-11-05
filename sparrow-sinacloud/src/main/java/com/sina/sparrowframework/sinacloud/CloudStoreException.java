@@ -1,22 +1,23 @@
 package com.sina.sparrowframework.sinacloud;
 
 
-import com.sina.sparrowframework.tools.struct.ResultCode;
-import com.sina.sparrowframework.exception.business.RuntimeBusinessException;
+import com.sina.sparrowframework.exception.business.BizFailException;
+import com.sina.sparrowframework.metadata.constants.CodeManager;
+
 
 /**
  * created  on 2018/10/12.
  */
-public class CloudStoreException extends RuntimeBusinessException {
+public class CloudStoreException extends BizFailException {
 
 
     private static final long serialVersionUID = 4723549333291204873L;
 
-    public CloudStoreException(ResultCode resultCode) {
-        super( resultCode,resultCode.display() );
+    public CloudStoreException(CodeManager errorCode) {
+        super( errorCode,errorCode.getDesc() );
     }
 
-    public CloudStoreException(ResultCode resultCode, Throwable cause,String format,Object... args) {
-        super( resultCode, cause,format,args );
+    public CloudStoreException(CodeManager errorCode, Throwable cause,Object... args) {
+        super( errorCode, errorCode.getDesc(),cause,args );
     }
 }
