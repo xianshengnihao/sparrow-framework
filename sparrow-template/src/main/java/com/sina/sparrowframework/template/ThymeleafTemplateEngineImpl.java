@@ -1,5 +1,6 @@
 package com.sina.sparrowframework.template;
 
+import com.sina.sparrowframework.metadata.constants.BaseCode;
 import com.sina.sparrowframework.tools.struct.ResultCode;
 import com.sina.sparrowframework.tools.utility.FileUtils;
 import com.sina.sparrowframework.tools.utility.ReflectionUtils;
@@ -78,14 +79,14 @@ public class ThymeleafTemplateEngineImpl implements TastyTemplateEngine, Environ
             String result = writer.toString();
 
             if (!StringUtils.hasText(result)) {
-                throw new TemplateEngineException(ResultCode.resourceNotFund,
+                throw new TemplateEngineException(BaseCode.ASSERT_ERROR,
                         String.format("没有找到相应模板,template[%s]", form.getTemplateName()));
             }
             return result;
         } catch (TemplateEngineException e) {
             throw e;
         } catch (Exception e) {
-            throw new TemplateEngineException(ResultCode.templateProcessError, e.getMessage(), e);
+            throw new TemplateEngineException(BaseCode.ASSERT_ERROR, e.getMessage(), e);
         }
     }
 
@@ -121,7 +122,7 @@ public class ThymeleafTemplateEngineImpl implements TastyTemplateEngine, Environ
             resource = new FileSystemResource(tempFile);
             return resource;
         } catch (Exception e) {
-            throw new TemplateEngineException(ResultCode.templateProcessError, e.getMessage(), e);
+            throw new TemplateEngineException(BaseCode.ASSERT_ERROR, e.getMessage(), e);
         }
     }
 
@@ -132,7 +133,7 @@ public class ThymeleafTemplateEngineImpl implements TastyTemplateEngine, Environ
         try (Writer w = writer) {
             templateEngine.process(templateName, context, w);
         } catch (IOException e) {
-            throw new TemplateEngineException(ResultCode.templateProcessError, e.getMessage(), e);
+            throw new TemplateEngineException(BaseCode.ASSERT_ERROR, e.getMessage(), e);
         }
     }
 

@@ -4,6 +4,7 @@ import com.sina.cloudstorage.SCSClientException;
 import com.sina.cloudstorage.services.scs.SCS;
 import com.sina.cloudstorage.services.scs.model.*;
 import com.sina.sparrowframework.exception.business.DataException;
+import com.sina.sparrowframework.metadata.constants.BaseCode;
 import com.sina.sparrowframework.tools.struct.ResultCode;
 import com.sina.sparrowframework.tools.tuple.Pair;
 import com.sina.sparrowframework.tools.utility.*;
@@ -141,7 +142,7 @@ public final class SinaCloudStore implements CloudStore, EnvironmentAware {
 
             return createMeta(path, meta, CloudMeta.class);
         } catch (SCSClientException e) {
-            throw new CloudStoreException(ResultCode.serverUploadError, e, e.getMessage());
+            throw new CloudStoreException(BaseCode.ASSERT_ERROR, e, e.getMessage());
         } finally {
             try {
                 Files.delete(file.toPath());
@@ -169,7 +170,7 @@ public final class SinaCloudStore implements CloudStore, EnvironmentAware {
 
             return createResult(fileObj);
         } catch (SCSClientException e) {
-            throw new CloudStoreException(ResultCode.downloadError, e, e.getMessage());
+            throw new CloudStoreException(BaseCode.ASSERT_ERROR, e, e.getMessage());
         }
     }
 
@@ -205,7 +206,7 @@ public final class SinaCloudStore implements CloudStore, EnvironmentAware {
             LOG.info("元数据下载路径:{},cost[{}]ms", pair.getRight(), System.currentTimeMillis() - start);
             return createMeta(path, meta, CloudMeta.class);
         } catch (SCSClientException e) {
-            throw new CloudStoreException(ResultCode.resourceNotFund, e, "meta get meta error,path[%s]", pair);
+            throw new CloudStoreException(BaseCode.ASSERT_ERROR, e, "meta get meta error,path[%s]", pair);
         }
     }
 
@@ -215,7 +216,7 @@ public final class SinaCloudStore implements CloudStore, EnvironmentAware {
         if (exists(path)) {
             url = doGetUrl(path);
         } else {
-            throw new CloudStoreException(ResultCode.resourceNotFund);
+            throw new CloudStoreException(BaseCode.ASSERT_ERROR);
         }
         return url;
     }
@@ -226,7 +227,7 @@ public final class SinaCloudStore implements CloudStore, EnvironmentAware {
     public ListResult listPath(String prefix, String offset, int rowCount) throws CloudStoreException, DataException {
         hasText(prefix, "prefix required");
         if (rowCount > 500 || rowCount < 1) {
-            throw new DataException(ResultCode.dataError, "rowCount error");
+            throw new DataException(BaseCode.ASSERT_ERROR, "rowCount error");
         }
 
         if (END_OFFSET.equals(offset)) {
@@ -254,7 +255,7 @@ public final class SinaCloudStore implements CloudStore, EnvironmentAware {
             }
             return listResult;
         } catch (SCSClientException e) {
-            throw new CloudStoreException(ResultCode.serverError, e, e.getMessage());
+            throw new CloudStoreException(BaseCode.ASSERT_ERROR, e, e.getMessage());
         }
     }
 
@@ -268,7 +269,7 @@ public final class SinaCloudStore implements CloudStore, EnvironmentAware {
         try {
             return patternUrlKid(patternUrlSsig(u.toString()));
         } catch (UnsupportedEncodingException e) {
-            throw new CloudStoreException(ResultCode.serverError, e, e.getMessage());
+            throw new CloudStoreException(BaseCode.ASSERT_ERROR, e, e.getMessage());
         }
     }
 
@@ -353,7 +354,7 @@ public final class SinaCloudStore implements CloudStore, EnvironmentAware {
             }
             return file;
         } catch (IOException e) {
-            throw new CloudStoreException(ResultCode.serverUploadError, e, e.getMessage());
+            throw new CloudStoreException(BaseCode.ASSERT_ERROR, e, e.getMessage());
         }
     }
 
@@ -366,7 +367,7 @@ public final class SinaCloudStore implements CloudStore, EnvironmentAware {
             Key aesKey = KeyUtils.readAesKey(env.getRequiredProperty(keyStr));
             return CipherUtils.encrypt(aesKey, CipherUtils.Algorithm.AES, resource.getInputStream());
         } catch (Exception e) {
-            throw new CloudStoreException(ResultCode.serverUploadError, e, e.getMessage());
+            throw new CloudStoreException(BaseCode.ASSERT_ERROR, e, e.getMessage());
         }
     }
 
@@ -390,7 +391,7 @@ public final class SinaCloudStore implements CloudStore, EnvironmentAware {
                 }
             };
         } catch (Exception e) {
-            throw new CloudStoreException(ResultCode.downloadError, e, e.getMessage());
+            throw new CloudStoreException(BaseCode.ASSERT_ERROR, e, e.getMessage());
         }
     }
 
@@ -470,7 +471,7 @@ public final class SinaCloudStore implements CloudStore, EnvironmentAware {
         try {
             return DigestUtils.md5Base64(file);
         } catch (IOException e) {
-            throw new CloudStoreException(ResultCode.serverUploadError);
+            throw new CloudStoreException(BaseCode.ASSERT_ERROR);
         }
     }
 
@@ -507,7 +508,7 @@ public final class SinaCloudStore implements CloudStore, EnvironmentAware {
             }
             return Pair.of(bucket, fileKey);
         } catch (IndexOutOfBoundsException e) {
-            throw new CloudStoreException(ResultCode.resourceNotFund);
+            throw new CloudStoreException(BaseCode.ASSERT_ERROR);
         }
     }
 
@@ -584,7 +585,7 @@ public final class SinaCloudStore implements CloudStore, EnvironmentAware {
                     .setOriginalName(decodeBase64(metaMap.get(META_ORIGINAL_NAME)));
             return t;
         } catch (Exception e) {
-            throw new CloudStoreException(ResultCode.downloadError, e, e.getMessage());
+            throw new CloudStoreException(BaseCode.ASSERT_ERROR, e, e.getMessage());
         }
     }
 
