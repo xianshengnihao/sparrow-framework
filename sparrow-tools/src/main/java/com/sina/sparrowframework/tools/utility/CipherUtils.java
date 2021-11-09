@@ -5,14 +5,14 @@ import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.spec.SecretKeySpec;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
+import java.security.PublicKey;
 import java.util.UUID;
 
 /**
@@ -183,6 +183,38 @@ public abstract class CipherUtils {
                 Base64.decodeBase64(cipherText));
         return new String(decryptByte, StandardCharsets.UTF_8);
     }
+
+    /**
+     * 处理解密data 128 bytes
+     * @param keyBase64
+     * @param algorithm
+     * @param cipherText
+     * @return
+     * @throws Exception
+     */
+    public static String decryptWithRsaPublic128(String keyBase64
+            , Algorithm algorithm
+            , String cipherText) throws Exception {
+        PublicKey key = KeyUtils.readRsaPublicKey(keyBase64);
+        Cipher cipher = Cipher.getInstance(algorithm.algorithm);
+        cipher.init(Cipher.DECRYPT_MODE, key);
+        return new String(multiSlot(new ByteArrayInputStream(
+                Base64.decodeBase64(cipherText)),cipher,128),StandardCharsets.UTF_8);
+    }
+    private static byte[] multiSlot(InputStream input, Cipher cipher, int maxLength)
+            throws IOException, BadPaddingException, IllegalBlockSizeException {
+
+        try (ByteArrayOutputStream out = new ByteArrayOutputStream();
+             InputStream in = new BufferedInputStream(input)) {
+            byte[] buffer = new byte[maxLength];
+            int read;
+            while ((read = in.read(buffer, 0, maxLength)) != -1) {
+                out.write(cipher.doFinal(buffer, 0, read));
+            }
+            return out.toByteArray();
+        }
+    }
+
 
     public static byte[] decryptWithRsaPrivate(String keyBase64
             , Algorithm algorithm

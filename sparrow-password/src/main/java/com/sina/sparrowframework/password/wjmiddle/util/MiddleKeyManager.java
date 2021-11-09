@@ -29,7 +29,7 @@ public class MiddleKeyManager implements EnvironmentAware  {
     @PostConstruct
     private  void initBusiness() throws Exception {
         MiddleKeyManager.businessPartnerPrivateKey =
-                KeyUtils.readRSAPrivateKey(environment.getProperty("wj.middle.business.partnerPrivateKey"));
+                KeyUtils.readRsaPrivateKey(environment.getProperty("wj.middle.business.partnerPrivateKey"));
         MiddleKeyManager.baseUrl = environment.getProperty("wj.middle.domain.name");
         MiddleKeyManager.business = environment.getProperty("wj.middle.business.code");
 

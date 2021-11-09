@@ -43,12 +43,12 @@ public class FundKeyManager implements EnvironmentAware  {
     private  void initBusiness() throws Exception {
 
         FundKeyManager.businessPlatformPublicKey =
-                KeyUtils.readRSAPublicKey(environment.getProperty("sinafund.business.platformPublicKey"));
+                KeyUtils.readRsaPublicKey(environment.getProperty("sinafund.business.platformPublicKey"));
 
         FundKeyManager.businessPlatformPrivateKey
-                = KeyUtils.readRSAPrivateKey(environment.getProperty("sinafund.business.platformPrivateKey"));
+                = KeyUtils.readRsaPrivateKey(environment.getProperty("sinafund.business.platformPrivateKey"));
         FundKeyManager.businessPartnerPublicKey
-                = KeyUtils.readRSAPublicKey(environment.getProperty("sinafund.business.partnerPublicKey"));
+                = KeyUtils.readRsaPublicKey(environment.getProperty("sinafund.business.partnerPublicKey"));
         FundKeyManager.merchantKey = environment.getProperty("sinafund.business.merchantKey");
         FundKeyManager.baseUrl = environment.getProperty("sinafund.domain.name");
     }

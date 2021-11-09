@@ -83,7 +83,16 @@ public abstract class Assert  {
         assertFalse(!expression, format, args);
     }
 
-
+    /**
+     * 此方法与 {@link Assert#hasText(String)} 不同的是此方法抛出的是 {@link IllegalArgumentException}
+     */
+    public static void assertHasText(String text, String format, Object... args) throws IllegalArgumentException {
+        try {
+            hasText(text, format);
+        } catch (Exception e) {
+            throwIllegalArgumentException(format, args);
+        }
+    }
     /**
      * 若两都 {@code null} 则认为两者不相待
      */

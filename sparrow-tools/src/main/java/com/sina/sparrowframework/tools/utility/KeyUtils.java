@@ -201,16 +201,7 @@ public abstract class KeyUtils {
         generator.initialize(keySize);
         return generator.generateKeyPair();
     }
-
-
-    public static PublicKey readRSAPublicKey(String base64Text) throws Exception {
-        return readPublicKey(KeyPairType.RSA, base64Text);
-    }
-    public static PrivateKey readRSAPrivateKey(String base64Text) throws Exception {
-        return readPrivateKey(KeyPairType.RSA, base64Text);
-    }
-
-
+    
 
     /*##################### protected ########################*/
 

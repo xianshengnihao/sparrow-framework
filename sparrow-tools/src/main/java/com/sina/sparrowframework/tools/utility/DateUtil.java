@@ -500,5 +500,11 @@ public abstract class DateUtil {
         LocalDateTime parse = LocalDateTime.parse("2018-05-29 13:52:50", ftf);
         return LocalDateTime.from(parse).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
     }
+    public static long currentTimestampSecond() {
+        return convertToTimestampSecond(LocalDateTime.now());
+    }
 
+    public static long convertToTimestampSecond(LocalDateTime dateTime) {
+        return dateTime.toEpochSecond(ZONE_OFFSET8);
+    }
 }
