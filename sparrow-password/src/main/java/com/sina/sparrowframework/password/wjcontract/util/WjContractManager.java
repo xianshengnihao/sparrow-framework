@@ -25,12 +25,14 @@ public class WjContractManager implements EnvironmentAware {
     public static String appid;
     public static String appSecret;
     public static String baseUrl;
+    public static String brandName;
 
     @PostConstruct
     private void initBusiness() throws Exception {
         appid = environment.getProperty("wjContract.business.appid");
         appSecret = environment.getProperty("wjContract.business.appSecret");
         baseUrl = environment.getProperty("wjContract.domain.name");
+        brandName = environment.getProperty("wjContract.business.brandName");
     }
 
     @Autowired

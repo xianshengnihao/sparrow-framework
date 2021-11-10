@@ -40,6 +40,7 @@ public class WjContractClient {
     private static final String PARAM_APPID = "x-wejoydata-appid";
     private static final String PARAM_TIMESTAMP = "x-wejoydata-timestamp";
     private static final String PARAM_SIGNATURE = "x-wejoydata-signature";
+    private static final String PARAM_BRANDNAME = "brandName";
     private static final String PARAM_BODYMD5 = "bodyMd5";
     private static final String PARAM_UID = "uid";
 
@@ -92,6 +93,7 @@ public class WjContractClient {
         httpHeaders.add(PARAM_UID, request.getUid());
         httpHeaders.add(PARAM_APPID, WjContractManager.appid);
         httpHeaders.add(PARAM_TIMESTAMP, String.valueOf(request.getTimestamp()));
+        httpHeaders.add(PARAM_BRANDNAME, WjContractManager.brandName);
         httpHeaders.add(PARAM_SIGNATURE, signStr);
         return new HttpEntity<>(JacksonUtil.objectToJson(request.getBody()), httpHeaders);
     }
