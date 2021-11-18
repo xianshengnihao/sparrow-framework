@@ -397,6 +397,9 @@ public class XiaodaiSupportBaseHttpClient {
     private static final String NULL = "null";
 
     private static String createEntireUrl(String url, Map<String, Object> urlParams) throws UnsupportedEncodingException {
+        if (urlParams == null || urlParams.isEmpty()) {
+            return url;
+        }
         StringBuffer stringBuffer = new StringBuffer(url);
         stringBuffer.append("?");
         for (Map.Entry<String, Object> entry : urlParams.entrySet()) {
