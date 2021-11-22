@@ -100,7 +100,7 @@ public class WjContractClient {
 
     private static String generateSign(WjContractRequest request) throws Exception {
         String bodyMd5 = null;
-        if (request.getBody() != null && !CollectionUtils.isEmpty(request.getBody())) {
+        if (request.getBody() != null) {
             bodyMd5 = DigestUtils.md5Hex(JacksonUtil.objectToJson(request.getBody()));
         }
         Map<String, Object> mapSignData = new HashMap<>();

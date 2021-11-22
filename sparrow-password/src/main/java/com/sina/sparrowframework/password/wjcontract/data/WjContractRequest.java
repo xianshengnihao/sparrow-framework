@@ -21,7 +21,7 @@ public class WjContractRequest implements Serializable {
 
     private Long timestamp = LocalDateTime.now().toEpochSecond(ZoneOffset.of("+8"));
 
-    private Map<String, Object> body;
+    private Object body;
 
     public String getUid() {
         return uid;
@@ -31,11 +31,11 @@ public class WjContractRequest implements Serializable {
         this.uid = uid;
     }
 
-    public Map<String, Object> getBody() {
+    public Object getBody() {
         return body;
     }
 
-    public void setBody(Map<String, Object> body) {
+    public void setBody(Object body) {
         this.body = body;
     }
 
