@@ -171,7 +171,9 @@ public class WjAccountClient {
                                 , StandardCharsets.UTF_8));
         return new FinanceUserInfo()
                 .setLgId(decodeMap.get("lgid"))
-                .setUid(decodeMap.get("uid"));
+                .setUid(decodeMap.get("uid"))
+                .setPid(decodeMap.get("pid"))
+                .setUserToken(userToken);
     }
 
     /**
