@@ -42,7 +42,6 @@ import static com.sina.sparrowframework.tools.utility.TimeUtils.*;
 /**
  * created  on 2018/4/18.
  */
-@Deprecated
 public abstract class JsonUtils {
 
 
