@@ -18,6 +18,46 @@ public class Constants {
     public static final String s11 = "s11";
     public static final String s12 = "s12";
     public static final String s13 = "s13";
+    /**
+     * 金融用户
+     */
+    public static final String s14 = "s14";
+    /**
+     * 金融用户消息
+     */
+    public static final String s15 = "s15";
+    /**
+     * 金融消息
+     */
+    public static final String s16 = "s16";
+    /**
+     * 金融平台
+     */
+    public static final String s17 = "s17";
+    /**
+     * 通讯录信息
+     */
+    public static final String s18 = "s18";
+    /**
+     * 设备信息
+     */
+    public static final String s19 = "s19";
+    /**
+     * 保险
+     */
+    public static final String s20 = "s20";
+    /**
+     * 积分商城
+     */
+    public static final String s21 = "s21";
+    /**
+     * (基金)xincai
+     */
+    public static final String s22 = "s22";
+    /**
+     * koala
+     */
+    public static final String s23 = "s23";
     public static final String url = "spring.datasource.%s.url[%s]";
     public static final String username = "spring.datasource.%s.username[%s]";
     public static final String password = "spring.datasource.%s.password[%s]";

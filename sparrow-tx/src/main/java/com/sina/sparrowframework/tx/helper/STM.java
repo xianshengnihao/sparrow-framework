@@ -18,4 +18,14 @@ public interface STM {
     String GIRAFFE_TX_MANAGER = "giraffeTxManager";
     String KOALA_TX_MANAGER = "koalaTxManager";
     String SM_TX_MANAGER = "smTxManager";
+    /**
+     * 金融用户
+     */
+    String FINANCE_USER_TX_MANAGER = "financeUserTxManager";
+    /**
+     * 金融用户
+     */
+//    String FINANCE_USER_TX_MANAGER = "financeUserTxManager";
+
+
 }
