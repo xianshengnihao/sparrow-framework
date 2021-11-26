@@ -447,6 +447,66 @@ public class DataSourceConfiguation extends BaseCondition implements Environment
         return new DefaultDataSourceTransactionManager(slaver13DataSource());
     }
 
+    @Bean(name = FINANCE_USER_TX_MANAGER)
+    @Conditional(S14DataSourceCondition.class)
+    public DefaultDataSourceTransactionManager s14TxManager() {
+        return new DefaultDataSourceTransactionManager(slaver14DataSource());
+    }
+
+    @Bean(name = FINANCE_USER_MSG_TX_MANAGER)
+    @Conditional(S15DataSourceCondition.class)
+    public DefaultDataSourceTransactionManager s15TxManager() {
+        return new DefaultDataSourceTransactionManager(slaver15DataSource());
+    }
+
+    @Bean(name = FINANCE_MSG_TX_MANAGER)
+    @Conditional(S16DataSourceCondition.class)
+    public DefaultDataSourceTransactionManager s16TxManager() {
+        return new DefaultDataSourceTransactionManager(slaver16DataSource());
+    }
+
+    @Bean(name = FINANCE_PLATFORM_TX_MANAGER)
+    @Conditional(S17DataSourceCondition.class)
+    public DefaultDataSourceTransactionManager s17TxManager() {
+        return new DefaultDataSourceTransactionManager(slaver17DataSource());
+    }
+
+    @Bean(name = FINANCE_CONTACT_INFO_TX_MANAGER)
+    @Conditional(S18DataSourceCondition.class)
+    public DefaultDataSourceTransactionManager s18TxManager() {
+        return new DefaultDataSourceTransactionManager(slaver18DataSource());
+    }
+
+    @Bean(name = FINANCE_DEVICE_INFO_TX_MANAGER)
+    @Conditional(S19DataSourceCondition.class)
+    public DefaultDataSourceTransactionManager s19TxManager() {
+        return new DefaultDataSourceTransactionManager(slaver19DataSource());
+    }
+
+    @Bean(name = FINANCE_INSURANCE_TX_MANAGER)
+    @Conditional(S20DataSourceCondition.class)
+    public DefaultDataSourceTransactionManager s20TxManager() {
+        return new DefaultDataSourceTransactionManager(slaver20DataSource());
+    }
+
+    @Bean(name = FINANCE_POINTS_MALL_TX_MANAGER)
+    @Conditional(S21DataSourceCondition.class)
+    public DefaultDataSourceTransactionManager s21TxManager() {
+        return new DefaultDataSourceTransactionManager(slaver21DataSource());
+    }
+
+    @Bean(name = XIN_CAI_TRADE_TX_MANAGER)
+    @Conditional(S22DataSourceCondition.class)
+    public DefaultDataSourceTransactionManager s22TxManager() {
+        return new DefaultDataSourceTransactionManager(slaver22DataSource());
+    }
+
+    @Bean(name = KOALA_MGR_TX_MANAGER)
+    @Conditional(S23DataSourceCondition.class)
+    public DefaultDataSourceTransactionManager s23TxManager() {
+        return new DefaultDataSourceTransactionManager(slaver23DataSource());
+    }
+
     @Bean
     public TransactionDefinitionInterceptor transactionDefinitionInterceptor() {
         return new TransactionDefinitionInterceptor();
