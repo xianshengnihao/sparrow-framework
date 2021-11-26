@@ -327,46 +327,140 @@ public class DataSourceConfiguation extends BaseCondition implements Environment
         Map<Object, Object> dsMap = new HashMap<>(8);
         dsMap.put(Constants.m0, m0);
         dsMap.put(Constants.s0, s0);
-        this.assembleDataSources(dsMap, env, Constants.s2, slaver2DataSource());
-        this.assembleDataSources(dsMap, env, Constants.s3, slaver3DataSource());
-        this.assembleDataSources(dsMap, env, Constants.s4, slaver4DataSource());
-        this.assembleDataSources(dsMap, env, Constants.s5, slaver5DataSource());
-        this.assembleDataSources(dsMap, env, Constants.myCat6, myCat6DataSource());
-        this.assembleDataSources(dsMap, env, Constants.s7, slaver7DataSource());
-        this.assembleDataSources(dsMap, env, Constants.s8, slaver8DataSource());
-        this.assembleDataSources(dsMap, env, Constants.s9, slaver9DataSource());
-        this.assembleDataSources(dsMap, env, Constants.s10, slaver10DataSource());
-        this.assembleDataSources(dsMap, env, Constants.s11, slaver11DataSource());
-        this.assembleDataSources(dsMap, env, Constants.s12, slaver12DataSource());
-        this.assembleDataSources(dsMap, env, Constants.s13, slaver13DataSource());
-        this.assembleDataSources(dsMap, env, Constants.s14, slaver14DataSource());
-        this.assembleDataSources(dsMap, env, Constants.s15, slaver15DataSource());
-        this.assembleDataSources(dsMap, env, Constants.s16, slaver16DataSource());
-        this.assembleDataSources(dsMap, env, Constants.s17, slaver17DataSource());
-        this.assembleDataSources(dsMap, env, Constants.s18, slaver18DataSource());
-        this.assembleDataSources(dsMap, env, Constants.s19, slaver19DataSource());
-        this.assembleDataSources(dsMap, env, Constants.s20, slaver20DataSource());
-        this.assembleDataSources(dsMap, env, Constants.s21, slaver21DataSource());
-        this.assembleDataSources(dsMap, env, Constants.s22, slaver22DataSource());
-        this.assembleDataSources(dsMap, env, Constants.s23, slaver23DataSource());
+        if (isSupportDs(env, Constants.s2)) {
+            DataSource s2 = slaver2DataSource();
+            if (!ObjectToolkit.isEmpty(s2)) {
+                dsMap.put(Constants.s2, s2);
+            }
+        }
+        if (isSupportDs(env, Constants.s3)) {
+            DataSource s3 = slaver3DataSource();
+            if (!ObjectToolkit.isEmpty(s3)) {
+                dsMap.put(Constants.s3, s3);
+            }
+        }
+        if (isSupportDs(env, Constants.s4)) {
+            DataSource s4 = slaver4DataSource();
+            if (!ObjectToolkit.isEmpty(s4)) {
+                dsMap.put(Constants.s4, s4);
+            }
+        }
+        if (isSupportDs(env, Constants.s5)) {
+            DataSource s5 = slaver5DataSource();
+            if (!ObjectToolkit.isEmpty(s5)) {
+                dsMap.put(Constants.s5, s5);
+            }
+        }
+        if (isSupportDs(env, Constants.myCat6)) {
+            DataSource myCat6 = myCat6DataSource();
+            if (!ObjectToolkit.isEmpty(myCat6)) {
+                dsMap.put(Constants.myCat6, myCat6);
+            }
+        }
+        if (isSupportDs(env, Constants.s7)) {
+            DataSource s7 = slaver7DataSource();
+            if (!ObjectToolkit.isEmpty(s7)) {
+                dsMap.put(Constants.s7, s7);
+            }
+        }
+        if (isSupportDs(env, Constants.s8)) {
+            DataSource s8 = slaver8DataSource();
+            if (!ObjectToolkit.isEmpty(s8)) {
+                dsMap.put(Constants.s8, s8);
+            }
+        }
+        if (isSupportDs(env, Constants.s9)) {
+            DataSource s9 = slaver9DataSource();
+            if (!ObjectToolkit.isEmpty(s9)) {
+                dsMap.put(Constants.s9, s9);
+            }
+        }
+        if (isSupportDs(env, Constants.s10)) {
+            DataSource s10 = slaver10DataSource();
+            if (!ObjectToolkit.isEmpty(s10)) {
+                dsMap.put(Constants.s10, s10);
+            }
+        }
+        if (isSupportDs(env, Constants.s11)) {
+            DataSource s11 = slaver11DataSource();
+            if (!ObjectToolkit.isEmpty(s11)) {
+                dsMap.put(Constants.s11, s11);
+            }
+        }
+        if (isSupportDs(env, Constants.s12)) {
+            DataSource s12 = slaver12DataSource();
+            if (!ObjectToolkit.isEmpty(s12)) {
+                dsMap.put(Constants.s12, s12);
+            }
+        }
+        if (isSupportDs(env, Constants.s13)) {
+            DataSource s13 = slaver13DataSource();
+            if (!ObjectToolkit.isEmpty(s13)) {
+                dsMap.put(Constants.s13, s13);
+            }
+        }
+        if (isSupportDs(env, Constants.s14)) {
+            DataSource s14 = slaver14DataSource();
+            if (!ObjectToolkit.isEmpty(s14)) {
+                dsMap.put(Constants.s14, s14);
+            }
+        }
+        if (isSupportDs(env, Constants.s15)) {
+            DataSource s15 = slaver15DataSource();
+            if (!ObjectToolkit.isEmpty(s15)) {
+                dsMap.put(Constants.s15, s15);
+            }
+        }
+        if (isSupportDs(env, Constants.s16)) {
+            DataSource s16 = slaver16DataSource();
+            if (!ObjectToolkit.isEmpty(s16)) {
+                dsMap.put(Constants.s16, s16);
+            }
+        }
+        if (isSupportDs(env, Constants.s17)) {
+            DataSource s17 = slaver17DataSource();
+            if (!ObjectToolkit.isEmpty(s17)) {
+                dsMap.put(Constants.s17, s17);
+            }
+        }
+        if (isSupportDs(env, Constants.s18)) {
+            DataSource s18 = slaver18DataSource();
+            if (!ObjectToolkit.isEmpty(s18)) {
+                dsMap.put(Constants.s18, s18);
+            }
+        }
+        if (isSupportDs(env, Constants.s19)) {
+            DataSource s19 = slaver19DataSource();
+            if (!ObjectToolkit.isEmpty(s19)) {
+                dsMap.put(Constants.s19, s19);
+            }
+        }
+        if (isSupportDs(env, Constants.s20)) {
+            DataSource s20 = slaver20DataSource();
+            if (!ObjectToolkit.isEmpty(s20)) {
+                dsMap.put(Constants.s20, s20);
+            }
+        }
+        if (isSupportDs(env, Constants.s21)) {
+            DataSource s21 = slaver21DataSource();
+            if (!ObjectToolkit.isEmpty(s21)) {
+                dsMap.put(Constants.s21, s21);
+            }
+        }
+        if (isSupportDs(env, Constants.s22)) {
+            DataSource s22 = slaver22DataSource();
+            if (!ObjectToolkit.isEmpty(s22)) {
+                dsMap.put(Constants.s22, s22);
+            }
+        }
+        if (isSupportDs(env, Constants.s23)) {
+            DataSource s23 = slaver23DataSource();
+            if (!ObjectToolkit.isEmpty(s23)) {
+                dsMap.put(Constants.s23, s23);
+            }
+        }
         dataSource.setTargetDataSources(dsMap);
         return dataSource;
-    }
-
-    /**
-     * 描述: 设置数据源
-     *
-     * @param dsMap
-     * @param env
-     * @param dsNo
-     * @param dataSource
-     * @return void
-     * @throws
-     */
-    private void assembleDataSources(Map<Object, Object> dsMap, Environment env, String dsNo, DruidDataSource dataSource) {
-        if (isSupportDs(env, dsNo) && !ObjectToolkit.isEmpty(dataSource)) {
-            dsMap.put(dsNo, dataSource);
-        }
     }
 
     @Bean(name = TX_MANAGER)
