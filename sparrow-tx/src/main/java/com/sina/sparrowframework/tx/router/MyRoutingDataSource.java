@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * 路由数据源
  *
+ * @author zhangtianye
  * @see Transactional#readOnly()
  */
 public class MyRoutingDataSource extends AbstractRoutingDataSource implements STM {
@@ -65,24 +66,24 @@ public class MyRoutingDataSource extends AbstractRoutingDataSource implements ST
                 index = "13";
             }else if (txName.equals(FINANCE_USER_TX_MANAGER)) {
                 index = "14";
-//            }else if (txName.equals()) {
-//                index = "15";
-//            }else if (txName.equals()) {
-//                index = "16";
-//            }else if (txName.equals()) {
-//                index = "17";
-//            }else if (txName.equals(SM_TX_MANAGER)) {
-//                index = "18";
-//            }else if (txName.equals(SM_TX_MANAGER)) {
-//                index = "19";
-//            }else if (txName.equals(SM_TX_MANAGER)) {
-//                index = "20";
-//            }else if (txName.equals(SM_TX_MANAGER)) {
-//                index = "21";
-//            }else if (txName.equals(SM_TX_MANAGER)) {
-//                index = "22";
-//            }else if (txName.equals(SM_TX_MANAGER)) {
-//                index = "23";
+            }else if (txName.equals(FINANCE_USER_MSG_TX_MANAGER)) {
+                index = "15";
+            }else if (txName.equals(FINANCE_MSG_TX_MANAGER)) {
+                index = "16";
+            }else if (txName.equals(FINANCE_PLATFORM_TX_MANAGER)) {
+                index = "17";
+            }else if (txName.equals(FINANCE_CONTACT_INFO_TX_MANAGER)) {
+                index = "18";
+            }else if (txName.equals(FINANCE_DEVICE_INFO_TX_MANAGER)) {
+                index = "19";
+            }else if (txName.equals(FINANCE_INSURANCE_TX_MANAGER)) {
+                index = "20";
+            }else if (txName.equals(FINANCE_POINTS_MALL_TX_MANAGER)) {
+                index = "21";
+            }else if (txName.equals(XIN_CAI_TRADE_TX_MANAGER)) {
+                index = "22";
+            }else if (txName.equals(KOALA_MGR_TX_MANAGER)) {
+                index = "23";
             }
         } else {
             pattern = MASTER_PATTER;

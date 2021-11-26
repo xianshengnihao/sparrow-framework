@@ -49,7 +49,8 @@ public class DataSourceConfiguation extends BaseCondition implements Environment
     }
 
     @Override
-    public void afterPropertiesSet() throws Exception {}
+    public void afterPropertiesSet() throws Exception {
+    }
 
     /**
      * 编号为 0 的主库
@@ -186,6 +187,106 @@ public class DataSourceConfiguation extends BaseCondition implements Environment
     }
 
     /**
+     * 编号为 14 的从库(finance_app_users)
+     * 动态数据源
+     */
+    @Bean(name = "slaver14DataSource", initMethod = "init", destroyMethod = "close")
+    @Conditional(S14DataSourceCondition.class)
+    public DruidDataSource slaver14DataSource() {
+        return createMasterDataSource(false, 14);
+    }
+
+    /**
+     * 编号为 15 的从库(finance_message)
+     * 动态数据源
+     */
+    @Bean(name = "slaver15DataSource", initMethod = "init", destroyMethod = "close")
+    @Conditional(S15DataSourceCondition.class)
+    public DruidDataSource slaver15DataSource() {
+        return createMasterDataSource(false, 15);
+    }
+
+    /**
+     * 编号为 16 的从库(finance_message_line)
+     * 动态数据源
+     */
+    @Bean(name = "slaver16DataSource", initMethod = "init", destroyMethod = "close")
+    @Conditional(S16DataSourceCondition.class)
+    public DruidDataSource slaver16DataSource() {
+        return createMasterDataSource(false, 16);
+    }
+
+    /**
+     * 编号为 17 的从库(finance)
+     * 动态数据源
+     */
+    @Bean(name = "slaver17DataSource", initMethod = "init", destroyMethod = "close")
+    @Conditional(S17DataSourceCondition.class)
+    public DruidDataSource slaver17DataSource() {
+        return createMasterDataSource(false, 17);
+    }
+
+    /**
+     * 编号为 18 的从库(finance_contact_info)
+     * 动态数据源
+     */
+    @Bean(name = "slaver18DataSource", initMethod = "init", destroyMethod = "close")
+    @Conditional(S18DataSourceCondition.class)
+    public DruidDataSource slaver18DataSource() {
+        return createMasterDataSource(false, 18);
+    }
+
+    /**
+     * 编号为 19 的从库(finance_device_info)
+     * 动态数据源
+     */
+    @Bean(name = "slaver19DataSource", initMethod = "init", destroyMethod = "close")
+    @Conditional(S19DataSourceCondition.class)
+    public DruidDataSource slaver19DataSource() {
+        return createMasterDataSource(false, 19);
+    }
+
+    /**
+     * 编号为 20 的从库(finance_insurance)
+     * 动态数据源
+     */
+    @Bean(name = "slaver20DataSource", initMethod = "init", destroyMethod = "close")
+    @Conditional(S20DataSourceCondition.class)
+    public DruidDataSource slaver20DataSource() {
+        return createMasterDataSource(false, 20);
+    }
+
+    /**
+     * 编号为 21 的从库(积分商城-finance_pointsmall)
+     * 动态数据源
+     */
+    @Bean(name = "slaver21DataSource", initMethod = "init", destroyMethod = "close")
+    @Conditional(S21DataSourceCondition.class)
+    public DruidDataSource slaver21DataSource() {
+        return createMasterDataSource(false, 21);
+    }
+
+    /**
+     * 编号为 22 的从库(xincai_trade)
+     * 动态数据源
+     */
+    @Bean(name = "slaver22DataSource", initMethod = "init", destroyMethod = "close")
+    @Conditional(S22DataSourceCondition.class)
+    public DruidDataSource slaver22DataSource() {
+        return createMasterDataSource(false, 22);
+    }
+
+    /**
+     * 编号为 23 的从库(koala-manager)
+     * 动态数据源
+     */
+    @Bean(name = "slaver23DataSource", initMethod = "init", destroyMethod = "close")
+    @Conditional(S23DataSourceCondition.class)
+    public DruidDataSource slaver23DataSource() {
+        return createMasterDataSource(false, 23);
+    }
+
+    /**
      * 封装 数据源创建逻辑
      */
     private DruidDataSource createMasterDataSource(boolean master, int index) {
@@ -226,80 +327,46 @@ public class DataSourceConfiguation extends BaseCondition implements Environment
         Map<Object, Object> dsMap = new HashMap<>(8);
         dsMap.put(Constants.m0, m0);
         dsMap.put(Constants.s0, s0);
-        if (isSupportDs(env, Constants.s2)) {
-            DataSource s2 = slaver2DataSource();
-            if (!ObjectToolkit.isEmpty(s2)) {
-                dsMap.put(Constants.s2, s2);
-            }
-        }
-        if (isSupportDs(env, Constants.s3)) {
-            DataSource s3 = slaver3DataSource();
-            if (!ObjectToolkit.isEmpty(s3)) {
-                dsMap.put(Constants.s3, s3);
-            }
-        }
-        if (isSupportDs(env, Constants.s4)) {
-            DataSource s4 = slaver4DataSource();
-            if (!ObjectToolkit.isEmpty(s4)) {
-                dsMap.put(Constants.s4, s4);
-            }
-        }
-        if (isSupportDs(env, Constants.s5)) {
-            DataSource s5 = slaver5DataSource();
-            if (!ObjectToolkit.isEmpty(s5)) {
-                dsMap.put(Constants.s5, s5);
-            }
-        }
-        if (isSupportDs(env, Constants.myCat6)) {
-            DataSource myCat6 = myCat6DataSource();
-            if (!ObjectToolkit.isEmpty(myCat6)) {
-                dsMap.put(Constants.myCat6, myCat6);
-            }
-        }
-        if (isSupportDs(env, Constants.s7)) {
-            DataSource s7 = slaver7DataSource();
-            if (!ObjectToolkit.isEmpty(s7)) {
-                dsMap.put(Constants.s7, s7);
-            }
-        }
-        if (isSupportDs(env, Constants.s8)) {
-            DataSource s8 = slaver8DataSource();
-            if (!ObjectToolkit.isEmpty(s8)) {
-                dsMap.put(Constants.s8, s8);
-            }
-        }
-        if (isSupportDs(env, Constants.s9)) {
-            DataSource s9 = slaver9DataSource();
-            if (!ObjectToolkit.isEmpty(s9)) {
-                dsMap.put(Constants.s9, s9);
-            }
-        }
-        if (isSupportDs(env, Constants.s10)) {
-            DataSource s10 = slaver10DataSource();
-            if (!ObjectToolkit.isEmpty(s10)) {
-                dsMap.put(Constants.s10, s10);
-            }
-        }
-        if (isSupportDs(env, Constants.s11)) {
-            DataSource s11 = slaver11DataSource();
-            if (!ObjectToolkit.isEmpty(s11)) {
-                dsMap.put(Constants.s11, s11);
-            }
-        }
-        if (isSupportDs(env, Constants.s12)) {
-            DataSource s12 = slaver12DataSource();
-            if (!ObjectToolkit.isEmpty(s12)) {
-                dsMap.put(Constants.s12, s12);
-            }
-        }
-        if (isSupportDs(env, Constants.s13)) {
-            DataSource s13 = slaver13DataSource();
-            if (!ObjectToolkit.isEmpty(s13)) {
-                dsMap.put(Constants.s13, s13);
-            }
-        }
+        this.assembleDataSources(dsMap, env, Constants.s2, slaver2DataSource());
+        this.assembleDataSources(dsMap, env, Constants.s3, slaver3DataSource());
+        this.assembleDataSources(dsMap, env, Constants.s4, slaver4DataSource());
+        this.assembleDataSources(dsMap, env, Constants.s5, slaver5DataSource());
+        this.assembleDataSources(dsMap, env, Constants.myCat6, myCat6DataSource());
+        this.assembleDataSources(dsMap, env, Constants.s7, slaver7DataSource());
+        this.assembleDataSources(dsMap, env, Constants.s8, slaver8DataSource());
+        this.assembleDataSources(dsMap, env, Constants.s9, slaver9DataSource());
+        this.assembleDataSources(dsMap, env, Constants.s10, slaver10DataSource());
+        this.assembleDataSources(dsMap, env, Constants.s11, slaver11DataSource());
+        this.assembleDataSources(dsMap, env, Constants.s12, slaver12DataSource());
+        this.assembleDataSources(dsMap, env, Constants.s13, slaver13DataSource());
+        this.assembleDataSources(dsMap, env, Constants.s14, slaver14DataSource());
+        this.assembleDataSources(dsMap, env, Constants.s15, slaver15DataSource());
+        this.assembleDataSources(dsMap, env, Constants.s16, slaver16DataSource());
+        this.assembleDataSources(dsMap, env, Constants.s17, slaver17DataSource());
+        this.assembleDataSources(dsMap, env, Constants.s18, slaver18DataSource());
+        this.assembleDataSources(dsMap, env, Constants.s19, slaver19DataSource());
+        this.assembleDataSources(dsMap, env, Constants.s20, slaver20DataSource());
+        this.assembleDataSources(dsMap, env, Constants.s21, slaver21DataSource());
+        this.assembleDataSources(dsMap, env, Constants.s22, slaver22DataSource());
+        this.assembleDataSources(dsMap, env, Constants.s23, slaver23DataSource());
         dataSource.setTargetDataSources(dsMap);
         return dataSource;
+    }
+
+    /**
+     * 描述: 设置数据源
+     *
+     * @param dsMap
+     * @param env
+     * @param dsNo
+     * @param dataSource
+     * @return void
+     * @throws
+     */
+    private void assembleDataSources(Map<Object, Object> dsMap, Environment env, String dsNo, DruidDataSource dataSource) {
+        if (isSupportDs(env, dsNo) && !ObjectToolkit.isEmpty(dataSource)) {
+            dsMap.put(dsNo, dataSource);
+        }
     }
 
     @Bean(name = TX_MANAGER)
@@ -397,9 +464,6 @@ public class DataSourceConfiguation extends BaseCondition implements Environment
         advisor.setOrder(0);
         return advisor;
     }
-
-
-
 
 
 }
