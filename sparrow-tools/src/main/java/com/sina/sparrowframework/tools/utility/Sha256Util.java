@@ -1,11 +1,12 @@
 package com.sina.sparrowframework.tools.utility;
 
+import org.apache.commons.codec.binary.Base64;
+
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
 
 public class Sha256Util {
 
@@ -63,7 +64,7 @@ public class Sha256Util {
             SecretKeySpec secret_key = new SecretKeySpec(secret.getBytes(), "hmacSHA256");
             hmacSHA256.init(secret_key);
             byte[] bytes = hmacSHA256.doFinal(payload.getBytes());
-            hash = Base64.getEncoder().encodeToString(bytes);
+            hash =  Base64.encodeBase64URLSafeString(bytes);
         } catch (Exception e) {
            throw new RuntimeException(e);
         }
