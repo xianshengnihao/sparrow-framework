@@ -43,6 +43,7 @@ public class WjContractClient {
     private static final String PARAM_BRANDNAME = "brandName";
     private static final String PARAM_BODYMD5 = "bodyMd5";
     private static final String PARAM_UID = "uid";
+    private static final String PARAM_USER_AGENT = "User-Agent";
 
     public static final String CONTROL_NODE = "/control";
     public static final String DATA_NODE = "/data";
@@ -95,6 +96,7 @@ public class WjContractClient {
         httpHeaders.add(PARAM_TIMESTAMP, String.valueOf(request.getTimestamp()));
         httpHeaders.add(PARAM_BRANDNAME, WjContractManager.brandName);
         httpHeaders.add(PARAM_SIGNATURE, signStr);
+        httpHeaders.add(PARAM_USER_AGENT, WjContractManager.appid);
         return new HttpEntity<>(JacksonUtil.objectToJson(request.getBody()), httpHeaders);
     }
 
