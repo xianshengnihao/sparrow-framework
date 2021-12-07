@@ -1,6 +1,8 @@
 package com.sina.sparrowframework.password.xiaodai.support;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -29,7 +31,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class XiaodaiSupportBaseHttpClient {
 
-    private static final String MODULE_NAME = "小贷User系统：";
+    private static final String MODULE_NAME = "小贷Xxx系统：";
     public static final String REQ_ID = "req.id";
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -336,6 +338,89 @@ public class XiaodaiSupportBaseHttpClient {
             logger.error(MODULE_NAME + "url=" + getUrlPathWithout(url) + ", params={}", XiaodaiSupportJsonUtil.toJsonForSafetyFiled(params), e);
         }
         return null;
+    }
+
+
+    /**
+     * post发送
+     *
+     * @param oriUrl
+     * @param urlParams url中?后的参数kv
+     * @param bodyKv POST的Body参数
+     * @param headers
+     * @return
+     */
+    public String postWithUrlParamsBodyKvHeadersReqId(String oriUrl, Map<String, Object> urlParams, Map<String, Object> bodyKv, Map<String, String> headers, String reqId) {
+        String url = oriUrl;
+        String bodyString = null;
+        try {
+            url = createEntireUrl(oriUrl, urlParams);
+            FormBody.Builder builder = new FormBody.Builder();
+            if (bodyKv != null) {
+                for (Map.Entry<String, Object> entry : bodyKv.entrySet()) {
+                    String value;
+                    if (entry.getValue() instanceof String) {
+                        value = (String) entry.getValue();
+                    } else {
+                        value = entry.getValue().toString();
+                    }
+                    if (value == null) {
+                        value = "";
+                    }
+                    builder.add(entry.getKey(), value);
+                }
+            }
+            RequestBody formBody = builder.build();
+            Request.Builder requestBuilder = new Request.Builder();
+            requestBuilder.url(url).post(formBody);
+            if (headers != null && headers.size() > 0) {
+                for (Map.Entry<String, String> header : headers.entrySet()) {
+                    requestBuilder.addHeader(header.getKey(), header.getValue());
+                }
+            }
+            requestBuilder.addHeader(REQ_ID, reqId);
+            // 为了释放连接资源
+            try (Response response = okHttpClient.newCall(requestBuilder.build()).execute()) {
+                ResponseBody responseBody = response.body();
+                if (responseBody != null) {
+                    bodyString = responseBody.string();
+                }
+            }
+
+            return bodyString;
+        } catch (Exception e) {
+            logger.error(MODULE_NAME + "url=" + getUrlPathWithout(url) + ", params={}", XiaodaiSupportJsonUtil.toJsonForSafetyFiled(urlParams), e);
+        }
+        return null;
+    }
+
+    private static final String NULL = "null";
+
+    private static String createEntireUrl(String url, Map<String, Object> urlParams) throws UnsupportedEncodingException {
+        if (urlParams == null || urlParams.isEmpty()) {
+            return url;
+        }
+        StringBuffer stringBuffer = new StringBuffer(url);
+        stringBuffer.append("?");
+        for (Map.Entry<String, Object> entry : urlParams.entrySet()) {
+            Object obj = entry.getValue();
+            String value = obj.toString();
+            if (obj instanceof List) {
+                StringBuffer sb = new StringBuffer("[");
+                for (Object o : (List) obj) {
+                    sb.append("\"").append(o.toString()).append("\",");
+                }
+                sb.replace(sb.length() - 1, sb.length(), "");
+                sb.append("]");
+                value = sb.toString();
+            }
+            if (value == null || NULL.equalsIgnoreCase(value)) {
+                value = "";
+            }
+            stringBuffer.append(entry.getKey() + "=" + URLEncoder.encode(value, Charsets.UTF_8.name()) + "&");
+        }
+        stringBuffer.replace(stringBuffer.length() - 1, stringBuffer.length(), "");
+        return stringBuffer.toString();
     }
 
     /**
