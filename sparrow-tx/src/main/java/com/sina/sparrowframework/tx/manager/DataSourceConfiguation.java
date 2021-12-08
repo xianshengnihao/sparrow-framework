@@ -49,7 +49,8 @@ public class DataSourceConfiguation extends BaseCondition implements Environment
     }
 
     @Override
-    public void afterPropertiesSet() throws Exception {}
+    public void afterPropertiesSet() throws Exception {
+    }
 
     /**
      * 编号为 0 的主库
@@ -186,6 +187,106 @@ public class DataSourceConfiguation extends BaseCondition implements Environment
     }
 
     /**
+     * 编号为 14 的从库(finance_app_users)
+     * 动态数据源
+     */
+    @Bean(name = "slaver14DataSource", initMethod = "init", destroyMethod = "close")
+    @Conditional(S14DataSourceCondition.class)
+    public DruidDataSource slaver14DataSource() {
+        return createMasterDataSource(false, 14);
+    }
+
+    /**
+     * 编号为 15 的从库(finance_message)
+     * 动态数据源
+     */
+    @Bean(name = "slaver15DataSource", initMethod = "init", destroyMethod = "close")
+    @Conditional(S15DataSourceCondition.class)
+    public DruidDataSource slaver15DataSource() {
+        return createMasterDataSource(false, 15);
+    }
+
+    /**
+     * 编号为 16 的从库(finance_message_line)
+     * 动态数据源
+     */
+    @Bean(name = "slaver16DataSource", initMethod = "init", destroyMethod = "close")
+    @Conditional(S16DataSourceCondition.class)
+    public DruidDataSource slaver16DataSource() {
+        return createMasterDataSource(false, 16);
+    }
+
+    /**
+     * 编号为 17 的从库(finance)
+     * 动态数据源
+     */
+    @Bean(name = "slaver17DataSource", initMethod = "init", destroyMethod = "close")
+    @Conditional(S17DataSourceCondition.class)
+    public DruidDataSource slaver17DataSource() {
+        return createMasterDataSource(false, 17);
+    }
+
+    /**
+     * 编号为 18 的从库(finance_contact_info)
+     * 动态数据源
+     */
+    @Bean(name = "slaver18DataSource", initMethod = "init", destroyMethod = "close")
+    @Conditional(S18DataSourceCondition.class)
+    public DruidDataSource slaver18DataSource() {
+        return createMasterDataSource(false, 18);
+    }
+
+    /**
+     * 编号为 19 的从库(finance_device_info)
+     * 动态数据源
+     */
+    @Bean(name = "slaver19DataSource", initMethod = "init", destroyMethod = "close")
+    @Conditional(S19DataSourceCondition.class)
+    public DruidDataSource slaver19DataSource() {
+        return createMasterDataSource(false, 19);
+    }
+
+    /**
+     * 编号为 20 的从库(finance_insurance)
+     * 动态数据源
+     */
+    @Bean(name = "slaver20DataSource", initMethod = "init", destroyMethod = "close")
+    @Conditional(S20DataSourceCondition.class)
+    public DruidDataSource slaver20DataSource() {
+        return createMasterDataSource(false, 20);
+    }
+
+    /**
+     * 编号为 21 的从库(积分商城-finance_pointsmall)
+     * 动态数据源
+     */
+    @Bean(name = "slaver21DataSource", initMethod = "init", destroyMethod = "close")
+    @Conditional(S21DataSourceCondition.class)
+    public DruidDataSource slaver21DataSource() {
+        return createMasterDataSource(false, 21);
+    }
+
+    /**
+     * 编号为 22 的从库(xincai_trade)
+     * 动态数据源
+     */
+    @Bean(name = "slaver22DataSource", initMethod = "init", destroyMethod = "close")
+    @Conditional(S22DataSourceCondition.class)
+    public DruidDataSource slaver22DataSource() {
+        return createMasterDataSource(false, 22);
+    }
+
+    /**
+     * 编号为 23 的从库(koala-manager)
+     * 动态数据源
+     */
+    @Bean(name = "slaver23DataSource", initMethod = "init", destroyMethod = "close")
+    @Conditional(S23DataSourceCondition.class)
+    public DruidDataSource slaver23DataSource() {
+        return createMasterDataSource(false, 23);
+    }
+
+    /**
      * 封装 数据源创建逻辑
      */
     private DruidDataSource createMasterDataSource(boolean master, int index) {
@@ -298,6 +399,66 @@ public class DataSourceConfiguation extends BaseCondition implements Environment
                 dsMap.put(Constants.s13, s13);
             }
         }
+        if (isSupportDs(env, Constants.s14)) {
+            DataSource s14 = slaver14DataSource();
+            if (!ObjectToolkit.isEmpty(s14)) {
+                dsMap.put(Constants.s14, s14);
+            }
+        }
+        if (isSupportDs(env, Constants.s15)) {
+            DataSource s15 = slaver15DataSource();
+            if (!ObjectToolkit.isEmpty(s15)) {
+                dsMap.put(Constants.s15, s15);
+            }
+        }
+        if (isSupportDs(env, Constants.s16)) {
+            DataSource s16 = slaver16DataSource();
+            if (!ObjectToolkit.isEmpty(s16)) {
+                dsMap.put(Constants.s16, s16);
+            }
+        }
+        if (isSupportDs(env, Constants.s17)) {
+            DataSource s17 = slaver17DataSource();
+            if (!ObjectToolkit.isEmpty(s17)) {
+                dsMap.put(Constants.s17, s17);
+            }
+        }
+        if (isSupportDs(env, Constants.s18)) {
+            DataSource s18 = slaver18DataSource();
+            if (!ObjectToolkit.isEmpty(s18)) {
+                dsMap.put(Constants.s18, s18);
+            }
+        }
+        if (isSupportDs(env, Constants.s19)) {
+            DataSource s19 = slaver19DataSource();
+            if (!ObjectToolkit.isEmpty(s19)) {
+                dsMap.put(Constants.s19, s19);
+            }
+        }
+        if (isSupportDs(env, Constants.s20)) {
+            DataSource s20 = slaver20DataSource();
+            if (!ObjectToolkit.isEmpty(s20)) {
+                dsMap.put(Constants.s20, s20);
+            }
+        }
+        if (isSupportDs(env, Constants.s21)) {
+            DataSource s21 = slaver21DataSource();
+            if (!ObjectToolkit.isEmpty(s21)) {
+                dsMap.put(Constants.s21, s21);
+            }
+        }
+        if (isSupportDs(env, Constants.s22)) {
+            DataSource s22 = slaver22DataSource();
+            if (!ObjectToolkit.isEmpty(s22)) {
+                dsMap.put(Constants.s22, s22);
+            }
+        }
+        if (isSupportDs(env, Constants.s23)) {
+            DataSource s23 = slaver23DataSource();
+            if (!ObjectToolkit.isEmpty(s23)) {
+                dsMap.put(Constants.s23, s23);
+            }
+        }
         dataSource.setTargetDataSources(dsMap);
         return dataSource;
     }
@@ -380,6 +541,66 @@ public class DataSourceConfiguation extends BaseCondition implements Environment
         return new DefaultDataSourceTransactionManager(slaver13DataSource());
     }
 
+    @Bean(name = FINANCE_USER_TX_MANAGER)
+    @Conditional(S14DataSourceCondition.class)
+    public DefaultDataSourceTransactionManager s14TxManager() {
+        return new DefaultDataSourceTransactionManager(slaver14DataSource());
+    }
+
+    @Bean(name = FINANCE_USER_MSG_TX_MANAGER)
+    @Conditional(S15DataSourceCondition.class)
+    public DefaultDataSourceTransactionManager s15TxManager() {
+        return new DefaultDataSourceTransactionManager(slaver15DataSource());
+    }
+
+    @Bean(name = FINANCE_MSG_TX_MANAGER)
+    @Conditional(S16DataSourceCondition.class)
+    public DefaultDataSourceTransactionManager s16TxManager() {
+        return new DefaultDataSourceTransactionManager(slaver16DataSource());
+    }
+
+    @Bean(name = FINANCE_PLATFORM_TX_MANAGER)
+    @Conditional(S17DataSourceCondition.class)
+    public DefaultDataSourceTransactionManager s17TxManager() {
+        return new DefaultDataSourceTransactionManager(slaver17DataSource());
+    }
+
+    @Bean(name = FINANCE_CONTACT_INFO_TX_MANAGER)
+    @Conditional(S18DataSourceCondition.class)
+    public DefaultDataSourceTransactionManager s18TxManager() {
+        return new DefaultDataSourceTransactionManager(slaver18DataSource());
+    }
+
+    @Bean(name = FINANCE_DEVICE_INFO_TX_MANAGER)
+    @Conditional(S19DataSourceCondition.class)
+    public DefaultDataSourceTransactionManager s19TxManager() {
+        return new DefaultDataSourceTransactionManager(slaver19DataSource());
+    }
+
+    @Bean(name = FINANCE_INSURANCE_TX_MANAGER)
+    @Conditional(S20DataSourceCondition.class)
+    public DefaultDataSourceTransactionManager s20TxManager() {
+        return new DefaultDataSourceTransactionManager(slaver20DataSource());
+    }
+
+    @Bean(name = FINANCE_POINTS_MALL_TX_MANAGER)
+    @Conditional(S21DataSourceCondition.class)
+    public DefaultDataSourceTransactionManager s21TxManager() {
+        return new DefaultDataSourceTransactionManager(slaver21DataSource());
+    }
+
+    @Bean(name = XIN_CAI_TRADE_TX_MANAGER)
+    @Conditional(S22DataSourceCondition.class)
+    public DefaultDataSourceTransactionManager s22TxManager() {
+        return new DefaultDataSourceTransactionManager(slaver22DataSource());
+    }
+
+    @Bean(name = KOALA_MGR_TX_MANAGER)
+    @Conditional(S23DataSourceCondition.class)
+    public DefaultDataSourceTransactionManager s23TxManager() {
+        return new DefaultDataSourceTransactionManager(slaver23DataSource());
+    }
+
     @Bean
     public TransactionDefinitionInterceptor transactionDefinitionInterceptor() {
         return new TransactionDefinitionInterceptor();
@@ -397,9 +618,6 @@ public class DataSourceConfiguation extends BaseCondition implements Environment
         advisor.setOrder(0);
         return advisor;
     }
-
-
-
 
 
 }

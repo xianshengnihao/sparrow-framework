@@ -13,7 +13,7 @@ import java.util.List;
  * </p>
  * @date 2019/11/20 13:59
  */
-abstract public class BaseCondition{
+public abstract class BaseCondition{
     private static final String PROJECT_SUPPORTED_MULTIPLE_DATASOURCE = "project.supported.multiple.datasource";
 
     /**
@@ -26,8 +26,8 @@ abstract public class BaseCondition{
     protected Boolean isSupportDs(Environment environment, String ds) {
         List dsLst = environment.getProperty(PROJECT_SUPPORTED_MULTIPLE_DATASOURCE, List.class, Arrays.asList(new String[]{Constants.s0}));
         if (dsLst.contains(ds)) {
-            return true;
+            return Boolean.TRUE;
         }
-        return false;
+        return Boolean.FALSE;
     }
 }
