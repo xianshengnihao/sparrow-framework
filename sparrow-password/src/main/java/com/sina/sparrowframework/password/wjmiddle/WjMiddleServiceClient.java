@@ -96,7 +96,6 @@ public class WjMiddleServiceClient {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
         httpHeaders.add(PARAM_USER_AGENT, MiddleKeyManager.business);
-        httpHeaders.add(PARAM_REFERER, UUIDUtils.randomUUID());
         MultiValueMap<String, Object> param = new LinkedMultiValueMap<>();
         for (Map.Entry<String, Object> entry : parMap.entrySet()) {
             param.add(entry.getKey(), entry.getValue());

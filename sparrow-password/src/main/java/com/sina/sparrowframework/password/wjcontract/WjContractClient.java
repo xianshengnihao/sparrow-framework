@@ -99,7 +99,6 @@ public class WjContractClient {
         httpHeaders.add(PARAM_BRANDNAME, WjContractManager.brandName);
         httpHeaders.add(PARAM_SIGNATURE, signStr);
         httpHeaders.add(PARAM_USER_AGENT, WjContractManager.appid);
-        httpHeaders.add(PARAM_REFERER, UUIDUtils.randomUUID());
         return new HttpEntity<>(JacksonUtil.objectToJson(request.getBody()), httpHeaders);
     }
 

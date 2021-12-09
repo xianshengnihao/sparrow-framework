@@ -267,7 +267,6 @@ public class WjAccountClient {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
         httpHeaders.add(PARAM_USER_AGENT, WjAccountKeyManager.appId);
-        httpHeaders.add(PARAM_REFERER, UUIDUtils.randomUUID());
         HttpEntity<Object> request = new HttpEntity<>(parMap, httpHeaders);
         return request;
     }
@@ -277,7 +276,6 @@ public class WjAccountClient {
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
         httpHeaders.add(xMerchantToken,token);
         httpHeaders.add(PARAM_USER_AGENT, WjAccountKeyManager.appId);
-        httpHeaders.add(PARAM_REFERER, UUIDUtils.randomUUID());
         HttpEntity<Object> request = new HttpEntity<>(parMap, httpHeaders);
         return request;
     }
