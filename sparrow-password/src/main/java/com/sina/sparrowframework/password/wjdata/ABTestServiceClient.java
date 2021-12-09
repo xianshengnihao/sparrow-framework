@@ -7,6 +7,7 @@ import com.sina.sparrowframework.password.wjdata.data.WjDataABTestRequest;
 import com.sina.sparrowframework.password.wjdata.data.WjDataBaseResponse;
 import com.sina.sparrowframework.password.wjdata.util.WjDataKeyManager;
 import com.sina.sparrowframework.tools.utility.JacksonUtil;
+import com.sina.sparrowframework.tools.utility.UUIDUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.env.Environment;
@@ -15,6 +16,10 @@ import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import org.springframework.util.StopWatch;
 import org.springframework.web.client.RestTemplate;
+
+import static com.sina.sparrowframework.password.wjdata.util.WjDataKeyManager.PARAM_REFERER;
+import static com.sina.sparrowframework.password.wjdata.util.WjDataKeyManager.PARAM_USER_AGENT;
+
 
 /**
  * 发起aBTest实验
@@ -38,6 +43,8 @@ public class ABTestServiceClient {
             watch.start();
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.add(PARAM_USER_AGENT, "licai");
+            headers.add(PARAM_REFERER, UUIDUtils.randomUUID());
             request.setChannel("licai").setApp("web");
             ResponseEntity<String> response = restTemplate.exchange(requestUrl, HttpMethod.POST,new HttpEntity<>(JacksonUtil.objectToJson(request), headers), String.class);
             watch.stop();

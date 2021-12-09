@@ -7,6 +7,8 @@ import com.sina.sparrowframework.password.wjaccount.data.FinanceBusinessRequest;
 import com.sina.sparrowframework.password.wjaccount.data.FinanceBusinessResponse;
 import com.sina.sparrowframework.password.wjaccount.data.FinancePublicToken;
 import com.sina.sparrowframework.password.wjaccount.data.FinanceUserInfo;
+import com.sina.sparrowframework.password.wjaccount.utils.WjAccountKeyManager;
+import com.sina.sparrowframework.password.wjcontract.util.WjContractManager;
 import com.sina.sparrowframework.tools.utility.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -264,6 +266,8 @@ public class WjAccountClient {
     private static HttpEntity<Object> buildEntity(Map<String, Object> parMap)  {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+        httpHeaders.add(PARAM_USER_AGENT, WjAccountKeyManager.appId);
+        httpHeaders.add(PARAM_REFERER, UUIDUtils.randomUUID());
         HttpEntity<Object> request = new HttpEntity<>(parMap, httpHeaders);
         return request;
     }
@@ -272,6 +276,8 @@ public class WjAccountClient {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
         httpHeaders.add(xMerchantToken,token);
+        httpHeaders.add(PARAM_USER_AGENT, WjAccountKeyManager.appId);
+        httpHeaders.add(PARAM_REFERER, UUIDUtils.randomUUID());
         HttpEntity<Object> request = new HttpEntity<>(parMap, httpHeaders);
         return request;
     }

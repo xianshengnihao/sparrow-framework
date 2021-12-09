@@ -10,6 +10,7 @@ import com.sina.sparrowframework.password.wjmiddle.util.MiddleSignatureUtils;
 import com.sina.sparrowframework.tools.utility.DigestUtils;
 import com.sina.sparrowframework.tools.utility.JacksonUtil;
 import com.sina.sparrowframework.tools.utility.Sha256Util;
+import com.sina.sparrowframework.tools.utility.UUIDUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,6 +45,7 @@ public class WjContractClient {
     private static final String PARAM_BODYMD5 = "bodyMd5";
     private static final String PARAM_UID = "uid";
     private static final String PARAM_USER_AGENT = "User-Agent";
+    private static final String PARAM_REFERER = "Referer";
 
     public static final String CONTROL_NODE = "/control";
     public static final String DATA_NODE = "/data";
@@ -97,6 +99,7 @@ public class WjContractClient {
         httpHeaders.add(PARAM_BRANDNAME, WjContractManager.brandName);
         httpHeaders.add(PARAM_SIGNATURE, signStr);
         httpHeaders.add(PARAM_USER_AGENT, WjContractManager.appid);
+        httpHeaders.add(PARAM_REFERER, UUIDUtils.randomUUID());
         return new HttpEntity<>(JacksonUtil.objectToJson(request.getBody()), httpHeaders);
     }
 

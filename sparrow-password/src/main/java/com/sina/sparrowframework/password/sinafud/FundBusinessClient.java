@@ -10,6 +10,7 @@ import com.sina.sparrowframework.password.sinafud.util.FundSignatureUtils;
 import com.sina.sparrowframework.tools.utility.CipherUtils;
 import com.sina.sparrowframework.tools.utility.JacksonUtil;
 import com.sina.sparrowframework.tools.utility.SignatureUtils;
+import com.sina.sparrowframework.tools.utility.UUIDUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.env.Environment;
@@ -25,6 +26,9 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+
+import static com.sina.sparrowframework.password.sinafud.util.FundSignatureUtils.PARAM_REFERER;
+import static com.sina.sparrowframework.password.sinafud.util.FundSignatureUtils.PARAM_USER_AGENT;
 
 /**
  *  2021/3/12
@@ -121,6 +125,8 @@ public class FundBusinessClient {
     private static HttpEntity<Object> buildEntity(Map<String, Object> parMap)  {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+        httpHeaders.add(PARAM_USER_AGENT, FundSignatureUtils.DATA);
+        httpHeaders.add(PARAM_REFERER, UUIDUtils.randomUUID());
         MultiValueMap<String, Object> param = new LinkedMultiValueMap<>();
         for (Map.Entry<String, Object> entry : parMap.entrySet()) {
             param.add(entry.getKey(), entry.getValue());

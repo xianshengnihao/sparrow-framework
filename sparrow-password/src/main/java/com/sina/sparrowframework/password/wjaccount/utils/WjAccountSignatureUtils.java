@@ -27,7 +27,8 @@ public abstract class WjAccountSignatureUtils {
     public final static String xMerchantToken= "x-merchant-token";
     public final static String xPassportTimestamp= "x-passport-timestamp";
 
-
+    public static final String PARAM_USER_AGENT = "User-Agent";
+    public static final String PARAM_REFERER = "Referer";
     /**
      * 金融账户 商户token redis存储KEY
      */
