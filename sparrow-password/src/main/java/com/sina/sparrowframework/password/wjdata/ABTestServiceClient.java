@@ -44,7 +44,6 @@ public class ABTestServiceClient {
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
             headers.add(PARAM_USER_AGENT, "licai");
-            headers.add(PARAM_REFERER, UUIDUtils.randomUUID());
             request.setChannel("licai").setApp("web");
             ResponseEntity<String> response = restTemplate.exchange(requestUrl, HttpMethod.POST,new HttpEntity<>(JacksonUtil.objectToJson(request), headers), String.class);
             watch.stop();
