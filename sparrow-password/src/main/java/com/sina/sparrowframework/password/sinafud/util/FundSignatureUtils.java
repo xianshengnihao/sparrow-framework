@@ -27,7 +27,8 @@ public abstract class FundSignatureUtils {
 
     public static final String DATA_NODE = "/data";
     public static final String SIGN_NODE = "/sign";
-
+    public static final String PARAM_USER_AGENT = "User-Agent";
+    public static final String PARAM_REFERER = "Referer";
 
     public static String fundSignature(String Json) {
         String signatureContent = sortSignatureContent(Json);

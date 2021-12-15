@@ -21,6 +21,9 @@ public class WjDataKeyManager implements EnvironmentAware  {
 
     public static String baseUrl;
 
+    public static final String PARAM_USER_AGENT = "User-Agent";
+    public static final String PARAM_REFERER = "Referer";
+
     @PostConstruct
     private  void initBusiness() {
         WjDataKeyManager.baseUrl = environment.getProperty("wjData.domain.name");

@@ -8,6 +8,7 @@ import com.sina.sparrowframework.password.wjmiddle.data.MiddleServiceResponse;
 import com.sina.sparrowframework.password.wjmiddle.util.MiddleKeyManager;
 import com.sina.sparrowframework.password.wjmiddle.util.MiddleSignatureUtils;
 import com.sina.sparrowframework.tools.utility.JacksonUtil;
+import com.sina.sparrowframework.tools.utility.UUIDUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.env.Environment;
@@ -20,6 +21,9 @@ import org.springframework.util.StopWatch;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Map;
+
+import static com.sina.sparrowframework.password.wjmiddle.util.MiddleSignatureUtils.PARAM_REFERER;
+import static com.sina.sparrowframework.password.wjmiddle.util.MiddleSignatureUtils.PARAM_USER_AGENT;
 
 /**
  * 微聚中台调用服务
@@ -91,6 +95,7 @@ public class WjMiddleServiceClient {
     private static HttpEntity<Object> buildEntityData(Map<String, Object> parMap) {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+        httpHeaders.add(PARAM_USER_AGENT, MiddleKeyManager.business);
         MultiValueMap<String, Object> param = new LinkedMultiValueMap<>();
         for (Map.Entry<String, Object> entry : parMap.entrySet()) {
             param.add(entry.getKey(), entry.getValue());

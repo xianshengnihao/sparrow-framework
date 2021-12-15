@@ -22,6 +22,8 @@ public abstract class MiddleSignatureUtils {
     public static final String CODE_NODE = "/code";
     public static final String MESSAGE_NODE = "/msg";
     public static final String DATA_NODE = "/data";
+    public static final String PARAM_USER_AGENT = "User-Agent";
+    public static final String PARAM_REFERER = "Referer";
 
     public static String middleSignature(String signatureContent) {
         String sort = sortSignatureContent(signatureContent);
