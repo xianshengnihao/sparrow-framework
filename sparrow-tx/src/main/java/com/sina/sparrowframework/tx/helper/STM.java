@@ -58,4 +58,8 @@ public interface STM {
      * 23.koala-manager
      */
     String KOALA_MGR_TX_MANAGER = "koalaMgrTxManager";
+    /**
+     * 24.scale
+     */
+    String SCALE_TX_MANAGER = "scaleTxManager";
 }

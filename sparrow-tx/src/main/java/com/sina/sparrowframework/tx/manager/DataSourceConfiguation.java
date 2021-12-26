@@ -287,6 +287,16 @@ public class DataSourceConfiguation extends BaseCondition implements Environment
     }
 
     /**
+     * 编号为 23 的从库(scale)
+     * 动态数据源
+     */
+    @Bean(name = "slaver24DataSource", initMethod = "init", destroyMethod = "close")
+    @Conditional(S24DataSourceCondition.class)
+    public DruidDataSource slaver24DataSource() {
+        return createMasterDataSource(false, 24);
+    }
+
+    /**
      * 封装 数据源创建逻辑
      */
     private DruidDataSource createMasterDataSource(boolean master, int index) {
@@ -459,6 +469,12 @@ public class DataSourceConfiguation extends BaseCondition implements Environment
                 dsMap.put(Constants.s23, s23);
             }
         }
+        if (isSupportDs(env, Constants.s24)) {
+            DataSource s24 = slaver24DataSource();
+            if (!ObjectToolkit.isEmpty(s24)) {
+                dsMap.put(Constants.s24, s24);
+            }
+        }
         dataSource.setTargetDataSources(dsMap);
         return dataSource;
     }
@@ -599,6 +615,12 @@ public class DataSourceConfiguation extends BaseCondition implements Environment
     @Conditional(S23DataSourceCondition.class)
     public DefaultDataSourceTransactionManager s23TxManager() {
         return new DefaultDataSourceTransactionManager(slaver23DataSource());
+    }
+
+    @Bean(name = SCALE_TX_MANAGER)
+    @Conditional(S24DataSourceCondition.class)
+    public DefaultDataSourceTransactionManager s24TxManager() {
+        return new DefaultDataSourceTransactionManager(slaver24DataSource());
     }
 
     @Bean
