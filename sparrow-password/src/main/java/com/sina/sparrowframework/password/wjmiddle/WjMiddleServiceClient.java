@@ -8,7 +8,6 @@ import com.sina.sparrowframework.password.wjmiddle.data.MiddleServiceResponse;
 import com.sina.sparrowframework.password.wjmiddle.util.MiddleKeyManager;
 import com.sina.sparrowframework.password.wjmiddle.util.MiddleSignatureUtils;
 import com.sina.sparrowframework.tools.utility.JacksonUtil;
-import com.sina.sparrowframework.tools.utility.UUIDUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.env.Environment;
@@ -22,7 +21,6 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Map;
 
-import static com.sina.sparrowframework.password.wjmiddle.util.MiddleSignatureUtils.PARAM_REFERER;
 import static com.sina.sparrowframework.password.wjmiddle.util.MiddleSignatureUtils.PARAM_USER_AGENT;
 
 /**

@@ -84,6 +84,8 @@ public class MyRoutingDataSource extends AbstractRoutingDataSource implements ST
                 index = "22";
             }else if (txName.equals(KOALA_MGR_TX_MANAGER)) {
                 index = "23";
+            }else if (txName.equals(SCALE_TX_MANAGER)) {
+                index = "24";
             }
         } else {
             pattern = MASTER_PATTER;

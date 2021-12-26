@@ -3,7 +3,7 @@
     <parent>
         <artifactId>sparrow-framework</artifactId>
         <groupId>com.sina.sparrowframework</groupId>
-        <version>0.0.31-SNAPSHOT</version>
+        <version>0.0.32-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -58,7 +58,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
-            <scope>provided</scope>
+<!--            <scope>provided</scope>-->
         </dependency>
 
         <!--调用xiaodai-user所需 开始-->

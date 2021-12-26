@@ -61,6 +61,26 @@ public abstract class CipherUtils {
     }
     /**
      * 填充模型:AES_ECB_PKCS5PADDING
+     * SecretKey:AES
+     * @param data 明文数据
+     * @param password 秘钥
+     * @return 加密后数据Base64
+     * @throws Exception
+     */
+    public static String decryptByAesEcbPkcs5paddingAes(
+            String data
+            , String password) throws Exception {
+        SecretKeySpec keySpec = new SecretKeySpec(
+                password.getBytes(), Algorithm.AES.algorithm);
+        Cipher cipher = Cipher.getInstance(Algorithm.AES_ECB_PKCS5PADDING.algorithm);
+        cipher.init(Cipher.DECRYPT_MODE, keySpec);
+        byte[] decryptByte = cipher.doFinal(Base64.decodeBase64(data));
+        return new String(decryptByte, StandardCharsets.UTF_8);
+    }
+
+
+    /**
+     * 填充模型:AES_ECB_PKCS5PADDING
      * @param data 明文数据
      * @param password 秘钥
      * @return 加密后数据Base64

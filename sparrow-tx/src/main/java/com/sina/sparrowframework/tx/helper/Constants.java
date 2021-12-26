@@ -58,6 +58,10 @@ public class Constants {
      * koala
      */
     public static final String s23 = "s23";
+    /**
+     * scale
+     */
+    public static final String s24 = "s24";
     public static final String url = "spring.datasource.%s.url[%s]";
     public static final String username = "spring.datasource.%s.username[%s]";
     public static final String password = "spring.datasource.%s.password[%s]";
